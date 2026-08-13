@@ -232,18 +232,18 @@ button {
   align-items: center;
   justify-content: space-between;
   width: min(var(--max), calc(100% - 48px));
-  height: 86px;
+  height: 72px;
   margin: 0 auto;
   isolation: isolate;
 }
 
 .site-header::before {
   position: absolute;
-  top: -18px;
+  top: -8px;
   left: 50%;
   z-index: -1;
   width: 100vw;
-  height: 122px;
+  height: 88px;
   content: "";
   background: linear-gradient(180deg, rgba(3, 4, 5, 0.68), rgba(3, 4, 5, 0.06) 72%, transparent);
   -webkit-backdrop-filter: blur(16px) saturate(130%);
@@ -1068,9 +1068,7 @@ h1 {
     width: min(100% - 32px, var(--max));
   }
 
-  .site-header {
-    height: 78px;
-  }
+  .site-header { height: 72px; }
 
   .shell {
     padding-top: 64px;
