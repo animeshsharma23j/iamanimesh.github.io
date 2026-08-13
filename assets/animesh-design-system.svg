@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-labelledby="title description">
+  <title id="title">Animesh portfolio design system</title>
+  <desc id="description">A technical visual board showing the colours, typography, layout, components, responsive rules, and accessibility principles of the Animesh portfolio.</desc>
+  <defs>
+    <pattern id="grid" width="80" height="80" patternUnits="userSpaceOnUse"><path d="M80 0H0V80" fill="none" stroke="#f3eee2" stroke-opacity=".035"/></pattern>
+    <linearGradient id="amberGlow" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f1b45a" stop-opacity=".16"/><stop offset="1" stop-color="#f1b45a" stop-opacity="0"/></linearGradient>
+    <linearGradient id="cyanGlow" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#75d5e4" stop-opacity=".12"/><stop offset="1" stop-color="#75d5e4" stop-opacity="0"/></linearGradient>
+    <style>
+      .bg { fill:#030405 } .panel { fill:#070a0d; stroke:#f3eee2; stroke-opacity:.15 } .rule { stroke:#f3eee2; stroke-opacity:.15 } .text { fill:#f3eee2; font-family:Inter,Arial,sans-serif } .muted { fill:#aaa395; font-family:Inter,Arial,sans-serif } .soft { fill:#706b62; font-family:Inter,Arial,sans-serif } .mono { fill:#75d5e4; font-family:Menlo,monospace; font-size:13px; letter-spacing:1.8px } .label { fill:#f3eee2; font-family:Inter,Arial,sans-serif; font-size:15px; font-weight:700 } .spec { fill:#aaa395; font-family:Inter,Arial,sans-serif; font-size:13px } .title { fill:#f3eee2; font-family:Inter,Arial,sans-serif; font-size:52px; font-weight:800; letter-spacing:-2px } .heading { fill:#f3eee2; font-family:Inter,Arial,sans-serif; font-size:25px; font-weight:800; letter-spacing:-.8px }
+    </style>
+  </defs>
+  <rect class="bg" width="1600" height="1000"/>
+  <rect width="1600" height="1000" fill="url(#grid)"/>
+  <circle cx="1340" cy="130" r="360" fill="url(#cyanGlow)"/><circle cx="160" cy="880" r="350" fill="url(#amberGlow)"/>
+  <g transform="translate(72 58)">
+    <text class="mono" x="0" y="0">ANIMESH / PORTFOLIO SYSTEM</text>
+    <text class="title" x="0" y="58">Clarity × Craft</text>
+    <text class="muted" x="0" y="90" font-size="17">Two typefaces. One focused product-story system.</text>
+    <line class="rule" x1="0" y1="120" x2="1456" y2="120"/>
+    <g transform="translate(0 164)">
+      <text class="mono" x="0" y="0">01 / COLOUR</text>
+      <rect class="panel" x="0" y="24" width="470" height="224"/>
+      <g transform="translate(22 48)">
+        <rect width="72" height="72" fill="#030405" stroke="#f3eee2" stroke-opacity=".32"/><text class="label" x="0" y="98">Canvas</text><text class="spec" x="0" y="118">#030405</text>
+        <rect x="100" width="72" height="72" fill="#070a0d" stroke="#f3eee2" stroke-opacity=".32"/><text class="label" x="100" y="98">Surface</text><text class="spec" x="100" y="118">#070A0D</text>
+        <rect x="200" width="72" height="72" fill="#f3eee2"/><text class="label" x="200" y="98">Text</text><text class="spec" x="200" y="118">#F3EEE2</text>
+        <rect x="300" width="72" height="72" fill="#f1b45a"/><text class="label" x="300" y="98">Primary</text><text class="spec" x="300" y="118">#F1B45A</text>
+        <rect x="400" width="48" height="72" fill="#75d5e4"/><text class="label" x="400" y="98">Signal</text><text class="spec" x="400" y="118">#75D5E4</text>
+        <text class="soft" x="0" y="174" font-size="13">Muted #AAA395 · Soft #706B62 · Rule rgba(243,238,226,.15)</text>
+      </g>
+    </g>
+    <g transform="translate(510 164)">
+      <text class="mono" x="0" y="0">02 / TYPE</text>
+      <rect class="panel" x="0" y="24" width="610" height="224"/>
+      <text class="text" x="24" y="92" font-family="Inter,Arial,sans-serif" font-size="48" font-weight="800">Simplicity is the</text>
+      <text class="text" x="24" y="136" font-family="Inter,Arial,sans-serif" font-size="48" font-weight="800">greatest sophistication.</text>
+      <text class="spec" x="24" y="164">Inter only for display, body, navigation, and actions</text>
+      <text class="muted" x="24" y="198" font-size="17">Complex workflows, focused and trustworthy.</text>
+      <text class="mono" x="448" y="198">SYSTEM MONO / LABELS ONLY</text>
+    </g>
+    <g transform="translate(1144 164)">
+      <text class="mono" x="0" y="0">03 / ACTIONS</text>
+      <rect class="panel" x="0" y="24" width="312" height="224"/>
+      <rect x="22" y="56" width="266" height="48" fill="#f1b45a"/><text x="42" y="86" fill="#1b1205" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="800">VIEW CASE STUDIES  →</text>
+      <rect x="22" y="122" width="266" height="48" fill="none" stroke="#f3eee2" stroke-opacity=".32"/><text class="text" x="42" y="152" font-size="14" font-weight="800">DOWNLOAD RÉSUMÉ</text>
+      <text class="spec" x="22" y="202">46px min-height · 8px corners</text>
+    </g>
+    <g transform="translate(0 458)">
+      <text class="mono" x="0" y="0">04 / LAYOUT</text>
+      <rect class="panel" x="0" y="24" width="700" height="350"/>
+      <rect x="24" y="48" width="652" height="280" fill="none" stroke="#f3eee2" stroke-opacity=".15"/>
+      <line class="rule" x1="360" y1="48" x2="360" y2="328"/>
+      <text class="soft" x="24" y="42" font-size="12">MAX 1180PX · DESKTOP GUTTER 48PX · 88PX GRID GAP</text>
+      <text class="heading" x="52" y="140">Focused story.</text><text class="heading" x="52" y="171">One clear task.</text>
+      <text class="muted" x="52" y="208" font-size="15">Hero copy, CTA, and proof.</text>
+      <circle cx="520" cy="188" r="94" fill="none" stroke="#75d5e4" stroke-opacity=".45" stroke-dasharray="4 5"/><circle cx="520" cy="188" r="54" fill="none" stroke="#f3eee2" stroke-opacity=".25"/><circle cx="520" cy="188" r="26" fill="#070a0d" stroke="#f1b45a"/><text class="text" x="497" y="184" font-size="11" font-weight="800">CLARITY</text><text x="515" y="202" fill="#f1b45a" font-family="Inter" font-size="20" font-weight="800">×</text>
+      <text class="spec" x="24" y="348">Hero: 0.94fr / 0.8fr → single column at ≤900px</text>
+    </g>
+    <g transform="translate(728 458)">
+      <text class="mono" x="0" y="0">05 / COMPONENTS</text>
+      <rect class="panel" x="0" y="24" width="728" height="350"/>
+      <text class="label" x="26" y="64">SELECTED RECOGNITION</text>
+      <line class="rule" x1="26" y1="82" x2="702" y2="82"/>
+      <text class="text" x="26" y="130" font-size="26" font-weight="800">4M+</text><text class="soft" x="26" y="153" font-size="13">downloads</text>
+      <text class="text" x="190" y="130" font-size="26" font-weight="800">$100K+</text><text class="soft" x="190" y="153" font-size="13">revenue</text>
+      <text class="text" x="366" y="130" font-size="22" font-weight="800">Microsoft Store</text><text class="soft" x="366" y="153" font-size="13">featured apps</text>
+      <line class="rule" x1="26" y1="184" x2="702" y2="184"/>
+      <text class="mono" x="26" y="220">CASE STUDY / EVIDENCE LED</text>
+      <text class="heading" x="26" y="260">One clear path, with smarter ways in.</text>
+      <text class="muted" x="26" y="290" font-size="15">Context → design choices → evidence → reflection.</text>
+      <rect x="590" y="225" width="84" height="62" fill="none" stroke="#f3eee2" stroke-opacity=".32"/><text x="619" y="264" fill="#f3eee2" font-family="Inter" font-size="26">→</text>
+      <text class="spec" x="26" y="328">Hairlines before cards · real product evidence · 8px interactive corners</text>
+    </g>
+    <g transform="translate(0 860)">
+      <text class="mono" x="0" y="0">06 / RESPONSIVE + ACCESSIBLE</text>
+      <text class="muted" x="0" y="32" font-size="15">≤900px: one-column hero · ≤560px: compact header, wrapping actions, two-column proof/gallery · no horizontal scrolling.</text>
+      <text class="muted" x="0" y="62" font-size="15">Visible keyboard focus · semantic landmarks · descriptive image alt text · decorative art hidden · reduced-motion support.</text>
+      <text class="soft" x="0" y="94" font-size="13">DO: quiet confidence, concise copy, generous space, documented decisions.  DO NOT: glossy cards, heavy gradients, fabricated evidence.</text>
+    </g>
+  </g>
+</svg>

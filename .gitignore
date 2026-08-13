@@ -1,0 +1,5 @@
+# Local verification output and machine-specific dependencies
+tmp/
+node_modules/
+.DS_Store
+

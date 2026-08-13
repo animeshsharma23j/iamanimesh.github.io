@@ -1,0 +1,1026 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UnitX Behance Case Study Board</title>
+    <style>
+      :root {
+        --ink: #17131b;
+        --muted: #706876;
+        --soft: #f6f0f7;
+        --paper: #fffafd;
+        --lavender: #f0d7ef;
+        --butter: #fff2bc;
+        --mint: #eaffcf;
+        --cyan: #90eff9;
+        --amber: #ffc76a;
+        --violet: #b673ff;
+        --charcoal: #08090d;
+        --unitx: #23172d;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        background: #ebe8ec;
+        color: var(--ink);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      body {
+        width: 1600px;
+      }
+
+      .board {
+        width: 1600px;
+        margin: 0;
+        overflow: hidden;
+        background:
+          radial-gradient(circle at 12% 7%, rgba(255, 241, 181, 0.78), transparent 360px),
+          radial-gradient(circle at 88% 10%, rgba(235, 205, 255, 0.9), transparent 420px),
+          linear-gradient(180deg, #fffafd 0%, #f7f3fa 28%, #f5f6fb 56%, #fff9f2 100%);
+      }
+
+      section {
+        position: relative;
+        padding: 120px 132px;
+      }
+
+      .hero {
+        min-height: 1120px;
+        background:
+          radial-gradient(circle at 76% 20%, rgba(255, 240, 178, 0.7), transparent 420px),
+          radial-gradient(circle at 18% 17%, rgba(245, 205, 239, 0.95), transparent 430px),
+          linear-gradient(135deg, #fff8fb 0%, #fae7f6 42%, #fff7dc 100%);
+      }
+
+      .topline {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+        z-index: 2;
+      }
+
+      .pill-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 22px;
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        min-height: 58px;
+        padding: 0 34px;
+        border: 1px solid rgba(160, 81, 161, 0.14);
+        border-radius: 999px;
+        color: #221827;
+        font-size: 25px;
+        font-weight: 650;
+        background: rgba(236, 191, 231, 0.62);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
+      }
+
+      .year {
+        color: #141014;
+        font-size: 50px;
+        font-weight: 750;
+        letter-spacing: 1px;
+      }
+
+      .ghost {
+        position: absolute;
+        left: 115px;
+        top: 365px;
+        z-index: 0;
+        color: rgba(127, 69, 115, 0.14);
+        font-size: 238px;
+        font-weight: 950;
+        letter-spacing: -14px;
+        line-height: 0.8;
+      }
+
+      .hero-title {
+        position: relative;
+        z-index: 2;
+        width: 540px;
+        margin-top: 178px;
+      }
+
+      .hero-title img {
+        width: 118px;
+        height: 118px;
+        border-radius: 30px;
+        box-shadow: 0 24px 60px rgba(67, 38, 74, 0.2);
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin: 0;
+      }
+
+      h1 {
+        margin-top: 28px;
+        font-size: 72px;
+        line-height: 0.96;
+        letter-spacing: -2.8px;
+      }
+
+      .hero-title p {
+        margin-top: 28px;
+        color: #5f5663;
+        font-size: 27px;
+        line-height: 1.38;
+      }
+
+      .mockup-stack {
+        position: absolute;
+        right: 130px;
+        top: 210px;
+        z-index: 2;
+        width: 680px;
+        height: 790px;
+      }
+
+      .phone {
+        position: absolute;
+        overflow: hidden;
+        border: 14px solid #19151b;
+        border-radius: 58px;
+        background: #111;
+        box-shadow: 0 42px 94px rgba(34, 20, 42, 0.34);
+      }
+
+      .phone::before {
+        position: absolute;
+        top: 18px;
+        left: 50%;
+        z-index: 3;
+        width: 94px;
+        height: 29px;
+        content: "";
+        border-radius: 999px;
+        background: #030307;
+        transform: translateX(-50%);
+      }
+
+      .phone img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .phone-main {
+        right: 104px;
+        top: 20px;
+        width: 360px;
+        height: 730px;
+        transform: rotate(8deg);
+      }
+
+      .phone-back-a {
+        left: 14px;
+        top: 210px;
+        width: 276px;
+        height: 560px;
+        opacity: 0.96;
+        transform: rotate(-9deg);
+      }
+
+      .phone-back-b {
+        right: 0;
+        top: 310px;
+        width: 252px;
+        height: 510px;
+        opacity: 0.9;
+        transform: rotate(15deg);
+      }
+
+      .float-chip {
+        position: absolute;
+        z-index: 4;
+        padding: 20px 27px;
+        border-radius: 28px;
+        color: #251a27;
+        font-size: 23px;
+        font-weight: 700;
+        background: rgba(255, 255, 255, 0.75);
+        box-shadow: 0 22px 50px rgba(66, 44, 72, 0.12);
+        backdrop-filter: blur(15px);
+      }
+
+      .chip-1 {
+        right: 610px;
+        top: 760px;
+        transform: rotate(-7deg);
+      }
+
+      .chip-2 {
+        right: 116px;
+        top: 814px;
+        transform: rotate(6deg);
+      }
+
+      .chip-3 {
+        right: 580px;
+        top: 598px;
+        background: rgba(228, 255, 198, 0.84);
+        transform: rotate(8deg);
+      }
+
+      .intro {
+        padding-top: 112px;
+        background: #fbfbfd;
+      }
+
+      .statement {
+        max-width: 1160px;
+        font-size: 47px;
+        line-height: 1.36;
+        letter-spacing: -1.2px;
+      }
+
+      .founder {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        margin-top: 70px;
+      }
+
+      .founder img {
+        width: 72px;
+        height: 72px;
+        border-radius: 18px;
+      }
+
+      .founder strong {
+        display: block;
+        font-size: 22px;
+      }
+
+      .founder span {
+        color: var(--muted);
+        font-size: 17px;
+      }
+
+      .info-grid {
+        display: grid;
+        grid-template-columns: 1.3fr 0.8fr 0.75fr;
+        gap: 110px;
+        margin-top: 98px;
+      }
+
+      .mini h3,
+      .section-head h2 {
+        font-size: 28px;
+        letter-spacing: -0.45px;
+      }
+
+      .mini p,
+      .mini li {
+        color: #746b78;
+        font-size: 19px;
+        line-height: 1.62;
+      }
+
+      .mini p {
+        margin-top: 26px;
+      }
+
+      .mini ul {
+        margin: 26px 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .timeline {
+        background: #fbfbfd;
+      }
+
+      .section-head {
+        display: grid;
+        grid-template-columns: 1fr 0.8fr;
+        gap: 90px;
+        align-items: start;
+        margin-bottom: 88px;
+      }
+
+      .section-head h2 {
+        color: #2d172c;
+        font-size: 54px;
+        line-height: 1;
+      }
+
+      .section-head h2 span {
+        color: #c99ac8;
+      }
+
+      .section-head p {
+        color: #756d79;
+        font-size: 20px;
+        line-height: 1.62;
+      }
+
+      .timeline-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0;
+        min-height: 410px;
+      }
+
+      .phase {
+        position: relative;
+        padding: 0 38px;
+        border-left: 1px dashed #daceda;
+      }
+
+      .phase:last-child {
+        border-right: 1px dashed #daceda;
+      }
+
+      .phase::before {
+        position: absolute;
+        top: 8px;
+        left: -13px;
+        width: 26px;
+        height: 26px;
+        content: "";
+        border-radius: 999px;
+        background: #e7ff9f;
+        box-shadow: 0 0 0 12px rgba(231, 255, 159, 0.24);
+      }
+
+      .phase .tag {
+        display: inline-flex;
+        margin-bottom: 160px;
+        padding: 16px 24px;
+        border-radius: 999px;
+        background: #f5d7ef;
+        font-size: 19px;
+        font-weight: 700;
+      }
+
+      .phase p {
+        color: #746b76;
+        font-size: 20px;
+        line-height: 1.6;
+      }
+
+      .analysis {
+        background: #fbfbfd;
+      }
+
+      .matrix {
+        display: grid;
+        grid-template-columns: 250px repeat(4, 1fr);
+        gap: 24px;
+        align-items: center;
+      }
+
+      .matrix .head {
+        padding: 20px 26px;
+        border: 2px solid #efbedf;
+        border-radius: 999px;
+        text-align: center;
+        font-size: 21px;
+        font-weight: 750;
+        background: #f7daf0;
+      }
+
+      .matrix .feature {
+        padding: 20px 28px;
+        border: 2px solid rgba(226, 182, 219, 0.72);
+        border-radius: 999px;
+        font-size: 21px;
+        background: rgba(255, 255, 255, 0.72);
+      }
+
+      .check,
+      .dash {
+        display: grid;
+        place-items: center;
+        width: 58px;
+        height: 58px;
+        margin: 0 auto;
+        border-radius: 999px;
+        font-size: 25px;
+        font-weight: 800;
+      }
+
+      .check {
+        background: #ebffb6;
+        color: #39510f;
+      }
+
+      .dash {
+        background: #f0edf2;
+        color: #a199a5;
+      }
+
+      .jobs {
+        min-height: 1120px;
+        background:
+          radial-gradient(circle at 80% 35%, rgba(255, 241, 184, 0.72), transparent 350px),
+          linear-gradient(180deg, #fbfbfd 0%, #f8f4fb 100%);
+      }
+
+      .job-card {
+        position: absolute;
+        width: 560px;
+        padding: 30px 38px;
+        border-radius: 24px;
+        background: #f4e4f3;
+        box-shadow: 0 24px 56px rgba(82, 55, 90, 0.08);
+        font-size: 26px;
+        line-height: 1.45;
+      }
+
+      .job-card small {
+        display: block;
+        margin-bottom: 10px;
+        color: #8a5f8a;
+        font-size: 17px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1.2px;
+      }
+
+      .job-1 {
+        left: 190px;
+        top: 360px;
+        transform: rotate(8deg);
+      }
+
+      .job-2 {
+        right: 190px;
+        top: 300px;
+        background: #effbd8;
+        transform: rotate(-7deg);
+      }
+
+      .job-3 {
+        left: 280px;
+        top: 610px;
+        background: #fff0be;
+        transform: rotate(-9deg);
+      }
+
+      .job-4 {
+        right: 270px;
+        top: 665px;
+        transform: rotate(6deg);
+      }
+
+      .flow {
+        background: #0b0c12;
+        color: white;
+      }
+
+      .flow .section-head h2,
+      .flow .section-head p {
+        color: white;
+      }
+
+      .flow .section-head p {
+        color: rgba(255, 255, 255, 0.66);
+      }
+
+      .flow-map {
+        display: grid;
+        grid-template-columns: 1fr 190px 1fr 190px 1fr;
+        gap: 22px;
+        align-items: center;
+      }
+
+      .flow-stack {
+        display: grid;
+        gap: 18px;
+      }
+
+      .flow-pill {
+        padding: 25px 30px;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 30px;
+        background: rgba(255, 255, 255, 0.075);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        font-size: 23px;
+        font-weight: 750;
+      }
+
+      .arrow {
+        color: rgba(255, 255, 255, 0.42);
+        font-size: 66px;
+        text-align: center;
+      }
+
+      .flow-core {
+        min-height: 390px;
+        display: grid;
+        place-items: center;
+        border-radius: 56px;
+        background:
+          radial-gradient(circle at 22% 18%, rgba(144, 239, 249, 0.44), transparent 160px),
+          radial-gradient(circle at 82% 78%, rgba(255, 199, 106, 0.35), transparent 180px),
+          #171923;
+        text-align: center;
+      }
+
+      .flow-core strong {
+        display: block;
+        font-size: 48px;
+      }
+
+      .flow-core span {
+        display: block;
+        margin-top: 12px;
+        color: rgba(255, 255, 255, 0.64);
+        font-size: 19px;
+      }
+
+      .screens {
+        background:
+          radial-gradient(circle at 16% 18%, rgba(255, 235, 170, 0.55), transparent 300px),
+          #fbfbfd;
+      }
+
+      .screen-gallery {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 38px;
+        align-items: end;
+      }
+
+      .gallery-item {
+        position: relative;
+      }
+
+      .gallery-item .phone {
+        position: relative;
+        top: auto;
+        right: auto;
+        width: 100%;
+        height: 560px;
+        border-width: 10px;
+        border-radius: 46px;
+        transform: none;
+        box-shadow: 0 28px 62px rgba(32, 22, 42, 0.18);
+      }
+
+      .gallery-item h3 {
+        margin-top: 26px;
+        font-size: 25px;
+      }
+
+      .gallery-item p {
+        margin-top: 9px;
+        color: #746c78;
+        font-size: 17px;
+        line-height: 1.45;
+      }
+
+      .system {
+        background: #fbfbfd;
+      }
+
+      .system-grid {
+        display: grid;
+        grid-template-columns: 0.8fr 1fr;
+        gap: 80px;
+        align-items: center;
+      }
+
+      .swatches {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+      }
+
+      .swatch {
+        min-height: 168px;
+        padding: 20px;
+        border-radius: 28px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        color: white;
+        font-size: 18px;
+        font-weight: 800;
+        box-shadow: 0 18px 45px rgba(36, 24, 45, 0.08);
+      }
+
+      .swatch:nth-child(1) { background: #08090d; }
+      .swatch:nth-child(2) { background: #75d5e4; color: #061114; }
+      .swatch:nth-child(3) { background: #f1b45a; color: #201305; }
+      .swatch:nth-child(4) { background: #a678ff; }
+      .swatch:nth-child(5) { background: #f2d8ef; color: #2a172a; }
+      .swatch:nth-child(6) { background: #f6f0e0; color: #251d12; }
+
+      .ui-cards {
+        display: grid;
+        gap: 20px;
+      }
+
+      .ui-card {
+        padding: 30px 34px;
+        border: 1px solid #ece3ee;
+        border-radius: 28px;
+        background: white;
+        box-shadow: 0 18px 48px rgba(40, 28, 48, 0.07);
+      }
+
+      .ui-card h3 {
+        font-size: 25px;
+      }
+
+      .ui-card p {
+        margin-top: 12px;
+        color: #746c78;
+        font-size: 19px;
+        line-height: 1.55;
+      }
+
+      .trust {
+        background:
+          radial-gradient(circle at 78% 12%, rgba(232, 255, 179, 0.72), transparent 360px),
+          linear-gradient(180deg, #fbfbfd 0%, #fff8ef 100%);
+      }
+
+      .trust-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 26px;
+      }
+
+      .trust-card {
+        min-height: 260px;
+        padding: 32px;
+        border: 1px solid rgba(229, 210, 230, 0.9);
+        border-radius: 34px;
+        background: rgba(255, 255, 255, 0.72);
+        box-shadow: 0 18px 50px rgba(54, 38, 60, 0.08);
+      }
+
+      .trust-card span {
+        display: grid;
+        place-items: center;
+        width: 54px;
+        height: 54px;
+        margin-bottom: 50px;
+        border-radius: 999px;
+        background: #e9ffad;
+        color: #3c520d;
+        font-size: 24px;
+        font-weight: 900;
+      }
+
+      .trust-card h3 {
+        font-size: 24px;
+      }
+
+      .trust-card p {
+        margin-top: 12px;
+        color: #746c78;
+        font-size: 18px;
+        line-height: 1.5;
+      }
+
+      .closing {
+        min-height: 900px;
+        display: grid;
+        place-items: center;
+        text-align: center;
+        color: white;
+        background:
+          radial-gradient(circle at 50% 10%, rgba(117, 213, 228, 0.24), transparent 420px),
+          radial-gradient(circle at 20% 80%, rgba(241, 180, 90, 0.2), transparent 370px),
+          #07080d;
+      }
+
+      .closing .ghost-close {
+        position: absolute;
+        color: rgba(255, 255, 255, 0.045);
+        font-size: 250px;
+        font-weight: 950;
+        letter-spacing: -13px;
+      }
+
+      .closing-content {
+        position: relative;
+        z-index: 2;
+        max-width: 1040px;
+      }
+
+      .closing h2 {
+        font-size: 74px;
+        line-height: 1;
+        letter-spacing: -2.8px;
+      }
+
+      .closing p {
+        margin-top: 36px;
+        color: rgba(255, 255, 255, 0.72);
+        font-size: 27px;
+        line-height: 1.5;
+      }
+
+      .caption {
+        margin-top: 50px;
+        color: rgba(255, 255, 255, 0.46);
+        font-size: 18px;
+        letter-spacing: 1.8px;
+        text-transform: uppercase;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="board">
+      <section class="hero">
+        <div class="topline">
+          <div class="pill-row">
+            <span class="pill">UI/UX Design</span>
+            <span class="pill">iOS Utility</span>
+            <span class="pill">AI Input</span>
+            <span class="pill">Watch App</span>
+          </div>
+          <div class="year">2026</div>
+        </div>
+
+        <div class="ghost">UNITX</div>
+
+        <div class="hero-title">
+          <img src="assets/unitx/current-app-icon.png" alt="" />
+          <h1>UnitX - Smart Unit Converter</h1>
+          <p>Type it. Say it. Scan it. Convert it. A faster way to move from real-world measurement moments to trustworthy answers.</p>
+        </div>
+
+        <div class="mockup-stack">
+          <div class="phone phone-back-a">
+            <img src="assets/unitx/s2-manual-controls.png" alt="" />
+          </div>
+          <div class="phone phone-main">
+            <img src="assets/unitx/s1-smart-convert.png" alt="" />
+          </div>
+          <div class="phone phone-back-b">
+            <img src="assets/unitx/s7-watch.png" alt="" />
+          </div>
+        </div>
+
+        <div class="float-chip chip-1">500 g to lb</div>
+        <div class="float-chip chip-2">100 USD to INR</div>
+        <div class="float-chip chip-3">Scan text</div>
+      </section>
+
+      <section class="intro">
+        <p class="statement">UnitX connects typed input, manual controls, camera scan, voice conversion, saved pairs, history, and Apple Watch into one flexible conversion workflow for everyday moments.</p>
+
+        <div class="founder">
+          <img src="assets/unitx/current-app-icon.png" alt="" />
+          <div>
+            <strong>Animesh Sharma</strong>
+            <span>Product design, SwiftUI implementation, QA</span>
+          </div>
+        </div>
+
+        <div class="info-grid">
+          <div class="mini">
+            <h3>Overview</h3>
+            <p>Most converter apps solve the math, but still force users through setup. UnitX reframes conversion as a micro-task: express intent first, then edit or save the result.</p>
+          </div>
+          <div class="mini">
+            <h3>Project Info</h3>
+            <ul>
+              <li>Category / Utility App</li>
+              <li>Platform / iPhone and Watch</li>
+              <li>Model / Freemium</li>
+            </ul>
+          </div>
+          <div class="mini">
+            <h3>Services</h3>
+            <ul>
+              <li>Product Strategy</li>
+              <li>UI/UX Design</li>
+              <li>SwiftUI Build</li>
+              <li>Launch QA</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="timeline">
+        <div class="section-head">
+          <h2>Project <span>Timeline</span></h2>
+          <p>The project moved from product framing to interaction design, then into SwiftUI implementation, monetization, watch support, and release preparation.</p>
+        </div>
+        <div class="timeline-grid">
+          <div class="phase">
+            <span class="tag">Strategy</span>
+            <p>Job stories, utility positioning, feature model, and freemium boundaries.</p>
+          </div>
+          <div class="phase">
+            <span class="tag">UX Design</span>
+            <p>Smart input, manual handoff, camera flow, favorites, history, and watch IA.</p>
+          </div>
+          <div class="phase">
+            <span class="tag">Build</span>
+            <p>SwiftUI screens, parser support, currency service, StoreKit, and Watch sync.</p>
+          </div>
+          <div class="phase">
+            <span class="tag">Launch</span>
+            <p>QA checks, screenshot planning, App Store copy, monetization, and polish.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="analysis">
+        <div class="section-head">
+          <h2>Competitive <span>Analysis</span></h2>
+          <p>The product opportunity was not more units. It was reducing friction across the different ways people encounter conversion needs.</p>
+        </div>
+        <div class="matrix">
+          <div></div>
+          <div class="head">Manual converter</div>
+          <div class="head">Calculator</div>
+          <div class="head">Currency app</div>
+          <div class="head">UnitX</div>
+
+          <div class="feature">Natural input</div>
+          <div class="dash">-</div>
+          <div class="dash">-</div>
+          <div class="dash">-</div>
+          <div class="check">✓</div>
+
+          <div class="feature">Camera scan</div>
+          <div class="dash">-</div>
+          <div class="dash">-</div>
+          <div class="dash">-</div>
+          <div class="check">✓</div>
+
+          <div class="feature">Manual precision</div>
+          <div class="check">✓</div>
+          <div class="dash">-</div>
+          <div class="dash">-</div>
+          <div class="check">✓</div>
+
+          <div class="feature">Favorites and history</div>
+          <div class="dash">-</div>
+          <div class="dash">-</div>
+          <div class="dash">-</div>
+          <div class="check">✓</div>
+
+          <div class="feature">Watch companion</div>
+          <div class="dash">-</div>
+          <div class="dash">-</div>
+          <div class="dash">-</div>
+          <div class="check">✓</div>
+        </div>
+      </section>
+
+      <section class="jobs">
+        <div class="section-head">
+          <h2>User <span>Jobs</span></h2>
+          <p>Conversion needs appear in small, scattered moments. The interface had to support speed, precision, recovery, and repeated use.</p>
+        </div>
+        <div class="job-card job-1"><small>Traveler</small>Convert prices quickly without mental math while shopping or moving through a city.</div>
+        <div class="job-card job-2"><small>Cook</small>Adapt recipe measurements without leaving the cooking flow.</div>
+        <div class="job-card job-3"><small>Worker</small>Scan a label, screenshot, tool, or document and turn a visible value into an answer.</div>
+        <div class="job-card job-4"><small>Repeat user</small>Save common unit pairs and reopen recent conversions from history or Watch.</div>
+      </section>
+
+      <section class="flow">
+        <div class="section-head">
+          <h2>Product <span>Map</span></h2>
+          <p>Every input path leads to the same structured conversion model, so the user can inspect, edit, save, replay, or continue on Watch.</p>
+        </div>
+        <div class="flow-map">
+          <div class="flow-stack">
+            <div class="flow-pill">Type a query</div>
+            <div class="flow-pill">Speak conversion</div>
+            <div class="flow-pill">Scan text</div>
+            <div class="flow-pill">Manual controls</div>
+          </div>
+          <div class="arrow">→</div>
+          <div class="flow-core">
+            <div>
+              <strong>Smart Result</strong>
+              <span>interpreted value, units, category, and editable output</span>
+            </div>
+          </div>
+          <div class="arrow">→</div>
+          <div class="flow-stack">
+            <div class="flow-pill">Save favorite</div>
+            <div class="flow-pill">Replay history</div>
+            <div class="flow-pill">Open manual</div>
+            <div class="flow-pill">Continue on Watch</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="screens">
+        <div class="section-head">
+          <h2>Final <span>Experience</span></h2>
+          <p>The final app balances a fast smart-input surface with precision controls, camera workflows, retention loops, and watch access.</p>
+        </div>
+        <div class="screen-gallery">
+          <div class="gallery-item">
+            <div class="phone"><img src="assets/unitx/s1-smart-convert.png" alt="" /></div>
+            <h3>Smart Convert</h3>
+            <p>Start with intent instead of setup.</p>
+          </div>
+          <div class="gallery-item">
+            <div class="phone"><img src="assets/unitx/s2-manual-controls.png" alt="" /></div>
+            <h3>Manual Control</h3>
+            <p>Precise category, unit, value, and swap controls.</p>
+          </div>
+          <div class="gallery-item">
+            <div class="phone"><img src="assets/unitx/s4-scan-anything.png" alt="" /></div>
+            <h3>Camera Scan</h3>
+            <p>Turn nearby printed text into a conversion moment.</p>
+          </div>
+          <div class="gallery-item">
+            <div class="phone"><img src="assets/unitx/s7-watch.png" alt="" /></div>
+            <h3>Watch</h3>
+            <p>Repeat common conversions away from the phone.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="system">
+        <div class="section-head">
+          <h2>Visual <span>System</span></h2>
+          <p>The visual language is dark, crisp, and utility-focused, softened for the Behance presentation through pastel boards and rounded editorial elements.</p>
+        </div>
+        <div class="system-grid">
+          <div class="swatches">
+            <div class="swatch">Charcoal</div>
+            <div class="swatch">Cyan</div>
+            <div class="swatch">Amber</div>
+            <div class="swatch">Violet</div>
+            <div class="swatch">Soft UI</div>
+            <div class="swatch">Warm paper</div>
+          </div>
+          <div class="ui-cards">
+            <div class="ui-card">
+              <h3>Result-first hierarchy</h3>
+              <p>Large values, compact supporting labels, and clear source or target units keep the answer readable at a glance.</p>
+            </div>
+            <div class="ui-card">
+              <h3>Recoverable workflows</h3>
+              <p>Smart results can move into manual control, favorites can be reopened, and history gives users a way back.</p>
+            </div>
+            <div class="ui-card">
+              <h3>Premium utility</h3>
+              <p>Pro features are attached to repeated value: voice, camera, Apple Watch, unlimited history, favorites, and themes.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="trust">
+        <div class="section-head">
+          <h2>Trust And <span>QA</span></h2>
+          <p>For a utility app, reliability is part of the design. The app has to communicate uncertainty and keep editable state aligned with the shown result.</p>
+        </div>
+        <div class="trust-grid">
+          <div class="trust-card">
+            <span>✓</span>
+            <h3>Smart handoff</h3>
+            <p>Smart results open manual conversion with a fresh presentation state, avoiding stale unit pairs.</p>
+          </div>
+          <div class="trust-card">
+            <span>✓</span>
+            <h3>Scan recovery</h3>
+            <p>Camera recognition can be ambiguous, so manual editing stays available.</p>
+          </div>
+          <div class="trust-card">
+            <span>✓</span>
+            <h3>Currency limits</h3>
+            <p>Rates are useful for everyday decisions without pretending to be financial precision.</p>
+          </div>
+          <div class="trust-card">
+            <span>✓</span>
+            <h3>Watch repeat use</h3>
+            <p>Favorites and recents make the companion app useful beyond a novelty flow.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="closing">
+        <div class="ghost-close">UNITX</div>
+        <div class="closing-content">
+          <h2>Conversion is not one workflow. It is a family of moments.</h2>
+          <p>The best version of UnitX is not the converter with the most categories. It is the converter that lets people reach the answer in the way the moment naturally allows.</p>
+          <div class="caption">Case Study / UnitX / Product Design and SwiftUI</div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
