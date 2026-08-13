@@ -2,17 +2,17 @@ import { existsSync, readFileSync, statSync } from "node:fs";
 import { resolve } from "node:path";
 
 const pages = [
-  ["index.html", "https://iamanimesh.com/", null],
-  ["products.html", "https://iamanimesh.com/products.html", "products.html"],
-  ["case-studies.html", "https://iamanimesh.com/case-studies.html", "case-studies.html"],
-  ["unitx.html", "https://iamanimesh.com/unitx.html", "products.html"],
-  ["buildx.html", "https://iamanimesh.com/buildx.html", "products.html"],
-  ["pacex.html", "https://iamanimesh.com/pacex.html", "products.html"],
-  ["income-tax.html", "https://iamanimesh.com/income-tax.html", "case-studies.html"],
-  ["trade-cloud-apps.html", "https://iamanimesh.com/trade-cloud-apps.html", "case-studies.html"],
-  ["unitx-case-study.html", "https://iamanimesh.com/unitx-case-study.html", "case-studies.html"],
-  ["journey.html", "https://iamanimesh.com/journey.html", "journey.html"],
-  ["about.html", "https://iamanimesh.com/about.html", "about.html"],
+  ["index.html", "https://www.iamanimesh.com/", null],
+  ["products.html", "https://www.iamanimesh.com/products.html", "products.html"],
+  ["case-studies.html", "https://www.iamanimesh.com/case-studies.html", "case-studies.html"],
+  ["unitx.html", "https://www.iamanimesh.com/unitx.html", "products.html"],
+  ["buildx.html", "https://www.iamanimesh.com/buildx.html", "products.html"],
+  ["pacex.html", "https://www.iamanimesh.com/pacex.html", "products.html"],
+  ["income-tax.html", "https://www.iamanimesh.com/income-tax.html", "case-studies.html"],
+  ["trade-cloud-apps.html", "https://www.iamanimesh.com/trade-cloud-apps.html", "case-studies.html"],
+  ["unitx-case-study.html", "https://www.iamanimesh.com/unitx-case-study.html", "case-studies.html"],
+  ["journey.html", "https://www.iamanimesh.com/journey.html", "journey.html"],
+  ["about.html", "https://www.iamanimesh.com/about.html", "about.html"],
 ];
 
 const errors = [];
