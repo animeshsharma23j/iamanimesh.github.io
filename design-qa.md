@@ -1,90 +1,43 @@
-# Design QA — portfolio refinement
+**Findings**
 
-## Source visual truth
+- No actionable P0, P1, or P2 visual differences were found in the rendered desktop heroes.
+  Evidence: the supplied product screens are used directly as the hero artwork; the rendered captures confirm BuildX's complete iPhone frame and the intentionally layered iPad/iPhone compositions for UnitX and Recital.
+  Residual test gap: Browser security policy blocked the requested local combined comparison page, so the source visuals and rendered captures were inspected individually rather than in one composed browser view.
 
-- Recognition reference: `/Users/johnconnor/Desktop/Screenshot 2026-07-30 at 9.24.46 PM.png`
-- Header / hero reference: `/Users/johnconnor/Desktop/Screenshot 2026-07-30 at 9.26.11 PM.png`
-- Journey reference: `/Users/johnconnor/Desktop/Screenshot 2026-07-30 at 9.30.23 PM.png`
+**Comparison Target**
 
-## Implementation evidence
+- Source visual truth:
+  - `/Users/johnconnor/Desktop/BuildX_Home.png` — 450 × 920 px.
+  - `/Users/johnconnor/Desktop/UnitX_Home.png` — 450 × 920 px; paired with `/Users/johnconnor/Desktop/UnitX_iPad.png` — 940 × 1320 px.
+  - `/Users/johnconnor/Desktop/Recital_Home.png` — 450 × 920 px; paired with `/Users/johnconnor/Desktop/Recital_iPad.png` — 940 × 1115 px.
+- Rendered implementation captures:
+  - `/private/tmp/buildx-landing-hero.png`
+  - `/private/tmp/unitx-landing-hero.png`
+  - `/private/tmp/recital-landing-hero.png`
+- Implementation viewport/state: local `http://localhost:4174`, desktop hero at 1280 × 720 CSS px, dark theme, default route state. Screenshot density is 1×; the supplied artwork is intentionally scaled as hero imagery rather than reproduced as a browser-sized interface.
 
-- Screenshot: `tmp/qa/journey-implementation.png`
-- Viewport: 1280 × 720 CSS pixels
-- State: home page loaded at `#journey`; first timeline entry and header visible.
-- Route checks: `index.html`, `unitx.html`, and `income-tax.html` each returned HTTP 200 from the local server.
+**Required Fidelity Surfaces**
 
-## Comparison
+- Fonts and typography: the site display hierarchy remains consistent with the PaceX page; product-app interface typography comes from the supplied screenshots without reconstruction.
+- Spacing and layout rhythm: both paired heroes preserve a readable foreground iPhone, a larger background iPad, shared baseline, and an unclipped top edge. BuildX keeps its single device fully inside the hero.
+- Colors and visual tokens: UnitX uses its green conversion interface, Recital its burgundy studio interface, and BuildX its neutral field-tool interface. The surrounding page uses each product accent intentionally.
+- Image quality and asset fidelity: all app screens are the supplied original PNGs; no mock device, logo, or product UI was recreated with CSS or placeholder artwork.
+- Copy and content: the pages use product-specific feature and FAQ copy. Recital's claims cover solo-teacher scheduling, attendance, lesson notes, practice, balances, statements, offline-first use, and iCloud sync.
 
-### Full view
+**Open Questions**
 
-The implementation keeps the reference's dark editorial field, quiet line work, pale type, and compact header. The home page intentionally retains its existing design-thinking visual language rather than copying the reference hero verbatim. Section spacing was widened so the hero, work, journey, and about content read as separate chapters.
+- The local-browser policy blocked `file:///private/tmp/portfolio-landing-comparison.html`, so it was not possible to put source and implementation captures together in one browser capture. This is a QA-evidence limitation, not a visible implementation issue.
 
-### Focused regions
+**Implementation Checklist**
 
-- **Header and identity:** the previous horizontal blur mask created a seam beside the wordmark. The veil now spans the viewport and fades only vertically. The supplied logo has a cyan-and-amber glow and alternates cleanly with the online wordmark.
-- **Journey:** cards were replaced with a left-hand rail, dot markers, company / role / summary in the main column, and dates aligned on the right—matching the requested reference structure.
-- **Recognition:** moved into About as a two-column editorial block: label left, yellow outcomes and recognition names right.
-- **Case studies:** rows are now whole, keyboard-focusable links to dedicated UnitX and Income Tax pages.
+- [x] Add supplied BuildX iPhone mockup to the BuildX hero.
+- [x] Add supplied UnitX iPhone and iPad mockups as one layered group.
+- [x] Add supplied Recital iPhone and iPad mockups as one layered group.
+- [x] Add matching feature-card and FAQ sections.
+- [x] Verify local links, metadata, and assets with `npm run verify`.
 
-## Iteration history
+**Follow-up Polish**
 
-1. Increased hero-to-section spacing and added low-contrast section rules.
-2. Separated the recognition content from the home hero and placed it within About.
-3. Rebuilt Journey as a timeline.
-4. Replaced conflicting identity-face animation with a timed cross-flip.
-5. Replaced the masked header blur with a full-width vertical fade to eliminate the perceived cut near the brand.
+- [P3] Re-run the combined source/rendered visual comparison when a local file comparison surface is permitted.
 
-## Required fidelity surfaces
-
-- Hero / main visible surface: reviewed.
-- Header navigation: reviewed, including wordmark, logo state, and Contact outline button.
-- Case-study entry interaction: verified through direct destination routes.
-- Journey anchor: reviewed at `#journey`.
-- About / recognition content: reviewed in source and visual treatment.
-- Responsive rules: reviewed for 900px and 560px breakpoints; journey, recognition, case rows, header, and case-study layout each collapse to one-column-safe patterns.
-
-Final result: passed
-
----
-
-# Design QA — Product consistency correction (2026-08-13)
-
-## Source visual truth
-
-- UnitX: supplied iPhone and iPad simulator screenshots.
-- BuildX: supplied iPhone and iPad simulator screenshots.
-- PaceX: supplied iPhone simulator screenshot.
-
-## Corrections verified
-
-- Products now uses the same black surface, warm-white type, low-contrast grid, and compact navigation treatment as the rest of the portfolio; the previous white directory treatment has been removed.
-- UnitX, BuildX, and PaceX heroes now render real supplied app screenshots. The previously generated app mockups are no longer used by product pages.
-- Each product hero now exposes exactly two intentional actions: a primary `Download on the App Store` link and a secondary `Explore` anchor to the feature section.
-- Browser checks confirmed all three real screenshot sources and App Store links: UnitX `6760877550`, BuildX `6767122401`, and PaceX `6767212682`.
-- The BuildX hero was visually reviewed at desktop width with the supplied iPhone screenshot; browser console reported no errors.
-
-Final result: passed
-
----
-
-# Design QA — Products and app landing pages (2026-08-13)
-
-## Reference and scope
-
-- Directory reference: `/Users/johnconnor/Desktop/Screenshot 2026-08-13 at 10.19.17 AM.png`
-- App-launch reference: `/Users/johnconnor/Desktop/Screenshot 2026-08-13 at 10.22.26 AM.png`
-- Implemented routes: `products.html`, `unitx.html`, `buildx.html`, and `pacex.html`
-
-## Visual checks
-
-- The Products page was rendered locally at desktop width. It uses the reference’s light editorial surface, large black headline, rounded white app cards, icon-first hierarchy, metadata, and a single clear exploration action per app.
-- The BuildX landing page was rendered locally. Its hero retains the reference’s dark app-launch rhythm: app icon and short copy on the left, full iPhone product image on the right, strong accent word, two focused actions, and compact product facts.
-- UnitX and PaceX routes were loaded locally; their unique hero headings were visible and the browser console reported no errors.
-
-## Interaction and integrity checks
-
-- Products is a first-class global-navigation item on all pages, with the active state applied only on the directory and product pages.
-- All three directory actions lead to their dedicated landing pages.
-- `npm run verify` passed across 10 pages, including metadata, landmarks, navigation, and local product assets.
-
-Final result: passed
+final result: blocked

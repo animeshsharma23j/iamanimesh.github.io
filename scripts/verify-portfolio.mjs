@@ -3,24 +3,21 @@ import { resolve } from "node:path";
 
 const pages = [
   ["index.html", "https://www.iamanimesh.com/", null],
-  ["products.html", "https://www.iamanimesh.com/products.html", "products.html"],
-  ["case-studies.html", "https://www.iamanimesh.com/case-studies.html", "case-studies.html"],
-  ["unitx.html", "https://www.iamanimesh.com/unitx.html", "products.html"],
-  ["celsius-to-fahrenheit.html", "https://www.iamanimesh.com/celsius-to-fahrenheit.html", "products.html"],
-  ["buildx.html", "https://www.iamanimesh.com/buildx.html", "products.html"],
-  ["feet-inches-calculator.html", "https://www.iamanimesh.com/feet-inches-calculator.html", "products.html"],
-  ["pacex.html", "https://www.iamanimesh.com/pacex.html", "products.html"],
-  ["recital.html", "https://www.iamanimesh.com/recital.html", "products.html"],
-  ["running-pace-calculator.html", "https://www.iamanimesh.com/running-pace-calculator.html", "products.html"],
-  ["income-tax.html", "https://www.iamanimesh.com/income-tax.html", "case-studies.html"],
-  ["trade-cloud-apps.html", "https://www.iamanimesh.com/trade-cloud-apps.html", "case-studies.html"],
-  ["unitx-case-study.html", "https://www.iamanimesh.com/unitx-case-study.html", "case-studies.html"],
+  ["products.html", "https://www.iamanimesh.com/products.html", null],
+  ["case-studies.html", "https://www.iamanimesh.com/case-studies.html", null],
+  ["unitx.html", "https://www.iamanimesh.com/unitx.html", null],
+  ["buildx.html", "https://www.iamanimesh.com/buildx.html", null],
+  ["pacex.html", "https://www.iamanimesh.com/pacex.html", null],
+  ["recital.html", "https://www.iamanimesh.com/recital.html", null],
+  ["income-tax.html", "https://www.iamanimesh.com/income-tax.html", null],
+  ["trade-cloud-apps.html", "https://www.iamanimesh.com/trade-cloud-apps.html", null],
+  ["unitx-case-study.html", "https://www.iamanimesh.com/unitx-case-study.html", null],
   ["journey.html", "https://www.iamanimesh.com/journey.html", null],
   ["about.html", "https://www.iamanimesh.com/about.html", "about.html"],
 ];
 
 const errors = [];
-const requiredNav = ["products.html", "case-studies.html", "about.html", "mailto:animeshsharma23j@gmail.com"];
+const requiredNav = ["index.html#products", "index.html#case-studies", "about.html", "mailto:animeshsharma23j@gmail.com"];
 
 for (const [file, canonical, activePage] of pages) {
   const html = readFileSync(file, "utf8");
@@ -31,7 +28,10 @@ for (const [file, canonical, activePage] of pages) {
   expect(html.includes(`<link rel="canonical" href="${canonical}" />`), "canonical URL is missing or incorrect");
   expect(/<meta property="og:title"/.test(html) && /<meta property="og:description"/.test(html), "missing Open Graph metadata");
 
-  for (const href of requiredNav) expect(html.includes(`href="${href}"`), `missing global navigation link: ${href}`);
+  const pageNav = file === "index.html"
+    ? ["#products", "#case-studies", "about.html", "mailto:animeshsharma23j@gmail.com"]
+    : requiredNav;
+  for (const href of pageNav) expect(html.includes(`href="${href}"`), `missing global navigation link: ${href}`);
 
   const currentMatches = [...html.matchAll(/aria-current="page"/g)].length;
   expect(currentMatches === (activePage ? 1 : 0), "unexpected active-navigation state");
