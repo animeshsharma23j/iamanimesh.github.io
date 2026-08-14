@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Convert Celsius to Fahrenheit instantly with this free temperature converter. See the exact Fahrenheit and Kelvin values, then handle everyday conversions in UnitX." />
+    <title>Celsius to Fahrenheit Converter | UnitX</title>
+    <link rel="canonical" href="https://www.iamanimesh.com/celsius-to-fahrenheit.html" />
+    <meta property="og:type" content="website" /><meta property="og:title" content="Celsius to Fahrenheit Converter | UnitX" /><meta property="og:description" content="Convert Celsius to Fahrenheit and Kelvin instantly." /><meta property="og:url" content="https://www.iamanimesh.com/celsius-to-fahrenheit.html" /><meta name="twitter:card" content="summary" />
+    <link rel="icon" href="icon.png" type="image/png" /><link rel="stylesheet" href="styles.css?v=20260814-25" />
+  </head>
+  <body class="calculator-page">
+    <a class="skip-link" href="#main-content">Skip to converter</a>
+    <header class="site-header"><a class="brand" href="index.html" aria-label="Animesh Sharma home"><span class="brand-name">animesh</span><span class="availability" aria-hidden="true"></span></a><nav class="tabs" aria-label="Portfolio sections"><a class="tab" href="products.html" aria-current="page">Products</a><a class="tab" href="case-studies.html">Case studies</a><a class="tab" href="about.html">About</a><a class="tab tab-contact" href="mailto:animeshsharma23j@gmail.com">Contact</a></nav><details class="mobile-menu"><summary aria-label="Open navigation"><span class="mobile-menu-icon" aria-hidden="true"></span><span class="visually-hidden">Menu</span></summary><nav aria-label="Mobile navigation"><a href="products.html">Products</a><a href="case-studies.html">Case studies</a><a href="about.html">About</a><a href="mailto:animeshsharma23j@gmail.com">Contact</a></nav></details></header>
+    <main id="main-content" class="calculator-shell">
+      <p class="product-kicker">UnitX tools</p>
+      <h1>Celsius to<br /><em>Fahrenheit.</em></h1>
+      <p class="calculator-intro">Enter a Celsius temperature for its exact Fahrenheit and Kelvin equivalents. Useful for weather, cooking, travel, and the everyday questions that should take seconds.</p>
+      <section class="pace-calculator conversion-calculator" aria-labelledby="converter-heading">
+        <div class="calculator-form-wrap">
+          <h2 id="converter-heading">Convert a temperature</h2>
+          <form id="temperature-converter-form">
+            <fieldset class="temperature-entry">
+              <legend>Celsius</legend>
+              <label for="celsius">Degrees Celsius</label>
+              <div class="temperature-input"><input id="celsius" name="celsius" type="number" step="any" value="20" required inputmode="decimal" /><span>°C</span></div>
+            </fieldset>
+            <button class="calculator-submit" type="submit">Convert temperature</button>
+          </form>
+          <div class="temperature-shortcuts" aria-label="Common Celsius temperatures"><button type="button" data-celsius="0">Freezing<br /><span>0°C</span></button><button type="button" data-celsius="20">Room<br /><span>20°C</span></button><button type="button" data-celsius="100">Boiling<br /><span>100°C</span></button></div>
+        </div>
+        <div class="pace-result" aria-live="polite">
+          <p class="result-label">Fahrenheit</p>
+          <output id="fahrenheit" class="measurement-number">68°F</output>
+          <output id="kelvin" class="pace-mile">293.15 K</output>
+          <p id="temperature-summary">20°C is 68°F.</p>
+        </div>
+      </section>
+      <section class="calculator-explainer">
+        <div><p class="product-kicker">The formula</p><h2>Multiply by 9/5, then add 32.</h2></div>
+        <p>To convert Celsius to Fahrenheit, multiply the Celsius value by 9/5 and add 32. Water freezes at 0°C (32°F) and boils at 100°C (212°F). Kelvin begins at absolute zero, so it is Celsius plus 273.15.</p>
+      </section>
+      <section class="calculator-cta">
+        <p class="product-kicker">Beyond one conversion</p>
+        <h2>Everyday questions, without the busywork.</h2>
+        <p>UnitX makes temperature, length, weight, and other conversions feel immediate on iPhone and Apple Watch—whether you type naturally, choose exact controls, or scan the number in front of you.</p>
+        <div class="product-actions"><a class="product-button primary" href="https://apps.apple.com/app/id6760877550" target="_blank" rel="noopener noreferrer">Download UnitX on the App Store <span aria-hidden="true">↗</span></a><a class="product-button secondary" href="unitx.html">Explore UnitX</a></div>
+      </section>
+    </main>
+    <footer class="site-footer product-site-footer"><span>© 2026 Animesh Sharma</span><span>Product designer &amp; engineer · India</span><a href="products.html">Products</a><a href="mailto:animeshsharma23j@gmail.com">animeshsharma23j@gmail.com</a></footer>
+    <script>
+      (() => {
+        const form = document.querySelector('#temperature-converter-form');
+        const celsius = document.querySelector('#celsius');
+        const fahrenheit = document.querySelector('#fahrenheit');
+        const kelvin = document.querySelector('#kelvin');
+        const summary = document.querySelector('#temperature-summary');
+        const format = (value, precision = 2) => Number(value.toFixed(precision)).toString();
+        const convert = () => {
+          const c = Number(celsius.value);
+          if (!Number.isFinite(c)) return;
+          const f = (c * 9 / 5) + 32;
+          fahrenheit.textContent = `${format(f)}°F`;
+          kelvin.textContent = `${format(c + 273.15)} K`;
+          summary.textContent = `${format(c)}°C is ${format(f)}°F.`;
+        };
+        form.addEventListener('submit', (event) => { event.preventDefault(); convert(); });
+        document.querySelectorAll('[data-celsius]').forEach((button) => button.addEventListener('click', () => { celsius.value = button.dataset.celsius; convert(); }));
+        convert();
+      })();
+    </script>
+  </body>
+</html>

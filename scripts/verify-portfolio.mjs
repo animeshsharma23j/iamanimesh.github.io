@@ -6,17 +6,21 @@ const pages = [
   ["products.html", "https://www.iamanimesh.com/products.html", "products.html"],
   ["case-studies.html", "https://www.iamanimesh.com/case-studies.html", "case-studies.html"],
   ["unitx.html", "https://www.iamanimesh.com/unitx.html", "products.html"],
+  ["celsius-to-fahrenheit.html", "https://www.iamanimesh.com/celsius-to-fahrenheit.html", "products.html"],
   ["buildx.html", "https://www.iamanimesh.com/buildx.html", "products.html"],
+  ["feet-inches-calculator.html", "https://www.iamanimesh.com/feet-inches-calculator.html", "products.html"],
   ["pacex.html", "https://www.iamanimesh.com/pacex.html", "products.html"],
+  ["recital.html", "https://www.iamanimesh.com/recital.html", "products.html"],
+  ["running-pace-calculator.html", "https://www.iamanimesh.com/running-pace-calculator.html", "products.html"],
   ["income-tax.html", "https://www.iamanimesh.com/income-tax.html", "case-studies.html"],
   ["trade-cloud-apps.html", "https://www.iamanimesh.com/trade-cloud-apps.html", "case-studies.html"],
   ["unitx-case-study.html", "https://www.iamanimesh.com/unitx-case-study.html", "case-studies.html"],
-  ["journey.html", "https://www.iamanimesh.com/journey.html", "journey.html"],
+  ["journey.html", "https://www.iamanimesh.com/journey.html", null],
   ["about.html", "https://www.iamanimesh.com/about.html", "about.html"],
 ];
 
 const errors = [];
-const requiredNav = ["products.html", "case-studies.html", "journey.html", "about.html", "mailto:animeshsharma23j@gmail.com"];
+const requiredNav = ["products.html", "case-studies.html", "about.html", "mailto:animeshsharma23j@gmail.com"];
 
 for (const [file, canonical, activePage] of pages) {
   const html = readFileSync(file, "utf8");
