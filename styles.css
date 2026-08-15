@@ -670,6 +670,17 @@ h1 {
 .contact-email { display: inline-block; color: var(--cyan); font-size: clamp(1.4rem, 3vw, 2.2rem); font-weight: 800; letter-spacing: -0.03em; }
 .contact-email:hover, .contact-email:focus-visible { color: var(--amber); outline: 0; }
 
+.legal-updated { margin: 0 0 32px; color: var(--soft); font-size: 0.85rem; }
+.legal-body { max-width: 720px; }
+.legal-body h2 { margin: 40px 0 14px; color: var(--text); font-size: 1.3rem; font-weight: 750; letter-spacing: -0.02em; }
+.legal-body h2:first-child { margin-top: 0; }
+.legal-body p { margin: 0 0 16px; color: var(--muted); font-size: 1rem; line-height: 1.65; }
+.legal-body ul { margin: 0 0 16px; padding-left: 20px; color: var(--muted); font-size: 1rem; line-height: 1.65; }
+.legal-body li { margin-bottom: 8px; }
+.legal-body li strong, .legal-body p strong { color: var(--text); }
+.legal-body a { color: var(--cyan); text-decoration: underline; text-underline-offset: 2px; }
+.legal-body a:hover, .legal-body a:focus-visible { color: var(--amber); }
+
 .diagram-core strong { color: var(--amber); font-size: 1.2rem; line-height: 0.9; }
 
 .thinking-steps { position: absolute; inset: 0; margin: 0; padding: 0; list-style: none; }

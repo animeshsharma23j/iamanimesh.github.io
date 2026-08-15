@@ -13,6 +13,14 @@ const pages = [
   ["trade-cloud-apps.html", "https://www.iamanimesh.com/trade-cloud-apps.html", null],
   ["unitx-case-study.html", "https://www.iamanimesh.com/unitx-case-study.html", null],
   ["about.html", "https://www.iamanimesh.com/about.html", "about.html"],
+  ["unitx-support.html", "https://www.iamanimesh.com/unitx-support.html", null],
+  ["unitx-privacy.html", "https://www.iamanimesh.com/unitx-privacy.html", null],
+  ["buildx-support.html", "https://www.iamanimesh.com/buildx-support.html", null],
+  ["buildx-privacy.html", "https://www.iamanimesh.com/buildx-privacy.html", null],
+  ["pacex-support.html", "https://www.iamanimesh.com/pacex-support.html", null],
+  ["pacex-privacy.html", "https://www.iamanimesh.com/pacex-privacy.html", null],
+  ["recital-support.html", "https://www.iamanimesh.com/recital-support.html", null],
+  ["recital-privacy.html", "https://www.iamanimesh.com/recital-privacy.html", null],
 ];
 
 const errors = [];
