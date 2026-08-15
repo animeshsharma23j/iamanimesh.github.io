@@ -7,7 +7,7 @@
     <meta name="description" content="Income Tax concept prototype — an automated, assisted filing demo, not an official tax service." />
     <title>File your ITR — concept demo</title>
     <link rel="icon" href="icon.png" type="image/png" />
-    <link rel="stylesheet" href="income-tax-demo.css?v=8" />
+    <link rel="stylesheet" href="income-tax-demo.css?v=9" />
   </head>
   <body>
     <div class="demo-shell">
@@ -77,11 +77,11 @@
               <span class="quick-link-desc">Worked examples — find the one closest to your situation.</span>
               <span class="quick-link-status is-open">Open</span>
             </button>
-            <div class="quick-link-card is-disabled" aria-disabled="true">
+            <button type="button" class="quick-link-card" data-goto="tax-qna">
               <span class="quick-link-title">Tax QnA</span>
               <span class="quick-link-desc">Plain-language answers, no section numbers.</span>
-              <span class="quick-link-status">Coming soon</span>
-            </div>
+              <span class="quick-link-status is-open">Open</span>
+            </button>
             <div class="quick-link-card is-disabled" aria-disabled="true">
               <span class="quick-link-title">Video Tutorials</span>
               <span class="quick-link-desc">Short walkthroughs of the trickier steps.</span>
@@ -230,6 +230,81 @@
                 <button type="button" class="demo-btn is-quiet" data-goto="home">← Back to Home</button>
               </div>
             </div>
+          </div>
+        </section>
+
+        <section class="demo-screen" id="tax-qna">
+          <span class="demo-eyebrow">Tax QnA</span>
+          <h1 class="demo-heading">Plain-language answers, no section numbers</h1>
+          <p class="demo-body">Every question here came from something people actually asked, not a made-up FAQ. Search, or browse by theme.</p>
+
+          <div class="qna-controls">
+            <input type="search" id="qna-search" class="qna-search-input" placeholder="Search a question or term…" aria-label="Search Tax QnA" />
+            <div class="qna-filter-chips" id="qna-filter-chips">
+              <button type="button" class="qna-chip is-active" data-filter="all">All</button>
+              <button type="button" class="qna-chip" data-filter="form">Form</button>
+              <button type="button" class="qna-chip" data-filter="reuse">Reuse</button>
+              <button type="button" class="qna-chip" data-filter="term">Terminology</button>
+              <button type="button" class="qna-chip" data-filter="recover">Recovery</button>
+            </div>
+          </div>
+
+          <div class="qna-list" id="qna-list">
+            <div class="qna-item" data-tag="form">
+              <button type="button" class="qna-question" aria-expanded="false"><span>Do I even need to file this year?</span><span class="qna-chevron" aria-hidden="true">⌄</span></button>
+              <div class="qna-answer" hidden><p>Generally, yes if your income is above the basic exemption limit, or if you had any capital gains, foreign assets, or business/freelance income — even a small amount. If none of that applies, you may not need to file at all.</p></div>
+            </div>
+            <div class="qna-item" data-tag="form">
+              <button type="button" class="qna-question" aria-expanded="false"><span>Which ITR form applies to me?</span><span class="qna-chevron" aria-hidden="true">⌄</span></button>
+              <div class="qna-answer" hidden><p>Salary and bank interest only → ITR-1. Add capital gains or foreign assets → ITR-2. Any business or freelance income → ITR-3. See <a href="#" data-goto="case-studies">Real Life Case Studies</a> for five worked examples, or just start filing — we work it out from a few plain questions, not the other way around.</p></div>
+            </div>
+            <div class="qna-item" data-tag="form">
+              <button type="button" class="qna-question" aria-expanded="false"><span>I have two Form 16s from two jobs — do I add them together or pick one?</span><span class="qna-chevron" aria-hidden="true">⌄</span></button>
+              <div class="qna-answer" hidden><p>Add them together. Both employers' salary combines into one figure on your return — it's still just salary income, so it's still ITR-1.</p></div>
+            </div>
+            <div class="qna-item" data-tag="term">
+              <button type="button" class="qna-question" aria-expanded="false"><span>What's the difference between AY and FY?</span><span class="qna-chevron" aria-hidden="true">⌄</span></button>
+              <div class="qna-answer" hidden><p>FY (Financial Year) is when you earned the income — April to March. AY (Assessment Year) is the year after that, when it gets assessed and filed. Income earned in FY 2025-26 is filed in AY 2026-27.</p></div>
+            </div>
+            <div class="qna-item" data-tag="term">
+              <button type="button" class="qna-question" aria-expanded="false"><span>What is Section 80C?</span><span class="qna-chevron" aria-hidden="true">⌄</span></button>
+              <div class="qna-answer" hidden><p>A deduction for money you've put into things like ELSS funds, PPF, or life insurance premiums — up to ₹1,50,000. It only reduces tax under the old regime.</p></div>
+            </div>
+            <div class="qna-item" data-tag="term">
+              <button type="button" class="qna-question" aria-expanded="false"><span>What is Section 80D?</span><span class="qna-chevron" aria-hidden="true">⌄</span></button>
+              <div class="qna-answer" hidden><p>A deduction for health insurance premiums you've paid — up to ₹25,000 (higher for senior citizens). Like 80C, it only applies under the old regime.</p></div>
+            </div>
+            <div class="qna-item" data-tag="term">
+              <button type="button" class="qna-question" aria-expanded="false"><span>What is TDS?</span><span class="qna-chevron" aria-hidden="true">⌄</span></button>
+              <div class="qna-answer" hidden><p>Tax Deducted at Source — tax your employer or bank already took out before paying you, and sent to the government on your behalf. It shows up in Form 26AS, and reduces what you still owe when you file.</p></div>
+            </div>
+            <div class="qna-item" data-tag="term">
+              <button type="button" class="qna-question" aria-expanded="false"><span>What are AIS and Form 26AS?</span><span class="qna-chevron" aria-hidden="true">⌄</span></button>
+              <div class="qna-answer" hidden><p>Government records of the income and tax already on file for you — salary, TDS, bank interest, broker statements. This is exactly what we auto-fill from, so you're not retyping what's already known.</p></div>
+            </div>
+            <div class="qna-item" data-tag="term">
+              <button type="button" class="qna-question" aria-expanded="false"><span>Old regime vs. new regime — which is better?</span><span class="qna-chevron" aria-hidden="true">⌄</span></button>
+              <div class="qna-answer" hidden><p>It depends entirely on how many deductions you can claim — the old regime allows more of them, the new regime has lower rates but fewer deductions. Try the <a href="#" data-goto="calculator">Interactive Tax Calculator</a> with your real numbers rather than guessing.</p></div>
+            </div>
+            <div class="qna-item" data-tag="reuse">
+              <button type="button" class="qna-question" aria-expanded="false"><span>Why do I have to re-enter information the government already has?</span><span class="qna-chevron" aria-hidden="true">⌄</span></button>
+              <div class="qna-answer" hidden><p>You shouldn't, for most of it — that's the point of pulling from AIS and Form 26AS automatically. We only ask again when something doesn't match, or when it's genuinely something we can't see, like freelance income.</p></div>
+            </div>
+            <div class="qna-item" data-tag="recover">
+              <button type="button" class="qna-question" aria-expanded="false"><span>What happens if I make a mistake?</span><span class="qna-chevron" aria-hidden="true">⌄</span></button>
+              <div class="qna-answer" hidden><p>You're told specifically what doesn't match and what to do about it — not shown a generic red warning with no explanation. A mismatch is a fixable state, not a verdict.</p></div>
+            </div>
+            <div class="qna-item" data-tag="recover">
+              <button type="button" class="qna-question" aria-expanded="false"><span>I paid tax through a challan — do I still need to enter it?</span><span class="qna-chevron" aria-hidden="true">⌄</span></button>
+              <div class="qna-answer" hidden><p>Yes. The payment is real, but if its details never make it into the return, the return shows the tax as unpaid — and that gap is exactly what turns into a "tax defaulter" notice months later, for tax you already paid. We check for this before you file.</p></div>
+            </div>
+          </div>
+
+          <p class="qna-empty" id="qna-empty" hidden>No matches for that search — try a different word.</p>
+
+          <div class="demo-actions demo-actions-row">
+            <button type="button" class="demo-btn is-primary" data-goto="start">Start Filing</button>
+            <button type="button" class="demo-btn is-quiet" data-goto="home">← Back to Home</button>
           </div>
         </section>
 
@@ -447,6 +522,6 @@
       <p class="demo-disclaimer"><strong>This is a design research prototype</strong>, not affiliated with the Income Tax Department or any filing service. The auto-import, OTP, and filing steps are all simulated with fixed demo data — nothing you do here is submitted, filed, or stored anywhere, and no real account is contacted. Read the <a href="income-tax.html">full case study</a>.</p>
     </div>
 
-    <script src="scripts/income-tax-demo.js?v=8" defer></script>
+    <script src="scripts/income-tax-demo.js?v=9" defer></script>
   </body>
 </html>

@@ -14,7 +14,7 @@
   var DED_80D = 25000;
 
   var progressOrder = ["snapshot", "q-capgains", "q-business", "q-foreign", "deductions", "regime", "resolve", "review", "everify"];
-  var WIDE_SCREENS = ["home", "guide", "calculator", "case-studies"];
+  var WIDE_SCREENS = ["home", "guide", "calculator", "case-studies", "tax-qna"];
   var demoShell = document.querySelector(".demo-shell");
 
   var answers = { capgains: null, business: null, foreign: null, ded80c: false, ded80d: false };
@@ -44,9 +44,10 @@
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
-  // ---- Simple screen-to-screen navigation (Home, Guide) ----
+  // ---- Simple screen-to-screen navigation (Home, Guide, and any inline links) ----
   document.querySelectorAll("[data-goto]").forEach(function (btn) {
-    btn.addEventListener("click", function () {
+    btn.addEventListener("click", function (e) {
+      e.preventDefault();
       showScreen(btn.getAttribute("data-goto"));
     });
   });
@@ -485,6 +486,50 @@
   }
 
   runCalculator();
+
+  // ---- Tax QnA: search, filter, accordion ----
+  var qnaSearch = document.getElementById("qna-search");
+  var qnaChips = document.querySelectorAll(".qna-chip");
+  var qnaItems = Array.prototype.slice.call(document.querySelectorAll(".qna-item"));
+  var qnaEmpty = document.getElementById("qna-empty");
+  var qnaFilter = "all";
+
+  function applyQnaFilter() {
+    var term = qnaSearch ? qnaSearch.value.trim().toLowerCase() : "";
+    var visibleCount = 0;
+    qnaItems.forEach(function (item) {
+      var matchesTag = qnaFilter === "all" || item.getAttribute("data-tag") === qnaFilter;
+      var matchesTerm = !term || item.textContent.toLowerCase().indexOf(term) > -1;
+      var visible = matchesTag && matchesTerm;
+      item.style.display = visible ? "" : "none";
+      if (visible) visibleCount++;
+    });
+    if (qnaEmpty) qnaEmpty.hidden = visibleCount > 0;
+  }
+
+  if (qnaSearch) {
+    qnaSearch.addEventListener("input", applyQnaFilter);
+  }
+
+  qnaChips.forEach(function (chip) {
+    chip.addEventListener("click", function () {
+      qnaChips.forEach(function (c) {
+        c.classList.remove("is-active");
+      });
+      chip.classList.add("is-active");
+      qnaFilter = chip.getAttribute("data-filter");
+      applyQnaFilter();
+    });
+  });
+
+  document.querySelectorAll(".qna-question").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var answer = btn.nextElementSibling;
+      var isOpen = btn.getAttribute("aria-expanded") === "true";
+      btn.setAttribute("aria-expanded", String(!isOpen));
+      answer.hidden = isOpen;
+    });
+  });
 
   // ---- Restart ----
   document.querySelectorAll("[data-restart]").forEach(function (link) {

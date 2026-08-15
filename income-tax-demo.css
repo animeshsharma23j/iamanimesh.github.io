@@ -1190,6 +1190,133 @@ body {
   color: var(--text);
 }
 
+/* Tax QnA */
+.qna-controls {
+  display: grid;
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.qna-search-input {
+  min-height: 48px;
+  padding: 0 16px;
+  border: 1.5px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.94rem;
+}
+
+.qna-search-input:focus-visible {
+  border-color: var(--primary);
+  outline: 0;
+}
+
+.qna-filter-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.qna-chip {
+  padding: 7px 14px;
+  border: 1.5px solid var(--border-strong);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 650;
+  cursor: pointer;
+  transition: border-color 140ms ease, background 140ms ease, color 140ms ease;
+}
+
+.qna-chip:hover,
+.qna-chip:focus-visible {
+  border-color: var(--primary);
+  outline: 0;
+}
+
+.qna-chip.is-active {
+  border-color: var(--primary);
+  background: var(--primary);
+  color: var(--on-primary);
+}
+
+.qna-list {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.qna-item {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface-2);
+  overflow: hidden;
+}
+
+.qna-question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  padding: 15px 18px;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: 0.92rem;
+  font-weight: 650;
+  text-align: left;
+  cursor: pointer;
+}
+
+.qna-question:hover,
+.qna-question:focus-visible {
+  color: var(--primary);
+  outline: 0;
+}
+
+.qna-chevron {
+  flex-shrink: 0;
+  color: var(--soft);
+  font-size: 1rem;
+  transition: transform 160ms ease;
+}
+
+.qna-question[aria-expanded="true"] .qna-chevron {
+  transform: rotate(180deg);
+}
+
+.qna-answer {
+  padding: 0 18px 16px;
+}
+
+.qna-answer p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.86rem;
+  line-height: 1.55;
+}
+
+.qna-answer a {
+  color: var(--primary);
+  font-weight: 650;
+}
+
+.qna-empty {
+  padding: 20px;
+  margin: 0 0 8px;
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-md);
+  color: var(--muted);
+  font-size: 0.88rem;
+  text-align: center;
+}
+
 @media (max-width: 760px) {
   .quick-links-grid {
     grid-template-columns: 1fr;
