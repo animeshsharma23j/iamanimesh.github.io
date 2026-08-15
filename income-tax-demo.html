@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <meta name="description" content="Income Tax concept prototype — a click-through research demo, not an official tax service." />
+    <title>Which ITR form applies to you? — concept demo</title>
+    <link rel="icon" href="icon.png" type="image/png" />
+    <link rel="stylesheet" href="income-tax-demo.css" />
+  </head>
+  <body>
+    <div class="demo-shell">
+      <div class="demo-topbar">
+        <a class="demo-back" href="income-tax.html">← Design concept by Animesh Sharma</a>
+        <span class="demo-step-count" id="demo-step-count"></span>
+      </div>
+
+      <div class="demo-card">
+        <div class="demo-progress" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+
+        <section class="demo-screen is-active" id="start">
+          <span class="demo-eyebrow">Getting started</span>
+          <h1 class="demo-heading">Let's figure out which ITR form applies to you</h1>
+          <p class="demo-body">Answer four quick questions about your income. No sign-in, no documents — this just points you in the right direction.</p>
+          <div class="demo-actions">
+            <button type="button" class="demo-btn is-primary" data-start>Start</button>
+          </div>
+        </section>
+
+        <section class="demo-screen" id="q-salary" data-question="salary">
+          <span class="demo-eyebrow">Income sources</span>
+          <h2 class="demo-heading">Do you have salary income?</h2>
+          <p class="demo-body">Income from an employer, shown on a Form 16 — this year, from one job or more.</p>
+          <div class="demo-choice-grid">
+            <button type="button" class="demo-choice" data-answer="yes">Yes</button>
+            <button type="button" class="demo-choice" data-answer="no">No</button>
+          </div>
+        </section>
+
+        <section class="demo-screen" id="q-capgains" data-question="capgains">
+          <span class="demo-eyebrow">Capital gains</span>
+          <h2 class="demo-heading">Did you sell any stocks, mutual funds, or property this year?</h2>
+          <div class="demo-choice-grid">
+            <button type="button" class="demo-choice" data-answer="yes">Yes</button>
+            <button type="button" class="demo-choice" data-answer="no">No</button>
+          </div>
+          <p class="demo-help"><span>New term? <strong>Capital gains</strong> just means profit from selling an investment — we'll only ask for the detail if you say yes.</span></p>
+        </section>
+
+        <section class="demo-screen" id="q-business" data-question="business">
+          <span class="demo-eyebrow">Business &amp; freelance</span>
+          <h2 class="demo-heading">Do you have business or freelance income?</h2>
+          <p class="demo-body">Includes consulting, freelancing, or running a business — not income from a regular employer.</p>
+          <div class="demo-choice-grid">
+            <button type="button" class="demo-choice" data-answer="yes">Yes</button>
+            <button type="button" class="demo-choice" data-answer="no">No</button>
+          </div>
+        </section>
+
+        <section class="demo-screen" id="q-foreign" data-question="foreign">
+          <span class="demo-eyebrow">Foreign assets</span>
+          <h2 class="demo-heading">Do you hold any foreign assets, or earn income from outside India?</h2>
+          <p class="demo-body">Foreign bank accounts, shares, or property — even a small amount counts here.</p>
+          <div class="demo-choice-grid">
+            <button type="button" class="demo-choice" data-answer="yes">Yes</button>
+            <button type="button" class="demo-choice" data-answer="no">No</button>
+          </div>
+        </section>
+
+        <section class="demo-screen" id="resolve">
+          <span class="demo-eyebrow">Result</span>
+          <h2 class="demo-heading">Based on what you told us:</h2>
+          <div class="demo-result-box">
+            <p class="demo-result-form" id="demo-result-form">ITR-1</p>
+            <p class="demo-result-why" id="demo-result-why">Reasoning appears here.</p>
+          </div>
+          <div class="demo-actions">
+            <button type="button" class="demo-btn is-primary" id="demo-continue-review">Continue to review</button>
+            <button type="button" class="demo-btn is-quiet" id="demo-not-right">That doesn't sound right</button>
+          </div>
+        </section>
+
+        <section class="demo-screen" id="override">
+          <span class="demo-eyebrow">Pick it yourself</span>
+          <h2 class="demo-heading">Which form do you think applies?</h2>
+          <p class="demo-body">No pressure — you can always change this later before filing.</p>
+          <div class="demo-override-list">
+            <button type="button" class="demo-override-option" data-manual-form="ITR-1"><strong>ITR-1 (Sahaj)</strong><span>Salary income only, total income up to ₹50 lakh</span></button>
+            <button type="button" class="demo-override-option" data-manual-form="ITR-2"><strong>ITR-2</strong><span>Salary plus capital gains, foreign assets, or more than one property</span></button>
+            <button type="button" class="demo-override-option" data-manual-form="ITR-3"><strong>ITR-3</strong><span>Business or professional income, including freelancing</span></button>
+            <button type="button" class="demo-override-option" data-manual-form="ITR-4 (Sugam)"><strong>ITR-4 (Sugam)</strong><span>Presumptive business or professional income</span></button>
+          </div>
+        </section>
+
+        <section class="demo-screen" id="review">
+          <span class="demo-eyebrow">Review</span>
+          <h2 class="demo-heading">We've filled in what your AIS already shows</h2>
+          <p class="demo-body">Filing as <strong id="demo-review-form">ITR-2</strong>.</p>
+          <ul class="demo-checklist">
+            <li class="is-done"><span class="demo-check-dot"></span>Salary &amp; TDS — matched</li>
+            <li class="is-done"><span class="demo-check-dot"></span>Bank interest — matched</li>
+            <li class="is-attention" id="demo-review-capgains"><span class="demo-check-dot"></span>Capital gains — needs a quick look</li>
+          </ul>
+          <div class="demo-actions">
+            <button type="button" class="demo-btn is-primary" id="demo-review-done">Looks good</button>
+          </div>
+        </section>
+
+        <section class="demo-screen" id="done">
+          <span class="demo-eyebrow">That's the concept</span>
+          <h2 class="demo-heading">This is where the real product would begin</h2>
+          <p class="demo-body">You just walked through a design concept, not a live filing tool — nothing was submitted or saved. If anything felt off, confusing, or genuinely useful, I'd like to know. Two lines is plenty.</p>
+          <div class="demo-feedback">
+            <textarea id="demo-feedback-text" placeholder="What was confusing? What worked? Would you actually trust a result like this?"></textarea>
+            <button type="button" class="demo-btn is-primary" id="demo-send-feedback">Email this feedback</button>
+            <p class="demo-thanks" id="demo-thanks">Thanks — your email app should have opened with this pre-filled. I read every reply.</p>
+          </div>
+          <p class="demo-body" style="margin-top: 18px; margin-bottom: 0;"><a href="#" data-restart>↺ Try it again with different answers</a></p>
+        </section>
+      </div>
+
+      <p class="demo-disclaimer"><strong>This is a design research prototype</strong>, not affiliated with the Income Tax Department or any filing service. Nothing you enter is submitted, filed, or stored anywhere — closing this tab clears it. Read the <a href="income-tax.html">full case study</a>.</p>
+    </div>
+
+    <script src="scripts/income-tax-demo.js" defer></script>
+  </body>
+</html>
