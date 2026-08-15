@@ -27,6 +27,21 @@
     return "₹" + Math.round(n).toLocaleString("en-IN");
   }
 
+  var runningTotalEl = document.getElementById("demo-running-total");
+  var runningTotalAmountEl = document.getElementById("demo-running-total-amount");
+
+  function updateRunningTotal(flash) {
+    if (!runningTotalAmountEl) return;
+    var gross = IMPORTED.salary + IMPORTED.bankInterest + (answers.capgains === "yes" ? IMPORTED.capgainsAmount : 0);
+    runningTotalAmountEl.textContent = fmt(gross);
+    if (flash && runningTotalEl) {
+      runningTotalEl.classList.add("is-updated");
+      setTimeout(function () {
+        runningTotalEl.classList.remove("is-updated");
+      }, 900);
+    }
+  }
+
   function showScreen(id) {
     stopTutorialPlay();
     screens.forEach(function (screen) {
@@ -49,6 +64,10 @@
       stepCountEl.textContent = "Step " + (idx + 1) + " of " + progressOrder.length;
     } else {
       stepCountEl.textContent = "";
+    }
+    if (runningTotalEl) {
+      runningTotalEl.hidden = idx === -1;
+      if (idx > -1) updateRunningTotal(false);
     }
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
@@ -177,6 +196,7 @@
       var key = screen.getAttribute("data-question");
       answers[key] = btn.getAttribute("data-answer");
       if (key === "capgains") {
+        updateRunningTotal(true);
         showScreen("q-business");
       } else if (key === "business") {
         showScreen("q-foreign");

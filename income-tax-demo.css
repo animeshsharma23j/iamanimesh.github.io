@@ -192,6 +192,10 @@ body {
   overflow: hidden;
 }
 
+.demo-card.is-split .demo-progress {
+  display: none;
+}
+
 /* Auth split panel */
 .auth-grid {
   display: grid;
@@ -281,6 +285,41 @@ body {
   background: var(--primary);
 }
 
+.demo-running-total {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 22px;
+  padding: 11px 15px;
+  border-radius: var(--radius-md);
+  background: var(--surface-2);
+  transition: background 300ms ease;
+}
+
+.demo-running-total[hidden] {
+  display: none;
+}
+
+.demo-running-total span {
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 650;
+}
+
+.demo-running-total strong {
+  color: var(--text);
+  font-size: 0.98rem;
+  font-weight: 800;
+}
+
+.demo-running-total.is-updated {
+  background: var(--success-bg);
+}
+
+.demo-running-total.is-updated strong {
+  color: var(--success);
+}
+
 .demo-screen {
   display: none;
 }
@@ -323,6 +362,13 @@ body {
   margin: 0 0 22px;
   color: var(--muted);
   font-size: 0.94rem;
+}
+
+.demo-fine {
+  margin: 0 0 20px;
+  color: var(--soft);
+  font-size: 0.78rem;
+  line-height: 1.5;
 }
 
 .demo-choice-grid {

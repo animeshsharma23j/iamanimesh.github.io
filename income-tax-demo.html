@@ -7,7 +7,7 @@
     <meta name="description" content="Income Tax concept prototype — an automated, assisted filing demo, not an official tax service." />
     <title>File your ITR — concept demo</title>
     <link rel="icon" href="icon.png" type="image/png" />
-    <link rel="stylesheet" href="income-tax-demo.css?v=13" />
+    <link rel="stylesheet" href="income-tax-demo.css?v=14" />
   </head>
   <body>
     <div class="site-meta-bar">
@@ -32,6 +32,7 @@
     <main class="demo-shell">
       <div class="demo-card">
         <div class="demo-progress" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+        <div class="demo-running-total" id="demo-running-total" hidden><span>Total income so far</span><strong id="demo-running-total-amount">₹0</strong></div>
 
         <section class="demo-screen is-active" id="signin">
           <div class="auth-grid">
@@ -460,6 +461,7 @@
           <span class="demo-eyebrow">Business &amp; freelance</span>
           <h2 class="demo-heading">Do you have business or freelance income?</h2>
           <p class="demo-body">This is the one thing we genuinely can't see from your records — consulting, freelancing, or running a business.</p>
+          <p class="demo-fine">This changes which ITR form applies, not your total income — we don't know the amount, so it won't add anything here.</p>
           <div class="demo-choice-grid">
             <button type="button" class="demo-choice" data-answer="yes">Yes</button>
             <button type="button" class="demo-choice" data-answer="no">No</button>
@@ -623,6 +625,6 @@
       <p class="demo-disclaimer"><strong>This is a design research prototype</strong>, not affiliated with the Income Tax Department or any filing service. The auto-import, OTP, and filing steps are all simulated with fixed demo data — nothing you do here is submitted, filed, or stored anywhere, and no real account is contacted. Read the <a href="income-tax.html">full case study</a>.</p>
     </footer>
 
-    <script src="scripts/income-tax-demo.js?v=12" defer></script>
+    <script src="scripts/income-tax-demo.js?v=13" defer></script>
   </body>
 </html>
