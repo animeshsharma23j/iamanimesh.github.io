@@ -4,8 +4,8 @@
   --text: #f3eee2;
   --muted: #aaa395;
   --soft: #8d877d;
-  --line: rgba(243, 238, 226, 0.38);
-  --line-strong: rgba(243, 238, 226, 0.5);
+  --line: rgba(243, 238, 226, 0.08);
+  --line-strong: rgba(243, 238, 226, 0.15);
   --amber: #75d5e4;
   --cyan: #75d5e4;
   --panel: rgba(7, 10, 13, 0.52);
@@ -119,6 +119,16 @@ button {
   transform: skewY(-6deg);
   transform-style: preserve-3d;
   opacity: 1;
+}
+
+body[class] .tesseract {
+  top: 50%;
+  right: auto;
+  left: 50%;
+  width: min(84vw, 1180px);
+  height: min(86vh, 920px);
+  transform: translate(-50%, -50%) skewY(-6deg);
+  opacity: 0.32;
 }
 
 .frame,
@@ -302,8 +312,14 @@ button {
   height: 7px;
   margin-left: 1px;
   border-radius: 50%;
-  background: #83df9c;
-  box-shadow: 0 0 0 4px rgba(131, 223, 156, 0.1), 0 0 15px rgba(131, 223, 156, 0.72);
+  background: var(--cyan);
+  box-shadow: 0 0 0 4px rgba(117, 213, 228, 0.14), 0 0 15px rgba(117, 213, 228, 0.72);
+  animation: availability-pulse 2.6s ease-in-out infinite;
+}
+
+@keyframes availability-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
 }
 
 .brand:focus-visible { outline: 1px solid var(--amber); outline-offset: 4px; }
@@ -1339,6 +1355,12 @@ h1 {
     right: -70vw;
     width: 145vw;
     opacity: 0.34;
+  }
+
+  body[class] .tesseract {
+    width: min(130vw, 900px);
+    height: min(70vh, 620px);
+    opacity: 0.28;
   }
 
   .thinking-diagram { margin: 0; }
