@@ -7,13 +7,16 @@
     <meta name="description" content="Income Tax concept prototype — an automated, assisted filing demo, not an official tax service." />
     <title>File your ITR — concept demo</title>
     <link rel="icon" href="icon.png" type="image/png" />
-    <link rel="stylesheet" href="income-tax-demo.css?v=4" />
+    <link rel="stylesheet" href="income-tax-demo.css?v=5" />
   </head>
   <body>
     <div class="demo-shell">
       <div class="demo-topbar">
         <a class="demo-back" href="income-tax.html">← Design concept by Animesh Sharma</a>
-        <span class="demo-step-count" id="demo-step-count"></span>
+        <div class="demo-topbar-right">
+          <span class="demo-ay-badge">Filing for AY 2026-27</span>
+          <span class="demo-step-count" id="demo-step-count"></span>
+        </div>
       </div>
 
       <div class="demo-card">
@@ -23,11 +26,12 @@
           <span class="demo-eyebrow">Sign in</span>
           <h1 class="demo-heading">Enter your PAN to continue</h1>
           <p class="demo-body">We'll send an OTP to verify it's you — no separate account or password to remember.</p>
-          <div class="demo-input-row"><label for="signin-pan">PAN</label><input id="signin-pan" type="text" placeholder="e.g. ABCDE1234F" maxlength="10" autocomplete="off" /></div>
+          <div class="demo-input-row"><label for="signin-pan">PAN</label><input id="signin-pan" type="text" placeholder="e.g. ABCDE1234F" maxlength="10" autocomplete="off" aria-describedby="signin-pan-error" /></div>
+          <p class="demo-field-error" id="signin-pan-error" hidden></p>
           <div class="demo-actions">
             <button type="button" class="demo-btn is-primary" id="demo-signin-send-otp" disabled>Send OTP</button>
           </div>
-          <p class="demo-fine">Verified in seconds · Used only to confirm it's you</p>
+          <p class="demo-fine">Verified in seconds · Used only to confirm it's you · Demo PAN: ABCDE1234F</p>
         </section>
 
         <section class="demo-screen" id="signin-otp">
@@ -51,6 +55,7 @@
           <span class="demo-eyebrow">Getting started</span>
           <h2 class="demo-heading">File your ITR without the guesswork</h2>
           <p class="demo-body">We can pull your salary, TDS, bank interest, and broker data automatically — you confirm a few things we can't see, and we handle the rest, including which regime saves you more.</p>
+          <p class="demo-help"><span><strong>Assessment Year (AY) 2026-27</strong> — this return covers income you earned between April 2025 and March 2026, the "previous year." AY is simply the year after that, when it gets assessed.</span></p>
           <div class="demo-actions">
             <button type="button" class="demo-btn is-primary" data-start>Auto-fill from AIS &amp; Form 26AS</button>
           </div>
@@ -260,6 +265,6 @@
       <p class="demo-disclaimer"><strong>This is a design research prototype</strong>, not affiliated with the Income Tax Department or any filing service. The auto-import, OTP, and filing steps are all simulated with fixed demo data — nothing you do here is submitted, filed, or stored anywhere, and no real account is contacted. Read the <a href="income-tax.html">full case study</a>.</p>
     </div>
 
-    <script src="scripts/income-tax-demo.js?v=4" defer></script>
+    <script src="scripts/income-tax-demo.js?v=5" defer></script>
   </body>
 </html>

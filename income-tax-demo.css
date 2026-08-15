@@ -67,6 +67,23 @@ body {
   color: var(--primary);
 }
 
+.demo-topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.demo-ay-badge {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(47, 95, 219, 0.09);
+  color: var(--primary);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
 .demo-step-count {
   color: var(--soft);
   font-size: 0.78rem;
@@ -704,6 +721,34 @@ body {
 .demo-input-row input:focus-visible {
   border-color: var(--primary);
   outline: 0;
+}
+
+.demo-input-row input.is-invalid {
+  border-color: var(--attention);
+}
+
+.demo-field-error {
+  display: flex;
+  gap: 8px;
+  margin: -6px 0 14px;
+  color: var(--attention);
+  font-size: 0.84rem;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.demo-field-error[hidden] {
+  display: none;
+}
+
+.demo-field-error::before {
+  content: "";
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  border-radius: 50%;
+  background: var(--attention-bg);
 }
 
 .demo-warn-box {

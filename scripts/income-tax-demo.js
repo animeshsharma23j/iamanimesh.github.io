@@ -42,13 +42,38 @@
   // ---- Sign in: PAN -> OTP ----
   var panInput = document.getElementById("signin-pan");
   var sendOtpBtn = document.getElementById("demo-signin-send-otp");
+  var panError = document.getElementById("signin-pan-error");
   var PAN_PATTERN = /^[A-Z]{5}[0-9]{4}[A-Z]$/;
+  var DEMO_VALID_PAN = "ABCDE1234F";
+
+  function showPanError(msg) {
+    panError.textContent = msg;
+    panError.hidden = false;
+    panInput.classList.add("is-invalid");
+  }
+
+  function hidePanError() {
+    panError.hidden = true;
+    panInput.classList.remove("is-invalid");
+  }
+
   if (panInput && sendOtpBtn) {
     panInput.addEventListener("input", function () {
       panInput.value = panInput.value.toUpperCase();
-      sendOtpBtn.disabled = !PAN_PATTERN.test(panInput.value);
+      sendOtpBtn.disabled = panInput.value.length !== 10;
+      hidePanError();
     });
     sendOtpBtn.addEventListener("click", function () {
+      var value = panInput.value.trim();
+      if (!PAN_PATTERN.test(value)) {
+        showPanError("That doesn't look like a valid PAN — 5 letters, 4 digits, then 1 letter (e.g. ABCDE1234F).");
+        return;
+      }
+      if (value !== DEMO_VALID_PAN) {
+        showPanError("We couldn't find an account for this PAN. Double-check the number, or use the demo PAN ABCDE1234F.");
+        return;
+      }
+      hidePanError();
       showScreen("signin-otp");
     });
   }
@@ -381,6 +406,7 @@
       resetChallanScreen();
       if (panInput) panInput.value = "";
       if (sendOtpBtn) sendOtpBtn.disabled = true;
+      hidePanError();
       signinOtpBoxes.forEach(function (input) {
         input.value = "";
       });
