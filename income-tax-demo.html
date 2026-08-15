@@ -7,7 +7,7 @@
     <meta name="description" content="Income Tax concept prototype — an automated, assisted filing demo, not an official tax service." />
     <title>File your ITR — concept demo</title>
     <link rel="icon" href="icon.png" type="image/png" />
-    <link rel="stylesheet" href="income-tax-demo.css?v=6" />
+    <link rel="stylesheet" href="income-tax-demo.css?v=7" />
   </head>
   <body>
     <div class="demo-shell">
@@ -67,11 +67,11 @@
               <span class="quick-link-desc">See exactly what happens when you file, before you start.</span>
               <span class="quick-link-status is-open">Open</span>
             </button>
-            <div class="quick-link-card is-disabled" aria-disabled="true">
+            <button type="button" class="quick-link-card" data-goto="calculator">
               <span class="quick-link-title">Interactive Tax Calculator</span>
               <span class="quick-link-desc">Compare old vs. new regime before you file.</span>
-              <span class="quick-link-status">Coming soon</span>
-            </div>
+              <span class="quick-link-status is-open">Open</span>
+            </button>
             <div class="quick-link-card is-disabled" aria-disabled="true">
               <span class="quick-link-title">Real Life Case Studies</span>
               <span class="quick-link-desc">Worked examples — find the one closest to your situation.</span>
@@ -112,6 +112,71 @@
           <div class="demo-actions demo-actions-row">
             <button type="button" class="demo-btn is-primary" data-goto="start">Start Filing</button>
             <button type="button" class="demo-btn is-quiet" data-goto="home">← Back to Home</button>
+          </div>
+        </section>
+
+        <section class="demo-screen" id="calculator">
+          <span class="demo-eyebrow">Interactive tax calculator</span>
+          <h1 class="demo-heading">See what you'd owe, before you file</h1>
+          <p class="demo-body">Recalculated after every entry — you shouldn't have to guess, or wait, to see where you stand.</p>
+
+          <div class="calculator-grid">
+            <div class="calculator-inputs">
+              <div class="calc-field">
+                <span class="calc-label">Age</span>
+                <div class="calc-segmented" id="calc-age-group">
+                  <button type="button" class="calc-segment is-selected" data-age="below60">Below 60</button>
+                  <button type="button" class="calc-segment" data-age="60to79">60–79 (Senior citizen)</button>
+                  <button type="button" class="calc-segment" data-age="80plus">80 and above</button>
+                </div>
+                <p class="calc-hint" id="calc-age-hint">Affects the tax-free threshold under the old regime only — the new regime treats every age the same.</p>
+              </div>
+
+              <div class="calc-field">
+                <label class="calc-label" for="calc-income">Annual income (₹)</label>
+                <input type="number" inputmode="numeric" id="calc-income" class="calc-input" value="900000" min="0" step="1000" />
+              </div>
+
+              <div class="calc-field-row">
+                <div class="calc-field">
+                  <label class="calc-label" for="calc-80c">Section 80C (₹)</label>
+                  <input type="number" inputmode="numeric" id="calc-80c" class="calc-input" value="0" min="0" step="1000" />
+                  <p class="calc-hint">ELSS, PPF, life insurance — up to ₹1,50,000</p>
+                </div>
+                <div class="calc-field">
+                  <label class="calc-label" for="calc-80d">Section 80D (₹)</label>
+                  <input type="number" inputmode="numeric" id="calc-80d" class="calc-input" value="0" min="0" step="1000" />
+                  <p class="calc-hint">Health insurance premium — up to ₹25,000</p>
+                </div>
+              </div>
+
+              <div class="calc-field">
+                <label class="calc-label" for="calc-other">Other deductions (₹)</label>
+                <input type="number" inputmode="numeric" id="calc-other" class="calc-input" value="0" min="0" step="1000" />
+                <p class="calc-hint">Home loan interest, donations, education loan interest, etc.</p>
+              </div>
+
+              <button type="button" class="demo-btn is-quiet calc-reset" id="calc-reset">Reset</button>
+            </div>
+
+            <div class="calculator-summary">
+              <h2 class="calc-summary-heading">Tax summary</h2>
+              <table class="calc-summary-table">
+                <thead><tr><th scope="col">Particulars</th><th scope="col">Old regime</th><th scope="col">New regime</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">Gross income</th><td id="calc-gross-old">₹0</td><td id="calc-gross-new">₹0</td></tr>
+                  <tr><th scope="row">Deductions</th><td id="calc-ded-old">₹0</td><td id="calc-ded-new">₹0</td></tr>
+                  <tr><th scope="row">Taxable income</th><td id="calc-taxable-old">₹0</td><td id="calc-taxable-new">₹0</td></tr>
+                  <tr class="is-total"><th scope="row">Tax payable</th><td id="calc-payable-old">₹0</td><td id="calc-payable-new">₹0</td></tr>
+                </tbody>
+              </table>
+              <p class="calc-savings" id="calc-savings"></p>
+              <p class="demo-fine">Simplified for this demo — assumes salary income only, standard slab rates plus 4% cess, and isn't tax advice.</p>
+              <div class="demo-actions">
+                <button type="button" class="demo-btn is-primary" data-goto="start">Start Filing with these numbers</button>
+                <button type="button" class="demo-btn is-quiet" data-goto="home">← Back to Home</button>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -329,6 +394,6 @@
       <p class="demo-disclaimer"><strong>This is a design research prototype</strong>, not affiliated with the Income Tax Department or any filing service. The auto-import, OTP, and filing steps are all simulated with fixed demo data — nothing you do here is submitted, filed, or stored anywhere, and no real account is contacted. Read the <a href="income-tax.html">full case study</a>.</p>
     </div>
 
-    <script src="scripts/income-tax-demo.js?v=6" defer></script>
+    <script src="scripts/income-tax-demo.js?v=7" defer></script>
   </body>
 </html>

@@ -14,7 +14,7 @@
   var DED_80D = 25000;
 
   var progressOrder = ["snapshot", "q-capgains", "q-business", "q-foreign", "deductions", "regime", "resolve", "review", "everify"];
-  var WIDE_SCREENS = ["home", "guide"];
+  var WIDE_SCREENS = ["home", "guide", "calculator"];
   var demoShell = document.querySelector(".demo-shell");
 
   var answers = { capgains: null, business: null, foreign: null, ded80c: false, ded80d: false };
@@ -395,6 +395,96 @@
       showScreen("done");
     });
   }
+
+  // ---- Standalone interactive tax calculator ----
+  var OLD_SLABS_BY_AGE = {
+    below60: [[250000, 0], [500000, 0.05], [1000000, 0.2], [Infinity, 0.3]],
+    "60to79": [[300000, 0], [500000, 0.05], [1000000, 0.2], [Infinity, 0.3]],
+    "80plus": [[500000, 0], [1000000, 0.2], [Infinity, 0.3]]
+  };
+  var AGE_HINTS = {
+    below60: "Affects the tax-free threshold under the old regime only — the new regime treats every age the same.",
+    "60to79": "Senior citizens get a higher tax-free threshold (₹3,00,000) under the old regime.",
+    "80plus": "Super senior citizens get the highest tax-free threshold (₹5,00,000) under the old regime."
+  };
+
+  var calcAgeGroup = document.getElementById("calc-age-group");
+  var calcIncomeInput = document.getElementById("calc-income");
+  var calc80cInput = document.getElementById("calc-80c");
+  var calc80dInput = document.getElementById("calc-80d");
+  var calcOtherInput = document.getElementById("calc-other");
+  var calcResetBtn = document.getElementById("calc-reset");
+  var calcAge = "below60";
+
+  function calcNum(input) {
+    var n = parseFloat(input.value);
+    return isFinite(n) && n > 0 ? n : 0;
+  }
+
+  function runCalculator() {
+    if (!calcIncomeInput) return;
+    var gross = calcNum(calcIncomeInput);
+    var ded80c = Math.min(calcNum(calc80cInput), DED_80C);
+    var ded80d = Math.min(calcNum(calc80dInput), DED_80D);
+    var other = calcNum(calcOtherInput);
+
+    var newTaxable = Math.max(0, gross - 75000);
+    var oldDeductions = 50000 + ded80c + ded80d + other;
+    var oldTaxable = Math.max(0, gross - oldDeductions);
+
+    var newTax = Math.round(slabTax(newTaxable, NEW_SLABS) * 1.04);
+    var oldTax = Math.round(slabTax(oldTaxable, OLD_SLABS_BY_AGE[calcAge]) * 1.04);
+
+    document.getElementById("calc-gross-old").textContent = fmt(gross);
+    document.getElementById("calc-gross-new").textContent = fmt(gross);
+    document.getElementById("calc-ded-old").textContent = fmt(oldDeductions);
+    document.getElementById("calc-ded-new").textContent = fmt(75000);
+    document.getElementById("calc-taxable-old").textContent = fmt(oldTaxable);
+    document.getElementById("calc-taxable-new").textContent = fmt(newTaxable);
+    document.getElementById("calc-payable-old").textContent = fmt(oldTax);
+    document.getElementById("calc-payable-new").textContent = fmt(newTax);
+
+    var savingsEl = document.getElementById("calc-savings");
+    var diff = Math.abs(newTax - oldTax);
+    var cheaper = newTax <= oldTax ? "new" : "old";
+    savingsEl.innerHTML = diff === 0 ? "Both regimes come out the same for these numbers." : "You save <strong>" + fmt(diff) + "</strong> by choosing the <strong>" + cheaper + " regime</strong>.";
+  }
+
+  if (calcAgeGroup) {
+    calcAgeGroup.querySelectorAll("[data-age]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        calcAgeGroup.querySelectorAll("[data-age]").forEach(function (b) {
+          b.classList.remove("is-selected");
+        });
+        btn.classList.add("is-selected");
+        calcAge = btn.getAttribute("data-age");
+        var hintEl = document.getElementById("calc-age-hint");
+        if (hintEl) hintEl.textContent = AGE_HINTS[calcAge];
+        runCalculator();
+      });
+    });
+  }
+
+  [calcIncomeInput, calc80cInput, calc80dInput, calcOtherInput].forEach(function (input) {
+    if (input) input.addEventListener("input", runCalculator);
+  });
+
+  if (calcResetBtn) {
+    calcResetBtn.addEventListener("click", function () {
+      calcIncomeInput.value = "900000";
+      calc80cInput.value = "0";
+      calc80dInput.value = "0";
+      calcOtherInput.value = "0";
+      calcAge = "below60";
+      calcAgeGroup.querySelectorAll("[data-age]").forEach(function (b) {
+        b.classList.toggle("is-selected", b.getAttribute("data-age") === "below60");
+      });
+      document.getElementById("calc-age-hint").textContent = AGE_HINTS.below60;
+      runCalculator();
+    });
+  }
+
+  runCalculator();
 
   // ---- Restart ----
   document.querySelectorAll("[data-restart]").forEach(function (link) {
