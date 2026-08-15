@@ -14,7 +14,7 @@
   var DED_80D = 25000;
 
   var progressOrder = ["snapshot", "q-capgains", "q-business", "q-foreign", "deductions", "regime", "resolve", "review", "everify"];
-  var WIDE_SCREENS = ["home", "guide", "calculator", "case-studies", "tax-qna"];
+  var WIDE_SCREENS = ["home", "guide", "calculator", "case-studies", "tax-qna", "video-tutorials"];
   var demoShell = document.querySelector(".demo-shell");
 
   var answers = { capgains: null, business: null, foreign: null, ded80c: false, ded80d: false };
@@ -26,6 +26,7 @@
   }
 
   function showScreen(id) {
+    stopTutorialPlay();
     screens.forEach(function (screen) {
       screen.classList.toggle("is-active", screen.id === id);
     });
@@ -531,6 +532,158 @@
     });
   });
 
+  // ---- Video tutorials: card grid + step-through player ----
+  var TUTORIALS = [
+    {
+      title: "Signing in without a password",
+      duration: "0:35",
+      frames: [
+        "Type your PAN — there's no separate username to create.",
+        "An OTP goes to your Aadhaar-linked mobile. In this demo, any 6 digits work.",
+        "You're in. No password was ever needed."
+      ]
+    },
+    {
+      title: "Why your salary auto-fills",
+      duration: "0:50",
+      frames: [
+        "The moment you start filing, we connect to AIS and Form 26AS — records the government already has.",
+        "Salary, TDS, and bank interest come back already filled in.",
+        "You just confirm it looks right — nothing to retype."
+      ]
+    },
+    {
+      title: "Understanding capital gains",
+      duration: "0:40",
+      frames: [
+        "\"Capital gains\" just means profit from selling an investment — stocks, mutual funds, property.",
+        "If your broker reported a sale this year, we show the amount and ask you to confirm it.",
+        "Said no? We skip the detail entirely — one question, not a form."
+      ]
+    },
+    {
+      title: "Old vs. new regime, in one screen",
+      duration: "0:55",
+      frames: [
+        "Two tax systems exist side by side — old, with more deductions; new, with lower rates.",
+        "We calculate both using your real numbers and put them side by side.",
+        "Whichever costs less is pre-selected — you can still pick the other if you prefer it."
+      ]
+    },
+    {
+      title: "Fixing a mismatch before you file",
+      duration: "0:45",
+      frames: [
+        "If a number doesn't match your records, we don't bury it in a red warning.",
+        "We name exactly what's mismatched, in plain language.",
+        "You fix it right there, before anything is submitted — not after a notice arrives."
+      ]
+    },
+    {
+      title: "The challan check, explained",
+      duration: "0:50",
+      frames: [
+        "Paid tax through a challan? Its details have to actually be entered in the return.",
+        "Miss that step, and the return looks unpaid — even though it wasn't.",
+        "We ask directly, before filing, so that gap never has a chance to open."
+      ]
+    }
+  ];
+
+  var tutorialList = document.getElementById("tutorial-list");
+  var tutorialPlayer = document.getElementById("tutorial-player");
+  var tutorialProgress = document.querySelectorAll("#tutorial-progress span");
+  var tutorialPlayBtn = document.getElementById("tutorial-play-btn");
+  var currentTutorial = null;
+  var currentFrame = 0;
+  var tutorialTimer = null;
+
+  function stopTutorialPlay() {
+    if (tutorialTimer) {
+      clearInterval(tutorialTimer);
+      tutorialTimer = null;
+      if (tutorialPlayBtn) tutorialPlayBtn.textContent = "▶ Play";
+    }
+  }
+
+  function renderTutorialFrame() {
+    if (!currentTutorial) return;
+    var frames = currentTutorial.frames;
+    document.getElementById("tutorial-frame-caption").textContent = frames[currentFrame];
+    document.getElementById("tutorial-frame-count").textContent = "Step " + (currentFrame + 1) + " of " + frames.length;
+    tutorialProgress.forEach(function (seg, i) {
+      seg.classList.toggle("is-done", i <= currentFrame);
+    });
+  }
+
+  function nextTutorialFrame() {
+    if (!currentTutorial) return;
+    currentFrame++;
+    if (currentFrame >= currentTutorial.frames.length) {
+      currentFrame = 0;
+      stopTutorialPlay();
+    }
+    renderTutorialFrame();
+  }
+
+  function openTutorial(i) {
+    currentTutorial = TUTORIALS[i];
+    currentFrame = 0;
+    stopTutorialPlay();
+    tutorialList.hidden = true;
+    tutorialPlayer.hidden = false;
+    document.getElementById("tutorial-player-title").textContent = currentTutorial.title;
+    document.getElementById("tutorial-player-duration").textContent = currentTutorial.duration;
+    renderTutorialFrame();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  document.querySelectorAll(".tutorial-card").forEach(function (card, i) {
+    card.addEventListener("click", function () {
+      openTutorial(i);
+    });
+  });
+
+  var tutorialBackBtn = document.getElementById("tutorial-back");
+  if (tutorialBackBtn) {
+    tutorialBackBtn.addEventListener("click", function () {
+      stopTutorialPlay();
+      tutorialPlayer.hidden = true;
+      tutorialList.hidden = false;
+    });
+  }
+
+  var tutorialPrevBtn = document.getElementById("tutorial-prev");
+  if (tutorialPrevBtn) {
+    tutorialPrevBtn.addEventListener("click", function () {
+      stopTutorialPlay();
+      currentFrame = Math.max(0, currentFrame - 1);
+      renderTutorialFrame();
+    });
+  }
+
+  var tutorialNextBtn = document.getElementById("tutorial-next");
+  if (tutorialNextBtn) {
+    tutorialNextBtn.addEventListener("click", function () {
+      stopTutorialPlay();
+      if (currentTutorial && currentFrame < currentTutorial.frames.length - 1) {
+        currentFrame++;
+        renderTutorialFrame();
+      }
+    });
+  }
+
+  if (tutorialPlayBtn) {
+    tutorialPlayBtn.addEventListener("click", function () {
+      if (tutorialTimer) {
+        stopTutorialPlay();
+        return;
+      }
+      tutorialTimer = setInterval(nextTutorialFrame, 2200);
+      tutorialPlayBtn.textContent = "❚❚ Pause";
+    });
+  }
+
   // ---- Restart ----
   document.querySelectorAll("[data-restart]").forEach(function (link) {
     link.addEventListener("click", function (e) {
@@ -558,6 +711,8 @@
         input.value = "";
       });
       if (signinVerifyBtn) signinVerifyBtn.disabled = true;
+      if (tutorialPlayer) tutorialPlayer.hidden = true;
+      if (tutorialList) tutorialList.hidden = false;
       showScreen("signin");
     });
   });
