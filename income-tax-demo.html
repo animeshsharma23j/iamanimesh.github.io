@@ -4,10 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex" />
-    <meta name="description" content="Income Tax concept prototype — a click-through research demo, not an official tax service." />
-    <title>Which ITR form applies to you? — concept demo</title>
+    <meta name="description" content="Income Tax concept prototype — an automated, assisted filing demo, not an official tax service." />
+    <title>File your ITR — concept demo</title>
     <link rel="icon" href="icon.png" type="image/png" />
-    <link rel="stylesheet" href="income-tax-demo.css" />
+    <link rel="stylesheet" href="income-tax-demo.css?v=2" />
   </head>
   <body>
     <div class="demo-shell">
@@ -17,41 +17,60 @@
       </div>
 
       <div class="demo-card">
-        <div class="demo-progress" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+        <div class="demo-progress" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
 
         <section class="demo-screen is-active" id="start">
           <span class="demo-eyebrow">Getting started</span>
-          <h1 class="demo-heading">Let's figure out which ITR form applies to you</h1>
-          <p class="demo-body">Answer four quick questions about your income. No sign-in, no documents — this just points you in the right direction.</p>
+          <h1 class="demo-heading">File your ITR without the guesswork</h1>
+          <p class="demo-body">We can pull your salary, TDS, bank interest, and broker data automatically — you confirm a few things we can't see, and we handle the rest, including which regime saves you more.</p>
           <div class="demo-actions">
-            <button type="button" class="demo-btn is-primary" data-start>Start</button>
+            <button type="button" class="demo-btn is-primary" data-start>Auto-fill from AIS &amp; Form 26AS</button>
           </div>
         </section>
 
-        <section class="demo-screen" id="q-salary" data-question="salary">
-          <span class="demo-eyebrow">Income sources</span>
-          <h2 class="demo-heading">Do you have salary income?</h2>
-          <p class="demo-body">Income from an employer, shown on a Form 16 — this year, from one job or more.</p>
-          <div class="demo-choice-grid">
-            <button type="button" class="demo-choice" data-answer="yes">Yes</button>
-            <button type="button" class="demo-choice" data-answer="no">No</button>
+        <section class="demo-screen" id="importing">
+          <span class="demo-eyebrow">One moment</span>
+          <h2 class="demo-heading">Securely fetching your data…</h2>
+          <p class="demo-body">Connecting to AIS, Form 26AS, and your linked broker — nothing leaves this demo.</p>
+          <ul class="import-checklist">
+            <li class="import-item">Salary &amp; employer details<span class="import-dot"></span></li>
+            <li class="import-item">TDS already deducted<span class="import-dot"></span></li>
+            <li class="import-item">Bank interest (Form 26AS)<span class="import-dot"></span></li>
+            <li class="import-item">Broker statements<span class="import-dot"></span></li>
+          </ul>
+          <div class="demo-actions">
+            <button type="button" class="demo-btn is-primary" hidden id="demo-import-continue" data-goto-snapshot>Continue</button>
+          </div>
+        </section>
+
+        <section class="demo-screen" id="snapshot">
+          <span class="demo-eyebrow">Here's what we found</span>
+          <h2 class="demo-heading">Nothing to type — just confirm this looks right</h2>
+          <ul class="demo-checklist">
+            <li class="is-done"><span class="demo-check-dot"></span>Salary income — ₹9,40,000</li>
+            <li class="is-done"><span class="demo-check-dot"></span>TDS already deducted — ₹68,000</li>
+            <li class="is-done"><span class="demo-check-dot"></span>Bank interest — ₹8,400</li>
+          </ul>
+          <p class="demo-help"><span>We'll only ask you about things we genuinely can't see — like whether you sold any investments this year.</span></p>
+          <div class="demo-actions">
+            <button type="button" class="demo-btn is-primary" data-snapshot-continue>Looks right, continue</button>
           </div>
         </section>
 
         <section class="demo-screen" id="q-capgains" data-question="capgains">
           <span class="demo-eyebrow">Capital gains</span>
-          <h2 class="demo-heading">Did you sell any stocks, mutual funds, or property this year?</h2>
+          <h2 class="demo-heading">We noticed activity in your linked broker account</h2>
+          <p class="demo-body">₹1,20,000 in short-term gains this year, based on your broker statements. Is that right?</p>
           <div class="demo-choice-grid">
-            <button type="button" class="demo-choice" data-answer="yes">Yes</button>
-            <button type="button" class="demo-choice" data-answer="no">No</button>
+            <button type="button" class="demo-choice" data-answer="yes">Yes, that's right</button>
+            <button type="button" class="demo-choice" data-answer="no">I didn't sell anything</button>
           </div>
-          <p class="demo-help"><span>New term? <strong>Capital gains</strong> just means profit from selling an investment — we'll only ask for the detail if you say yes.</span></p>
         </section>
 
         <section class="demo-screen" id="q-business" data-question="business">
           <span class="demo-eyebrow">Business &amp; freelance</span>
           <h2 class="demo-heading">Do you have business or freelance income?</h2>
-          <p class="demo-body">Includes consulting, freelancing, or running a business — not income from a regular employer.</p>
+          <p class="demo-body">This is the one thing we genuinely can't see from your records — consulting, freelancing, or running a business.</p>
           <div class="demo-choice-grid">
             <button type="button" class="demo-choice" data-answer="yes">Yes</button>
             <button type="button" class="demo-choice" data-answer="no">No</button>
@@ -68,12 +87,54 @@
           </div>
         </section>
 
+        <section class="demo-screen" id="deductions">
+          <span class="demo-eyebrow">Deductions</span>
+          <h2 class="demo-heading">Want to reduce your tax under the old regime?</h2>
+          <p class="demo-body">These only count if the old regime turns out better for you — we'll compare both on the next screen either way.</p>
+          <div class="demo-toggle-list">
+            <button type="button" class="demo-toggle" id="demo-ded-80c" aria-pressed="false">
+              <span class="demo-toggle-switch"></span>
+              <span><strong>Section 80C</strong><span>ELSS, PPF, life insurance premiums — up to ₹1,50,000</span></span>
+            </button>
+            <button type="button" class="demo-toggle" id="demo-ded-80d" aria-pressed="false">
+              <span class="demo-toggle-switch"></span>
+              <span><strong>Section 80D</strong><span>Health insurance premiums — up to ₹25,000</span></span>
+            </button>
+          </div>
+          <div class="demo-actions">
+            <button type="button" class="demo-btn is-primary" id="demo-to-regime">Compare old vs. new regime</button>
+          </div>
+        </section>
+
+        <section class="demo-screen" id="regime">
+          <span class="demo-eyebrow">Regime comparison</span>
+          <h2 class="demo-heading">Here's what you'd owe under each</h2>
+          <div class="regime-grid">
+            <button type="button" class="regime-card" id="demo-regime-new" data-pick-regime="new">
+              <span class="regime-name">New regime</span>
+              <span class="regime-amount" id="demo-new-tax">₹0</span>
+              <span class="regime-note">Standard deduction only</span>
+              <span class="regime-badge">Recommended</span>
+            </button>
+            <button type="button" class="regime-card" id="demo-regime-old" data-pick-regime="old">
+              <span class="regime-name">Old regime</span>
+              <span class="regime-amount" id="demo-old-tax">₹0</span>
+              <span class="regime-note">With your deductions applied</span>
+              <span class="regime-badge">Recommended</span>
+            </button>
+          </div>
+          <p class="demo-body" style="margin-top: 16px;">That's a difference of <strong id="demo-savings">₹0</strong>. Tap either card to choose it — we've pre-selected the one that costs less.</p>
+          <p class="demo-help" id="demo-old-deductions-note" style="display: none;"><span>Your 80C/80D choices only reduce tax under the <strong>old</strong> regime — the new regime doesn't allow most deductions, which is part of why this comparison matters.</span></p>
+          <p class="demo-fine">Simplified for this demo — capital gains are taxed at slab rate here rather than the real flat STCG/LTCG rates, and this isn't tax advice.</p>
+        </section>
+
         <section class="demo-screen" id="resolve">
           <span class="demo-eyebrow">Result</span>
           <h2 class="demo-heading">Based on what you told us:</h2>
           <div class="demo-result-box">
             <p class="demo-result-form" id="demo-result-form">ITR-1</p>
             <p class="demo-result-why" id="demo-result-why">Reasoning appears here.</p>
+            <p class="demo-result-regime" id="demo-result-regime">Regime appears here.</p>
           </div>
           <div class="demo-actions">
             <button type="button" class="demo-btn is-primary" id="demo-continue-review">Continue to review</button>
@@ -95,22 +156,46 @@
 
         <section class="demo-screen" id="review">
           <span class="demo-eyebrow">Review</span>
-          <h2 class="demo-heading">We've filled in what your AIS already shows</h2>
-          <p class="demo-body">Filing as <strong id="demo-review-form">ITR-2</strong>.</p>
+          <h2 class="demo-heading">Everything in one place before you file</h2>
           <ul class="demo-checklist">
             <li class="is-done"><span class="demo-check-dot"></span>Salary &amp; TDS — matched</li>
             <li class="is-done"><span class="demo-check-dot"></span>Bank interest — matched</li>
-            <li class="is-attention" id="demo-review-capgains"><span class="demo-check-dot"></span>Capital gains — needs a quick look</li>
+            <li class="is-done" id="demo-review-capgains"><span class="demo-check-dot"></span>Capital gains — reconciled with broker data</li>
           </ul>
+          <div class="summary-box">
+            <div class="summary-row"><span>Filing as</span><strong id="demo-review-form">ITR-2</strong></div>
+            <div class="summary-row"><span>Regime</span><strong id="demo-review-regime">New regime</strong></div>
+            <div class="summary-row"><span>Total income</span><strong id="demo-review-income">₹0</strong></div>
+            <div class="summary-row"><span>Tax computed</span><strong id="demo-review-tax">₹0</strong></div>
+            <div class="summary-row"><span>Already paid (TDS)</span><strong id="demo-review-tds">₹0</strong></div>
+            <div class="summary-row is-outcome"><span>Outcome</span><strong id="demo-review-outcome">—</strong></div>
+          </div>
           <div class="demo-actions">
-            <button type="button" class="demo-btn is-primary" id="demo-review-done">Looks good</button>
+            <button type="button" class="demo-btn is-primary" id="demo-review-done">Continue to e-verify</button>
+          </div>
+        </section>
+
+        <section class="demo-screen" id="everify">
+          <span class="demo-eyebrow">Verify &amp; file</span>
+          <h2 class="demo-heading">Enter the OTP sent to your Aadhaar-linked mobile</h2>
+          <p class="demo-body">Demo only — type any 6 digits, nothing is actually sent or verified.</p>
+          <div class="otp-row">
+            <input class="otp-box" type="text" inputmode="numeric" maxlength="1" aria-label="OTP digit 1" />
+            <input class="otp-box" type="text" inputmode="numeric" maxlength="1" aria-label="OTP digit 2" />
+            <input class="otp-box" type="text" inputmode="numeric" maxlength="1" aria-label="OTP digit 3" />
+            <input class="otp-box" type="text" inputmode="numeric" maxlength="1" aria-label="OTP digit 4" />
+            <input class="otp-box" type="text" inputmode="numeric" maxlength="1" aria-label="OTP digit 5" />
+            <input class="otp-box" type="text" inputmode="numeric" maxlength="1" aria-label="OTP digit 6" />
+          </div>
+          <div class="demo-actions">
+            <button type="button" class="demo-btn is-primary" id="demo-file-now" disabled>File now</button>
           </div>
         </section>
 
         <section class="demo-screen" id="done">
-          <span class="demo-eyebrow">That's the concept</span>
-          <h2 class="demo-heading">This is where the real product would begin</h2>
-          <p class="demo-body">You just walked through a design concept, not a live filing tool — nothing was submitted or saved. If anything felt off, confusing, or genuinely useful, I'd like to know. Two lines is plenty.</p>
+          <span class="demo-eyebrow">Filed — demo only</span>
+          <h2 class="demo-heading">That's the concept, end to end</h2>
+          <p class="demo-body">Acknowledgement number <strong id="demo-ack-number">ITR-DEMO-000000</strong>. Nothing was actually submitted — this is where the real product would begin. If anything felt off, confusing, or genuinely better than what exists today, I'd like to know.</p>
           <div class="demo-feedback">
             <textarea id="demo-feedback-text" placeholder="What was confusing? What worked? Would you actually trust a result like this?"></textarea>
             <button type="button" class="demo-btn is-primary" id="demo-send-feedback">Email this feedback</button>
@@ -120,9 +205,9 @@
         </section>
       </div>
 
-      <p class="demo-disclaimer"><strong>This is a design research prototype</strong>, not affiliated with the Income Tax Department or any filing service. Nothing you enter is submitted, filed, or stored anywhere — closing this tab clears it. Read the <a href="income-tax.html">full case study</a>.</p>
+      <p class="demo-disclaimer"><strong>This is a design research prototype</strong>, not affiliated with the Income Tax Department or any filing service. The auto-import, OTP, and filing steps are all simulated with fixed demo data — nothing you do here is submitted, filed, or stored anywhere, and no real account is contacted. Read the <a href="income-tax.html">full case study</a>.</p>
     </div>
 
-    <script src="scripts/income-tax-demo.js" defer></script>
+    <script src="scripts/income-tax-demo.js?v=2" defer></script>
   </body>
 </html>
