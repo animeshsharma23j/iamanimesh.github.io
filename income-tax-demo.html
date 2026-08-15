@@ -7,7 +7,14 @@
     <meta name="description" content="Income Tax concept prototype — an automated, assisted filing demo, not an official tax service." />
     <title>File your ITR — concept demo</title>
     <link rel="icon" href="icon.png" type="image/png" />
-    <link rel="stylesheet" href="income-tax-demo.css?v=14" />
+    <link rel="stylesheet" href="income-tax-demo.css?v=18" />
+    <script>
+      (function () {
+        var saved = localStorage.getItem("itr-demo-theme");
+        var theme = saved || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+        if (theme === "dark") document.documentElement.setAttribute("data-theme", "dark");
+      })();
+    </script>
   </head>
   <body>
     <div class="site-meta-bar">
@@ -25,12 +32,13 @@
           <span class="site-nav-link">Help</span>
         </nav>
         <span class="demo-ay-badge">Filing for AY 2026-27</span>
+        <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch to dark mode" aria-pressed="false">🌙</button>
       </div>
     </header>
 
     <main class="demo-shell">
       <div class="demo-card">
-        <div class="demo-progress" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+        <div class="demo-progress" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
         <div class="demo-running-total" id="demo-running-total" hidden><span>Total income so far</span><strong id="demo-running-total-amount">₹0</strong></div>
 
         <section class="demo-screen is-active" id="signin">
@@ -124,11 +132,11 @@
               <span class="quick-link-desc">Short walkthroughs of the trickier steps.</span>
               <span class="quick-link-status is-open">Open</span>
             </button>
-            <div class="quick-link-card is-disabled" aria-disabled="true">
+            <button type="button" class="quick-link-card" id="quick-link-chat">
               <span class="quick-link-title">Online Chat Support</span>
               <span class="quick-link-desc">For anything the guide and QnA don't cover.</span>
-              <span class="quick-link-status">Coming soon</span>
-            </div>
+              <span class="quick-link-status is-open">Open</span>
+            </button>
           </div>
         </section>
 
@@ -432,72 +440,77 @@
           </div>
         </section>
 
-        <section class="demo-screen" id="snapshot">
-          <span class="demo-eyebrow">Here's what we found</span>
-          <h2 class="demo-heading">Nothing to type — just confirm this looks right</h2>
+        <section class="demo-screen" id="verify">
+          <span class="demo-eyebrow">Verify your details</span>
+          <h2 class="demo-heading">Here's what we found — check it over</h2>
           <ul class="demo-checklist">
             <li class="is-done"><span class="demo-check-dot"></span>Salary income — ₹9,40,000</li>
             <li class="is-done"><span class="demo-check-dot"></span>TDS already deducted — ₹68,000</li>
             <li class="is-done"><span class="demo-check-dot"></span>Bank interest — ₹8,400</li>
           </ul>
-          <p class="demo-help"><span>We'll only ask you about things we genuinely can't see — like whether you sold any investments this year.</span></p>
+
+          <div class="verify-capgains" id="verify-capgains">
+            <div class="verify-capgains-info">
+              <span class="demo-check-dot" id="verify-capgains-dot"></span>
+              <div>
+                <strong>Capital gains — ₹1,20,000</strong>
+                <span>Detected from your linked broker statements this year.</span>
+              </div>
+            </div>
+            <div class="verify-capgains-actions" id="verify-capgains-actions">
+              <button type="button" class="demo-btn-sm" data-capgains="yes">That's right</button>
+              <button type="button" class="demo-btn-sm is-quiet" data-capgains="no">Not mine</button>
+            </div>
+            <p class="verify-capgains-status" id="verify-capgains-status" hidden></p>
+          </div>
+
+          <details class="verify-more">
+            <summary>Anything else we can't see? <span>Business income, foreign assets</span></summary>
+            <div class="demo-toggle-list">
+              <button type="button" class="demo-toggle" id="demo-toggle-business" aria-pressed="false">
+                <span class="demo-toggle-switch"></span>
+                <span><strong>Business or freelance income</strong><span>Consulting, freelancing, or running a business</span></span>
+              </button>
+              <button type="button" class="demo-toggle" id="demo-toggle-foreign" aria-pressed="false">
+                <span class="demo-toggle-switch"></span>
+                <span><strong>Foreign assets or income</strong><span>Foreign bank accounts, shares, or property</span></span>
+              </button>
+            </div>
+            <p class="demo-fine">These change which ITR form applies, not your total income — neither carries a rupee amount we can add here.</p>
+          </details>
+
           <div class="demo-actions">
-            <button type="button" class="demo-btn is-primary" data-snapshot-continue>Looks right, continue</button>
+            <button type="button" class="demo-btn is-primary" id="demo-verify-continue">See my suggested form</button>
           </div>
         </section>
 
-        <section class="demo-screen" id="q-capgains" data-question="capgains">
-          <span class="demo-eyebrow">Capital gains</span>
-          <h2 class="demo-heading">We noticed activity in your linked broker account</h2>
-          <p class="demo-body">₹1,20,000 in short-term gains this year, based on your broker statements. Is that right?</p>
-          <div class="demo-choice-grid">
-            <button type="button" class="demo-choice" data-answer="yes">Yes, that's right</button>
-            <button type="button" class="demo-choice" data-answer="no">I didn't sell anything</button>
-          </div>
-        </section>
-
-        <section class="demo-screen" id="q-business" data-question="business">
-          <span class="demo-eyebrow">Business &amp; freelance</span>
-          <h2 class="demo-heading">Do you have business or freelance income?</h2>
-          <p class="demo-body">This is the one thing we genuinely can't see from your records — consulting, freelancing, or running a business.</p>
-          <p class="demo-fine">This changes which ITR form applies, not your total income — we don't know the amount, so it won't add anything here.</p>
-          <div class="demo-choice-grid">
-            <button type="button" class="demo-choice" data-answer="yes">Yes</button>
-            <button type="button" class="demo-choice" data-answer="no">No</button>
-          </div>
-        </section>
-
-        <section class="demo-screen" id="q-foreign" data-question="foreign">
-          <span class="demo-eyebrow">Foreign assets</span>
-          <h2 class="demo-heading">Do you hold any foreign assets, or earn income from outside India?</h2>
-          <p class="demo-body">Foreign bank accounts, shares, or property — even a small amount counts here.</p>
-          <div class="demo-choice-grid">
-            <button type="button" class="demo-choice" data-answer="yes">Yes</button>
-            <button type="button" class="demo-choice" data-answer="no">No</button>
-          </div>
-        </section>
-
-        <section class="demo-screen" id="deductions">
-          <span class="demo-eyebrow">Deductions</span>
-          <h2 class="demo-heading">Want to reduce your tax under the old regime?</h2>
-          <p class="demo-body">These only count if the old regime turns out better for you — we'll compare both on the next screen either way.</p>
-          <div class="demo-toggle-list">
-            <button type="button" class="demo-toggle" id="demo-ded-80c" aria-pressed="false">
-              <span class="demo-toggle-switch"></span>
-              <span><strong>Section 80C</strong><span>ELSS, PPF, life insurance premiums — up to ₹1,50,000</span></span>
-            </button>
-            <button type="button" class="demo-toggle" id="demo-ded-80d" aria-pressed="false">
-              <span class="demo-toggle-switch"></span>
-              <span><strong>Section 80D</strong><span>Health insurance premiums — up to ₹25,000</span></span>
-            </button>
+        <section class="demo-screen" id="resolve">
+          <span class="demo-eyebrow">Result</span>
+          <h2 class="demo-heading">Based on what you told us:</h2>
+          <div class="demo-result-box">
+            <p class="demo-result-form" id="demo-result-form">ITR-1</p>
+            <p class="demo-result-why" id="demo-result-why">Reasoning appears here.</p>
           </div>
           <div class="demo-actions">
-            <button type="button" class="demo-btn is-primary" id="demo-to-regime">Compare old vs. new regime</button>
+            <button type="button" class="demo-btn is-primary" id="demo-continue-review">Compare old vs. new regime</button>
+            <button type="button" class="demo-btn is-quiet" id="demo-not-right">That doesn't sound right</button>
           </div>
         </section>
 
-        <section class="demo-screen" id="regime">
-          <span class="demo-eyebrow">Regime comparison</span>
+        <section class="demo-screen" id="override">
+          <span class="demo-eyebrow">Pick it yourself</span>
+          <h2 class="demo-heading">Which form do you think applies?</h2>
+          <p class="demo-body">No pressure — you can always change this later before filing.</p>
+          <div class="demo-override-list">
+            <button type="button" class="demo-override-option" data-manual-form="ITR-1"><strong>ITR-1 (Sahaj)</strong><span>Salary income only, total income up to ₹50 lakh</span></button>
+            <button type="button" class="demo-override-option" data-manual-form="ITR-2"><strong>ITR-2</strong><span>Salary plus capital gains, foreign assets, or more than one property</span></button>
+            <button type="button" class="demo-override-option" data-manual-form="ITR-3"><strong>ITR-3</strong><span>Business or professional income, including freelancing</span></button>
+            <button type="button" class="demo-override-option" data-manual-form="ITR-4 (Sugam)"><strong>ITR-4 (Sugam)</strong><span>Presumptive business or professional income</span></button>
+          </div>
+        </section>
+
+        <section class="demo-screen" id="compare">
+          <span class="demo-eyebrow">Compare regimes</span>
           <h2 class="demo-heading">Here's what you'd owe under each</h2>
           <div class="regime-grid">
             <button type="button" class="regime-card" id="demo-regime-new" data-pick-regime="new">
@@ -514,33 +527,25 @@
             </button>
           </div>
           <p class="demo-body" style="margin-top: 16px;">That's a difference of <strong id="demo-savings">₹0</strong>. Tap either card to choose it — we've pre-selected the one that costs less.</p>
+
+          <details class="verify-more">
+            <summary>Add deductions <span>Section 80C, 80D — only help under the old regime</span></summary>
+            <div class="demo-toggle-list">
+              <button type="button" class="demo-toggle" id="demo-ded-80c" aria-pressed="false">
+                <span class="demo-toggle-switch"></span>
+                <span><strong>Section 80C</strong><span>ELSS, PPF, life insurance premiums — up to ₹1,50,000</span></span>
+              </button>
+              <button type="button" class="demo-toggle" id="demo-ded-80d" aria-pressed="false">
+                <span class="demo-toggle-switch"></span>
+                <span><strong>Section 80D</strong><span>Health insurance premiums — up to ₹25,000</span></span>
+              </button>
+            </div>
+          </details>
+
           <p class="demo-help" id="demo-old-deductions-note" style="display: none;"><span>Your 80C/80D choices only reduce tax under the <strong>old</strong> regime — the new regime doesn't allow most deductions, which is part of why this comparison matters.</span></p>
           <p class="demo-fine">Simplified for this demo — capital gains are taxed at slab rate here rather than the real flat STCG/LTCG rates, and this isn't tax advice.</p>
-        </section>
-
-        <section class="demo-screen" id="resolve">
-          <span class="demo-eyebrow">Result</span>
-          <h2 class="demo-heading">Based on what you told us:</h2>
-          <div class="demo-result-box">
-            <p class="demo-result-form" id="demo-result-form">ITR-1</p>
-            <p class="demo-result-why" id="demo-result-why">Reasoning appears here.</p>
-            <p class="demo-result-regime" id="demo-result-regime">Regime appears here.</p>
-          </div>
           <div class="demo-actions">
-            <button type="button" class="demo-btn is-primary" id="demo-continue-review">Continue to review</button>
-            <button type="button" class="demo-btn is-quiet" id="demo-not-right">That doesn't sound right</button>
-          </div>
-        </section>
-
-        <section class="demo-screen" id="override">
-          <span class="demo-eyebrow">Pick it yourself</span>
-          <h2 class="demo-heading">Which form do you think applies?</h2>
-          <p class="demo-body">No pressure — you can always change this later before filing.</p>
-          <div class="demo-override-list">
-            <button type="button" class="demo-override-option" data-manual-form="ITR-1"><strong>ITR-1 (Sahaj)</strong><span>Salary income only, total income up to ₹50 lakh</span></button>
-            <button type="button" class="demo-override-option" data-manual-form="ITR-2"><strong>ITR-2</strong><span>Salary plus capital gains, foreign assets, or more than one property</span></button>
-            <button type="button" class="demo-override-option" data-manual-form="ITR-3"><strong>ITR-3</strong><span>Business or professional income, including freelancing</span></button>
-            <button type="button" class="demo-override-option" data-manual-form="ITR-4 (Sugam)"><strong>ITR-4 (Sugam)</strong><span>Presumptive business or professional income</span></button>
+            <button type="button" class="demo-btn is-primary" id="demo-compare-continue">Continue to review</button>
           </div>
         </section>
 
@@ -624,6 +629,27 @@
       <p class="demo-disclaimer"><strong>This is a design research prototype</strong>, not affiliated with the Income Tax Department or any filing service. The auto-import, OTP, and filing steps are all simulated with fixed demo data — nothing you do here is submitted, filed, or stored anywhere, and no real account is contacted. Read the <a href="income-tax.html">full case study</a>.</p>
     </footer>
 
-    <script src="scripts/income-tax-demo.js?v=13" defer></script>
+    <div class="chat-widget" id="chat-widget">
+      <div class="chat-panel" id="chat-panel" hidden>
+        <div class="chat-panel-head">
+          <div>
+            <strong>Ask ITR Assist</strong>
+            <span>Simulated assistant — answers pulled from Tax QnA</span>
+          </div>
+          <button type="button" class="chat-close" id="chat-close" aria-label="Close chat">✕</button>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+          <div class="chat-msg is-bot"><p>Hi — ask me something about filing, or tap a suggestion below.</p></div>
+        </div>
+        <div class="chat-quick-replies" id="chat-quick-replies"></div>
+        <form class="chat-input-row" id="chat-input-row">
+          <input type="text" id="chat-input" placeholder="Type a question…" autocomplete="off" aria-label="Type a question" />
+          <button type="submit" class="chat-send" aria-label="Send">→</button>
+        </form>
+      </div>
+      <button type="button" class="chat-bubble" id="chat-bubble" aria-label="Open chat support">💬</button>
+    </div>
+
+    <script src="scripts/income-tax-demo.js?v=14" defer></script>
   </body>
 </html>

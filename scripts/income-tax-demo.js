@@ -13,13 +13,13 @@
   var DED_80C = 150000;
   var DED_80D = 25000;
 
-  var progressOrder = ["snapshot", "q-capgains", "q-business", "q-foreign", "deductions", "regime", "resolve", "review", "everify"];
+  var progressOrder = ["verify", "resolve", "compare", "review", "everify"];
   var WIDE_SCREENS = ["home", "guide", "calculator", "case-studies", "tax-qna", "video-tutorials"];
   var SPLIT_SCREENS = ["signin", "signin-otp"];
   var demoShell = document.querySelector(".demo-shell");
   var demoCard = document.querySelector(".demo-card");
 
-  var answers = { capgains: null, business: null, foreign: null, ded80c: false, ded80d: false };
+  var answers = { capgains: null, business: false, foreign: false, ded80c: false, ded80d: false };
   var computed = { newTax: 0, oldTax: 0, recommended: "new", finalTax: 0, totalIncome: 0 };
   var manualForm = null;
 
@@ -55,6 +55,9 @@
     }
     if (demoShell) {
       demoShell.classList.toggle("is-auth", SPLIT_SCREENS.indexOf(id) > -1);
+    }
+    if (chatWidget) {
+      chatWidget.hidden = SPLIT_SCREENS.indexOf(id) > -1;
     }
     var idx = progressOrder.indexOf(id);
     if (idx > -1) {
@@ -178,35 +181,77 @@
 
   document.querySelectorAll("[data-goto-snapshot]").forEach(function (btn) {
     btn.addEventListener("click", function () {
-      showScreen("snapshot");
+      showScreen("verify");
     });
   });
 
-  // ---- Snapshot -> first question ----
-  document.querySelectorAll("[data-snapshot-continue]").forEach(function (btn) {
+  // ---- Verify: detected capital gains — confirm / not mine / undo ----
+  var verifyCapgainsBox = document.getElementById("verify-capgains");
+  var verifyCapgainsActions = document.getElementById("verify-capgains-actions");
+  var verifyCapgainsStatus = document.getElementById("verify-capgains-status");
+
+  function setCapgainsState(state) {
+    if (!verifyCapgainsBox) return;
+    verifyCapgainsBox.classList.remove("is-done", "is-excluded");
+    if (state === "yes") {
+      verifyCapgainsBox.classList.add("is-done");
+      verifyCapgainsActions.hidden = true;
+      verifyCapgainsStatus.hidden = false;
+      verifyCapgainsStatus.innerHTML = "Confirmed — included in your return. <a href=\"#\" data-capgains-undo>Not right?</a>";
+    } else if (state === "no") {
+      verifyCapgainsBox.classList.add("is-excluded");
+      verifyCapgainsActions.hidden = true;
+      verifyCapgainsStatus.hidden = false;
+      verifyCapgainsStatus.innerHTML = "Excluded from your return. <a href=\"#\" data-capgains-undo>Actually, add it back</a>";
+    } else {
+      verifyCapgainsActions.hidden = false;
+      verifyCapgainsStatus.hidden = true;
+    }
+  }
+
+  document.querySelectorAll("[data-capgains]").forEach(function (btn) {
     btn.addEventListener("click", function () {
-      showScreen("q-capgains");
+      answers.capgains = btn.getAttribute("data-capgains");
+      setCapgainsState(answers.capgains);
+      updateRunningTotal(true);
     });
   });
 
-  // ---- Yes/No style question screens ----
-  document.querySelectorAll("[data-answer]").forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      var screen = btn.closest(".demo-screen");
-      var key = screen.getAttribute("data-question");
-      answers[key] = btn.getAttribute("data-answer");
-      if (key === "capgains") {
+  if (verifyCapgainsStatus) {
+    verifyCapgainsStatus.addEventListener("click", function (e) {
+      if (e.target.matches("[data-capgains-undo]")) {
+        e.preventDefault();
+        answers.capgains = null;
+        setCapgainsState(null);
         updateRunningTotal(true);
-        showScreen("q-business");
-      } else if (key === "business") {
-        showScreen("q-foreign");
-      } else if (key === "foreign") {
-        showScreen("deductions");
       }
     });
-  });
+  }
 
-  // ---- Deductions toggles ----
+  // ---- Verify: business / foreign toggles (no rupee amount — only affects form) ----
+  var businessToggle = document.getElementById("demo-toggle-business");
+  var foreignToggle = document.getElementById("demo-toggle-foreign");
+  if (businessToggle) {
+    businessToggle.addEventListener("click", function () {
+      answers.business = !answers.business;
+      businessToggle.classList.toggle("is-on", answers.business);
+      businessToggle.setAttribute("aria-pressed", String(answers.business));
+    });
+  }
+  if (foreignToggle) {
+    foreignToggle.addEventListener("click", function () {
+      answers.foreign = !answers.foreign;
+      foreignToggle.classList.toggle("is-on", answers.foreign);
+      foreignToggle.setAttribute("aria-pressed", String(answers.foreign));
+    });
+  }
+
+  var verifyContinueBtn = document.getElementById("demo-verify-continue");
+  if (verifyContinueBtn) {
+    verifyContinueBtn.addEventListener("click", resolveForm);
+  }
+
+  // ---- Deductions toggles (now on the compare screen — live recalc, no separate button) ----
   var ded80cToggle = document.getElementById("demo-ded-80c");
   var ded80dToggle = document.getElementById("demo-ded-80d");
   if (ded80cToggle) {
@@ -214,6 +259,7 @@
       answers.ded80c = !answers.ded80c;
       ded80cToggle.classList.toggle("is-on", answers.ded80c);
       ded80cToggle.setAttribute("aria-pressed", String(answers.ded80c));
+      runTaxCalculation();
     });
   }
   if (ded80dToggle) {
@@ -221,14 +267,12 @@
       answers.ded80d = !answers.ded80d;
       ded80dToggle.classList.toggle("is-on", answers.ded80d);
       ded80dToggle.setAttribute("aria-pressed", String(answers.ded80d));
+      runTaxCalculation();
     });
   }
-  var toRegimeBtn = document.getElementById("demo-to-regime");
-  if (toRegimeBtn) {
-    toRegimeBtn.addEventListener("click", function () {
-      runTaxCalculation();
-      showScreen("regime");
-    });
+  var compareContinueBtn = document.getElementById("demo-compare-continue");
+  if (compareContinueBtn) {
+    compareContinueBtn.addEventListener("click", showReview);
   }
 
   // ---- Tax calculation ----
@@ -280,18 +324,19 @@
     btn.addEventListener("click", function () {
       computed.recommended = btn.getAttribute("data-pick-regime");
       computed.finalTax = computed.recommended === "new" ? computed.newTax : computed.oldTax;
-      resolveForm();
+      document.getElementById("demo-regime-new").classList.toggle("is-recommended", computed.recommended === "new");
+      document.getElementById("demo-regime-old").classList.toggle("is-recommended", computed.recommended === "old");
     });
   });
 
-  // ---- Resolve (ITR form recommendation) ----
+  // ---- Resolve (ITR form recommendation — shown right after verify, before regime comparison) ----
   function resolveForm() {
     manualForm = null;
     var form, why;
-    if (answers.foreign === "yes") {
-      form = answers.business === "yes" ? "ITR-3" : "ITR-2";
-      why = "Foreign assets or income need Schedule FA, which ITR-1 doesn't support" + (answers.business === "yes" ? ", and business income needs ITR-3." : ".");
-    } else if (answers.business === "yes") {
+    if (answers.foreign) {
+      form = answers.business ? "ITR-3" : "ITR-2";
+      why = "Foreign assets or income need Schedule FA, which ITR-1 doesn't support" + (answers.business ? ", and business income needs ITR-3." : ".");
+    } else if (answers.business) {
       form = "ITR-3";
       why = "Business or freelance income needs ITR-3.";
     } else if (answers.capgains === "yes") {
@@ -303,7 +348,6 @@
     }
     document.getElementById("demo-result-form").textContent = form;
     document.getElementById("demo-result-why").textContent = why;
-    document.getElementById("demo-result-regime").textContent = (computed.recommended === "new" ? "New" : "Old") + " regime, estimated tax " + fmt(computed.finalTax);
     showScreen("resolve");
   }
 
@@ -317,13 +361,17 @@
   document.querySelectorAll("[data-manual-form]").forEach(function (btn) {
     btn.addEventListener("click", function () {
       manualForm = btn.getAttribute("data-manual-form");
-      showReview();
+      runTaxCalculation();
+      showScreen("compare");
     });
   });
 
   var continueReviewBtn = document.getElementById("demo-continue-review");
   if (continueReviewBtn) {
-    continueReviewBtn.addEventListener("click", showReview);
+    continueReviewBtn.addEventListener("click", function () {
+      runTaxCalculation();
+      showScreen("compare");
+    });
   }
 
   // ---- Review ----
@@ -712,12 +760,135 @@
     });
   }
 
+  // ---- Chat support (simulated — no real AI, honest fallback for anything unrecognized) ----
+  var CHAT_QA = [
+    {
+      q: "Do I need to file this year?",
+      keywords: ["need to file", "have to file", "do i file"],
+      a: "Generally, yes if your income is above the basic exemption limit, or if you had any capital gains, foreign assets, or business/freelance income — even a small amount."
+    },
+    {
+      q: "What's the difference between AY and FY?",
+      keywords: ["ay", "fy", "assessment year", "financial year"],
+      a: "FY (Financial Year) is when you earned the income — April to March. AY (Assessment Year) is the year after that, when it gets assessed and filed."
+    },
+    {
+      q: "What is Section 80C?",
+      keywords: ["80c"],
+      a: "A deduction for ELSS, PPF, or life insurance premiums — up to ₹1,50,000. It only reduces tax under the old regime."
+    },
+    {
+      q: "Old regime vs. new — which is better?",
+      keywords: ["old regime", "new regime", "which regime"],
+      a: "It depends entirely on how many deductions you can claim. Try the Interactive Tax Calculator on the Home hub with your real numbers rather than guessing."
+    },
+    {
+      q: "I paid tax via challan — do I need to enter it?",
+      keywords: ["challan"],
+      a: "Yes. If its details never make it into the return, the return shows the tax as unpaid — that gap is exactly what turns into a \"tax defaulter\" notice months later, for tax you already paid."
+    },
+    {
+      q: "What happens if I make a mistake?",
+      keywords: ["mistake", "wrong", "error"],
+      a: "You're told specifically what doesn't match and what to do about it — not shown a generic red warning with no explanation. A mismatch is a fixable state, not a verdict."
+    }
+  ];
+
+  var chatWidget = document.getElementById("chat-widget");
+  var chatBubble = document.getElementById("chat-bubble");
+  var chatPanel = document.getElementById("chat-panel");
+  var chatClose = document.getElementById("chat-close");
+  var chatMessages = document.getElementById("chat-messages");
+  var chatQuickReplies = document.getElementById("chat-quick-replies");
+  var chatInputRow = document.getElementById("chat-input-row");
+  var chatInput = document.getElementById("chat-input");
+
+  function addChatMessage(text, sender) {
+    var msg = document.createElement("div");
+    msg.className = "chat-msg is-" + sender;
+    var p = document.createElement("p");
+    p.textContent = text;
+    msg.appendChild(p);
+    chatMessages.appendChild(msg);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+    return msg;
+  }
+
+  function answerChat(text) {
+    var lower = text.toLowerCase();
+    var match = CHAT_QA.filter(function (entry) {
+      return entry.keywords.some(function (kw) {
+        return lower.indexOf(kw) > -1;
+      });
+    })[0];
+    var typing = addChatMessage("Typing…", "bot");
+    typing.classList.add("is-typing");
+    setTimeout(function () {
+      typing.remove();
+      addChatMessage(match ? match.a : "I don't have a canned answer for that in this prototype — try one of the suggestions below, or check the Tax QnA page for more.", "bot");
+    }, 650);
+  }
+
+  if (chatQuickReplies) {
+    CHAT_QA.forEach(function (entry) {
+      var chip = document.createElement("button");
+      chip.type = "button";
+      chip.className = "chat-chip";
+      chip.textContent = entry.q;
+      chip.addEventListener("click", function () {
+        addChatMessage(entry.q, "user");
+        answerChat(entry.q);
+      });
+      chatQuickReplies.appendChild(chip);
+    });
+  }
+
+  function openChat() {
+    if (chatPanel) chatPanel.hidden = false;
+    if (chatInput) chatInput.focus();
+  }
+
+  function closeChat() {
+    if (chatPanel) chatPanel.hidden = true;
+  }
+
+  if (chatBubble) {
+    chatBubble.addEventListener("click", function () {
+      if (chatPanel.hidden) {
+        openChat();
+      } else {
+        closeChat();
+      }
+    });
+  }
+
+  if (chatClose) {
+    chatClose.addEventListener("click", closeChat);
+  }
+
+  var quickLinkChat = document.getElementById("quick-link-chat");
+  if (quickLinkChat) {
+    quickLinkChat.addEventListener("click", openChat);
+  }
+
+  if (chatInputRow) {
+    chatInputRow.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var text = chatInput.value.trim();
+      if (!text) return;
+      addChatMessage(text, "user");
+      answerChat(text);
+      chatInput.value = "";
+    });
+  }
+
   // ---- Restart ----
   document.querySelectorAll("[data-restart]").forEach(function (link) {
     link.addEventListener("click", function (e) {
       e.preventDefault();
-      answers = { capgains: null, business: null, foreign: null, ded80c: false, ded80d: false };
+      answers = { capgains: null, business: false, foreign: false, ded80c: false, ded80d: false };
       manualForm = null;
+      setCapgainsState(null);
       otpInputs.forEach(function (input) {
         input.value = "";
       });
@@ -728,6 +899,14 @@
       if (ded80dToggle) {
         ded80dToggle.classList.remove("is-on");
         ded80dToggle.setAttribute("aria-pressed", "false");
+      }
+      if (businessToggle) {
+        businessToggle.classList.remove("is-on");
+        businessToggle.setAttribute("aria-pressed", "false");
+      }
+      if (foreignToggle) {
+        foreignToggle.classList.remove("is-on");
+        foreignToggle.setAttribute("aria-pressed", "false");
       }
       document.getElementById("demo-thanks").classList.remove("is-visible");
       document.getElementById("demo-feedback-text").value = "";
@@ -760,6 +939,39 @@
       );
       window.location.href = "mailto:animeshsharma23j@gmail.com?subject=" + subject + "&body=" + body;
       document.getElementById("demo-thanks").classList.add("is-visible");
+    });
+  }
+
+  // ---- Dark mode ----
+  var themeToggle = document.getElementById("theme-toggle");
+  var THEME_KEY = "itr-demo-theme";
+
+  function applyTheme(theme) {
+    if (theme === "dark") {
+      document.documentElement.setAttribute("data-theme", "dark");
+      if (themeToggle) {
+        themeToggle.textContent = "☀️";
+        themeToggle.setAttribute("aria-label", "Switch to light mode");
+        themeToggle.setAttribute("aria-pressed", "true");
+      }
+    } else {
+      document.documentElement.removeAttribute("data-theme");
+      if (themeToggle) {
+        themeToggle.textContent = "🌙";
+        themeToggle.setAttribute("aria-label", "Switch to dark mode");
+        themeToggle.setAttribute("aria-pressed", "false");
+      }
+    }
+  }
+
+  applyTheme(document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light");
+
+  if (themeToggle) {
+    themeToggle.addEventListener("click", function () {
+      var isDark = document.documentElement.getAttribute("data-theme") === "dark";
+      var next = isDark ? "light" : "dark";
+      applyTheme(next);
+      localStorage.setItem(THEME_KEY, next);
     });
   }
 
