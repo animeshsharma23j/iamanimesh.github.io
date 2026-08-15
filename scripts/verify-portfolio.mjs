@@ -12,7 +12,6 @@ const pages = [
   ["income-tax.html", "https://www.iamanimesh.com/income-tax.html", null],
   ["trade-cloud-apps.html", "https://www.iamanimesh.com/trade-cloud-apps.html", null],
   ["unitx-case-study.html", "https://www.iamanimesh.com/unitx-case-study.html", null],
-  ["journey.html", "https://www.iamanimesh.com/journey.html", null],
   ["about.html", "https://www.iamanimesh.com/about.html", "about.html"],
 ];
 
