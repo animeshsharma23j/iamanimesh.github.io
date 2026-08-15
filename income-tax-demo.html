@@ -7,7 +7,7 @@
     <meta name="description" content="Income Tax concept prototype — an automated, assisted filing demo, not an official tax service." />
     <title>File your ITR — concept demo</title>
     <link rel="icon" href="icon.png" type="image/png" />
-    <link rel="stylesheet" href="income-tax-demo.css?v=18" />
+    <link rel="stylesheet" href="income-tax-demo.css?v=21" />
     <script>
       (function () {
         var saved = localStorage.getItem("itr-demo-theme");
@@ -45,7 +45,6 @@
           <div class="auth-grid">
             <div class="auth-side">
               <span class="auth-side-icon" aria-hidden="true">🔒</span>
-              <h2>Built around trust, not just task completion</h2>
               <ul class="auth-trust-list">
                 <li><strong>No password to remember</strong><span>PAN + OTP is the entire sign-in — one less thing to forget or reuse.</span></li>
                 <li><strong>Verified in seconds</strong><span>Your OTP confirms it's you — nothing else is asked at sign-in.</span></li>
@@ -70,7 +69,6 @@
           <div class="auth-grid">
             <div class="auth-side">
               <span class="auth-side-icon" aria-hidden="true">🔒</span>
-              <h2>Built around trust, not just task completion</h2>
               <ul class="auth-trust-list">
                 <li><strong>No password to remember</strong><span>PAN + OTP is the entire sign-in — one less thing to forget or reuse.</span></li>
                 <li><strong>Verified in seconds</strong><span>Your OTP confirms it's you — nothing else is asked at sign-in.</span></li>
@@ -598,7 +596,7 @@
           <span class="demo-eyebrow">Verify &amp; file</span>
           <h2 class="demo-heading">Enter the OTP sent to your Aadhaar-linked mobile</h2>
           <p class="demo-body">Demo only — type any 6 digits, nothing is actually sent or verified.</p>
-          <div class="otp-row">
+          <div class="otp-row" id="everify-otp-row">
             <input class="otp-box" type="text" inputmode="numeric" maxlength="1" aria-label="OTP digit 1" />
             <input class="otp-box" type="text" inputmode="numeric" maxlength="1" aria-label="OTP digit 2" />
             <input class="otp-box" type="text" inputmode="numeric" maxlength="1" aria-label="OTP digit 3" />
@@ -650,6 +648,6 @@
       <button type="button" class="chat-bubble" id="chat-bubble" aria-label="Open chat support">💬</button>
     </div>
 
-    <script src="scripts/income-tax-demo.js?v=14" defer></script>
+    <script src="scripts/income-tax-demo.js?v=16" defer></script>
   </body>
 </html>

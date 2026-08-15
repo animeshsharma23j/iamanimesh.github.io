@@ -127,6 +127,7 @@
     boxes.forEach(function (input, i) {
       input.addEventListener("input", function () {
         input.value = input.value.replace(/[^0-9]/g, "").slice(0, 1);
+        input.classList.toggle("is-filled", input.value.length === 1);
         if (input.value && boxes[i + 1]) {
           boxes[i + 1].focus();
         }
@@ -442,28 +443,7 @@
   });
 
   // ---- e-Verify (simulated OTP) ----
-  var otpInputs = Array.prototype.slice.call(document.querySelectorAll(".otp-box"));
-  otpInputs.forEach(function (input, i) {
-    input.addEventListener("input", function () {
-      input.value = input.value.replace(/[^0-9]/g, "").slice(0, 1);
-      if (input.value && otpInputs[i + 1]) {
-        otpInputs[i + 1].focus();
-      }
-      checkOtpComplete();
-    });
-    input.addEventListener("keydown", function (e) {
-      if (e.key === "Backspace" && !input.value && otpInputs[i - 1]) {
-        otpInputs[i - 1].focus();
-      }
-    });
-  });
-
-  function checkOtpComplete() {
-    var complete = otpInputs.every(function (input) {
-      return input.value.length === 1;
-    });
-    document.getElementById("demo-file-now").disabled = !complete;
-  }
+  var otpInputs = wireOtpBoxes("everify-otp-row", document.getElementById("demo-file-now"));
 
   var fileNowBtn = document.getElementById("demo-file-now");
   if (fileNowBtn) {
@@ -891,6 +871,7 @@
       setCapgainsState(null);
       otpInputs.forEach(function (input) {
         input.value = "";
+        input.classList.remove("is-filled");
       });
       if (ded80cToggle) {
         ded80cToggle.classList.remove("is-on");
@@ -916,6 +897,7 @@
       hidePanError();
       signinOtpBoxes.forEach(function (input) {
         input.value = "";
+        input.classList.remove("is-filled");
       });
       if (signinVerifyBtn) signinVerifyBtn.disabled = true;
       if (tutorialPlayer) tutorialPlayer.hidden = true;
