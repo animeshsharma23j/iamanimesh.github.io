@@ -7,7 +7,7 @@
     <meta name="description" content="Income Tax concept prototype — an automated, assisted filing demo, not an official tax service." />
     <title>File your ITR — concept demo</title>
     <link rel="icon" href="icon.png" type="image/png" />
-    <link rel="stylesheet" href="income-tax-demo.css?v=3" />
+    <link rel="stylesheet" href="income-tax-demo.css?v=4" />
   </head>
   <body>
     <div class="demo-shell">
@@ -19,9 +19,37 @@
       <div class="demo-card">
         <div class="demo-progress" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
 
-        <section class="demo-screen is-active" id="start">
+        <section class="demo-screen is-active" id="signin">
+          <span class="demo-eyebrow">Sign in</span>
+          <h1 class="demo-heading">Enter your PAN to continue</h1>
+          <p class="demo-body">We'll send an OTP to verify it's you — no separate account or password to remember.</p>
+          <div class="demo-input-row"><label for="signin-pan">PAN</label><input id="signin-pan" type="text" placeholder="e.g. ABCDE1234F" maxlength="10" autocomplete="off" /></div>
+          <div class="demo-actions">
+            <button type="button" class="demo-btn is-primary" id="demo-signin-send-otp" disabled>Send OTP</button>
+          </div>
+          <p class="demo-fine">Verified in seconds · Used only to confirm it's you</p>
+        </section>
+
+        <section class="demo-screen" id="signin-otp">
+          <span class="demo-eyebrow">Verify it's you</span>
+          <h2 class="demo-heading">Enter the OTP sent to your Aadhaar-linked mobile</h2>
+          <p class="demo-body">Demo only — type any 6 digits, nothing is actually sent or verified.</p>
+          <div class="otp-row" id="signin-otp-row">
+            <input class="otp-box" type="text" inputmode="numeric" maxlength="1" aria-label="OTP digit 1" />
+            <input class="otp-box" type="text" inputmode="numeric" maxlength="1" aria-label="OTP digit 2" />
+            <input class="otp-box" type="text" inputmode="numeric" maxlength="1" aria-label="OTP digit 3" />
+            <input class="otp-box" type="text" inputmode="numeric" maxlength="1" aria-label="OTP digit 4" />
+            <input class="otp-box" type="text" inputmode="numeric" maxlength="1" aria-label="OTP digit 5" />
+            <input class="otp-box" type="text" inputmode="numeric" maxlength="1" aria-label="OTP digit 6" />
+          </div>
+          <div class="demo-actions">
+            <button type="button" class="demo-btn is-primary" id="demo-signin-verify" disabled>Verify &amp; continue</button>
+          </div>
+        </section>
+
+        <section class="demo-screen" id="start">
           <span class="demo-eyebrow">Getting started</span>
-          <h1 class="demo-heading">File your ITR without the guesswork</h1>
+          <h2 class="demo-heading">File your ITR without the guesswork</h2>
           <p class="demo-body">We can pull your salary, TDS, bank interest, and broker data automatically — you confirm a few things we can't see, and we handle the rest, including which regime saves you more.</p>
           <div class="demo-actions">
             <button type="button" class="demo-btn is-primary" data-start>Auto-fill from AIS &amp; Form 26AS</button>
@@ -232,6 +260,6 @@
       <p class="demo-disclaimer"><strong>This is a design research prototype</strong>, not affiliated with the Income Tax Department or any filing service. The auto-import, OTP, and filing steps are all simulated with fixed demo data — nothing you do here is submitted, filed, or stored anywhere, and no real account is contacted. Read the <a href="income-tax.html">full case study</a>.</p>
     </div>
 
-    <script src="scripts/income-tax-demo.js?v=3" defer></script>
+    <script src="scripts/income-tax-demo.js?v=4" defer></script>
   </body>
 </html>

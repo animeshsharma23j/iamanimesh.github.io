@@ -39,6 +39,50 @@
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
+  // ---- Sign in: PAN -> OTP ----
+  var panInput = document.getElementById("signin-pan");
+  var sendOtpBtn = document.getElementById("demo-signin-send-otp");
+  var PAN_PATTERN = /^[A-Z]{5}[0-9]{4}[A-Z]$/;
+  if (panInput && sendOtpBtn) {
+    panInput.addEventListener("input", function () {
+      panInput.value = panInput.value.toUpperCase();
+      sendOtpBtn.disabled = !PAN_PATTERN.test(panInput.value);
+    });
+    sendOtpBtn.addEventListener("click", function () {
+      showScreen("signin-otp");
+    });
+  }
+
+  function wireOtpBoxes(containerId, buttonEl, onComplete) {
+    var boxes = Array.prototype.slice.call(document.querySelectorAll("#" + containerId + " .otp-box"));
+    boxes.forEach(function (input, i) {
+      input.addEventListener("input", function () {
+        input.value = input.value.replace(/[^0-9]/g, "").slice(0, 1);
+        if (input.value && boxes[i + 1]) {
+          boxes[i + 1].focus();
+        }
+        var complete = boxes.every(function (b) {
+          return b.value.length === 1;
+        });
+        if (buttonEl) buttonEl.disabled = !complete;
+      });
+      input.addEventListener("keydown", function (e) {
+        if (e.key === "Backspace" && !input.value && boxes[i - 1]) {
+          boxes[i - 1].focus();
+        }
+      });
+    });
+    return boxes;
+  }
+
+  var signinOtpBoxes = wireOtpBoxes("signin-otp-row", document.getElementById("demo-signin-verify"));
+  var signinVerifyBtn = document.getElementById("demo-signin-verify");
+  if (signinVerifyBtn) {
+    signinVerifyBtn.addEventListener("click", function () {
+      showScreen("start");
+    });
+  }
+
   // ---- Start -> importing animation ----
   document.querySelectorAll("[data-start]").forEach(function (btn) {
     btn.addEventListener("click", function () {
@@ -335,7 +379,13 @@
       document.getElementById("demo-thanks").classList.remove("is-visible");
       document.getElementById("demo-feedback-text").value = "";
       resetChallanScreen();
-      showScreen("start");
+      if (panInput) panInput.value = "";
+      if (sendOtpBtn) sendOtpBtn.disabled = true;
+      signinOtpBoxes.forEach(function (input) {
+        input.value = "";
+      });
+      if (signinVerifyBtn) signinVerifyBtn.disabled = true;
+      showScreen("signin");
     });
   });
 
@@ -357,5 +407,5 @@
     });
   }
 
-  showScreen("start");
+  showScreen("signin");
 })();
