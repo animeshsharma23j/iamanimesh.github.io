@@ -17,7 +17,7 @@ const pages = [
 ];
 
 const errors = [];
-const requiredNav = ["index.html#products", "index.html#case-studies", "about.html", "mailto:animeshsharma23j@gmail.com"];
+const requiredNav = ["index.html#products", "index.html#case-studies", "about.html", "index.html#work-with-me"];
 
 for (const [file, canonical, activePage] of pages) {
   const html = readFileSync(file, "utf8");
@@ -29,7 +29,7 @@ for (const [file, canonical, activePage] of pages) {
   expect(/<meta property="og:title"/.test(html) && /<meta property="og:description"/.test(html), "missing Open Graph metadata");
 
   const pageNav = file === "index.html"
-    ? ["#products", "#case-studies", "about.html", "mailto:animeshsharma23j@gmail.com"]
+    ? ["#products", "#case-studies", "about.html", "#work-with-me"]
     : requiredNav;
   for (const href of pageNav) expect(html.includes(`href="${href}"`), `missing global navigation link: ${href}`);
 
