@@ -7,7 +7,7 @@
     <meta name="description" content="Income Tax concept prototype — an automated, assisted filing demo, not an official tax service." />
     <title>File your ITR — concept demo</title>
     <link rel="icon" href="icon.png" type="image/png" />
-    <link rel="stylesheet" href="income-tax-demo.css?v=5" />
+    <link rel="stylesheet" href="income-tax-demo.css?v=6" />
   </head>
   <body>
     <div class="demo-shell">
@@ -48,6 +48,70 @@
           </div>
           <div class="demo-actions">
             <button type="button" class="demo-btn is-primary" id="demo-signin-verify" disabled>Verify &amp; continue</button>
+          </div>
+        </section>
+
+        <section class="demo-screen" id="home">
+          <div class="demo-hero">
+            <span class="demo-hero-brand">ITR Assist</span>
+            <h1 class="demo-heading">What would you like to do?</h1>
+            <p class="demo-body">Your ITR for AY 2026-27 is ready to file whenever you are.</p>
+            <div class="demo-actions demo-hero-actions">
+              <button type="button" class="demo-btn is-primary" data-goto="start">Start Filing</button>
+            </div>
+          </div>
+
+          <div class="quick-links-grid">
+            <button type="button" class="quick-link-card" data-goto="guide">
+              <span class="quick-link-title">Step-by-Step Guide</span>
+              <span class="quick-link-desc">See exactly what happens when you file, before you start.</span>
+              <span class="quick-link-status is-open">Open</span>
+            </button>
+            <div class="quick-link-card is-disabled" aria-disabled="true">
+              <span class="quick-link-title">Interactive Tax Calculator</span>
+              <span class="quick-link-desc">Compare old vs. new regime before you file.</span>
+              <span class="quick-link-status">Coming soon</span>
+            </div>
+            <div class="quick-link-card is-disabled" aria-disabled="true">
+              <span class="quick-link-title">Real Life Case Studies</span>
+              <span class="quick-link-desc">Worked examples — find the one closest to your situation.</span>
+              <span class="quick-link-status">Coming soon</span>
+            </div>
+            <div class="quick-link-card is-disabled" aria-disabled="true">
+              <span class="quick-link-title">Tax QnA</span>
+              <span class="quick-link-desc">Plain-language answers, no section numbers.</span>
+              <span class="quick-link-status">Coming soon</span>
+            </div>
+            <div class="quick-link-card is-disabled" aria-disabled="true">
+              <span class="quick-link-title">Video Tutorials</span>
+              <span class="quick-link-desc">Short walkthroughs of the trickier steps.</span>
+              <span class="quick-link-status">Coming soon</span>
+            </div>
+            <div class="quick-link-card is-disabled" aria-disabled="true">
+              <span class="quick-link-title">Online Chat Support</span>
+              <span class="quick-link-desc">For anything the guide and QnA don't cover.</span>
+              <span class="quick-link-status">Coming soon</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="demo-screen" id="guide">
+          <span class="demo-eyebrow">Step-by-step guide</span>
+          <h1 class="demo-heading">Here's exactly what happens when you file</h1>
+          <p class="guide-callout"><span><strong>Not sure you even need to file this year?</strong> You generally do if your income is above the basic exemption limit, or if you had any capital gains, foreign assets, or business/freelance income — even a small amount.</span></p>
+
+          <ol class="guide-steps">
+            <li><span class="guide-step-num">1</span><div><strong>Sign in with your PAN</strong><p>An OTP confirms it's you — no password to remember.</p></div></li>
+            <li><span class="guide-step-num">2</span><div><strong>We auto-fill what's already on record</strong><p>Salary, TDS, bank interest, and broker data — pulled from AIS and Form 26AS.</p></div></li>
+            <li><span class="guide-step-num">3</span><div><strong>You confirm what we genuinely can't see</strong><p>Capital gains, freelance income, foreign assets — a few plain questions, not a form.</p></div></li>
+            <li><span class="guide-step-num">4</span><div><strong>We compare both tax regimes</strong><p>Old vs. new, side by side, with the one that saves you more pointed out.</p></div></li>
+            <li><span class="guide-step-num">5</span><div><strong>You review everything in one place</strong><p>Including a check for tax you've already paid by challan, before anything is submitted.</p></div></li>
+            <li><span class="guide-step-num">6</span><div><strong>You verify and you're done</strong><p>One more OTP, and that's the whole process.</p></div></li>
+          </ol>
+
+          <div class="demo-actions demo-actions-row">
+            <button type="button" class="demo-btn is-primary" data-goto="start">Start Filing</button>
+            <button type="button" class="demo-btn is-quiet" data-goto="home">← Back to Home</button>
           </div>
         </section>
 
@@ -265,6 +329,6 @@
       <p class="demo-disclaimer"><strong>This is a design research prototype</strong>, not affiliated with the Income Tax Department or any filing service. The auto-import, OTP, and filing steps are all simulated with fixed demo data — nothing you do here is submitted, filed, or stored anywhere, and no real account is contacted. Read the <a href="income-tax.html">full case study</a>.</p>
     </div>
 
-    <script src="scripts/income-tax-demo.js?v=5" defer></script>
+    <script src="scripts/income-tax-demo.js?v=6" defer></script>
   </body>
 </html>

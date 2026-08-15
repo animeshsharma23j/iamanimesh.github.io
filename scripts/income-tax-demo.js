@@ -14,6 +14,8 @@
   var DED_80D = 25000;
 
   var progressOrder = ["snapshot", "q-capgains", "q-business", "q-foreign", "deductions", "regime", "resolve", "review", "everify"];
+  var WIDE_SCREENS = ["home", "guide"];
+  var demoShell = document.querySelector(".demo-shell");
 
   var answers = { capgains: null, business: null, foreign: null, ded80c: false, ded80d: false };
   var computed = { newTax: 0, oldTax: 0, recommended: "new", finalTax: 0, totalIncome: 0 };
@@ -27,6 +29,9 @@
     screens.forEach(function (screen) {
       screen.classList.toggle("is-active", screen.id === id);
     });
+    if (demoShell) {
+      demoShell.classList.toggle("is-wide", WIDE_SCREENS.indexOf(id) > -1);
+    }
     var idx = progressOrder.indexOf(id);
     if (idx > -1) {
       progressSegments.forEach(function (seg, i) {
@@ -38,6 +43,13 @@
     }
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
+
+  // ---- Simple screen-to-screen navigation (Home, Guide) ----
+  document.querySelectorAll("[data-goto]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      showScreen(btn.getAttribute("data-goto"));
+    });
+  });
 
   // ---- Sign in: PAN -> OTP ----
   var panInput = document.getElementById("signin-pan");
@@ -104,7 +116,7 @@
   var signinVerifyBtn = document.getElementById("demo-signin-verify");
   if (signinVerifyBtn) {
     signinVerifyBtn.addEventListener("click", function () {
-      showScreen("start");
+      showScreen("home");
     });
   }
 
