@@ -7,53 +7,90 @@
     <meta name="description" content="Income Tax concept prototype — an automated, assisted filing demo, not an official tax service." />
     <title>File your ITR — concept demo</title>
     <link rel="icon" href="icon.png" type="image/png" />
-    <link rel="stylesheet" href="income-tax-demo.css?v=11" />
+    <link rel="stylesheet" href="income-tax-demo.css?v=13" />
   </head>
   <body>
-    <div class="demo-shell">
-      <div class="demo-topbar">
+    <div class="site-meta-bar">
+      <div class="site-meta-bar-inner">
         <a class="demo-back" href="income-tax.html">← Design concept by Animesh Sharma</a>
-        <div class="demo-topbar-right">
-          <span class="demo-ay-badge">Filing for AY 2026-27</span>
-          <span class="demo-step-count" id="demo-step-count"></span>
-        </div>
+        <span class="demo-step-count" id="demo-step-count"></span>
       </div>
+    </div>
 
+    <header class="site-header">
+      <div class="site-header-inner">
+        <span class="site-brand"><span class="site-brand-mark">₹</span>ITR Assist</span>
+        <nav class="site-nav" aria-label="Primary">
+          <span class="site-nav-link is-active">Home</span>
+          <span class="site-nav-link">Individuals</span>
+          <span class="site-nav-link">Help</span>
+        </nav>
+        <span class="demo-ay-badge">Filing for AY 2026-27</span>
+      </div>
+    </header>
+
+    <main class="demo-shell">
       <div class="demo-card">
         <div class="demo-progress" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
 
         <section class="demo-screen is-active" id="signin">
-          <span class="demo-eyebrow">Sign in</span>
-          <h1 class="demo-heading">Enter your PAN to continue</h1>
-          <p class="demo-body">We'll send an OTP to verify it's you — no separate account or password to remember.</p>
-          <div class="demo-input-row"><label for="signin-pan">PAN</label><input id="signin-pan" type="text" placeholder="e.g. ABCDE1234F" maxlength="10" autocomplete="off" aria-describedby="signin-pan-error" /></div>
-          <p class="demo-field-error" id="signin-pan-error" hidden></p>
-          <div class="demo-actions">
-            <button type="button" class="demo-btn is-primary" id="demo-signin-send-otp" disabled>Send OTP</button>
+          <div class="auth-grid">
+            <div class="auth-side">
+              <span class="auth-side-icon" aria-hidden="true">🔒</span>
+              <h2>Built around trust, not just task completion</h2>
+              <ul class="auth-trust-list">
+                <li><strong>No password to remember</strong><span>PAN + OTP is the entire sign-in — one less thing to forget or reuse.</span></li>
+                <li><strong>Verified in seconds</strong><span>Your OTP confirms it's you — nothing else is asked at sign-in.</span></li>
+                <li><strong>Nothing leaves this demo</strong><span>Every step here is simulated. Read the <a href="income-tax.html">full case study</a>.</span></li>
+              </ul>
+            </div>
+            <div class="auth-form-panel">
+              <span class="demo-eyebrow">Sign in</span>
+              <h1 class="demo-heading">Enter your PAN to continue</h1>
+              <p class="demo-body">We'll send an OTP to verify it's you — no separate account or password to remember.</p>
+              <div class="demo-input-row"><label for="signin-pan">PAN</label><input id="signin-pan" type="text" placeholder="e.g. ABCDE1234F" maxlength="10" autocomplete="off" aria-describedby="signin-pan-error" /></div>
+              <p class="demo-field-error" id="signin-pan-error" hidden></p>
+              <div class="demo-actions">
+                <button type="button" class="demo-btn is-primary" id="demo-signin-send-otp" disabled>Send OTP</button>
+              </div>
+              <p class="demo-fine">Verified in seconds · Used only to confirm it's you · Demo PAN: ABCDE1234F</p>
+            </div>
           </div>
-          <p class="demo-fine">Verified in seconds · Used only to confirm it's you · Demo PAN: ABCDE1234F</p>
         </section>
 
         <section class="demo-screen" id="signin-otp">
-          <span class="demo-eyebrow">Verify it's you</span>
-          <h2 class="demo-heading">Enter the OTP sent to your Aadhaar-linked mobile</h2>
-          <p class="demo-body">Demo only — type any 6 digits, nothing is actually sent or verified.</p>
-          <div class="otp-row" id="signin-otp-row">
-            <input class="otp-box" type="text" inputmode="numeric" maxlength="1" aria-label="OTP digit 1" />
-            <input class="otp-box" type="text" inputmode="numeric" maxlength="1" aria-label="OTP digit 2" />
-            <input class="otp-box" type="text" inputmode="numeric" maxlength="1" aria-label="OTP digit 3" />
-            <input class="otp-box" type="text" inputmode="numeric" maxlength="1" aria-label="OTP digit 4" />
-            <input class="otp-box" type="text" inputmode="numeric" maxlength="1" aria-label="OTP digit 5" />
-            <input class="otp-box" type="text" inputmode="numeric" maxlength="1" aria-label="OTP digit 6" />
-          </div>
-          <div class="demo-actions">
-            <button type="button" class="demo-btn is-primary" id="demo-signin-verify" disabled>Verify &amp; continue</button>
+          <div class="auth-grid">
+            <div class="auth-side">
+              <span class="auth-side-icon" aria-hidden="true">🔒</span>
+              <h2>Built around trust, not just task completion</h2>
+              <ul class="auth-trust-list">
+                <li><strong>No password to remember</strong><span>PAN + OTP is the entire sign-in — one less thing to forget or reuse.</span></li>
+                <li><strong>Verified in seconds</strong><span>Your OTP confirms it's you — nothing else is asked at sign-in.</span></li>
+                <li><strong>Nothing leaves this demo</strong><span>Every step here is simulated. Read the <a href="income-tax.html">full case study</a>.</span></li>
+              </ul>
+            </div>
+            <div class="auth-form-panel">
+              <span class="demo-eyebrow">Verify it's you</span>
+              <h2 class="demo-heading">Enter the OTP sent to your Aadhaar-linked mobile</h2>
+              <p class="demo-body">Demo only — type any 6 digits, nothing is actually sent or verified.</p>
+              <div class="otp-row" id="signin-otp-row">
+                <input class="otp-box" type="text" inputmode="numeric" maxlength="1" aria-label="OTP digit 1" />
+                <input class="otp-box" type="text" inputmode="numeric" maxlength="1" aria-label="OTP digit 2" />
+                <input class="otp-box" type="text" inputmode="numeric" maxlength="1" aria-label="OTP digit 3" />
+                <input class="otp-box" type="text" inputmode="numeric" maxlength="1" aria-label="OTP digit 4" />
+                <input class="otp-box" type="text" inputmode="numeric" maxlength="1" aria-label="OTP digit 5" />
+                <input class="otp-box" type="text" inputmode="numeric" maxlength="1" aria-label="OTP digit 6" />
+              </div>
+              <div class="demo-actions">
+                <button type="button" class="demo-btn is-primary" id="demo-signin-verify" disabled>Verify &amp; continue</button>
+              </div>
+            </div>
           </div>
         </section>
 
         <section class="demo-screen" id="home">
           <div class="demo-hero">
-            <span class="demo-hero-brand">ITR Assist</span>
+            <span class="demo-eyebrow">Home</span>
             <h1 class="demo-heading">What would you like to do?</h1>
             <p class="demo-body">Your ITR for AY 2026-27 is ready to file whenever you are.</p>
             <div class="demo-actions demo-hero-actions">
@@ -580,10 +617,12 @@
           <p class="demo-body" style="margin-top: 18px; margin-bottom: 0;"><a href="#" data-restart>↺ Try it again with different answers</a></p>
         </section>
       </div>
+    </main>
 
+    <footer class="site-footer">
       <p class="demo-disclaimer"><strong>This is a design research prototype</strong>, not affiliated with the Income Tax Department or any filing service. The auto-import, OTP, and filing steps are all simulated with fixed demo data — nothing you do here is submitted, filed, or stored anywhere, and no real account is contacted. Read the <a href="income-tax.html">full case study</a>.</p>
-    </div>
+    </footer>
 
-    <script src="scripts/income-tax-demo.js?v=10" defer></script>
+    <script src="scripts/income-tax-demo.js?v=12" defer></script>
   </body>
 </html>

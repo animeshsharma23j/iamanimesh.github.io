@@ -15,7 +15,9 @@
 
   var progressOrder = ["snapshot", "q-capgains", "q-business", "q-foreign", "deductions", "regime", "resolve", "review", "everify"];
   var WIDE_SCREENS = ["home", "guide", "calculator", "case-studies", "tax-qna", "video-tutorials"];
+  var SPLIT_SCREENS = ["signin", "signin-otp"];
   var demoShell = document.querySelector(".demo-shell");
+  var demoCard = document.querySelector(".demo-card");
 
   var answers = { capgains: null, business: null, foreign: null, ded80c: false, ded80d: false };
   var computed = { newTax: 0, oldTax: 0, recommended: "new", finalTax: 0, totalIncome: 0 };
@@ -32,6 +34,12 @@
     });
     if (demoShell) {
       demoShell.classList.toggle("is-wide", WIDE_SCREENS.indexOf(id) > -1);
+    }
+    if (demoCard) {
+      demoCard.classList.toggle("is-split", SPLIT_SCREENS.indexOf(id) > -1);
+    }
+    if (demoShell) {
+      demoShell.classList.toggle("is-auth", SPLIT_SCREENS.indexOf(id) > -1);
     }
     var idx = progressOrder.indexOf(id);
     if (idx > -1) {
