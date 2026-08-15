@@ -7,7 +7,7 @@
     <meta name="description" content="Income Tax concept prototype — an automated, assisted filing demo, not an official tax service." />
     <title>File your ITR — concept demo</title>
     <link rel="icon" href="icon.png" type="image/png" />
-    <link rel="stylesheet" href="income-tax-demo.css?v=2" />
+    <link rel="stylesheet" href="income-tax-demo.css?v=3" />
   </head>
   <body>
     <div class="demo-shell">
@@ -171,7 +171,31 @@
             <div class="summary-row is-outcome"><span>Outcome</span><strong id="demo-review-outcome">—</strong></div>
           </div>
           <div class="demo-actions">
-            <button type="button" class="demo-btn is-primary" id="demo-review-done">Continue to e-verify</button>
+            <button type="button" class="demo-btn is-primary" id="demo-review-done">Continue</button>
+          </div>
+        </section>
+
+        <section class="demo-screen" id="challan-check">
+          <span class="demo-eyebrow">Before you file</span>
+          <h2 class="demo-heading">Have you already paid this tax through a challan?</h2>
+          <p class="demo-body">This is one of the most common ways people end up flagged as a defaulter later — the tax genuinely gets paid, but its challan details never make it into the return, so there's no record it happened here.</p>
+          <div class="demo-choice-grid" id="challan-initial-choices">
+            <button type="button" class="demo-choice" data-challan="yes">Yes, I've paid it</button>
+            <button type="button" class="demo-choice" data-challan="no">No, not yet</button>
+          </div>
+          <div id="challan-yes-panel" hidden>
+            <p class="demo-warn-box"><span>Good catch — without these details, this return would have gone in looking unpaid even though it wasn't.</span></p>
+            <div class="demo-input-row"><label for="challan-number">Challan number</label><input id="challan-number" type="text" placeholder="e.g. 24010500012345" /></div>
+            <div class="demo-input-row"><label for="challan-bsr">BSR code</label><input id="challan-bsr" type="text" placeholder="e.g. 0510004" /></div>
+            <div class="demo-actions">
+              <button type="button" class="demo-btn is-primary" data-challan-continue>Confirm &amp; continue</button>
+            </div>
+          </div>
+          <div id="challan-no-panel" hidden>
+            <p class="demo-help"><span>No problem — you can e-verify now and pay before the deadline. We'll remind you, and nothing here treats paying on time as a problem.</span></p>
+            <div class="demo-actions">
+              <button type="button" class="demo-btn is-primary" data-challan-continue>Continue</button>
+            </div>
           </div>
         </section>
 
@@ -208,6 +232,6 @@
       <p class="demo-disclaimer"><strong>This is a design research prototype</strong>, not affiliated with the Income Tax Department or any filing service. The auto-import, OTP, and filing steps are all simulated with fixed demo data — nothing you do here is submitted, filed, or stored anywhere, and no real account is contacted. Read the <a href="income-tax.html">full case study</a>.</p>
     </div>
 
-    <script src="scripts/income-tax-demo.js?v=2" defer></script>
+    <script src="scripts/income-tax-demo.js?v=3" defer></script>
   </body>
 </html>

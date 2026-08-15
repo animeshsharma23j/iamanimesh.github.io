@@ -244,9 +244,43 @@
   var reviewDoneBtn = document.getElementById("demo-review-done");
   if (reviewDoneBtn) {
     reviewDoneBtn.addEventListener("click", function () {
-      showScreen("everify");
+      var diff = computed.finalTax - IMPORTED.tds;
+      if (diff > 0) {
+        resetChallanScreen();
+        showScreen("challan-check");
+      } else {
+        showScreen("everify");
+      }
     });
   }
+
+  // ---- Challan check ----
+  function resetChallanScreen() {
+    document.getElementById("challan-initial-choices").style.display = "grid";
+    document.getElementById("challan-yes-panel").hidden = true;
+    document.getElementById("challan-no-panel").hidden = true;
+    var numInput = document.getElementById("challan-number");
+    var bsrInput = document.getElementById("challan-bsr");
+    if (numInput) numInput.value = "";
+    if (bsrInput) bsrInput.value = "";
+  }
+
+  document.querySelectorAll("[data-challan]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      document.getElementById("challan-initial-choices").style.display = "none";
+      if (btn.getAttribute("data-challan") === "yes") {
+        document.getElementById("challan-yes-panel").hidden = false;
+      } else {
+        document.getElementById("challan-no-panel").hidden = false;
+      }
+    });
+  });
+
+  document.querySelectorAll("[data-challan-continue]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      showScreen("everify");
+    });
+  });
 
   // ---- e-Verify (simulated OTP) ----
   var otpInputs = Array.prototype.slice.call(document.querySelectorAll(".otp-box"));
@@ -300,6 +334,7 @@
       }
       document.getElementById("demo-thanks").classList.remove("is-visible");
       document.getElementById("demo-feedback-text").value = "";
+      resetChallanScreen();
       showScreen("start");
     });
   });
