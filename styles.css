@@ -630,6 +630,18 @@ h1 {
 .site-footer a { color: var(--muted); }
 .site-footer a:hover, .site-footer a:focus-visible { color: var(--amber); outline: 0; }
 
+.social-links { display: flex; align-items: center; gap: 16px; }
+.social-links a { display: inline-flex; color: var(--soft); }
+.social-links a:hover, .social-links a:focus-visible { color: var(--amber); outline: 0; }
+.social-links svg { width: 18px; height: 18px; }
+
+.contact-panel { padding-top: 26px; text-align: center; }
+.contact-panel .intro { text-align: center; }
+.contact-panel h2 { max-width: none; margin: 0 auto 20px; color: var(--text); font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 750; line-height: 1; letter-spacing: -0.03em; }
+.contact-lede { max-width: 460px; margin: 0 auto 28px; color: var(--muted); font-size: 1.05rem; line-height: 1.5; }
+.contact-email { display: inline-block; color: var(--cyan); font-size: clamp(1.4rem, 3vw, 2.2rem); font-weight: 800; letter-spacing: -0.03em; }
+.contact-email:hover, .contact-email:focus-visible { color: var(--amber); outline: 0; }
+
 .diagram-core strong { color: var(--amber); font-size: 1.2rem; line-height: 0.9; }
 
 .thinking-steps { position: absolute; inset: 0; margin: 0; padding: 0; list-style: none; }
