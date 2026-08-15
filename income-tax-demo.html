@@ -7,7 +7,7 @@
     <meta name="description" content="Income Tax concept prototype — an automated, assisted filing demo, not an official tax service." />
     <title>File your ITR — concept demo</title>
     <link rel="icon" href="icon.png" type="image/png" />
-    <link rel="stylesheet" href="income-tax-demo.css?v=7" />
+    <link rel="stylesheet" href="income-tax-demo.css?v=8" />
   </head>
   <body>
     <div class="demo-shell">
@@ -72,11 +72,11 @@
               <span class="quick-link-desc">Compare old vs. new regime before you file.</span>
               <span class="quick-link-status is-open">Open</span>
             </button>
-            <div class="quick-link-card is-disabled" aria-disabled="true">
+            <button type="button" class="quick-link-card" data-goto="case-studies">
               <span class="quick-link-title">Real Life Case Studies</span>
               <span class="quick-link-desc">Worked examples — find the one closest to your situation.</span>
-              <span class="quick-link-status">Coming soon</span>
-            </div>
+              <span class="quick-link-status is-open">Open</span>
+            </button>
             <div class="quick-link-card is-disabled" aria-disabled="true">
               <span class="quick-link-title">Tax QnA</span>
               <span class="quick-link-desc">Plain-language answers, no section numbers.</span>
@@ -108,6 +108,59 @@
             <li><span class="guide-step-num">5</span><div><strong>You review everything in one place</strong><p>Including a check for tax you've already paid by challan, before anything is submitted.</p></div></li>
             <li><span class="guide-step-num">6</span><div><strong>You verify and you're done</strong><p>One more OTP, and that's the whole process.</p></div></li>
           </ol>
+
+          <div class="demo-actions demo-actions-row">
+            <button type="button" class="demo-btn is-primary" data-goto="start">Start Filing</button>
+            <button type="button" class="demo-btn is-quiet" data-goto="home">← Back to Home</button>
+          </div>
+        </section>
+
+        <section class="demo-screen" id="case-studies">
+          <span class="demo-eyebrow">Real life case studies</span>
+          <h1 class="demo-heading">Five people, five situations</h1>
+          <p class="demo-body">The single most common question research heard was "which form even applies to me?" — with no confident way to answer it. Here's that question answered for five real situations, not a legal list.</p>
+
+          <div class="case-study-grid">
+            <article class="case-study-card">
+              <header><span class="case-study-persona">First-time filer, 23</span></header>
+              <p class="case-study-quote">"I didn't even know if I had to file this year. I just knew people were talking about a deadline."</p>
+              <p class="case-study-situation">Salary from one employer. No investments, no other income.</p>
+              <div class="case-study-outcome"><span class="case-study-form">ITR-1</span><p>Salary and bank interest only — no capital gains, business income, or foreign assets. The simplest case there is.</p></div>
+              <p class="case-study-regime"><strong>Regime:</strong> New regime wins outright — nothing to claim under the old regime worth switching for.</p>
+            </article>
+
+            <article class="case-study-card">
+              <header><span class="case-study-persona">First-time filer, 26</span></header>
+              <p class="case-study-quote">"I had two Form 16s from two jobs. Nobody told me if I add them together or pick one."</p>
+              <p class="case-study-situation">Salary from two employers in the same year, after a job change.</p>
+              <div class="case-study-outcome"><span class="case-study-form">ITR-1</span><p>Both employers' salary combine into one figure. The form depends on the type of income, not how many payslips it came from.</p></div>
+              <p class="case-study-regime"><strong>Regime:</strong> Worth comparing both — new regime usually wins unless there are real 80C/80D deductions from before the switch.</p>
+            </article>
+
+            <article class="case-study-card">
+              <header><span class="case-study-persona">Senior citizen, 68</span></header>
+              <p class="case-study-quote">"My son used to do this. Now every second word on the page is one I've never seen before."</p>
+              <p class="case-study-situation">Pension income plus fixed deposit interest. No capital gains.</p>
+              <div class="case-study-outcome"><span class="case-study-form">ITR-1</span><p>Pension counts as salary income for filing purposes — the simplest case, with a higher tax-free threshold for her age.</p></div>
+              <p class="case-study-regime"><strong>Regime:</strong> Old regime often wins here, thanks to the senior-citizen interest deduction (80TTB) — worth comparing, not assuming.</p>
+            </article>
+
+            <article class="case-study-card">
+              <header><span class="case-study-persona">Senior citizen, 71</span></header>
+              <p class="case-study-quote">"I saw a red warning and just stopped. For two days I thought I'd broken something."</p>
+              <p class="case-study-situation">Pension only, one bank account.</p>
+              <div class="case-study-outcome"><span class="case-study-form">ITR-1</span><p>The simplest case on paper. What made it hard wasn't the form — it was an unexplained warning. Here, anything that needs a second look is named specifically.</p></div>
+              <p class="case-study-regime"><strong>Regime:</strong> New regime, in his case — no deductions to claim that would change the outcome.</p>
+            </article>
+
+            <article class="case-study-card">
+              <header><span class="case-study-persona">First-time filer, 29 — freelance + salaried</span></header>
+              <p class="case-study-quote">"I had two tabs open — one for filing, one for Googling what a term meant."</p>
+              <p class="case-study-situation">Salaried income plus freelance or consulting income.</p>
+              <div class="case-study-outcome"><span class="case-study-form">ITR-3</span><p>Any business or professional income — including freelancing — needs ITR-3 instead of ITR-1 or ITR-2.</p></div>
+              <p class="case-study-regime"><strong>Regime:</strong> New regime is simpler with few business expenses to claim; old regime can still win with real expenses on the books.</p>
+            </article>
+          </div>
 
           <div class="demo-actions demo-actions-row">
             <button type="button" class="demo-btn is-primary" data-goto="start">Start Filing</button>
@@ -394,6 +447,6 @@
       <p class="demo-disclaimer"><strong>This is a design research prototype</strong>, not affiliated with the Income Tax Department or any filing service. The auto-import, OTP, and filing steps are all simulated with fixed demo data — nothing you do here is submitted, filed, or stored anywhere, and no real account is contacted. Read the <a href="income-tax.html">full case study</a>.</p>
     </div>
 
-    <script src="scripts/income-tax-demo.js?v=7" defer></script>
+    <script src="scripts/income-tax-demo.js?v=8" defer></script>
   </body>
 </html>

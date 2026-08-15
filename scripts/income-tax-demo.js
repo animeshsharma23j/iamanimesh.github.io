@@ -14,7 +14,7 @@
   var DED_80D = 25000;
 
   var progressOrder = ["snapshot", "q-capgains", "q-business", "q-foreign", "deductions", "regime", "resolve", "review", "everify"];
-  var WIDE_SCREENS = ["home", "guide", "calculator"];
+  var WIDE_SCREENS = ["home", "guide", "calculator", "case-studies"];
   var demoShell = document.querySelector(".demo-shell");
 
   var answers = { capgains: null, business: null, foreign: null, ded80c: false, ded80d: false };
