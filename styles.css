@@ -1043,6 +1043,9 @@ h1 {
 .project-gallery figure { min-width: 0; margin: 0; }
 .project-gallery img { display: block; width: 100%; height: auto; border: 1px solid var(--line); background: var(--bg-2); }
 .project-gallery figcaption { margin-top: 10px; color: var(--muted); font-size: 0.74rem; font-weight: 700; }
+.project-gallery-solo { max-width: 260px; margin-top: 32px; }
+.project-gallery-solo img { display: block; width: 100%; height: auto; border: 1px solid var(--line); background: var(--bg-2); }
+.project-gallery-solo figcaption { margin-top: 10px; max-width: none; color: var(--muted); font-size: 0.82rem; line-height: 1.45; }
 .suite-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 32px; }
 .suite-card { min-width: 0; padding: 22px; border: 1px solid var(--line); background: rgba(7, 10, 13, 0.38); }
 .suite-card-link { transition: border-color 180ms ease, background 180ms ease, transform 180ms ease; }
