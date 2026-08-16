@@ -1046,6 +1046,8 @@ h1 {
 .project-gallery-solo { max-width: 260px; margin-top: 32px; }
 .project-gallery-solo img { display: block; width: 100%; height: auto; border: 1px solid var(--line); background: var(--bg-2); }
 .project-gallery-solo figcaption { margin-top: 10px; max-width: none; color: var(--muted); font-size: 0.82rem; line-height: 1.45; }
+.project-gallery.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.project-gallery.cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .suite-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 32px; }
 .suite-card { min-width: 0; padding: 22px; border: 1px solid var(--line); background: rgba(7, 10, 13, 0.38); }
 .suite-card-link { transition: border-color 180ms ease, background 180ms ease, transform 180ms ease; }
