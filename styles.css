@@ -1209,6 +1209,11 @@ h1 {
 .product-feature-grid h3 { margin: 34px 0 12px; color: #f8f8f8; font-size: 1.32rem; font-weight: 750; letter-spacing: 0; }
 .product-feature-grid p { margin: 0; color: rgba(238, 240, 244, 0.6); font-size: 0.96rem; line-height: 1.55; }
 
+.screenshot-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; align-items: start; margin-top: 64px; }
+.screenshot-figure { margin: 0; }
+.screenshot-figure img { display: block; width: 100%; max-width: 300px; height: auto; margin: 0; border-radius: 0; box-shadow: 0 34px 70px rgba(0, 0, 0, 0.5); }
+.screenshot-caption { max-width: 280px; margin: 24px 0 0; color: rgba(238, 240, 244, 0.62); font-size: 0.95rem; line-height: 1.5; }
+
 /* Products deliberately shares the portfolio's dark visual system. */
 .products-page { background: var(--bg); color: var(--text); }
 .products-page::after { display: block; }
@@ -1591,9 +1596,11 @@ h1 {
   .product-unitx .product-feature-grid,
   .product-recital .product-feature-grid,
   .product-buildx .product-feature-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .screenshot-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 560px) {
+  .screenshot-grid { grid-template-columns: 1fr; gap: 48px; }
   .products-shell, .product-hero, .product-section { width: min(100% - 32px, 1180px); }
   .products-shell { padding: 42px 0 82px; }
   .products-intro { margin-bottom: 42px; }
