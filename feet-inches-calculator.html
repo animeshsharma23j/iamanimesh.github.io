@@ -57,12 +57,10 @@
             </div>
           </div>
         </div>
-      <section class="pace-calculator measurement-calculator" aria-labelledby="calculator-heading">
+      <section class="pace-calculator measurement-calculator" aria-label="Feet and inches calculator">
         <div class="calculator-form-wrap">
-          <h2 id="calculator-heading">Your measurements</h2>
           <form id="measurement-calculator-form">
             <fieldset>
-              <legend>Calculation</legend>
               <div class="operation-options" role="group" aria-label="Choose a calculation"><button type="button" data-operation="add" aria-pressed="true">Add</button><button type="button" data-operation="subtract" aria-pressed="false">Subtract</button></div>
             </fieldset>
             <fieldset>
@@ -73,7 +71,6 @@
               <legend>Second measurement</legend>
               <div class="measurement-fields"><label>Feet<input id="feet-b" type="number" min="0" value="3" inputmode="numeric" /></label><label>Inches<input id="inches-b" type="number" min="0" max="11" value="10" inputmode="numeric" /></label><label>Fraction<select id="fraction-b"><option value="0">0</option><option value="0.0625">1/16</option><option value="0.125">1/8</option><option value="0.1875">3/16</option><option value="0.25">1/4</option><option value="0.3125">5/16</option><option value="0.375">3/8</option><option value="0.5">1/2</option><option value="0.625">5/8</option><option value="0.75">3/4</option><option value="0.875">7/8</option></select></label></div>
             </fieldset>
-            <button class="calculator-submit" type="submit">Calculate measurement</button>
           </form>
         </div>
         <div class="pace-result" aria-live="polite">
@@ -113,7 +110,8 @@
           decimal.textContent = `${sign}${(absolute / 192).toFixed(3)} decimal feet`;
           summary.textContent = `${sign}${(absolute / 16).toFixed(2).replace(/\.00$/, '')} total inches.`;
         };
-        form.addEventListener('submit', (event) => { event.preventDefault(); calculate(); });
+        form.addEventListener('submit', (event) => event.preventDefault());
+        Object.values(inputs).forEach((field) => field.addEventListener('input', calculate));
         document.querySelectorAll('[data-operation]').forEach((button) => button.addEventListener('click', () => { operation = button.dataset.operation; document.querySelectorAll('[data-operation]').forEach((item) => item.setAttribute('aria-pressed', String(item === button))); calculate(); }));
         calculate();
       })();
