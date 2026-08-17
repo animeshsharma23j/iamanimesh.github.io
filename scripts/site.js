@@ -18,3 +18,19 @@
   });
   onScroll();
 })();
+
+(function () {
+  var links = document.querySelectorAll('a[href*="apps.apple.com"]');
+  if (!links.length) return;
+
+  links.forEach(function (link) {
+    link.addEventListener("click", function () {
+      if (typeof gtag !== "function") return;
+      gtag("event", "app_store_click", {
+        app_name: link.getAttribute("data-app") || document.title,
+        link_url: link.href,
+        link_location: link.closest("footer") ? "footer" : "hero",
+      });
+    });
+  });
+})();
