@@ -1719,6 +1719,7 @@ h1 {
 .distance-options button, .calculator-submit { min-height: 44px; border: 1px solid var(--line-strong); border-radius: 0; background: transparent; color: var(--text); font: inherit; font-size: .75rem; font-weight: 750; cursor: pointer; }
 .distance-options button:hover { border-color: var(--cyan); color: var(--cyan); }
 .time-fields { grid-template-columns: repeat(3, 1fr); }
+.distance-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
 .calculator-submit { width: 100%; margin-top: 30px; border-color: var(--cyan); background: var(--cyan); color: #071013; font-size: .84rem; }
 .calculator-submit:hover { background: #b6f7ff; }
 .pace-result { display: flex; flex-direction: column; justify-content: center; min-width: 0; padding: 42px; background: rgba(117, 213, 228, .07); }

@@ -15,7 +15,7 @@
     <title>Running Pace Calculator: Pace per km & Mile | PaceX</title>
     <link rel="canonical" href="https://www.iamanimesh.com/running-pace-calculator.html" />
     <meta property="og:type" content="website" /><meta property="og:title" content="Running Pace Calculator: Pace per km & Mile | PaceX" /><meta property="og:description" content="Calculate your running pace from a race distance and finish time." /><meta property="og:url" content="https://www.iamanimesh.com/running-pace-calculator.html" /><meta name="twitter:card" content="summary" />
-    <link rel="icon" href="icon.png" type="image/png" /><link rel="stylesheet" href="styles.css?v=20260817-2" />
+    <link rel="icon" href="icon.png" type="image/png" /><link rel="stylesheet" href="styles.css?v=20260817-3" />
   </head>
   <body class="calculator-page">
     <a class="skip-link" href="#main-content">Skip to calculator</a>
@@ -57,17 +57,15 @@
             </div>
           </div>
         </div>
-      <section class="pace-calculator" aria-labelledby="calculator-heading">
+      <section class="pace-calculator" aria-label="Running pace calculator">
         <div class="calculator-form-wrap">
-          <h2 id="calculator-heading">Your finish time</h2>
           <form id="pace-calculator-form">
             <fieldset>
               <legend>Distance</legend>
-              <div class="distance-options" role="group" aria-label="Common race distances">
-                <button type="button" data-distance="5">5K</button><button type="button" data-distance="10">10K</button><button type="button" data-distance="21.0975">Half marathon</button><button type="button" data-distance="42.195">Marathon</button>
+              <div class="distance-row">
+                <label>Preset<select id="distance-preset"><option value="">Custom</option><option value="5">5K</option><option value="10">10K</option><option value="21.0975">Half marathon</option><option value="42.195">Marathon</option></select></label>
+                <label>Distance in kilometres<input id="distance" name="distance" type="number" min="0.1" step="0.001" value="10" required /></label>
               </div>
-              <label for="distance">Distance in kilometres</label>
-              <input id="distance" name="distance" type="number" min="0.1" step="0.001" value="10" required />
             </fieldset>
             <fieldset>
               <legend>Finish time</legend>
@@ -77,7 +75,6 @@
                 <label>Seconds<input id="seconds" name="seconds" type="number" min="0" max="59" value="0" inputmode="numeric" /></label>
               </div>
             </fieldset>
-            <button class="calculator-submit" type="submit">Calculate pace</button>
           </form>
         </div>
         <div class="pace-result" aria-live="polite">
@@ -96,6 +93,7 @@
       (() => {
         const form = document.querySelector('#pace-calculator-form');
         const distance = document.querySelector('#distance');
+        const preset = document.querySelector('#distance-preset');
         const hours = document.querySelector('#hours');
         const minutes = document.querySelector('#minutes');
         const seconds = document.querySelector('#seconds');
@@ -114,8 +112,13 @@
           const time = [Number(hours.value), Number(minutes.value), Number(seconds.value)].map((value, index) => index === 0 ? value : String(value).padStart(2, '0')).join(':');
           summary.textContent = `A ${time} finish over ${kilometres} km.`;
         };
-        form.addEventListener('submit', (event) => { event.preventDefault(); calculate(); });
-        document.querySelectorAll('[data-distance]').forEach((button) => button.addEventListener('click', () => { distance.value = button.dataset.distance; calculate(); }));
+        form.addEventListener('submit', (event) => event.preventDefault());
+        [distance, hours, minutes, seconds].forEach((field) => field.addEventListener('input', calculate));
+        preset.addEventListener('change', () => {
+          if (preset.value) distance.value = preset.value;
+          calculate();
+        });
+        distance.addEventListener('input', () => { preset.value = ''; });
         calculate();
       })();
     </script>
