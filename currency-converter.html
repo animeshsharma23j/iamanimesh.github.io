@@ -52,15 +52,17 @@
           <h2 id="calculator-heading">Your conversion</h2>
           <form id="currency-calculator-form">
             <fieldset>
-              <legend>Amount &amp; currencies</legend>
-              <div class="measurement-fields">
-                <label>Amount<input id="amount" type="number" min="0" step="any" value="100" inputmode="decimal" /></label>
+              <legend>Currencies</legend>
+              <div class="currency-fields">
                 <label>From<select id="from-currency"></select></label>
+                <button type="button" id="swap-currencies" class="swap-button" aria-label="Swap currencies">⇄</button>
                 <label>To<select id="to-currency"></select></label>
               </div>
             </fieldset>
-            <button type="button" id="swap-currencies" style="width: 100%; margin-top: 12px; min-height: 44px; border: 1px solid var(--line-strong); background: transparent; color: var(--text); font: inherit; font-size: .75rem; font-weight: 750; cursor: pointer;">⇄ Swap currencies</button>
-            <button class="calculator-submit" type="submit">Convert</button>
+            <fieldset>
+              <legend>Amount</legend>
+              <input id="amount" type="number" min="0" step="any" value="100" inputmode="decimal" />
+            </fieldset>
           </form>
         </div>
         <div class="pace-result" aria-live="polite">
@@ -70,14 +72,15 @@
           <p id="conversion-summary">Fetching today's rate…</p>
         </div>
       </section>
-      <section class="calculator-explainer">
-        <div><p class="product-kicker">How it works</p><h2>Rates that update, not rates that are guessed.</h2></div>
-        <p>This converter fetches live reference rates from the European Central Bank, refreshed each time you calculate. If a live rate can't be fetched—no connection, for instance—it says so rather than showing you a stale number.</p>
-      </section>
       <section class="calculator-cta">
         <p class="product-kicker">Take it with you</p>
         <h2>Everyday conversions, without the busywork.</h2>
         <p>UnitX handles currency alongside every other everyday unit—natural language input, manual controls, and camera-assisted entry, on iPhone and Apple Watch.</p>
+        <div class="product-feature-grid">
+          <article><span>01</span><h3>Ask naturally</h3><p>Start with the words you already have: a value, a unit, and a goal.</p></article>
+          <article><span>02</span><h3>Choose exactly</h3><p>Switch to clear category and unit controls when the request needs to be explicit.</p></article>
+          <article><span>03</span><h3>Scan the number</h3><p>Use camera entry to turn printed values into a useful starting point.</p></article>
+        </div>
         <div class="product-actions"><a class="product-button primary" data-app="UnitX" href="https://apps.apple.com/app/id6760877550" target="_blank" rel="noopener noreferrer">Download UnitX on the App Store <span aria-hidden="true">↗</span></a><a class="product-button secondary" href="unitx.html">Explore UnitX</a></div>
       </section>
     </main>
@@ -142,7 +145,12 @@
           }
         };
 
-        form.addEventListener('submit', (event) => { event.preventDefault(); calculate(true); });
+        form.addEventListener('submit', (event) => event.preventDefault());
+        let debounceTimer;
+        amount.addEventListener('input', () => {
+          clearTimeout(debounceTimer);
+          debounceTimer = setTimeout(() => calculate(true), 350);
+        });
         fromSelect.addEventListener('change', () => calculate(true));
         toSelect.addEventListener('change', () => calculate(true));
         swapButton.addEventListener('click', () => { const temp = fromSelect.value; fromSelect.value = toSelect.value; toSelect.value = temp; calculate(true); });
