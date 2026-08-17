@@ -1669,7 +1669,8 @@ h1 {
 .calculator-page { --product-accent: var(--cyan); }
 .calculator-page .product-kicker { color: var(--cyan); }
 .calculator-shell { width: min(100% - 48px, 1080px); margin: 0 auto; padding: 100px 0 104px; }
-.calculator-hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(200px, 260px); column-gap: clamp(32px, 6vw, 80px); align-items: center; margin: 0 0 56px; }
+.calculator-hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(220px, 320px); column-gap: clamp(32px, 6vw, 80px); align-items: center; margin: 0 0 56px; }
+.calculator-hero-download { white-space: nowrap; }
 .calculator-hero h1 { max-width: 760px; margin: 12px 0 0; font-size: clamp(3.4rem, 8vw, 7.2rem); line-height: .9; letter-spacing: -.065em; }
 .calculator-hero h1 em { color: var(--cyan); font-family: inherit; font-style: normal; }
 .calculator-intro { max-width: 590px; margin: 28px 0 0; color: var(--muted); font-size: 1.1rem; line-height: 1.65; }
