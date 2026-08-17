@@ -83,6 +83,42 @@
     });
   });
 
+  // ---- Home: open chat from the value-prop card ----
+  document.querySelectorAll("[data-open-chat]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      openChat();
+    });
+  });
+
+  // ---- Home: info module tabs ----
+  var infoTabs = Array.prototype.slice.call(document.querySelectorAll(".home-info-tab"));
+  var infoPanels = Array.prototype.slice.call(document.querySelectorAll(".home-info-panel"));
+  infoTabs.forEach(function (tab) {
+    tab.addEventListener("click", function () {
+      var target = tab.getAttribute("data-info-tab");
+      infoTabs.forEach(function (t) {
+        var active = t === tab;
+        t.classList.toggle("is-active", active);
+        t.setAttribute("aria-selected", String(active));
+      });
+      infoPanels.forEach(function (panel) {
+        var active = panel.getAttribute("data-info-panel") === target;
+        panel.classList.toggle("is-active", active);
+        panel.hidden = !active;
+      });
+    });
+  });
+
+  // ---- Home: FAQ accordion ----
+  document.querySelectorAll(".home-faq-question").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var answer = btn.nextElementSibling;
+      var isOpen = btn.getAttribute("aria-expanded") === "true";
+      btn.setAttribute("aria-expanded", String(!isOpen));
+      answer.hidden = isOpen;
+    });
+  });
+
   // ---- Sign in: PAN -> OTP ----
   var panInput = document.getElementById("signin-pan");
   var sendOtpBtn = document.getElementById("demo-signin-send-otp");
@@ -891,6 +927,7 @@
       }
       document.getElementById("demo-thanks").classList.remove("is-visible");
       document.getElementById("demo-feedback-text").value = "";
+      resetFeedbackRating();
       resetChallanScreen();
       if (panInput) panInput.value = "";
       if (sendOtpBtn) sendOtpBtn.disabled = true;
@@ -907,20 +944,109 @@
   });
 
   // ---- Feedback ----
+  var FEEDBACK_STORE_KEY = "itr-demo-feedback-log";
+  var feedbackRating = 0;
+  var feedbackTags = [];
+  var feedbackStars = Array.prototype.slice.call(document.querySelectorAll(".feedback-star"));
+  var feedbackStarsLabel = document.getElementById("feedback-stars-label");
+  var feedbackTagBtns = Array.prototype.slice.call(document.querySelectorAll(".feedback-tag"));
+  var STAR_LABELS = { 1: "Not great", 2: "Needs work", 3: "Okay", 4: "Good", 5: "Loved it" };
+
+  function renderStars() {
+    feedbackStars.forEach(function (star) {
+      var value = Number(star.getAttribute("data-star"));
+      var filled = value <= feedbackRating;
+      star.classList.toggle("is-filled", filled);
+      star.setAttribute("aria-checked", String(value === feedbackRating));
+    });
+    if (feedbackStarsLabel) feedbackStarsLabel.textContent = feedbackRating ? STAR_LABELS[feedbackRating] : "";
+  }
+
+  function resetFeedbackRating() {
+    feedbackRating = 0;
+    feedbackTags = [];
+    renderStars();
+    feedbackTagBtns.forEach(function (btn) {
+      btn.classList.remove("is-active");
+    });
+  }
+
+  feedbackStars.forEach(function (star) {
+    star.addEventListener("click", function () {
+      feedbackRating = Number(star.getAttribute("data-star"));
+      renderStars();
+    });
+  });
+
+  feedbackTagBtns.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var tag = btn.getAttribute("data-tag");
+      var isActive = btn.classList.toggle("is-active");
+      if (isActive) {
+        feedbackTags.push(tag);
+      } else {
+        feedbackTags = feedbackTags.filter(function (t) {
+          return t !== tag;
+        });
+      }
+    });
+  });
+
+  function buildFeedbackText() {
+    var text = document.getElementById("demo-feedback-text").value.trim();
+    var lines = [];
+    lines.push("Rating: " + (feedbackRating ? feedbackRating + "/5 (" + STAR_LABELS[feedbackRating] + ")" : "not given"));
+    lines.push("Tags: " + (feedbackTags.length ? feedbackTags.join(", ") : "none"));
+    lines.push("Comment: " + (text || "(no written comment — just the click-through)"));
+    lines.push("");
+    lines.push("---");
+    lines.push("Form shown: " + (document.getElementById("demo-review-form").textContent || "n/a"));
+    lines.push("Regime: " + (document.getElementById("demo-review-regime").textContent || "n/a"));
+    return lines.join("\n");
+  }
+
+  function logFeedbackLocally(body) {
+    try {
+      var log = JSON.parse(localStorage.getItem(FEEDBACK_STORE_KEY) || "[]");
+      log.push({ at: new Date().toISOString(), body: body });
+      localStorage.setItem(FEEDBACK_STORE_KEY, JSON.stringify(log.slice(-20)));
+    } catch (e) {
+      /* localStorage unavailable — skip local backup silently */
+    }
+  }
+
   var sendFeedbackBtn = document.getElementById("demo-send-feedback");
   if (sendFeedbackBtn) {
     sendFeedbackBtn.addEventListener("click", function () {
-      var text = document.getElementById("demo-feedback-text").value.trim();
+      var body = buildFeedbackText();
+      logFeedbackLocally(body);
       var subject = encodeURIComponent("Income Tax concept — feedback");
-      var body = encodeURIComponent(
-        (text || "(no written comment — just the click-through)") +
-          "\n\n---\nForm shown: " +
-          (document.getElementById("demo-review-form").textContent || "n/a") +
-          "\nRegime: " +
-          (document.getElementById("demo-review-regime").textContent || "n/a")
-      );
-      window.location.href = "mailto:animeshsharma23j@gmail.com?subject=" + subject + "&body=" + body;
-      document.getElementById("demo-thanks").classList.add("is-visible");
+      window.location.href = "mailto:animeshsharma23j@gmail.com?subject=" + subject + "&body=" + encodeURIComponent(body);
+      var thanks = document.getElementById("demo-thanks");
+      thanks.textContent = "Thanks — your email app should have opened with this pre-filled. I read every reply.";
+      thanks.classList.add("is-visible");
+    });
+  }
+
+  var copyFeedbackBtn = document.getElementById("demo-copy-feedback");
+  if (copyFeedbackBtn) {
+    copyFeedbackBtn.addEventListener("click", function () {
+      var body = buildFeedbackText();
+      logFeedbackLocally(body);
+      var thanks = document.getElementById("demo-thanks");
+      var showCopied = function () {
+        thanks.textContent = "Copied — paste it anywhere and send it my way whenever suits you.";
+        thanks.classList.add("is-visible");
+      };
+      var showCopyFailed = function () {
+        thanks.textContent = "Couldn't access the clipboard — try \"Email this feedback\" instead.";
+        thanks.classList.add("is-visible");
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(body).then(showCopied, showCopyFailed);
+      } else {
+        showCopyFailed();
+      }
     });
   }
 
