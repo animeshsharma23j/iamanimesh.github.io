@@ -1602,7 +1602,8 @@ h1 {
   .store-gallery li { margin-bottom: 10px; }
   .case-study-page .site-header,
   .case-study-shell,
-  .subpage-shell { width: min(100% - 32px, 1080px); }
+  .subpage-shell,
+  .about-page.subpage-shell { width: min(100% - 32px, 1080px); }
   .case-study-shell { padding: 64px 0 96px; }
   .case-study-shell h1 { font-size: clamp(2.6rem, 11vw, 3.5rem); }
   .case-study-shell h1 span { font-size: 0.48em; }
@@ -1622,6 +1623,8 @@ h1 {
   .directory-card > a { grid-column: 2; width: 150px; }
   .product-hero { grid-template-columns: 1fr; min-height: 0; padding: 0; }
   .product-copy { padding: 68px 0 42px; }
+  .app-screen-hero .product-copy { padding: 68px 0 42px; }
+  .product-pacex .app-screen-hero .product-copy { padding: 68px 0 42px; }
   .image-hero .product-hero-art { position: relative; inset: auto; grid-row: 1; grid-column: 1; width: calc(100% + 48px); height: auto; margin: -80px -24px 0; opacity: 0.62; }
   .image-hero .product-copy { grid-row: 1; grid-column: 1; align-self: center; }
   .unitx-visual { height: 610px; }
@@ -1643,6 +1646,8 @@ h1 {
   .directory-card > a { grid-column: 1 / -1; width: 100%; }
   .product-page .site-header { width: calc(100% - 24px); }
   .product-copy { padding: 48px 0 28px; }
+  .app-screen-hero .product-copy { padding: 48px 0 28px; }
+  .product-pacex .app-screen-hero .product-copy { padding: 48px 0 28px; }
   .product-app-icon { width: 32px; height: 32px; margin-bottom: 12px; border-radius: 8px; }
   .product-copy h1 { font-size: 2.5rem; }
   .product-lede { margin: 20px 0 24px; font-size: 1rem; }
@@ -1655,6 +1660,7 @@ h1 {
   .image-hero .product-hero-art { width: calc(100% + 32px); margin: -62px -16px 0; }
   .app-screen-frame, .app-screen-hero .app-screen-frame-paired { min-height: 420px; height: 420px; margin-top: 6px; }
   .product-pacex .app-screen-frame { min-height: 500px; height: 500px; margin-top: 6px; }
+  .product-pacex .app-screen-frame img { width: 220px; margin-top: 0; }
   .app-screen-buildx { min-height: 500px; height: 500px; }
   .device-duo { justify-self: center; width: min(100%, 500px); height: 510px; }
   .device-duo .device-ipad { width: min(410px, 85%); }
