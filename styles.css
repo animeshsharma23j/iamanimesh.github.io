@@ -1035,9 +1035,11 @@ h1 {
 .label-row { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 42px; align-items: baseline; }
 .label-row > .page-eyebrow { margin-bottom: 0; }
 .about-hero-row { margin-bottom: 0; }
-.about-portrait { margin: 24px 0 0; max-width: 200px; }
-.about-portrait img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 16px; border: 1px solid var(--line-strong); box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45); filter: grayscale(100%) contrast(1.08) brightness(0.85); }
-.about-journey { margin-top: 112px; padding-top: 26px; border-top: 1px solid var(--line); }
+.about-portrait { position: relative; margin: 24px 0 0; max-width: 320px; border-radius: 16px; overflow: hidden; }
+.about-portrait img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 16px; border: 1px solid var(--line-strong); box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45); filter: grayscale(100%) contrast(1.5) brightness(0.62); }
+.about-portrait::after { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at 42% 32%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 72%, rgba(0, 0, 0, 0.78) 100%); pointer-events: none; }
+.about-journey { align-items: start; margin-top: 112px; padding-top: 26px; border-top: 1px solid var(--line); }
+.about-journey > .page-eyebrow { padding-top: clamp(0.5rem, 1.6vw, 1.1rem); }
 .journey-body { min-width: 0; }
 .about-journey h2 + .journey-list,
 .journey-body .journey-list { margin-top: 0; }
@@ -1493,7 +1495,7 @@ h1 {
 
   .journey-list { max-width: none; }
   .label-row { grid-template-columns: 1fr; gap: 16px; }
-  .about-portrait { max-width: 180px; }
+  .about-portrait { max-width: 260px; }
   .store-gallery { column-count: 4; }
 }
 
