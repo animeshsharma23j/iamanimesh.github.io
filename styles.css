@@ -1036,7 +1036,7 @@ h1 {
 .label-row > .page-eyebrow { margin-bottom: 0; }
 .about-hero-row { margin-bottom: 0; }
 .about-portrait { margin: 24px 0 0; max-width: 200px; }
-.about-portrait img { display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 16px; border: 1px solid var(--line-strong); box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45); filter: grayscale(100%) contrast(1.08) brightness(0.85); }
+.about-portrait img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 16px; border: 1px solid var(--line-strong); box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45); filter: grayscale(100%) contrast(1.08) brightness(0.85); }
 .about-journey { margin-top: 112px; padding-top: 26px; border-top: 1px solid var(--line); }
 .journey-body { min-width: 0; }
 .about-journey h2 + .journey-list,
