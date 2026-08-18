@@ -1026,7 +1026,7 @@ h1 {
 .about-tags svg { width: 15px; height: 15px; color: var(--cyan); flex-shrink: 0; }
 
 .case-study-page { background: var(--bg); }
-.case-study-page .site-header { width: min(980px, calc(100% - 48px)); }
+.case-study-page .site-header { width: min(var(--max), calc(100% - 48px)); }
 .subpage-shell { width: min(1080px, calc(100% - 48px)); margin: 0 auto; padding: 96px 0 140px; }
 .about-page.subpage-shell { width: min(var(--max), calc(100% - 48px)); }
 .subpage-shell > h1 { max-width: 900px; margin-bottom: 64px; font-size: clamp(3rem, 6.2vw, 6.5rem); }
@@ -1046,7 +1046,7 @@ h1 {
 .about-journey h2 { max-width: 820px; margin: 0 0 58px; color: var(--text); font-size: clamp(2.3rem, 4.6vw, 4.8rem); line-height: 1.02; letter-spacing: -0.045em; }
 .case-back { color: var(--muted); font-size: 0.8rem; font-weight: 700; }
 .case-back:hover, .case-back:focus-visible { color: var(--amber); outline: 0; }
-.case-study-shell { width: min(980px, calc(100% - 48px)); margin: 0 auto; padding: 96px 0 156px; }
+.case-study-shell { width: min(var(--max), calc(100% - 48px)); margin: 0 auto; padding: 96px 0 156px; }
 .case-eyebrow, .detail-label { color: var(--cyan); font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.07em; text-transform: uppercase; }
 .case-study-shell h1 { max-width: 900px; margin: 0 0 28px; font-size: clamp(3.3rem, 7vw, 7rem); }
 .case-study-shell h1 span { color: var(--muted); font-size: 0.42em; font-weight: 600; letter-spacing: -0.04em; }
