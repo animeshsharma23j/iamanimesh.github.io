@@ -1020,9 +1020,15 @@ h1 {
 .resume-link:hover,
 .resume-link:focus-visible { border-color: var(--amber); color: var(--amber); outline: 0; }
 
+.about-tags { display: flex; flex-wrap: wrap; gap: 12px; margin: 28px 0 0; padding: 0; list-style: none; }
+.about-tags li { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border: 1px solid var(--line-strong); border-radius: 999px; color: var(--muted); font-size: 0.86rem; font-weight: 650; letter-spacing: -0.01em; transition: border-color 180ms ease, color 180ms ease; }
+.about-tags li:hover { border-color: var(--cyan); color: var(--text); }
+.about-tags svg { width: 15px; height: 15px; color: var(--cyan); flex-shrink: 0; }
+
 .case-study-page { background: var(--bg); }
 .case-study-page .site-header { width: min(980px, calc(100% - 48px)); }
 .subpage-shell { width: min(1080px, calc(100% - 48px)); margin: 0 auto; padding: 96px 0 140px; }
+.about-page.subpage-shell { width: min(var(--max), calc(100% - 48px)); }
 .subpage-shell > h1 { max-width: 900px; margin-bottom: 64px; font-size: clamp(3rem, 6.2vw, 6.5rem); }
 .page-eyebrow { margin: 0 0 20px; color: var(--cyan); font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
 .subpage-shell .journey-list { margin: 0; }
@@ -1312,11 +1318,16 @@ h1 {
 }
 
 .recognition-content { display: grid; gap: 38px; }
-.recognition-item h3 { margin: 0 0 10px; color: #f5c800; font-size: clamp(1.4rem, 2.5vw, 2.6rem); font-weight: 720; letter-spacing: -0.05em; }
+.recognition-item h3 { margin: 0 0 10px; color: var(--cyan); font-size: clamp(1.4rem, 2.5vw, 2.6rem); font-weight: 720; letter-spacing: -0.05em; }
 .recognition-item p { margin: 0; color: var(--muted); font-size: clamp(0.98rem, 1.35vw, 1.18rem); line-height: 1.5; }
-.recognition-logos { display: flex; flex-wrap: wrap; gap: 30px 68px; align-items: center; margin-top: 18px; padding-top: 32px; border-top: 1px solid var(--line); color: rgba(243, 238, 226, 0.68); }
-.recognition-logos span { font-size: clamp(1.15rem, 2vw, 1.72rem); font-weight: 750; letter-spacing: -0.04em; }
-.recognition-logos span:nth-child(2) { letter-spacing: 0.1em; }
+.recognition-logos { display: flex; flex-wrap: wrap; gap: 26px 56px; align-items: center; margin-top: 18px; padding-top: 32px; border-top: 1px solid var(--line); color: rgba(243, 238, 226, 0.7); }
+.recognition-logos span { display: inline-flex; align-items: center; gap: 9px; font-size: clamp(1.05rem, 1.7vw, 1.4rem); font-weight: 700; letter-spacing: -0.02em; }
+.recognition-logos svg { width: 20px; height: 20px; flex-shrink: 0; color: inherit; }
+.recognition-logos span.logo-nokia { font-weight: 800; letter-spacing: 0.02em; }
+.recognition-logos span.logo-wc { font-weight: 650; letter-spacing: -0.01em; }
+
+.store-gallery { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; margin: 44px 0 0; padding: 0; list-style: none; }
+.store-gallery img { display: block; width: 100%; height: auto; border-radius: 10px; border: 1px solid var(--line-strong); box-shadow: 0 24px 48px rgba(0, 0, 0, 0.45); }
 
 @keyframes reveal {
   from {
@@ -1465,6 +1476,7 @@ h1 {
 
   .recognition { grid-template-columns: 1fr; gap: 26px; }
   .journey-list { max-width: none; }
+  .store-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
 }
 
 @media (max-width: 560px) {
