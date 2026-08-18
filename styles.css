@@ -1032,10 +1032,11 @@ h1 {
 .subpage-shell > h1 { max-width: 900px; margin-bottom: 64px; font-size: clamp(3rem, 6.2vw, 6.5rem); }
 .page-eyebrow { margin: 0 0 20px; color: var(--cyan); font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
 .subpage-shell .journey-list { margin: 0; }
-.label-row { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 42px; align-items: start; }
+.label-row { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 42px; align-items: baseline; }
+.label-row > .page-eyebrow { margin-bottom: 0; }
 .about-hero-row { margin-bottom: 0; }
-.about-portrait { margin: 24px 0 0; max-width: 260px; }
-.about-portrait img { display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 16px; border: 1px solid var(--line-strong); box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45); filter: grayscale(100%) contrast(1.25) brightness(0.72); }
+.about-portrait { margin: 24px 0 0; max-width: 200px; }
+.about-portrait img { display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 16px; border: 1px solid var(--line-strong); box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45); filter: grayscale(100%) contrast(1.08) brightness(0.85); }
 .about-journey { margin-top: 112px; padding-top: 26px; border-top: 1px solid var(--line); }
 .journey-body { min-width: 0; }
 .about-journey h2 + .journey-list,
@@ -1333,7 +1334,7 @@ h1 {
   .recognition-logos-track { animation: none; }
 }
 
-.store-gallery { column-count: 4; column-gap: 14px; margin: 40px 0 0; padding: 0; list-style: none; }
+.store-gallery { column-count: 6; column-gap: 12px; margin: 40px 0 0; padding: 0; list-style: none; }
 .store-gallery li { margin: 0 0 14px; overflow: hidden; break-inside: avoid; border-radius: 10px; border: 1px solid var(--line-strong); background: var(--bg-2); }
 .store-gallery img { display: block; width: 100%; height: auto; }
 .store-gallery .tile-accent,
@@ -1492,8 +1493,8 @@ h1 {
 
   .journey-list { max-width: none; }
   .label-row { grid-template-columns: 1fr; gap: 16px; }
-  .about-portrait { max-width: 220px; }
-  .store-gallery { column-count: 3; }
+  .about-portrait { max-width: 180px; }
+  .store-gallery { column-count: 4; }
 }
 
 @media (max-width: 560px) {
@@ -1595,7 +1596,7 @@ h1 {
   .journey-list time { padding: 0; font-size: 0.78rem; }
   .recognition { margin: 72px 0; padding: 38px 0; }
   .recognition-logos-track { gap: 40px; }
-  .store-gallery { column-count: 2; column-gap: 10px; }
+  .store-gallery { column-count: 3; column-gap: 10px; }
   .store-gallery li { margin-bottom: 10px; }
   .case-study-page .site-header,
   .case-study-shell,
