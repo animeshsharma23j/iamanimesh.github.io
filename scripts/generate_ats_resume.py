@@ -42,15 +42,15 @@ def main():
         p("+91 9582137784 | animeshsharma23j@gmail.com | www.iamanimesh.com", styles["resume_title"]),
         Spacer(1, 7), HRFlowable(width="100%", thickness=0.8, color=HexColor("#9AA4AE")),
         p("Professional Summary", styles["section"]),
-        p("Product and UX designer with experience across mobile, web, smartwatch, enterprise, and public-service products. Skilled in user research, interaction design, wireframes, prototypes, usability testing, and translating complex workflows into clear, practical experiences. Career includes 30+ Windows-platform apps reaching 4M+ downloads and work on Income Tax digital services.", styles["body"]),
+        p("Product and UX designer with experience across mobile, web, smartwatch, enterprise, and public-service products. Skilled in user research, interaction design, design systems, accessibility, wireframes, prototypes, usability and A/B testing, and translating complex workflows into clear, practical experiences. Career includes 20+ Windows-platform apps reaching 4M+ downloads and work on Income Tax digital services.", styles["body"]),
         p("Core Skills", styles["section"]),
-        p("Product Design; UX Research; Interaction Design; Information Architecture; User Flows; Wireframing; Prototyping; Usability Testing; User Personas; Storyboards; Figma; Sketch; Adobe Illustrator; Affinity Designer; Selenium; HP Quality Center", styles["body"]),
+        p("Product Design; UX Research; Interaction Design; Information Architecture; Design Systems; Accessibility; User Flows; Wireframing; Prototyping; Usability Testing; A/B Testing; User Personas; Storyboards; Figma; Adobe Illustrator; AI-Assisted Design &amp; Development (Claude Code, Codex)", styles["body"]),
         p("Professional Experience", styles["section"]),
-        role("UI / UX Designer", "Central Board of Direct Taxes (Income Tax)", "2021-Present", [
+        role("Senior UX Designer", "Central Board of Direct Taxes (Income Tax)", "2021-Present", [
             "Contributed to the redesign and overhaul of the Income Tax website and improvements to ITBA, a case-disposal tool.",
             "Created UI elements, wireframes, prototypes, and user-testing materials for ITR experiences and Government of India mobile apps.",
         ], styles),
-        role("UI / UX Designer", "Independent / Freelance", "2019-Present", [
+        role("UX Designer", "Independent / Freelance", "2019-Present", [
             "Designed watch faces for boAt Lifestyle India and contributed mobile and web design work for e-commerce and consumer products.",
             "Delivered user research, visual and interaction design, flows, wireframes, prototypes, and testing for projects including Country Delight and Wizikey.",
         ], styles),
@@ -59,19 +59,16 @@ def main():
             "Created menus, tabs, wireframes, prototypes, process flows, and testing plans for internal products.",
         ], styles),
         role("UI / UX Designer", "Galaxy Studio", "2016-2019", [
-            "Designed Windows Phone, Windows 10, Nokia Asha, and BlackBerry OS 10 applications; team portfolio included 30+ apps and 4M+ downloads.",
+            "Designed Windows Phone, Windows 10, Nokia Asha, and BlackBerry OS 10 applications; team portfolio included 20+ apps and 4M+ downloads.",
             "Worked on Yube, eXpress Player, FitVid, and SuperHeroes Wallpapers; selected apps were featured in the Windows App Store and Windows Central.",
         ], styles),
         role("QA Analyst", "IBM India Pvt. Ltd.", "2014-2016", [
             "Created and executed test cases across McKesson Healthcare and C2C Rail projects, including unit, integration, interface, sanity, regression, usability, and beta testing.",
-            "Supported business teams using HP Quality Center and Selenium.",
         ], styles),
         p("Selected Achievements", styles["section"]),
-        p("4M+ downloads across Windows-platform apps; 100+ smartwatch face designs for boAt India; Microsoft Student Partner (2012-2013); Top 10 in Microsoft DVLUP, a Windows Phone developer reward program.", styles["body"]),
+        p("100+ smartwatch face designs for boAt India; Microsoft Student Partner (2012-2013); Top 10 in Microsoft DVLUP, a Windows Phone developer reward program.", styles["body"]),
         p("Education", styles["section"]),
         p("Post Graduate Certificate in UX Design &amp; HCI, Indian Institute of Technology (IIT), Guwahati, 2023<br/>Bachelor of Technology (ECE), Netaji Subhash University of Technology (East Campus), 2009-2013", styles["body"]),
-        p("Certifications", styles["section"]),
-        p("Udemy / Coursera coursework in Sketch, Figma, Adobe Illustrator, and Design Principles; currently learning XR Design.", styles["body"]),
     ]
     document.build(story)
 
