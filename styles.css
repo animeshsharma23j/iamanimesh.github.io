@@ -824,6 +824,7 @@ h1 {
 .journey-list p { max-width: 800px; margin: 0; color: var(--muted); font-size: clamp(0.98rem, 1.45vw, 1.2rem); line-height: 1.5; }
 .journey-list .career-role { margin-bottom: 17px; color: var(--text); font-size: clamp(1rem, 1.6vw, 1.26rem); font-weight: 680; }
 .journey-list time { padding-top: 6px; color: var(--muted); font-size: 0.92rem; white-space: nowrap; }
+.journey-case-link { color: var(--cyan); text-decoration: underline; text-underline-offset: 2px; }
 
 .case-row {
   display: grid;
