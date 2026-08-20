@@ -38,7 +38,7 @@ def main():
 
     story = [
         p("ANIMESH SHARMA", styles["name"]),
-        p("Product / UX Designer | Mobile, Web, Wearables &amp; Public-Service Systems", styles["resume_title"]),
+        p("Product Designer | Mobile, Web, Wearables &amp; Public-Service Systems", styles["resume_title"]),
         p("+91 9582137784 | animeshsharma23j@gmail.com | www.iamanimesh.com", styles["resume_title"]),
         Spacer(1, 7), HRFlowable(width="100%", thickness=0.8, color=HexColor("#9AA4AE")),
         p("Professional Summary", styles["section"]),
