@@ -48,7 +48,7 @@ def main():
         p("Professional Experience", styles["section"]),
         role("Senior UX Designer", "Central Board of Direct Taxes (Income Tax)", "2021-Present", [
             "Contributed to the redesign and overhaul of the Income Tax website and improvements to ITBA, a case-disposal tool.",
-            "Created UI elements, wireframes, prototypes, and user-testing materials for ITR experiences and Government of India mobile apps.",
+            "Led UX research, created UI elements, wireframes, prototypes, and user-testing materials for ITR experiences.",
         ], styles),
         role("UX Designer", "Independent / Freelance", "2019-Present", [
             "Designed watch faces for boAt Lifestyle India and contributed mobile and web design work for e-commerce and consumer products.",
@@ -56,7 +56,7 @@ def main():
         ], styles),
         role("UI / UX Designer", "Comptroller General of Defence Accounts (CGDA) / DRDO", "2019-2021", [
             "Designed and maintained websites and apps, including work on an accounting system supporting employee bill-clearance workflows.",
-            "Created menus, tabs, wireframes, prototypes, process flows, and testing plans for internal products.",
+            "Conducted UX research and created menus, tabs, wireframes, prototypes, process flows, and testing plans for internal products.",
         ], styles),
         role("UI / UX Designer", "Galaxy Studio", "2016-2019", [
             "Designed Windows Phone, Windows 10, Nokia Asha, and BlackBerry OS 10 applications; team portfolio included 20+ apps and 4M+ downloads.",
