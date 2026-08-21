@@ -92,6 +92,18 @@ a {
   text-decoration: none;
 }
 
+img[loading="lazy"] {
+  background: rgba(243, 238, 226, 0.04);
+  opacity: 0;
+  transition: opacity 320ms ease;
+}
+img[loading="lazy"].is-loaded {
+  opacity: 1;
+}
+@media (scripting: none) {
+  img[loading="lazy"] { opacity: 1; background: none; }
+}
+
 button {
   font: inherit;
 }
@@ -1060,7 +1072,7 @@ h1 {
 .case-meta { display: flex; flex-wrap: wrap; gap: 10px 28px; padding: 22px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); color: var(--muted); font-size: 0.82rem; }
 .case-detail-grid { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 42px; padding: 72px 0; border-bottom: 1px solid var(--line); }
 .case-detail-grid h2 { max-width: 720px; margin: 0 0 18px; font-size: clamp(1.7rem, 3.2vw, 3.2rem); line-height: 1.04; letter-spacing: -0.045em; }
-.case-detail-grid p:last-child { max-width: 700px; margin: 0; color: var(--muted); font-size: 1.06rem; line-height: 1.62; }
+.case-detail-grid p:last-child { max-width: 630px; margin: 0; color: var(--muted); font-size: 1.06rem; line-height: 1.62; }
 .case-facts { display: grid; gap: 12px; max-width: 700px; margin: 28px 0 0; padding: 0; list-style: none; }
 .case-facts li { padding-top: 12px; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.98rem; line-height: 1.5; }
 .case-facts strong { display: block; margin-bottom: 4px; color: var(--text); font-size: 0.8rem; letter-spacing: 0.01em; text-transform: uppercase; }

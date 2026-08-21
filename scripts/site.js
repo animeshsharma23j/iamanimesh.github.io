@@ -20,6 +20,24 @@
 })();
 
 (function () {
+  var images = document.querySelectorAll('img[loading="lazy"]');
+  if (!images.length) return;
+
+  function reveal(img) {
+    img.classList.add("is-loaded");
+  }
+
+  images.forEach(function (img) {
+    if (img.complete) {
+      reveal(img);
+    } else {
+      img.addEventListener("load", function () { reveal(img); });
+      img.addEventListener("error", function () { reveal(img); });
+    }
+  });
+})();
+
+(function () {
   var links = document.querySelectorAll('a[href*="apps.apple.com"]');
   if (!links.length) return;
 
