@@ -65,11 +65,11 @@
             </fieldset>
             <fieldset>
               <legend>First measurement</legend>
-              <div class="measurement-fields"><label>Feet<input id="feet-a" type="number" min="0" value="8" inputmode="numeric" /></label><label>Inches<input id="inches-a" type="number" min="0" max="11" value="7" inputmode="numeric" /></label><label>Fraction<select id="fraction-a"><option value="0">0</option><option value="0.0625">1/16</option><option value="0.125">1/8</option><option value="0.1875">3/16</option><option value="0.25">1/4</option><option value="0.3125">5/16</option><option value="0.375">3/8</option><option value="0.5">1/2</option><option value="0.625">5/8</option><option value="0.75">3/4</option><option value="0.875">7/8</option></select></label></div>
+              <div class="measurement-fields"><label>Feet<input id="feet-a" type="number" min="0" value="8" inputmode="numeric" /></label><label>Inches<input id="inches-a" type="number" min="0" max="11" value="7" inputmode="numeric" /></label><label>Fraction<select id="fraction-a"><option value="0">0</option><option value="0.0625">1/16</option><option value="0.125">1/8</option><option value="0.1875">3/16</option><option value="0.25">1/4</option><option value="0.3125">5/16</option><option value="0.375">3/8</option><option value="0.5">1/2</option><option value="0.625">5/8</option><option value="0.75">3/4</option><option value="0.875">7/8</option></select></label><p id="hint-a" class="field-hint" aria-live="polite"></p></div>
             </fieldset>
             <fieldset>
               <legend>Second measurement</legend>
-              <div class="measurement-fields"><label>Feet<input id="feet-b" type="number" min="0" value="3" inputmode="numeric" /></label><label>Inches<input id="inches-b" type="number" min="0" max="11" value="10" inputmode="numeric" /></label><label>Fraction<select id="fraction-b"><option value="0">0</option><option value="0.0625">1/16</option><option value="0.125">1/8</option><option value="0.1875">3/16</option><option value="0.25">1/4</option><option value="0.3125">5/16</option><option value="0.375">3/8</option><option value="0.5">1/2</option><option value="0.625">5/8</option><option value="0.75">3/4</option><option value="0.875">7/8</option></select></label></div>
+              <div class="measurement-fields"><label>Feet<input id="feet-b" type="number" min="0" value="3" inputmode="numeric" /></label><label>Inches<input id="inches-b" type="number" min="0" max="11" value="10" inputmode="numeric" /></label><label>Fraction<select id="fraction-b"><option value="0">0</option><option value="0.0625">1/16</option><option value="0.125">1/8</option><option value="0.1875">3/16</option><option value="0.25">1/4</option><option value="0.3125">5/16</option><option value="0.375">3/8</option><option value="0.5">1/2</option><option value="0.625">5/8</option><option value="0.75">3/4</option><option value="0.875">7/8</option></select></label><p id="hint-b" class="field-hint" aria-live="polite"></p></div>
             </fieldset>
           </form>
         </div>
@@ -92,12 +92,23 @@
         const result = document.querySelector('#measurement-result');
         const decimal = document.querySelector('#decimal-feet');
         const summary = document.querySelector('#measurement-summary');
+        const hintA = document.querySelector('#hint-a');
+        const hintB = document.querySelector('#hint-b');
         let operation = 'add';
         const asSixteenths = (feet, inches, fraction) => Math.round(((feet * 12) + inches + fraction) * 16);
         const fractionText = (sixteenths) => { const fractions = ['', '1/16', '1/8', '3/16', '1/4', '5/16', '3/8', '7/16', '1/2', '9/16', '5/8', '11/16', '3/4', '13/16', '7/8', '15/16']; return fractions[sixteenths]; };
+        const validate = (feetField, inchesField, hintEl) => {
+          const feetInvalid = feetField.value !== '' && Number(feetField.value) < 0;
+          const inchesInvalid = inchesField.value !== '' && (Number(inchesField.value) < 0 || Number(inchesField.value) > 11);
+          feetField.setAttribute('aria-invalid', String(feetInvalid));
+          inchesField.setAttribute('aria-invalid', String(inchesInvalid));
+          hintEl.textContent = inchesInvalid ? 'Inches should be 0–11 — use feet for anything larger.' : feetInvalid ? 'Feet can’t be negative.' : '';
+        };
         const calculate = () => {
-          const first = asSixteenths(Number(inputs.feetA.value), Number(inputs.inchesA.value), Number(inputs.fractionA.value));
-          const second = asSixteenths(Number(inputs.feetB.value), Number(inputs.inchesB.value), Number(inputs.fractionB.value));
+          validate(inputs.feetA, inputs.inchesA, hintA);
+          validate(inputs.feetB, inputs.inchesB, hintB);
+          const first = asSixteenths(Number(inputs.feetA.value) || 0, Number(inputs.inchesA.value) || 0, Number(inputs.fractionA.value) || 0);
+          const second = asSixteenths(Number(inputs.feetB.value) || 0, Number(inputs.inchesB.value) || 0, Number(inputs.fractionB.value) || 0);
           const total = operation === 'add' ? first + second : first - second;
           const sign = total < 0 ? '−' : '';
           const absolute = Math.abs(total);
