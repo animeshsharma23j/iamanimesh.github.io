@@ -1720,24 +1720,18 @@ h1 {
 .directory-card.directory-entry { display: grid; grid-template-columns: 1fr; justify-items: start; gap: 20px; min-height: 540px; padding: 32px; }
 .directory-card.directory-entry > img { width: 88px; height: 88px; border-radius: 18px; }
 .directory-card.directory-entry h2, .case-row.directory-entry h2 { margin: 0 0 10px; font-size: clamp(1.65rem, 2.6vw, 2.35rem); font-weight: 800; line-height: 1.04; letter-spacing: 0; }
-.case-row.directory-entry .case-open { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 18px; border: 1px solid var(--line-strong); border-radius: 0; background: transparent; color: var(--text); font-size: 0.82rem; font-weight: 750; text-decoration: none; transition: border-color 180ms ease, color 180ms ease, transform 180ms ease; }
-.case-row.directory-entry:hover .case-open, .case-row.directory-entry:focus-visible .case-open { border-color: var(--text); color: var(--text); transform: translateY(-2px); }
 
-.case-row.directory-entry { display: grid; grid-template-columns: 1fr; grid-template-rows: auto auto 1fr auto auto; align-items: start; gap: 18px; min-height: 540px; padding: 32px; color: var(--text); text-decoration: none; transition: border-color 180ms ease, background 180ms ease; }
+.case-row.directory-entry { display: grid; grid-template-columns: 1fr; grid-template-rows: auto auto 1fr auto; align-items: start; gap: 18px; min-height: 540px; padding: 32px; color: var(--text); text-decoration: none; transition: border-color 180ms ease, background 180ms ease; }
 .case-row.directory-entry:hover { transform: none; }
 .case-row.directory-entry .case-number { color: var(--cyan); font-size: 0.74rem; font-weight: 800; }
 .case-row.directory-entry p { max-width: 670px; font-size: 1rem; }
 .case-row.directory-entry ul { margin: 0; padding: 0; }
-.case-row.directory-entry .case-open { position: static; width: auto; height: auto; margin: 4px 0 0; }
-.case-row.directory-entry .case-open::before { display: none; }
-.case-row.directory-entry .case-open::after { position: static; width: auto; height: auto; border: 0; transform: none; content: "Explore case study  →"; color: currentColor; }
 
 @media (max-width: 560px) {
   .directory-list, .product-directory.directory-list, .case-list.directory-list { grid-template-columns: 1fr; gap: 12px; }
   .directory-entry, .directory-card.directory-entry, .case-row.directory-entry { min-height: 0; }
   .directory-card.directory-entry, .case-row.directory-entry { gap: 16px; padding: 24px; }
   .directory-card.directory-entry > img { width: 76px; height: 76px; }
-  .case-row.directory-entry .case-open { width: 100%; }
 }
 
 /* Mobile navigation: replace the cramped desktop tabs with a compact menu. */
