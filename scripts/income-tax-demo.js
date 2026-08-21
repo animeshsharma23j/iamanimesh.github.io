@@ -185,22 +185,53 @@
   var signinVerifyBtn = document.getElementById("demo-signin-verify");
   if (signinVerifyBtn) {
     signinVerifyBtn.addEventListener("click", function () {
-      showScreen("home");
+      showScreen("analyzing");
+      runAnalyzingAnimation();
     });
   }
 
-  // ---- Start -> importing animation ----
-  document.querySelectorAll("[data-start]").forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      showScreen("importing");
-      runImportAnimation();
-    });
-  });
+  // ---- Sign-in -> analysing AIS -> importing animation ----
+  var ANALYZING_SUBSTEPS = [
+    "Matching your PAN with AIS records…",
+    "Reading Form 26AS…",
+    "Checking linked broker statements…"
+  ];
+
+  function runAnalyzingAnimation() {
+    var percentEl = document.getElementById("demo-analyzing-percent");
+    var fillEl = document.getElementById("demo-analyzing-fill");
+    var substepEl = document.getElementById("demo-analyzing-substep");
+    var duration = 1600;
+    var start = null;
+
+    function step(timestamp) {
+      if (start === null) start = timestamp;
+      var elapsed = timestamp - start;
+      var pct = Math.min(100, Math.round((elapsed / duration) * 100));
+      percentEl.textContent = pct + "%";
+      fillEl.style.width = pct + "%";
+      var substepIdx = Math.min(ANALYZING_SUBSTEPS.length - 1, Math.floor((pct / 100) * ANALYZING_SUBSTEPS.length));
+      substepEl.textContent = ANALYZING_SUBSTEPS[substepIdx];
+      if (pct < 100) {
+        requestAnimationFrame(step);
+      } else {
+        setTimeout(function () {
+          showScreen("importing");
+          runImportAnimation();
+        }, 300);
+      }
+    }
+    requestAnimationFrame(step);
+  }
 
   function runImportAnimation() {
     var items = Array.prototype.slice.call(document.querySelectorAll(".import-item"));
     items.forEach(function (item) {
       item.classList.remove("is-done");
+      var row = item.querySelector(".import-item-row");
+      var detail = item.querySelector(".import-item-detail");
+      if (row) row.setAttribute("aria-expanded", "false");
+      if (detail) detail.hidden = true;
     });
     var continueBtn = document.getElementById("demo-import-continue");
     continueBtn.hidden = true;
@@ -215,6 +246,18 @@
       }, 450 * (i + 1));
     });
   }
+
+  // ---- Import checklist: expand a fetched row to see its detail ----
+  document.querySelectorAll(".import-item-row").forEach(function (row) {
+    row.addEventListener("click", function () {
+      var item = row.closest(".import-item");
+      if (!item || !item.classList.contains("is-done")) return;
+      var detail = document.getElementById(row.getAttribute("aria-controls"));
+      var expanded = row.getAttribute("aria-expanded") === "true";
+      row.setAttribute("aria-expanded", String(!expanded));
+      if (detail) detail.hidden = expanded;
+    });
+  });
 
   document.querySelectorAll("[data-goto-snapshot]").forEach(function (btn) {
     btn.addEventListener("click", function () {
@@ -939,7 +982,7 @@
       if (signinVerifyBtn) signinVerifyBtn.disabled = true;
       if (tutorialPlayer) tutorialPlayer.hidden = true;
       if (tutorialList) tutorialList.hidden = false;
-      showScreen("signin");
+      showScreen("home");
     });
   });
 
@@ -1083,5 +1126,5 @@
     });
   }
 
-  showScreen("signin");
+  showScreen("home");
 })();

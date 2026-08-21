@@ -17,7 +17,7 @@
     <meta name="description" content="Income Tax concept prototype — an automated, assisted filing demo, not an official tax service." />
     <title>File your ITR — concept demo</title>
     
-    <link rel="stylesheet" href="income-tax-demo.css?v=25" />
+    <link rel="stylesheet" href="income-tax-demo.css?v=26" />
     <script>
       (function () {
         var saved = localStorage.getItem("itr-demo-theme");
@@ -51,7 +51,7 @@
         <div class="demo-progress" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
         <div class="demo-running-total" id="demo-running-total" hidden><span>Total income so far</span><strong id="demo-running-total-amount">₹0</strong></div>
 
-        <section class="demo-screen is-active" id="signin">
+        <section class="demo-screen" id="signin">
           <div class="auth-grid">
             <div class="auth-side">
               <span class="auth-side-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg></span>
@@ -104,14 +104,20 @@
           </div>
         </section>
 
-        <section class="demo-screen" id="home">
+        <section class="demo-screen is-active" id="home">
           <div class="demo-hero">
-            <span class="demo-eyebrow">Home</span>
-            <h1 class="demo-heading">Let's make this the easiest return you've filed</h1>
-            <p class="demo-body">Whether this is your first ITR or you just want fewer surprises, everything here answers "what happens next" before it becomes a problem. Your AY 2026-27 return is ready whenever you are.</p>
-            <div class="demo-actions demo-hero-actions">
-              <button type="button" class="demo-btn is-primary" data-goto="start">Start Filing</button>
+            <span class="demo-hero-badge">AY 2026-27 · Ready when you are</span>
+            <h1 class="demo-hero-heading">Let's make this the easiest return you've filed</h1>
+            <p class="demo-hero-body">Whether this is your first ITR or you just want fewer surprises, everything here answers "what happens next" before it becomes a problem.</p>
+            <div class="demo-hero-actions">
+              <button type="button" class="demo-btn is-primary demo-hero-cta" data-goto="signin">Start Filing</button>
+              <a href="#" data-goto="guide" class="demo-hero-secondary">See how filing works <span aria-hidden="true">→</span></a>
             </div>
+            <ul class="demo-hero-trust">
+              <li>No password — just PAN + OTP</li>
+              <li>Auto-filled from AIS &amp; Form 26AS</li>
+              <li>Takes about 5 minutes</li>
+            </ul>
           </div>
 
           <div class="value-prop-grid">
@@ -277,7 +283,7 @@
           </ol>
 
           <div class="demo-actions demo-actions-row">
-            <button type="button" class="demo-btn is-primary" data-goto="start">Start Filing</button>
+            <button type="button" class="demo-btn is-primary" data-goto="signin">Start Filing</button>
             <button type="button" class="demo-btn is-quiet" data-goto="home">← Back to Home</button>
           </div>
         </section>
@@ -330,7 +336,7 @@
           </div>
 
           <div class="demo-actions demo-actions-row">
-            <button type="button" class="demo-btn is-primary" data-goto="start">Start Filing</button>
+            <button type="button" class="demo-btn is-primary" data-goto="signin">Start Filing</button>
             <button type="button" class="demo-btn is-quiet" data-goto="home">← Back to Home</button>
           </div>
         </section>
@@ -393,7 +399,7 @@
               <p class="calc-savings" id="calc-savings"></p>
               <p class="demo-fine">Simplified for this demo — assumes salary income only, standard slab rates plus 4% cess, and isn't tax advice.</p>
               <div class="demo-actions">
-                <button type="button" class="demo-btn is-primary" data-goto="start">Start Filing with these numbers</button>
+                <button type="button" class="demo-btn is-primary" data-goto="signin">Start Filing with these numbers</button>
                 <button type="button" class="demo-btn is-quiet" data-goto="home">← Back to Home</button>
               </div>
             </div>
@@ -470,7 +476,7 @@
           <p class="qna-empty" id="qna-empty" hidden>No matches for that search — try a different word.</p>
 
           <div class="demo-actions demo-actions-row">
-            <button type="button" class="demo-btn is-primary" data-goto="start">Start Filing</button>
+            <button type="button" class="demo-btn is-primary" data-goto="signin">Start Filing</button>
             <button type="button" class="demo-btn is-quiet" data-goto="home">← Back to Home</button>
           </div>
         </section>
@@ -532,44 +538,79 @@
           </div>
 
           <div class="demo-actions demo-actions-row">
-            <button type="button" class="demo-btn is-primary" data-goto="start">Start Filing</button>
+            <button type="button" class="demo-btn is-primary" data-goto="signin">Start Filing</button>
             <button type="button" class="demo-btn is-quiet" data-goto="home">← Back to Home</button>
           </div>
         </section>
 
-        <section class="demo-screen" id="start">
-          <span class="demo-eyebrow">Getting started</span>
-          <h2 class="demo-heading">File your ITR without the guesswork</h2>
-          <p class="demo-body">We can pull your salary, TDS, bank interest, and broker data automatically — you confirm a few things we can't see, and we handle the rest, including which regime saves you more.</p>
-          <p class="demo-help"><span><strong>Assessment Year (AY) 2026-27</strong> — this return covers income you earned between April 2025 and March 2026, the "previous year." AY is simply the year after that, when it gets assessed.</span></p>
-          <div class="demo-actions">
-            <button type="button" class="demo-btn is-primary" data-start>Auto-fill from AIS &amp; Form 26AS</button>
+        <section class="demo-screen" id="analyzing">
+          <div class="demo-analyzing">
+            <span class="demo-eyebrow">Getting started</span>
+            <p class="demo-analyzing-label">Analysing your AIS…</p>
+            <p class="demo-analyzing-percent" id="demo-analyzing-percent">0%</p>
+            <div class="demo-analyzing-track"><span class="demo-analyzing-fill" id="demo-analyzing-fill"></span></div>
+            <p class="demo-fine" id="demo-analyzing-substep">Matching your PAN with AIS records…</p>
           </div>
         </section>
 
         <section class="demo-screen" id="importing">
           <span class="demo-eyebrow">One moment</span>
           <h2 class="demo-heading">Securely fetching your data…</h2>
-          <p class="demo-body">Connecting to AIS, Form 26AS, and your linked broker — nothing leaves this demo.</p>
+          <p class="demo-body">Connecting to AIS, Form 26AS, and your linked broker — nothing leaves this demo. Tap a row once it's fetched to check the details.</p>
           <ul class="import-checklist">
-            <li class="import-item">Salary &amp; employer details<span class="import-dot"></span></li>
-            <li class="import-item">TDS already deducted<span class="import-dot"></span></li>
-            <li class="import-item">Bank interest (Form 26AS)<span class="import-dot"></span></li>
-            <li class="import-item">Broker statements<span class="import-dot"></span></li>
+            <li class="import-item" id="import-item-salary">
+              <button type="button" class="import-item-row" aria-expanded="false" aria-controls="import-detail-salary"><span class="import-item-label">Salary &amp; employer details</span><span class="import-dot"></span><span class="import-chevron" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7.5l5 5 5-5"></path></svg></span></button>
+              <div class="import-item-detail" id="import-detail-salary" hidden>
+                <dl>
+                  <div><dt>Employer</dt><dd>TCS India Pvt. Ltd.</dd></div>
+                  <div><dt>Basic</dt><dd>₹6,20,000</dd></div>
+                  <div><dt>HRA</dt><dd>₹1,80,000</dd></div>
+                  <div><dt>Special allowance</dt><dd>₹1,40,000</dd></div>
+                  <div class="is-total"><dt>Gross salary</dt><dd>₹9,40,000</dd></div>
+                </dl>
+              </div>
+            </li>
+            <li class="import-item" id="import-item-tds">
+              <button type="button" class="import-item-row" aria-expanded="false" aria-controls="import-detail-tds"><span class="import-item-label">TDS already deducted</span><span class="import-dot"></span><span class="import-chevron" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7.5l5 5 5-5"></path></svg></span></button>
+              <div class="import-item-detail" id="import-detail-tds" hidden>
+                <dl>
+                  <div><dt>Q1 (Apr–Jun)</dt><dd>₹17,000</dd></div>
+                  <div><dt>Q2 (Jul–Sep)</dt><dd>₹17,000</dd></div>
+                  <div><dt>Q3 (Oct–Dec)</dt><dd>₹17,000</dd></div>
+                  <div><dt>Q4 (Jan–Mar)</dt><dd>₹17,000</dd></div>
+                  <div class="is-total"><dt>Total TDS</dt><dd>₹68,000</dd></div>
+                </dl>
+              </div>
+            </li>
+            <li class="import-item" id="import-item-interest">
+              <button type="button" class="import-item-row" aria-expanded="false" aria-controls="import-detail-interest"><span class="import-item-label">Bank interest (Form 26AS)</span><span class="import-dot"></span><span class="import-chevron" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7.5l5 5 5-5"></path></svg></span></button>
+              <div class="import-item-detail" id="import-detail-interest" hidden>
+                <dl>
+                  <div><dt>HDFC Bank — savings</dt><dd>₹5,400</dd></div>
+                  <div><dt>SBI — savings</dt><dd>₹3,000</dd></div>
+                  <div class="is-total"><dt>Total interest</dt><dd>₹8,400</dd></div>
+                </dl>
+              </div>
+            </li>
+            <li class="import-item" id="import-item-broker">
+              <button type="button" class="import-item-row" aria-expanded="false" aria-controls="import-detail-broker"><span class="import-item-label">Broker statements</span><span class="import-dot"></span><span class="import-chevron" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7.5l5 5 5-5"></path></svg></span></button>
+              <div class="import-item-detail" id="import-detail-broker" hidden>
+                <dl>
+                  <div><dt>Broker</dt><dd>Zerodha Broking</dd></div>
+                  <div><dt>Type</dt><dd>Equity — short-term</dd></div>
+                  <div class="is-total"><dt>Capital gains</dt><dd>₹1,20,000</dd></div>
+                </dl>
+              </div>
+            </li>
           </ul>
           <div class="demo-actions">
-            <button type="button" class="demo-btn is-primary" hidden id="demo-import-continue" data-goto-snapshot>Continue</button>
+            <button type="button" class="demo-btn is-primary" hidden id="demo-import-continue" data-goto-snapshot>Looks good — continue</button>
           </div>
         </section>
 
         <section class="demo-screen" id="verify">
           <span class="demo-eyebrow">Verify your details</span>
-          <h2 class="demo-heading">Here's what we found — check it over</h2>
-          <ul class="demo-checklist">
-            <li class="is-done"><span class="demo-check-dot"></span>Salary income — ₹9,40,000</li>
-            <li class="is-done"><span class="demo-check-dot"></span>TDS already deducted — ₹68,000</li>
-            <li class="is-done"><span class="demo-check-dot"></span>Bank interest — ₹8,400</li>
-          </ul>
+          <h2 class="demo-heading">Does everything look right, or is there anything else to add?</h2>
 
           <div class="verify-capgains" id="verify-capgains">
             <div class="verify-capgains-info">
@@ -794,6 +835,6 @@
       <button type="button" class="chat-bubble" id="chat-bubble" aria-label="Open chat support">💬</button>
     </div>
 
-    <script src="scripts/income-tax-demo.js?v=18" defer></script>
+    <script src="scripts/income-tax-demo.js?v=19" defer></script>
   </body>
 </html>
