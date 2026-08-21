@@ -73,7 +73,21 @@
       if (idx > -1) updateRunningTotal(false);
     }
     window.scrollTo({ top: 0, behavior: "smooth" });
+    setTimeout(adjustChatWidgetOffset, 50);
   }
+
+  // ---- Keep the chat bubble above the footer instead of overlapping it ----
+  function adjustChatWidgetOffset() {
+    var widget = document.getElementById("chat-widget");
+    var footer = document.querySelector(".site-footer");
+    if (!widget || !footer) return;
+    var footerRect = footer.getBoundingClientRect();
+    var overlap = window.innerHeight - footerRect.top;
+    var margin = 20;
+    widget.style.bottom = (overlap > 0 ? overlap + margin : margin) + "px";
+  }
+  window.addEventListener("scroll", adjustChatWidgetOffset, { passive: true });
+  window.addEventListener("resize", adjustChatWidgetOffset);
 
   // ---- Simple screen-to-screen navigation (Home, Guide, and any inline links) ----
   document.querySelectorAll("[data-goto]").forEach(function (btn) {
@@ -226,6 +240,9 @@
 
   function runImportAnimation() {
     var items = Array.prototype.slice.call(document.querySelectorAll(".import-item"));
+    var importEyebrow = document.getElementById("importing-eyebrow");
+    var importHeading = document.getElementById("importing-heading");
+    var importBody = document.getElementById("importing-body");
     items.forEach(function (item) {
       item.classList.remove("is-done");
       var row = item.querySelector(".import-item-row");
@@ -233,6 +250,9 @@
       if (row) row.setAttribute("aria-expanded", "false");
       if (detail) detail.hidden = true;
     });
+    if (importEyebrow) importEyebrow.textContent = "One moment";
+    if (importHeading) importHeading.textContent = "Securely fetching your data…";
+    if (importBody) importBody.textContent = "Connecting to AIS, Form 26AS, and your linked broker — nothing leaves this demo.";
     var continueBtn = document.getElementById("demo-import-continue");
     continueBtn.hidden = true;
     items.forEach(function (item, i) {
@@ -240,6 +260,9 @@
         item.classList.add("is-done");
         if (i === items.length - 1) {
           setTimeout(function () {
+            if (importEyebrow) importEyebrow.textContent = "All set";
+            if (importHeading) importHeading.textContent = "Your data is in — check it over";
+            if (importBody) importBody.textContent = "Pulled from AIS, Form 26AS, and your linked broker. Tap a row to check the details.";
             continueBtn.hidden = false;
           }, 350);
         }
@@ -256,6 +279,7 @@
       var expanded = row.getAttribute("aria-expanded") === "true";
       row.setAttribute("aria-expanded", String(!expanded));
       if (detail) detail.hidden = expanded;
+      adjustChatWidgetOffset();
     });
   });
 

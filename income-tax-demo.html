@@ -17,7 +17,7 @@
     <meta name="description" content="Income Tax concept prototype — an automated, assisted filing demo, not an official tax service." />
     <title>File your ITR — concept demo</title>
     
-    <link rel="stylesheet" href="income-tax-demo.css?v=27" />
+    <link rel="stylesheet" href="income-tax-demo.css?v=28" />
     <script>
       (function () {
         var saved = localStorage.getItem("itr-demo-theme");
@@ -554,9 +554,9 @@
         </section>
 
         <section class="demo-screen" id="importing">
-          <span class="demo-eyebrow">One moment</span>
-          <h2 class="demo-heading">Securely fetching your data…</h2>
-          <p class="demo-body">Connecting to AIS, Form 26AS, and your linked broker — nothing leaves this demo. Tap a row once it's fetched to check the details.</p>
+          <span class="demo-eyebrow" id="importing-eyebrow">One moment</span>
+          <h2 class="demo-heading" id="importing-heading">Securely fetching your data…</h2>
+          <p class="demo-body" id="importing-body">Connecting to AIS, Form 26AS, and your linked broker — nothing leaves this demo.</p>
           <ul class="import-checklist">
             <li class="import-item" id="import-item-salary">
               <button type="button" class="import-item-row" aria-expanded="false" aria-controls="import-detail-salary"><span class="import-item-label">Salary &amp; employer details</span><span class="import-dot"></span><span class="import-chevron" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7.5l5 5 5-5"></path></svg></span></button>
@@ -835,6 +835,6 @@
       <button type="button" class="chat-bubble" id="chat-bubble" aria-label="Open chat support">💬</button>
     </div>
 
-    <script src="scripts/income-tax-demo.js?v=19" defer></script>
+    <script src="scripts/income-tax-demo.js?v=20" defer></script>
   </body>
 </html>
