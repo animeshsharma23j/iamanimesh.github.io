@@ -1510,17 +1510,19 @@ a:focus-visible {
   margin-top: 0;
 }
 
-.demo-hero-cta {
+.demo-btn.demo-hero-cta {
   width: auto;
-  min-width: 200px;
+  min-width: 210px;
+  padding: 0 26px;
+  border-radius: var(--radius-pill);
   background: var(--bg);
   color: var(--text);
   border-color: var(--bg);
 }
 
-.demo-hero-cta:hover,
-.demo-hero-cta:focus-visible {
-  background: color-mix(in srgb, var(--bg) 88%, var(--text));
+.demo-btn.demo-hero-cta:hover,
+.demo-btn.demo-hero-cta:focus-visible {
+  background: color-mix(in srgb, var(--bg) 85%, var(--text));
   border-color: var(--bg);
   outline: 0;
 }
