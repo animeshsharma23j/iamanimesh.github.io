@@ -34,7 +34,7 @@ def main():
     styles.add(ParagraphStyle(name="name", parent=styles["Heading1"], fontName="Helvetica-Bold", fontSize=20, leading=23, spaceAfter=2, textColor=HexColor("#15191D")))
     styles.add(ParagraphStyle(name="resume_title", parent=styles["Normal"], fontName="Helvetica", fontSize=10.2, leading=13.2, textColor=HexColor("#333A42")))
     styles.add(ParagraphStyle(name="contact", parent=styles["Normal"], fontName="Helvetica", fontSize=8.9, leading=12, textColor=HexColor("#333A42"), linkUnderline=False))
-    styles.add(ParagraphStyle(name="section", parent=styles["Heading2"], fontName="Helvetica-Bold", fontSize=10.2, leading=12.8, spaceBefore=9, spaceAfter=4, textColor=HexColor("#1C5D80")))
+    styles.add(ParagraphStyle(name="section", parent=styles["Heading2"], fontName="Helvetica-Bold", fontSize=10.2, leading=12.8, spaceBefore=9, spaceAfter=4, textColor=HexColor("#1B717E")))
     styles.add(ParagraphStyle(name="body", parent=styles["Normal"], fontName="Helvetica", fontSize=9.2, leading=12.2, textColor=HexColor("#20262D")))
     styles.add(ParagraphStyle(name="role", parent=styles["Normal"], fontName="Helvetica", fontSize=9.35, leading=12.6, textColor=HexColor("#11161B")))
     styles.add(ParagraphStyle(name="bullet", parent=styles["Normal"], leftIndent=8, firstLineIndent=-7, fontName="Helvetica", fontSize=8.85, leading=11.7, textColor=HexColor("#20262D")))
