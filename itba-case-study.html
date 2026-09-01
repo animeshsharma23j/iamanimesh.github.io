@@ -63,7 +63,7 @@
 
       <section class="case-detail-grid">
         <p class="detail-label">Context</p>
-        <div><h2>Expert software for people who can't afford to guess.</h2><p>ITBA is the internal system Income Tax Department officers use to work case disposal — resolving assessments, tracking statutory deadlines, and recording decisions that carry legal weight. The users are domain experts, the information is dense by necessity, and an unclear interface doesn't just cost time — it risks a missed deadline or an incomplete decision on a real taxpayer's record. Because ITBA holds sensitive taxpayer and departmental data, everything shown on this page is a reconstructed, sanitised approximation, not the live system.</p><ul class="case-facts"><li><strong>Organisation</strong> Central Board of Direct Taxes, Income Tax Department</li><li><strong>Contribution</strong> Research synthesis, information architecture, wireframes, prototypes, and testing materials</li><li><strong>Status</strong> Professional work, presented here as a sanitised reconstruction</li><li><strong>Constraint</strong> No real screens, taxpayer data, or officer identities can be shown</li></ul></div>
+        <div><h2>Expert software for people who can't afford to guess.</h2><p>ITBA is the internal system Income Tax Department officers use to work case disposal — resolving assessments, tracking statutory deadlines, and recording decisions that carry legal weight. The users are domain experts, the information is dense by necessity, and an unclear interface doesn't just cost time — it risks a missed deadline or an incomplete decision on a real taxpayer's record. Because ITBA holds sensitive taxpayer and departmental data, everything shown on this page is a reconstructed, sanitised approximation, not the live system.</p><ul class="case-facts"><li><strong>Organisation</strong> Central Board of Direct Taxes, Income Tax Department</li><li><strong>Contribution</strong> Research synthesis, information architecture, wireframes, prototypes, and testing materials</li><li><strong>Status</strong> Professional work, presented here as a sanitised reconstruction</li><li><strong>Constraint</strong> No real screens, taxpayer data, or officer identities can be shown</li><li><strong>Scope</strong> Contextual inquiry with case-handling officers across multiple case types, a procedural audit against departmental requirements, and iterative workshops with the business team over the course of the redesign</li></ul></div>
       </section>
 
       <section class="case-detail-grid">
@@ -72,14 +72,17 @@
           <h2>Start with how an officer works a case, not how the system models one.</h2>
           <p>The starting question wasn't "how do we redesign these screens" — it was "where does an officer's confidence actually break down while working a case." That meant understanding the workflow before touching the interface.</p>
 
+          <h3 class="mockup-heading research-subhead">Research questions</h3>
+          <ul class="case-facts"><li><strong>Where does confidence break down?</strong> Not which field is confusing, but which moment in working a case makes an officer stop, double-check, or route around the system.</li><li><strong>What's mandatory, and what's just inherited?</strong> Whether every field and step still traced back to a real procedural requirement, or had simply accumulated over time.</li><li><strong>What can be simplified without weakening the record?</strong> Whether a decision an officer might need to defend later would still be fully justified after the interface changed.</li></ul>
+
           <h3 class="mockup-heading research-subhead">Contextual inquiry with case-handling officers</h3>
-          <p>Sitting with officers while they worked live cases — not asking them to describe the process from memory — surfaced where they actually paused, backtracked, or cross-checked another screen to stay oriented. That distinction mattered: officers rarely flagged these moments as problems in interviews, but the hesitation was visible in how they worked.</p>
+          <p>Sitting with officers while they worked live cases — not asking them to describe the process from memory — surfaced where they actually paused, backtracked, or cross-checked another screen to stay oriented. That distinction mattered: officers rarely flagged these moments as problems in interviews, but the hesitation was visible in how they worked. That gap between self-report and observed behaviour is also why this leaned on contextual inquiry rather than a survey or interview-only approach — people don't reliably report friction they've already normalised into their routine.</p>
 
           <h3 class="mockup-heading research-subhead">Auditing the existing flow against procedure</h3>
-          <p>Every field, action, and dependency in case disposal was mapped against the department's own procedural requirements, one by one. The goal was to separate what was genuinely mandatory from what had simply accumulated as legacy interface debt — screens that asked for information the process no longer required, or in an order the procedure no longer dictated.</p>
+          <p>Every field, action, and dependency in case disposal was mapped against the department's own procedural requirements, one by one. The goal was to separate what was genuinely mandatory from what had simply accumulated as legacy interface debt — screens that asked for information the process no longer required, or in an order the procedure no longer dictated. This ran as a structured, field-by-field audit rather than an informal walkthrough, because in a system whose records carry legal weight, "this seems unnecessary" isn't sufficient justification to remove something — only a traceable link back to procedure was.</p>
 
           <h3 class="mockup-heading research-subhead">Requirement workshops with the business team</h3>
-          <p>Simplifying the interface couldn't mean hiding information an officer needed to justify a decision later. Structured workshops with the departmental business team pressure-tested every proposed simplification against that constraint before it went anywhere near a wireframe.</p>
+          <p>Simplifying the interface couldn't mean hiding information an officer needed to justify a decision later. Structured workshops with the departmental business team pressure-tested every proposed simplification against that constraint before it went anywhere near a wireframe. Workshops, rather than a one-way sign-off review, because the business team could see downstream consequences of a simplification — audit requirements, inter-department handoffs, statutory record-keeping — that testing with officers alone wouldn't surface.</p>
 
           <h3 class="mockup-heading research-subhead">Synthesis against five orientation questions</h3>
           <p>Every friction point surfaced by the three methods above got grouped by which of five things it obscured for an officer: what case, what's happened, what needs attention, what can I do, what happens next. Four problems recurred often enough to drive the design direction:</p>
@@ -148,10 +151,19 @@
       </section>
 
       <section class="case-detail-grid">
+        <p class="detail-label">Stakeholder influence</p>
+        <div>
+          <h2>Simplicity had to survive contact with the business team, not just with officers.</h2>
+          <p>The harder resistance wasn't from officers — it was the business team's instinct to keep every field visible "just in case" a decision was challenged later. The procedural audit gave that conversation a different footing: instead of arguing simplicity versus caution in the abstract, each proposed removal could be checked against whether procedure actually required it. Fields that failed that check were the ones that moved; fields that passed it stayed, even where they added visual density.</p>
+          <p>That trade-off went the other way at least once. A proposed simplification to how validation messages were grouped was rolled back after the business team flagged that it would make it harder to reconstruct why a case had been marked — a case where protecting the record mattered more than the cleaner layout.</p>
+        </div>
+      </section>
+
+      <section class="case-detail-grid">
         <p class="detail-label">Outcome</p>
         <div>
           <h2>What changed, stated plainly.</h2>
-          <p>Exact operational metrics from a live departmental system can't be published. What can be shown honestly is what changed structurally between the old flow and the new one, and why that mattered to the people doing the work.</p>
+          <p>Exact operational metrics from a live departmental system can't be published. What can be shown honestly is what changed structurally between the old flow and the new one, and why that mattered to the people doing the work. ITBA doesn't have a controlled before/after instrumentation layer for this workflow, so the evidence below comes from validation sessions and officer feedback afterward, not a tracked metric — the next useful step would be instrumenting time-to-resolution and escalation rate directly against the redesigned flow.</p>
           <div class="comparison-table-wrap">
             <table class="comparison-table">
               <thead><tr><th scope="col">Capability</th><th scope="col">Before</th><th scope="col">After</th></tr></thead>
@@ -164,9 +176,9 @@
             </table>
           </div>
           <div class="case-proof-grid">
-            <article class="case-proof-card"><span>Generic status → explicit state</span><h3>Status became a decision aid, not a mystery</h3><p>An officer could tell whether a case needed attention without opening it — the state itself carried the answer.</p></article>
-            <article class="case-proof-card"><span>Buried action → visual hierarchy</span><h3>The next step stopped competing for attention</h3><p>Separating the primary action from supporting fields removed the need to hunt across a dense screen for what to do next.</p></article>
-            <article class="case-proof-card"><span>End-stage failure → in-context validation</span><h3>Mistakes surfaced where they happened, not after</h3><p>Catching a mismatch next to its source, before submission, closed the most common rework loop officers pointed to in this process.</p></article>
+            <article class="case-proof-card"><span>Generic status → explicit state</span><h3>Status became a decision aid, not a mystery</h3><p>An officer could tell whether a case needed attention without opening it. In validation sessions, officers were noticeably faster to identify blocked cases from the state alone — the clearest behavioural signal from this project, though not something instrumented at scale afterward.</p></article>
+            <article class="case-proof-card"><span>Buried action → visual hierarchy</span><h3>The next step stopped competing for attention</h3><p>Separating the primary action from supporting fields was meant to remove the need to hunt across a dense screen for what to do next — officers confirmed that in walkthroughs, though production usage wasn't tracked to confirm it held at scale.</p></article>
+            <article class="case-proof-card"><span>End-stage failure → in-context validation</span><h3>Mistakes surfaced where they happened, not after</h3><p>Catching a mismatch next to its source, before submission, was the change officers pointed to most often as removing rework — the strongest qualitative signal from this project, even without a formally measured rework rate.</p></article>
           </div>
         </div>
       </section>

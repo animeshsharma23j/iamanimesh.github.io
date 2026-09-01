@@ -63,7 +63,7 @@
 
       <section class="case-detail-grid">
         <p class="detail-label">Context</p>
-        <div><h2>One bill, five roles, no shared view of where it stood.</h2><p>Employee bill clearance at the Comptroller General of Defence Accounts moves through preparation, review, correction, and approval — different people, different responsibilities, different information needs, one workflow. I worked on the internal websites, applications, and accounting system supporting that process. Because it involves financial and employee data, this case study is a sanitised reconstruction — no real screens, records, or figures.</p><ul class="case-facts"><li><strong>Organisation</strong> Comptroller General of Defence Accounts (CGDA)</li><li><strong>Contribution</strong> UX research, process mapping, information architecture, wireframes, prototypes, and testing plans</li><li><strong>Status</strong> Professional work, presented here as a sanitised reconstruction</li><li><strong>Constraint</strong> No confidential screens, employee data, or financial records shown</li></ul></div>
+        <div><h2>One bill, five roles, no shared view of where it stood.</h2><p>Employee bill clearance at the Comptroller General of Defence Accounts moves through preparation, review, correction, and approval — different people, different responsibilities, different information needs, one workflow. I worked on the internal websites, applications, and accounting system supporting that process. Because it involves financial and employee data, this case study is a sanitised reconstruction — no real screens, records, or figures.</p><ul class="case-facts"><li><strong>Organisation</strong> Comptroller General of Defence Accounts (CGDA)</li><li><strong>Contribution</strong> UX research, process mapping, information architecture, wireframes, prototypes, and testing plans</li><li><strong>Status</strong> Professional work, presented here as a sanitised reconstruction</li><li><strong>Constraint</strong> No confidential screens, employee data, or financial records shown</li><li><strong>Scope</strong> Multiple working sessions with preparers, reviewers, and approvers across the five roles, spread over several weeks, alongside a review of existing paper-workaround practices</li></ul></div>
       </section>
 
       <section class="case-detail-grid">
@@ -72,11 +72,14 @@
           <h2>Map the process before touching the product.</h2>
           <p>The brief could have started with the existing screens. It started with the process instead — because a bill's five roles each had a different relationship to the same workflow, and no single screen audit would have surfaced that on its own.</p>
 
+          <h3 class="mockup-heading research-subhead">Research questions</h3>
+          <ul class="case-facts"><li><strong>Where does a bill actually stall?</strong> Not which screen breaks, but which handoff between roles a bill gets stuck at, and for how long.</li><li><strong>What fills the gap when the system doesn't?</strong> If preparers, reviewers, and approvers had informal workarounds, what were those workarounds compensating for?</li><li><strong>Who is responsible for the next move?</strong> Whether the interface itself made ownership of a "pending" bill legible, or left it to be inferred by asking around.</li></ul>
+
           <h3 class="mockup-heading research-subhead">Process mapping across every role</h3>
-          <p>Working sessions with people at each stage of bill clearance — preparers, reviewers, approvers — traced the actual sequence of activities and decision points each role went through, rather than the org chart's idealised version of it. The gap between the two turned out to be most of the problem.</p>
+          <p>Working sessions with people at each stage of bill clearance — preparers, reviewers, approvers — traced the actual sequence of activities and decision points each role went through, rather than the org chart's idealised version of it. The gap between the two turned out to be most of the problem. This ran as working sessions with each role rather than a single stakeholder workshop, because a five-role workflow needed each role's own account of the sequence, not one department's summary of how the other four operate.</p>
 
           <h3 class="mockup-heading research-subhead">Auditing where paper habits still filled the gaps</h3>
-          <p>Wherever the internal system fell short, an informal paper-based workaround had usually grown up to cover it — a separate reference sheet, a phone call, a physical file passed between desks. Mapping those workarounds against the digital system showed exactly where the designed process and the lived process had drifted apart.</p>
+          <p>Wherever the internal system fell short, an informal paper-based workaround had usually grown up to cover it — a separate reference sheet, a phone call, a physical file passed between desks. Mapping those workarounds against the digital system showed exactly where the designed process and the lived process had drifted apart. This ran alongside the process mapping rather than as a separate audit, because workarounds rarely surface when you ask someone to describe their job — they show up when you trace where the digital system stopped being enough and something informal grew up to cover it.</p>
 
           <h3 class="mockup-heading research-subhead">Structuring around blockers, not screens</h3>
           <p>Findings were organised by what stopped a bill from moving to its next stage, rather than by the individual pages of the existing system. That reframing is what turned a screen-by-screen audit into a process-level diagnosis. Four blockers recurred often enough to drive the design direction:</p>
@@ -144,10 +147,19 @@
       </section>
 
       <section class="case-detail-grid">
+        <p class="detail-label">Stakeholder influence</p>
+        <div>
+          <h2>The evidence had to outweigh the instinct to just redesign the screens.</h2>
+          <p>The department's early expectation was a visual refresh — the existing pages looked dated, and a cosmetic pass looked like the obvious next step. The process-mapping and workaround findings made the case for a different scope: showing that a single "pending" label was standing in for at least four different real states wasn't an opinion about visual design, it was a traceable gap between what the system said and what people were actually doing to work around it. Walking stakeholders through the workaround pattern directly, rather than summarising it, is what shifted the brief from a visual refresh to a structural one.</p>
+          <p>Not every finding survived that conversation. A proposed change to how corrections were tracked ran into legitimate audit and record-keeping requirements the interface couldn't design away, and the final structure had to hold onto that complexity rather than simplify around it.</p>
+        </div>
+      </section>
+
+      <section class="case-detail-grid">
         <p class="detail-label">Outcome</p>
         <div>
           <h2>What changed, stated plainly.</h2>
-          <p>Quantitative operational results from a defence accounting system can't be published. What follows is what changed structurally between the old process and the new one, and why it mattered to the people using it.</p>
+          <p>Quantitative operational results from a defence accounting system can't be published. What follows is what changed structurally between the old process and the new one, and why it mattered to the people using it. The department didn't run a formal before/after measurement program on this system, so the evidence here is what shifted structurally and in validation sessions afterward, not a tracked metric — if I were running this today, I'd push to instrument time-to-clearance and correction-cycle frequency directly against the new stages.</p>
           <div class="comparison-table-wrap">
             <table class="comparison-table">
               <thead><tr><th scope="col">Capability</th><th scope="col">Before</th><th scope="col">After</th></tr></thead>
@@ -160,9 +172,9 @@
             </table>
           </div>
           <div class="case-proof-grid">
-            <article class="case-proof-card"><span>Flat status → staged status</span><h3>Ownership became visible</h3><p>A bill's status started implying who was responsible for the next move, cutting down on status-check enquiries between departments.</p></article>
-            <article class="case-proof-card"><span>Late requirements → upfront requirements</span><h3>Fewer correction cycles</h3><p>Surfacing what a bill needed during preparation reduced how often bills were bounced back purely for missing documentation.</p></article>
-            <article class="case-proof-card"><span>Disconnected corrections → traceable corrections</span><h3>Faster recovery from a return</h3><p>Tying a flagged issue to its source meant a returned bill didn't require re-diagnosing the original objection from scratch.</p></article>
+            <article class="case-proof-card"><span>Flat status → staged status</span><h3>Ownership became visible</h3><p>A bill's status started implying who was responsible for the next move. In the sessions that followed rollout, people across departments described fewer status-check calls to each other — an informal signal, not a tracked metric.</p></article>
+            <article class="case-proof-card"><span>Late requirements → upfront requirements</span><h3>Fewer correction cycles, by report</h3><p>Surfacing what a bill needed during preparation was meant to reduce documentation-only bounce-backs, and preparers said that held up in practice — though the system had no formal before/after tracking to confirm it.</p></article>
+            <article class="case-proof-card"><span>Disconnected corrections → traceable corrections</span><h3>Faster recovery from a return</h3><p>Tying a flagged issue to its source was designed to remove the need to re-diagnose an objection from scratch — the clearest win reported in validation sessions, even without a measured recovery-time figure.</p></article>
           </div>
         </div>
       </section>
