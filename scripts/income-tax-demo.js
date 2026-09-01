@@ -42,8 +42,12 @@
     }
   }
 
+  var currentScreenId = null;
+
   function showScreen(id) {
     stopTutorialPlay();
+    currentScreenId = id;
+    if (id === "done") trackDemoComplete();
     screens.forEach(function (screen) {
       screen.classList.toggle("is-active", screen.id === id);
     });
@@ -1149,6 +1153,28 @@
       localStorage.setItem(THEME_KEY, next);
     });
   }
+
+  // ---- Passive drop-off tracking: where people are when they leave, not just whether they finish ----
+  var dropoffTracked = false;
+  var completeTracked = false;
+
+  function trackDemoComplete() {
+    if (completeTracked || typeof gtag !== "function") return;
+    completeTracked = true;
+    gtag("event", "demo_complete");
+  }
+
+  function trackDropoff() {
+    if (dropoffTracked || completeTracked || typeof gtag !== "function") return;
+    if (!currentScreenId || currentScreenId === "done") return;
+    dropoffTracked = true;
+    gtag("event", "demo_dropoff", { screen_id: currentScreenId });
+  }
+
+  document.addEventListener("visibilitychange", function () {
+    if (document.visibilityState === "hidden") trackDropoff();
+  });
+  window.addEventListener("pagehide", trackDropoff);
 
   showScreen("home");
 })();
