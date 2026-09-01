@@ -1720,7 +1720,7 @@ h1 {
 .directory-entry { box-sizing: border-box; min-width: 0; min-height: 420px; border: 1px solid var(--line); border-radius: 0; background: rgba(7, 10, 13, 0.72); }
 .directory-entry:not(.directory-card-static):hover, .directory-entry:not(.directory-card-static):focus-visible { border-color: rgba(117, 213, 228, 0.68); background: rgba(117, 213, 228, 0.055); }
 
-.directory-card.directory-entry { display: grid; grid-template-columns: 1fr; justify-items: start; gap: 20px; min-height: 540px; padding: 32px; }
+.directory-card.directory-entry { display: grid; grid-template-columns: 1fr; justify-items: start; align-items: start; align-content: start; gap: 20px; min-height: 540px; padding: 32px; }
 .directory-card.directory-entry > img { width: 88px; height: 88px; border-radius: 18px; }
 .directory-card.directory-entry h2, .case-row.directory-entry h2 { margin: 0 0 10px; font-size: clamp(1.65rem, 2.6vw, 2.35rem); font-weight: 800; line-height: 1.04; letter-spacing: 0; }
 
