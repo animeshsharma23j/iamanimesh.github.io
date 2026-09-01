@@ -1724,7 +1724,8 @@ h1 {
 .directory-entry:not(.directory-card-static):hover, .directory-entry:not(.directory-card-static):focus-visible { border-color: rgba(117, 213, 228, 0.68); background: rgba(117, 213, 228, 0.055); }
 
 .directory-card.directory-entry { display: grid; grid-template-columns: 1fr; justify-items: start; gap: 20px; min-height: 540px; padding: 32px; }
-.directory-card.directory-entry > img { width: 88px; height: 88px; border-radius: 18px; }
+.directory-card.directory-entry > img { width: 88px; height: 88px; border-radius: 18px; outline: 1px solid rgba(255, 255, 255, 0.14); outline-offset: -1px; }
+.coming-soon-body > img { outline: 1px solid rgba(255, 255, 255, 0.14); outline-offset: -1px; }
 .directory-card.directory-entry h2, .case-row.directory-entry h2 { margin: 0 0 10px; font-size: clamp(1.65rem, 2.6vw, 2.35rem); font-weight: 800; line-height: 1.04; letter-spacing: 0; }
 
 .case-row.directory-entry { display: grid; grid-template-columns: 1fr; grid-template-rows: auto auto 1fr auto; align-items: start; gap: 18px; min-height: 540px; padding: 32px; color: var(--text); text-decoration: none; transition: border-color 180ms ease, background 180ms ease; }
