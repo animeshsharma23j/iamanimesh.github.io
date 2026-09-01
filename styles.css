@@ -1204,7 +1204,9 @@ h1 {
 .products-shell h1 { max-width: 860px; margin: 0; color: #151820; font-size: var(--headline-size); font-weight: 800; line-height: 0.98; letter-spacing: 0; }
 .products-intro { max-width: 620px; margin: 28px 0 70px; color: #5d6574; font-size: clamp(1.05rem, 1.55vw, 1.34rem); line-height: 1.55; }
 .product-directory { display: grid; gap: 26px; }
-.directory-card { display: grid; grid-template-columns: 174px minmax(0, 1fr) 146px; gap: 34px; align-items: center; padding: 42px 52px; border: 1px solid #e0e3e8; border-radius: 24px; background: rgba(255, 255, 255, 0.92); box-shadow: 0 16px 38px rgba(28, 35, 46, 0.07); }
+.directory-card { position: relative; display: grid; grid-template-columns: 174px minmax(0, 1fr) 146px; gap: 34px; align-items: center; padding: 42px 52px; border: 1px solid #e0e3e8; border-radius: 24px; background: rgba(255, 255, 255, 0.92); box-shadow: 0 16px 38px rgba(28, 35, 46, 0.07); }
+.coming-soon-badge { position: absolute; top: 24px; right: 26px; }
+.directory-card.is-coming-soon { cursor: default; opacity: 0.82; }
 .directory-card > img { width: 128px; height: 128px; border-radius: 28px; box-shadow: 0 15px 26px rgba(24, 29, 38, 0.13); }
 .directory-card h2 { margin: 0 0 12px; color: #151820; font-size: clamp(1.5rem, 2.2vw, 2rem); font-weight: 750; letter-spacing: 0; }
 .directory-card h2 span { display: block; margin-top: 4px; color: #4f5765; font-size: 0.5em; font-weight: 650; letter-spacing: -0.03em; }
@@ -1667,6 +1669,7 @@ h1 {
   .directory-card > img { width: 82px; height: 82px; border-radius: 20px; }
   .directory-card h2 { font-size: 1.58rem; }
   .directory-card > a { grid-column: 1 / -1; width: 100%; }
+  .coming-soon-badge { position: static; grid-column: 1 / -1; justify-self: start; order: -1; margin-bottom: 4px; }
   .product-page .site-header { width: calc(100% - 24px); }
   .product-copy { padding: 48px 0 28px; }
   .app-screen-hero .product-copy { padding: 48px 0 28px; }
