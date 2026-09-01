@@ -1207,6 +1207,9 @@ h1 {
 .directory-card { position: relative; display: grid; grid-template-columns: 174px minmax(0, 1fr) 146px; gap: 34px; align-items: center; padding: 42px 52px; border: 1px solid #e0e3e8; border-radius: 24px; background: rgba(255, 255, 255, 0.92); box-shadow: 0 16px 38px rgba(28, 35, 46, 0.07); }
 .coming-soon-badge { position: absolute; top: 24px; right: 26px; }
 .directory-card.is-coming-soon { cursor: default; opacity: 0.82; }
+.directory-card.directory-entry.is-coming-soon { display: block; }
+.coming-soon-body { display: grid; grid-template-columns: 1fr; justify-items: start; align-items: center; gap: 20px; height: 100%; }
+.coming-soon-body > img { width: 88px; height: 88px; border-radius: 18px; }
 .directory-card > img { width: 128px; height: 128px; border-radius: 28px; box-shadow: 0 15px 26px rgba(24, 29, 38, 0.13); }
 .directory-card h2 { margin: 0 0 12px; color: #151820; font-size: clamp(1.5rem, 2.2vw, 2rem); font-weight: 750; letter-spacing: 0; }
 .directory-card h2 span { display: block; margin-top: 4px; color: #4f5765; font-size: 0.5em; font-weight: 650; letter-spacing: -0.03em; }
@@ -1720,7 +1723,7 @@ h1 {
 .directory-entry { box-sizing: border-box; min-width: 0; min-height: 420px; border: 1px solid var(--line); border-radius: 0; background: rgba(7, 10, 13, 0.72); }
 .directory-entry:not(.directory-card-static):hover, .directory-entry:not(.directory-card-static):focus-visible { border-color: rgba(117, 213, 228, 0.68); background: rgba(117, 213, 228, 0.055); }
 
-.directory-card.directory-entry { display: grid; grid-template-columns: 1fr; justify-items: start; align-items: start; align-content: start; gap: 20px; min-height: 540px; padding: 32px; }
+.directory-card.directory-entry { display: grid; grid-template-columns: 1fr; justify-items: start; gap: 20px; min-height: 540px; padding: 32px; }
 .directory-card.directory-entry > img { width: 88px; height: 88px; border-radius: 18px; }
 .directory-card.directory-entry h2, .case-row.directory-entry h2 { margin: 0 0 10px; font-size: clamp(1.65rem, 2.6vw, 2.35rem); font-weight: 800; line-height: 1.04; letter-spacing: 0; }
 
@@ -1735,6 +1738,8 @@ h1 {
   .directory-entry, .directory-card.directory-entry, .case-row.directory-entry { min-height: 0; }
   .directory-card.directory-entry, .case-row.directory-entry { gap: 16px; padding: 24px; }
   .directory-card.directory-entry > img { width: 76px; height: 76px; }
+  .coming-soon-body { gap: 16px; }
+  .coming-soon-body > img { width: 76px; height: 76px; }
 }
 
 /* Mobile navigation: replace the cramped desktop tabs with a compact menu. */
