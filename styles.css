@@ -1318,6 +1318,10 @@ h1 {
 .directory-card small { color: var(--soft); }
 
 .app-screen-hero { grid-template-columns: minmax(0, 0.9fr) minmax(370px, 0.85fr); align-items: start; }
+/* RateX ships without a hero screenshot for now, so its hero runs as a single
+   column rather than reserving an empty 370px one beside the copy. To restore
+   it: delete this rule and put the .app-screen-frame back in ratex.html. */
+.product-ratex .app-screen-hero { grid-template-columns: minmax(0, 1fr); }
 .app-screen-hero .product-copy { align-self: start; padding: 0; }
 .app-screen-frame { position: relative; display: flex; align-items: flex-end; justify-content: center; align-self: start; min-height: 560px; overflow: hidden; }
 .app-screen-frame::before { position: absolute; inset: 18% 8% 2%; content: ""; border-radius: 50%; background: radial-gradient(circle, color-mix(in srgb, var(--product-accent) 24%, transparent), transparent 68%); filter: blur(10px); }
