@@ -1097,9 +1097,16 @@ h1 {
 .case-study-shell h1 span { display: block; margin-top: 0.25em; color: var(--muted); font-size: 0.42em; font-weight: 600; line-height: 1.15; letter-spacing: -0.04em; }
 .case-intro { max-width: 650px; margin: 0 0 42px; color: var(--text); font-size: clamp(1.25rem, 2vw, 1.7rem); line-height: 1.38; }
 .case-meta { display: flex; flex-wrap: wrap; gap: 10px 28px; padding: 22px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); color: var(--muted); font-size: 0.82rem; }
-.case-detail-grid { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 42px; padding: 72px 0; border-bottom: 1px solid var(--line); }
+.case-detail-grid { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 42px; padding: 72px 0; border-bottom: 1px solid var(--rule); }
 .case-detail-grid h2 { max-width: 720px; margin: 0 0 18px; font-size: clamp(1.7rem, 3.2vw, 3.2rem); line-height: 1.04; letter-spacing: -0.045em; }
-.case-detail-grid p:last-child { max-width: 630px; margin: 0; color: var(--muted); font-size: 1.06rem; line-height: 1.62; }
+/* Long-form prose. This treatment was previously scoped to p:last-child, so
+   only the final paragraph of a section got a measure, a line-height and a
+   muted colour; every other one fell back to browser defaults — line-height
+   `normal` (~1.2) across the full 958px column, at heading brightness. */
+.case-detail-grid > div > p:not([class]),
+.case-detail-grid p:last-child { max-width: 630px; margin: 0 0 18px; color: var(--muted); font-size: 1.06rem; line-height: 1.62; }
+.case-detail-grid > div > p:not([class]):last-child,
+.case-detail-grid p:last-child { margin-bottom: 0; }
 .case-facts { display: grid; gap: 12px; max-width: 700px; margin: 28px 0 0; padding: 0; list-style: none; }
 .case-facts li { padding-top: 12px; border-top: 1px solid var(--rule); color: var(--muted); font-size: 0.98rem; line-height: 1.5; }
 .case-facts strong { display: block; margin-bottom: 4px; color: var(--text); font-size: 0.8rem; letter-spacing: 0.01em; text-transform: uppercase; }
@@ -1233,7 +1240,7 @@ h1 {
 .signal-table-wrap { margin-top: 28px; }
 .signal-row { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 16px; align-items: baseline; padding: 11px 0; border-top: 1px solid var(--rule); }
 .signal-row:first-child { border-top: none; }
-.signal-tag { display: inline-flex; align-items: center; justify-content: center; padding: 3px 8px; border: 1px solid rgba(117, 213, 228, 0.32); border-radius: 20px; color: var(--cyan); font-family: var(--font-mono); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; white-space: nowrap; }
+.signal-tag { display: block; padding: 3px 0; color: var(--cyan); font-family: var(--font-mono); font-size: 0.66rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; white-space: nowrap; }
 .signal-text { margin: 0; color: var(--muted); font-size: 0.9rem; line-height: 1.5; }
 
 /* Product directory and app-launch pages */
