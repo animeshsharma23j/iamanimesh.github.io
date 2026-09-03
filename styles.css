@@ -1937,6 +1937,13 @@ h1 {
   .mobile-menu nav a:hover,
   .mobile-menu nav a:focus-visible { color: #0b1b1d; background: var(--cyan); outline: 0; }
 
+  /* .tabs is display:none at this width, so the desktop tab's current-page
+     treatment goes with it. Mark the current page here too — quiet colour,
+     kept distinct from the filled cyan hover state below it. */
+  .mobile-menu nav a[aria-current="page"] { color: var(--cyan); }
+  .mobile-menu nav a[aria-current="page"]:hover,
+  .mobile-menu nav a[aria-current="page"]:focus-visible { color: #0b1b1d; }
+
   .home-directory-section { margin-top: 88px; padding-top: 22px; }
   .home-section-heading { display: grid; gap: 22px; margin-bottom: 30px; }
   .home-section-heading h2 { font-size: clamp(2.25rem, 10vw, 3.35rem); }

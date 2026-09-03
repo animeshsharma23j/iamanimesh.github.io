@@ -31,7 +31,15 @@ const navFor = (file) => [
   "about.html",
   file === "index.html" ? "#work-with-me" : "index.html#work-with-me",
 ];
-const activeNav = { "about.html": "about.html" };
+// A nav destination marks itself in both navs: the .tabs row and the mobile
+// menu that replaces it below 560px. Marking only one leaves the other set of
+// users without a current-page cue, so the count below is deliberately 2.
+const activeNav = {
+  "about.html": "about.html",
+  "products.html": "products.html",
+  "case-studies.html": "case-studies.html",
+};
+const NAV_COUNT = 2;
 
 const errors = [];
 
@@ -67,9 +75,11 @@ for (const file of pages) {
 
     const activePage = activeNav[file] ?? null;
     const currentMatches = [...html.matchAll(/aria-current="page"/g)].length;
-    expect(currentMatches === (activePage ? 1 : 0), "unexpected active-navigation state");
+    const expected = activePage ? NAV_COUNT : 0;
+    expect(currentMatches === expected, `unexpected active-navigation state (found ${currentMatches}, expected ${expected})`);
     if (activePage) {
-      expect(html.includes(`href="${activePage}" aria-current="page"`), "active navigation points to the wrong page");
+      const marked = [...html.matchAll(new RegExp(`href="${activePage}" aria-current="page"`, "g"))].length;
+      expect(marked === NAV_COUNT, `active navigation must mark ${activePage} in both the tab row and the mobile menu (found ${marked})`);
     }
   }
 
