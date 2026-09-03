@@ -1142,6 +1142,27 @@ h1 {
 /* Mockup windows (hero + final mockups gallery) */
 .case-hero-visual { display: flex; align-items: stretch; gap: 22px; margin: 48px 0 14px; }
 .case-hero-caption { margin: 16px 0 0; color: var(--soft); font-size: 0.78rem; }
+
+/* Inline prose links inside a case study. The global `a` rule is
+   color:inherit/text-decoration:none, which suits nav and card links but
+   leaves a link inside a paragraph indistinguishable from the text it sits in.
+   Scoped to case-study copy so nav, cards, and CTAs keep the global treatment. */
+.case-study-shell p a,
+.case-study-shell li a,
+.case-hero-caption a {
+  color: var(--cyan);
+  text-decoration: underline;
+  text-decoration-color: rgba(117, 213, 228, 0.4);
+  text-underline-offset: 3px;
+}
+.case-study-shell p a:hover,
+.case-study-shell li a:hover,
+.case-hero-caption a:hover,
+.case-study-shell p a:focus-visible,
+.case-study-shell li a:focus-visible,
+.case-hero-caption a:focus-visible {
+  text-decoration-color: var(--cyan);
+}
 .mockup-window { display: flex; flex-direction: column; flex: 1; min-width: 0; border: 1px solid var(--line-strong); border-radius: 10px; background: var(--bg-2); box-shadow: 0 30px 70px rgba(0, 0, 0, 0.4); overflow: hidden; }
 .mockup-chrome { display: flex; align-items: center; gap: 6px; height: 30px; padding: 0 12px; border-bottom: 1px solid var(--line); }
 .mockup-chrome span { width: 7px; height: 7px; border-radius: 50%; background: var(--line-strong); }
