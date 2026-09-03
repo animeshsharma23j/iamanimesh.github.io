@@ -9,6 +9,11 @@
   --amber: #75d5e4;
   --cyan: #75d5e4;
   --warn: #f0857c;
+  /* Attention state for mockup status rows. --amber is a legacy alias of
+     --cyan, so before this there was no colour that could mark a row as
+     needing a look without it reading as an accent. */
+  --attn: #dfae58;
+  --attn-soft: rgba(223, 174, 88, 0.14);
   --panel: rgba(7, 10, 13, 0.52);
   --max: 1180px;
   --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -1163,39 +1168,37 @@ h1 {
 .case-hero-caption a:focus-visible {
   text-decoration-color: var(--cyan);
 }
-.mockup-window { display: flex; flex-direction: column; flex: 1; min-width: 0; border: 1px solid var(--line-strong); border-radius: 10px; background: var(--bg-2); box-shadow: 0 30px 70px rgba(0, 0, 0, 0.4); overflow: hidden; }
+.mockup-window { display: flex; flex-direction: column; flex: 1; min-width: 0; border: 1px solid var(--line-strong); border-radius: 16px; background: var(--bg-2); box-shadow: 0 30px 70px rgba(0, 0, 0, 0.4); overflow: hidden; }
 .mockup-chrome { display: flex; align-items: center; gap: 6px; height: 30px; padding: 0 12px; border-bottom: 1px solid var(--line); }
-.mockup-chrome span { width: 7px; height: 7px; border-radius: 50%; background: var(--line-strong); }
+.mockup-chrome span:not(.mockup-chrome-brand) { width: 8px; height: 8px; flex-shrink: 0; border-radius: 50%; background: var(--line-strong); }
 .mockup-chrome-brand { display: flex; flex-shrink: 0; align-items: center; gap: 6px; margin-left: 8px; padding-left: 8px; border-left: 1px solid var(--line); color: var(--soft); font-family: var(--font-mono); font-size: 0.66rem; font-weight: 700; letter-spacing: 0.04em; white-space: nowrap; }
-.mockup-chrome-brand::before { content: ""; width: 6px; height: 6px; border-radius: 2px; background: var(--cyan); }
-.mockup-input { display: flex; flex-direction: column; gap: 5px; margin-bottom: 18px; }
+.mockup-input { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 14px; padding: 10px 12px; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--bg); }
 .mockup-input span { color: var(--soft); font-family: var(--font-mono); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; }
-.mockup-input strong { display: block; padding: 11px 12px; border: 1px solid var(--line-strong); border-radius: 6px; color: var(--text); font-size: 0.92rem; font-weight: 600; letter-spacing: 0.04em; }
+.mockup-input strong { color: var(--text); font-family: var(--font-mono); font-size: 0.86rem; font-weight: 600; letter-spacing: 0.04em; }
 .mockup-body { display: flex; flex: 1; flex-direction: column; padding: 24px; }
 .mockup-eyebrow { display: block; margin-bottom: 10px; color: var(--cyan); font-family: var(--font-mono); font-size: 0.64rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
 .mockup-heading { margin: 0 0 8px; color: var(--text); font-size: 1.14rem; line-height: 1.3; letter-spacing: -0.02em; }
 .mockup-body p { margin: 0 0 16px; color: var(--muted); font-size: 0.84rem; line-height: 1.5; }
 .mockup-steps { display: flex; gap: 5px; margin-bottom: 14px; }
-.mockup-steps span { flex: 1; height: 3px; border-radius: 2px; background: var(--line-strong); }
-.mockup-steps span.is-done { background: var(--amber); }
+.mockup-steps span { width: 16px; height: 4px; flex-shrink: 0; border-radius: 999px; background: var(--line-strong); }
+.mockup-steps span.is-done { background: var(--cyan); }
 .mockup-actions { display: flex; flex-wrap: wrap; gap: 10px; }
 .mockup-btn { display: inline-flex; align-items: center; min-height: 36px; padding: 0 16px; border: 1px solid var(--line-strong); border-radius: 6px; background: transparent; color: var(--text); font: inherit; font-size: 0.78rem; font-weight: 700; }
 .mockup-btn.is-primary { border-color: var(--amber); background: var(--amber); color: #1b1205; }
-.mockup-body p.mockup-help { display: flex; gap: 10px; margin-top: 28px; padding: 12px 14px; border-left: 2px solid var(--cyan); background: rgba(117, 213, 228, 0.06); font-size: 0.78rem; line-height: 1.5; color: var(--text); }
+.mockup-body p.mockup-help { margin-top: 16px; padding-top: 10px; border-top: 1px solid var(--line); color: var(--soft); font-size: 0.74rem; line-height: 1.5; }
 .mockup-body p.mockup-fine { margin: 20px 0 0; color: var(--soft); font-size: 0.72rem; }
 .mockup-checklist { display: grid; gap: 11px; margin: 4px 0 16px; padding: 0; list-style: none; }
-.mockup-checklist li { display: flex; align-items: center; gap: 10px; color: var(--muted); font-size: 0.82rem; }
+.mockup-checklist li { display: flex; align-items: center; gap: 9px; padding: 9px 10px; border: 1px solid var(--line); border-radius: 8px; color: var(--muted); font-size: 0.82rem; }
 .mockup-checklist li.is-done { color: var(--text); }
-.mockup-checklist li.is-attention { color: var(--text); }
-.mockup-checklist .mockup-dot { position: relative; width: 15px; height: 15px; flex-shrink: 0; border: 1px solid var(--line-strong); border-radius: 50%; }
-.mockup-checklist li.is-done .mockup-dot { background: var(--cyan); border-color: var(--cyan); }
-.mockup-checklist li.is-done .mockup-dot::after { position: absolute; top: 2px; left: 5px; width: 4px; height: 7px; border: solid #071013; border-width: 0 2px 2px 0; content: ""; transform: rotate(40deg); }
-.mockup-checklist li.is-attention .mockup-dot { border-color: var(--amber); }
+.mockup-checklist li.is-attention { color: var(--text); border-color: var(--attn); background: var(--attn-soft); }
+.mockup-checklist .mockup-dot { width: 8px; height: 8px; flex-shrink: 0; border-radius: 50%; background: var(--line-strong); }
+.mockup-checklist li.is-done .mockup-dot { background: var(--cyan); }
+.mockup-checklist li.is-attention .mockup-dot { background: var(--attn); }
 .mockup-actions.is-bottom { margin-top: auto; padding-top: 20px; }
-.mockup-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); align-items: stretch; gap: 16px; margin-top: 32px; }
+.mockup-gallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: stretch; gap: 20px; margin-top: 32px; }
 .mockup-gallery figure { display: flex; flex-direction: column; min-width: 0; margin: 0; }
 .mockup-gallery .mockup-window { flex: 1; box-shadow: none; }
-.mockup-gallery figcaption { margin-top: 10px; color: var(--muted); font-size: 0.74rem; font-weight: 700; }
+.mockup-gallery figcaption { margin-top: 10px; color: var(--soft); font-size: 0.76rem; font-weight: 600; text-align: center; }
 
 /* Wireframe sketches */
 .wireframe-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 16px; margin-top: 32px; }
@@ -1489,6 +1492,9 @@ h1 {
 }
 
 @media (max-width: 900px) {
+  /* Six mockups: 3-up on desktop, 2-up here, 1-up at 560px below. */
+  .mockup-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
   .site-header,
   .shell {
     width: min(100% - 32px, var(--max));
