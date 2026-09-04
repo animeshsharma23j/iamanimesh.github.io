@@ -27,6 +27,11 @@
   --h2-weight: 750;
   --h3-size: 2rem;
   --h3-small: 1.5rem;
+  /* The lede: the sentence that sits under a heading and sets up the page or
+     section. One size, whatever the page. 21.4px desktop, 16.8px at the floor.
+     Previously five sizes — 16.8 / 17.6 / 21.4 / 23.2 / 27.2px — split across
+     nine rules with no relationship to each other. */
+  --lede-size: clamp(1.05rem, 1.55vw, 1.34rem);
   /* Small-type scale. Everything at or below ~13.6px resolves to one of these
      two. Previously this band held 23 distinct sizes across 59 declarations,
      eight of them inside a 2.2px range — differences that cost maintenance and
@@ -513,7 +518,7 @@ h1 {
   max-width: 590px;
   margin-bottom: 0;
   color: var(--muted);
-  font-size: clamp(1.05rem, 1.55vw, 1.34rem);
+  font-size: var(--lede-size);
   line-height: 1.55;
 }
 
@@ -758,7 +763,7 @@ h1 {
 .contact-panel { padding-top: 26px; text-align: center; }
 .contact-panel .intro { text-align: center; }
 .contact-panel h2 { max-width: none; margin: 0 auto 20px; color: var(--text); font-size: var(--h2-size); font-weight: 750; line-height: 1; letter-spacing: -0.03em; }
-.contact-lede { max-width: 460px; margin: 0 auto 28px; color: var(--muted); font-size: 1.05rem; line-height: 1.5; }
+.contact-lede { max-width: 460px; margin: 0 auto 28px; color: var(--muted); font-size: var(--lede-size); line-height: 1.5; }
 .contact-email { display: inline-block; color: var(--cyan); font-size: clamp(1.4rem, 3vw, 2.2rem); font-weight: 800; letter-spacing: -0.03em; }
 .contact-email:hover, .contact-email:focus-visible { color: var(--amber); }
 .contact-email:focus-visible { text-decoration: underline; text-underline-offset: 4px; }
@@ -985,7 +990,7 @@ h1 {
   max-width: 720px;
   margin: -34px 0 42px;
   color: var(--muted);
-  font-size: 1.05rem;
+  font-size: var(--lede-size);
   line-height: 1.55;
 }
 
@@ -1083,7 +1088,7 @@ h1 {
 .about-copy p {
   max-width: 560px;
   color: var(--muted);
-  font-size: clamp(1.08rem, 1.8vw, 1.45rem);
+  font-size: var(--lede-size);
   line-height: 1.55;
 }
 
@@ -1155,7 +1160,7 @@ h1 {
 
 .case-study-shell h1 { max-width: 900px; margin: 0 0 28px; font-size: var(--headline-size); }
 .case-study-shell h1 span { display: block; margin-top: 0.25em; color: var(--muted); font-size: 0.42em; font-weight: 650; line-height: 1.15; letter-spacing: -0.04em; }
-.case-intro { max-width: 650px; margin: 0 0 42px; color: var(--text); font-size: clamp(1.25rem, 2vw, 1.7rem); line-height: 1.38; }
+.case-intro { max-width: 650px; margin: 0 0 42px; color: var(--text); font-size: var(--lede-size); line-height: 1.38; }
 .case-meta { display: flex; flex-wrap: wrap; gap: 10px 28px; padding: 22px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); color: var(--muted); font-size: var(--text-small); }
 .case-detail-grid { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 42px; padding: 72px 0; border-bottom: 1px solid var(--rule); }
 .case-detail-grid h2 { max-width: 720px; margin: 0 0 18px; font-size: var(--h2-size); line-height: 1.04; letter-spacing: -0.045em; }
@@ -1330,7 +1335,7 @@ h1 {
 .products-shell { width: min(var(--max), calc(100% - 48px)); margin: 0 auto; padding: 86px 0 128px; }
 .products-eyebrow, .product-kicker { margin: 0 0 20px; }
 .products-shell h1 { max-width: 860px; margin: 0; color: var(--text); font-size: var(--headline-size); font-weight: 800; letter-spacing: 0; }
-.products-intro { max-width: 620px; margin: 28px 0 70px; color: #5d6574; font-size: clamp(1.05rem, 1.55vw, 1.34rem); line-height: 1.55; }
+.products-intro { max-width: 620px; margin: 28px 0 70px; color: #5d6574; font-size: var(--lede-size); line-height: 1.55; }
 .product-directory { display: grid; gap: 26px; }
 .directory-card { position: relative; display: grid; grid-template-columns: 174px minmax(0, 1fr) 146px; gap: 34px; align-items: center; padding: 42px 52px; border: 1px solid #e0e3e8; border-radius: 24px; background: rgba(255, 255, 255, 0.92); box-shadow: 0 16px 38px rgba(28, 35, 46, 0.07); }
 .coming-soon-badge { position: absolute; top: 24px; right: 26px; }
@@ -1353,7 +1358,7 @@ h1 {
 .product-page .product-kicker { margin-bottom: 16px; color: var(--product-accent); }
 .product-copy h1 { margin: 0; color: var(--text); font-size: var(--headline-size); font-weight: 800; letter-spacing: 0; }
 .product-copy h1 em { color: var(--product-accent); font-style: normal; }
-.product-lede { max-width: 535px; margin: 30px 0 34px; color: var(--muted); font-size: clamp(1.08rem, 1.6vw, 1.34rem); line-height: 1.52; }
+.product-lede { max-width: 535px; margin: 30px 0 34px; color: var(--muted); font-size: var(--lede-size); line-height: 1.52; }
 .product-actions { display: flex; flex-wrap: wrap; gap: 12px; }
 .product-button { display: inline-flex; align-items: center; justify-content: center; gap: 12px; min-height: 46px; padding: 0 18px; border: 1px solid transparent; border-radius: 0; font-size: var(--text-small); font-weight: 750; transition: transform 180ms ease, border-color 180ms ease, background 180ms ease; }
 .product-button:hover, .product-button:focus-visible { transform: translateY(-2px); }
@@ -1370,7 +1375,7 @@ h1 {
 .product-unitx, .product-buildx, .product-pacex { background: var(--bg); }
 .product-section { width: min(1180px, calc(100% - 48px)); margin: 0 auto; padding: 128px 0 140px; border-top: 1px solid rgba(255, 255, 255, 0.12); }
 .product-section h2 { max-width: 860px; margin: 0; color: var(--text); font-size: var(--h2-size); font-weight: 750; line-height: 1.04; letter-spacing: 0; }
-.section-lede { max-width: 620px; margin: 28px 0 54px; color: var(--muted); font-size: clamp(1.05rem, 1.55vw, 1.34rem); line-height: 1.55; }
+.section-lede { max-width: 620px; margin: 28px 0 54px; color: var(--muted); font-size: var(--lede-size); line-height: 1.55; }
 .product-feature-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
 .product-feature-grid article { min-width: 0; padding: 28px; border: 1px solid rgba(255, 255, 255, 0.13); border-radius: 15px; background: rgba(255, 255, 255, 0.035); }
 .product-feature-grid span { color: var(--product-accent); font-family: var(--font-mono); font-size: var(--text-label); font-weight: 800; letter-spacing: 0.12em; }
@@ -1716,7 +1721,6 @@ h1 {
   }
 
   .lede {
-    font-size: 1rem;
     overflow-wrap: anywhere;
   }
 
@@ -1823,7 +1827,7 @@ h1 {
   .app-screen-hero .product-copy { padding: 48px 0 28px; }
   .product-pacex .app-screen-hero .product-copy { padding: 48px 0 28px; }
   .product-app-icon { width: 32px; height: 32px; margin-bottom: 12px; border-radius: 8px; }
-  .product-lede { margin: 20px 0 24px; font-size: 1rem; }
+  .product-lede { margin: 20px 0 24px; }
   .product-actions { flex-wrap: nowrap; gap: 8px; }
   .product-button { min-height: 46px; padding: 0 12px; font-size: var(--text-small); white-space: nowrap; }
   .product-button.primary { flex: 1 1 auto; }
@@ -1899,7 +1903,7 @@ h1 {
 .calculator-hero-download { white-space: nowrap; }
 .calculator-hero h1 { max-width: 760px; margin: 12px 0 0; font-size: var(--headline-size); letter-spacing: -.065em; }
 .calculator-hero h1 em { color: var(--cyan); font-family: inherit; font-style: normal; }
-.calculator-intro { max-width: 590px; margin: 28px 0 0; color: var(--muted); font-size: 1.1rem; line-height: 1.65; }
+.calculator-intro { max-width: 590px; margin: 28px 0 0; color: var(--muted); font-size: var(--lede-size); line-height: 1.65; }
 @media (max-width: 700px) {
   .calculator-hero { grid-template-columns: 1fr; row-gap: 32px; }
 }
