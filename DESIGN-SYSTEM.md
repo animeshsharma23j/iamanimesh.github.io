@@ -1,6 +1,6 @@
 # Animesh Portfolio Design System
 
-Version 1.6 · 4 September 2026 · audited against live `styles.css` + `index.html`
+Version 1.7 · 4 September 2026 · audited against live `styles.css` + `index.html`
 
 ## Product intent
 
@@ -53,6 +53,19 @@ The background uses only a subtle low-contrast grid and restrained radial cyan a
 Before this, six different h1 sizes were live at 1440px — home and products at 64.8px, product pages at 72px, the case-study index and all support/privacy/404 pages at 89.28px, case-study detail at 100.8px, and the calculators at 115.2px. Each page type had picked up its own `clamp()` at a different time and they were never compared, so a privacy policy outranked the homepage and the ranking inverted at mobile. It read as accidental because it was.
 
 The mobile value is set by redefining the token inside the `≤900px` block, so a single line moves the whole site. **Do not add a per-page `h1` font-size.**
+
+#### The full heading ramp
+
+| Token | Desktop | ≤900px | Role |
+| --- | --- | --- | --- |
+| `--headline-size` | 72px | 48px | Every `h1` |
+| `--h2-size` | 48px | 36px | Section headings — home sections, About journey, case-study sections, product sections, privacy/support headings, calculator panels |
+| `--h3-size` | 32px | 24px | Directory and case cards, About journey entries, Trade Cloud suite cards |
+| `--h3-small` | 24px | 20px | Small card headings — proof cards, product feature grids, certifications |
+
+**Sized by role, not by tag.** The product/case card is an `h2` on its index page and an `h3` on the home page; both take `--h3-size` so the same component reads the same size wherever it appears. Adding a heading means picking the token whose role it matches — never writing a new size.
+
+Two deliberate exceptions, both artwork rather than page structure: the hero diagram's labels (`0.58rem`) and `.mockup-heading` inside the simulated app screens on `income-tax.html` (18.24px). Those reconstruct a UI at miniature scale and would break if pulled onto the page ramp.
 
 #### Small-type scale — two steps, no more
 
@@ -164,11 +177,11 @@ Inter, not mono. A mono eyebrow was tried and reverted — the site reads better
 
 Measured against live `styles.css` on 4 September 2026. These are gaps between the system as specified above and the system as built. Recorded so the spec stays honest — this section should shrink, not grow.
 
-### Section heading sizes (h2 / h3)
+### Body and supporting copy
 
-`h1` is now a single token (v1.6) and the small tier, the weights and the eyebrow were resolved in v1.3. What remains is roughly 30 near-unique `clamp()` expressions on `h2` and `h3` — `clamp(1.7rem, 3.2vw, 3.2rem)`, `clamp(1.65rem, 2.6vw, 2.35rem)`, `clamp(2rem, 3.5vw, 3rem)` and so on, mostly one use each.
+The heading ramp (v1.7), the small tier, the weights and the eyebrow are all resolved. What remains untokenised is body and intro copy — around 20 `clamp()` expressions on `.lede`, `.case-intro`, `.product-lede`, `.calculator-intro` and similar, mostly one use each, spanning roughly 16–27px.
 
-Same problem as the headlines had, one level down: nobody chose these relative to each other. Worth the same treatment — a small set of tokens rather than a per-component clamp — but it needs a designer's eye on the result, not a mechanical pass.
+Lower stakes than the headings were, since these sit closer together and rarely appear side by side. Worth a pass eventually; not urgent.
 
 ### Corner radii
 
