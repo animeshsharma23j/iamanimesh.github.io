@@ -1,6 +1,6 @@
 # Animesh Portfolio Design System
 
-Version 1.3 · 4 September 2026 · audited against live `styles.css` + `index.html`
+Version 1.4 · 4 September 2026 · audited against live `styles.css` + `index.html`
 
 ## Product intent
 
@@ -26,16 +26,16 @@ The CSS fallback lists are operating-system fallbacks for these two roles, not e
 | `--text` | `#F3EEE2` | Main headings and high-emphasis copy |
 | `--muted` | `#AAA395` | Supporting copy and navigation |
 | `--soft` | `#8D877D` | Captions and lower-emphasis metadata |
-| `--line` | `rgba(243,238,226,0.22)` | Directional dividers only (`border-top` / `-bottom` / `-left` / `-right`) — 1.73:1, decorative |
-| `--line-strong` | `rgba(243,238,226,0.38)` | Component boundaries — every full `border: 1px solid` box. 3.11:1 |
-| `--rule` | `rgba(243,238,226,0.45)` | Case-study section rules in long-form copy. 3.97:1 |
+| `--line` | `rgba(243,238,226,0.08)` | Default divider and border |
+| `--line-strong` | `rgba(243,238,226,0.15)` | Active border and stronger separation |
+| `--rule` | `rgba(243,238,226,0.24)` | Case-study section rules in long-form copy |
 | `--amber` / `--cyan` | `#75D5E4` | Primary action, emphasis, availability, labels, process markers |
 | `--warn` | `#F0857C` | Invalid form fields and error hints only |
 | `--panel` | `rgba(7,10,13,0.52)` | Translucent supporting surface |
 
 **The system now runs a single accent colour.** `--amber` and `--cyan` both resolve to the same cyan (`#75D5E4`) in production — there is no separate gold/amber token in use anywhere in `styles.css`. `--amber` survives only as a legacy variable name; treat it as an alias for cyan, not a second hue. If a warm accent is ever reintroduced, `--amber` should be repointed to a real amber value rather than left as a synonym.
 
-**Structural lines carry a contrast floor.** Fine rules are this system's primary hierarchy device (see *Visual surfaces*), so they have to actually reach the eye. `--line-strong` and `--rule` both clear the WCAG 1.4.11 3:1 minimum for UI-component boundaries against `--bg`; `--line` sits below it deliberately and is therefore restricted to decorative dividers that carry no grouping meaning. **Do not lower these three values.** A full box border around a card, a button, or any interactive surface uses `--line-strong`, never `--line` — the boundary of an interactive element is a UI component boundary and is covered by 1.4.11.
+**These line values are a deliberate aesthetic choice.** They sit below the WCAG 1.4.11 3:1 minimum for UI-component boundaries (`--line` ≈1.1:1, `--line-strong` ≈1.4:1, `--rule` ≈1.9:1). Raising them to clear that floor was tried and reverted — it made the design heavier than intended. Treat the restraint as intentional; do not raise them again without being asked.
 
 The background uses only a subtle low-contrast grid and restrained radial cyan atmosphere. These effects support hierarchy; they must never reduce text legibility or become decorative content.
 
