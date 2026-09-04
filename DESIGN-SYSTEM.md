@@ -1,6 +1,6 @@
 # Animesh Portfolio Design System
 
-Version 1.8 · 4 September 2026 · audited against live `styles.css` + `index.html`
+Version 1.9 · 4 September 2026 · audited against live `styles.css` + `index.html`
 
 ## Product intent
 
@@ -209,7 +209,7 @@ Only `income-tax.html` uses `signal-tag` and `case-next`. `case-back` is styled 
 
 ## Assets
 
-- Exact technical board: `assets/animesh-design-system.png`. **Regenerate it with `python3 scripts/generate_design_system_board.py`** after any token change — every value on the board is parsed from `styles.css` at render time, so it cannot drift from the code the way the hand-made version did. Inter is not installed locally, so the board renders in SF, which is what `--font-sans` falls back to on macOS anyway.
+- Exact technical board: `assets/animesh-design-system.png`. **Regenerate it with `python3 scripts/generate_design_system_board.py`** after any token change — every value on the board is parsed from `styles.css` at render time, so it cannot drift from the code the way the hand-made version did. It renders in real Inter via `InterVariable.ttf` (`brew install --cask font-inter`), setting the weight axis directly so the board shows 400/650/750/800 exactly rather than the nearest static cut. Without Inter installed it falls back to SF and says so on the board itself.
 - `assets/animesh-design-system.svg` still shows the old amber-primary palette and a text-overflow bug; treat it as superseded by the PNG above and do not hand-edit it further — regenerate it (or drop it) instead.
 - Concept-only visual mood board (not a typography source): `assets/animesh-design-system-moodboard.png`
 - Product evidence: `case-studies/assets/unitx/`

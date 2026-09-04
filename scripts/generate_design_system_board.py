@@ -7,9 +7,16 @@ render time — nothing here is typed by hand. Re-run after any token change:
 
     python3 scripts/generate_design_system_board.py
 
-Inter is not installed locally, so the sans face falls back to SF (SFNS.ttf),
-which is exactly what --font-sans resolves to on macOS when Inter is absent.
-The mono face uses SFNSMono.ttf, which is what --font-mono resolves to.
+Renders in real Inter (InterVariable.ttf) so the board matches what the site
+serves. Inter is a variable font with two axes — optical size and weight — so
+the site's exact weights (400/650/750/800) are hit directly rather than
+approximated by the nearest static cut. Install with:
+
+    brew install --cask font-inter
+
+If Inter is missing the board falls back to SF, which is what --font-sans
+resolves to on macOS without it. The mono face uses SFNSMono.ttf, which is what
+--font-mono resolves to.
 """
 
 import re
@@ -25,8 +32,11 @@ PAD = 64
 COL_GAP = 32
 COL_W = (W - PAD * 2 - COL_GAP) // 2
 
-SANS = "/System/Library/Fonts/SFNS.ttf"
+INTER = Path.home() / "Library/Fonts/InterVariable.ttf"
+SANS = str(INTER) if INTER.exists() else "/System/Library/Fonts/SFNS.ttf"
 MONO = "/System/Library/Fonts/SFNSMono.ttf"
+USING_INTER = INTER.exists()
+# SF's fallback names, only used when Inter is absent
 WEIGHT_NAME = {400: "Regular", 650: "Semibold", 750: "Bold", 800: "Heavy"}
 
 _cache = {}
@@ -39,7 +49,13 @@ def font(size, weight=400, mono=False):
     f = ImageFont.truetype(MONO if mono else SANS, size)
     if not mono:
         try:
-            f.set_variation_by_name(WEIGHT_NAME.get(weight, "Regular"))
+            if USING_INTER:
+                # [optical size, weight]. Inter's opsz axis runs 14-32; track the
+                # rendered size so display type gets the display-optimised cut,
+                # which is what font-optical-sizing: auto does in the browser.
+                f.set_variation_by_axes([float(min(32, max(14, size))), float(weight)])
+            else:
+                f.set_variation_by_name(WEIGHT_NAME.get(weight, "Regular"))
         except Exception:
             pass
     _cache[key] = f
@@ -154,7 +170,8 @@ y += 28
 d.text((PAD, y), "every value on this board is parsed from styles.css at render time.",
        font=font(20), fill=MUTED)
 y += 36
-tracked(PAD, y, "v2.0  ·  04 SEP 2026  ·  GENERATED FROM styles.css",
+_face = "INTER" if USING_INTER else "SF (INTER NOT INSTALLED)"
+tracked(PAD, y, f"v2.1  ·  04 SEP 2026  ·  GENERATED FROM styles.css  ·  SET IN {_face}",
         font(14, mono=True), SOFT, 1.5)
 y += 40
 rule(y)
@@ -351,4 +368,4 @@ y += 44
 
 img = img.crop((0, 0, W, y))
 img.save(OUT)
-print(f"wrote {OUT.relative_to(ROOT)}  {W}x{y}")
+print(f"wrote {OUT.relative_to(ROOT)}  {W}x{y}  ({'Inter' if USING_INTER else 'SF fallback'})")
