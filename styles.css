@@ -21,7 +21,9 @@
      eight of them inside a 2.2px range — differences that cost maintenance and
      read as inconsistency rather than hierarchy. Role decides which:
      mono and/or uppercase technical labels take --text-label, all other small
-     sans copy takes --text-small. Do not add a third step here. */
+     sans copy takes --text-small. Do not add a third step here.
+     The one deliberate exception is the hero diagram's own labels, kept at
+     0.58rem because that artwork is sized as a unit. */
   --text-label: 0.7rem;
   --text-small: 0.82rem;
 }
@@ -461,10 +463,10 @@ body[class] .tesseract {
 .products-eyebrow,
 .product-kicker {
   color: var(--cyan);
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: var(--text-label);
-  font-weight: 750;
-  letter-spacing: 0.08em;
+  font-weight: 800;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
 }
 
@@ -615,7 +617,7 @@ h1 {
 .thinking-steps span,
 .thinking-diagram figcaption {
   font-family: var(--font-mono);
-  font-size: var(--text-label);
+  font-size: 0.58rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }

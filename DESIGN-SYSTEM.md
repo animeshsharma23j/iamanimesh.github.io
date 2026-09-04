@@ -1,6 +1,6 @@
 # Animesh Portfolio Design System
 
-Version 1.4 · 4 September 2026 · audited against live `styles.css` + `index.html`
+Version 1.5 · 4 September 2026 · audited against live `styles.css` + `index.html`
 
 ## Product intent
 
@@ -55,13 +55,17 @@ Everything at or below ~13.6px resolves to one of two tokens. Role decides which
 | `--text-label` | `0.7rem` (11.2px) | Mono and/or uppercase technical labels — eyebrows, tags, table headers, case numbers, metadata |
 | `--text-small` | `0.82rem` (13.1px) | All other small sans copy — buttons, links, captions, footnotes, hints |
 
-This band previously held **23 distinct sizes across 59 declarations**, eight of them inside a 2.2px range. Differences that small are invisible on screen and read as inconsistency rather than hierarchy. 11.2px is also the floor: nothing on the site renders smaller.
+This band previously held **23 distinct sizes across 59 declarations**, eight of them inside a 2.2px range. Differences that small are invisible on screen and read as inconsistency rather than hierarchy.
+
+One deliberate exception: the hero diagram's own labels stay at `0.58rem` (9.28px). That artwork is sized as a unit and the tokens would break its proportions.
 
 **Do not add a third step here**, and do not write a literal `rem` value below `0.86rem` — use a token.
 
 #### The eyebrow
 
-One component, one definition. `.intro`, `.page-eyebrow`, `.case-eyebrow`, `.detail-label`, `.products-eyebrow` and `.product-kicker` share a single rule: mono, `--text-label`, weight 750, 0.08em, uppercase, cyan. Only margin varies by context. Class names are kept rather than renamed across 36 files; adding a new one means adding it to that selector list, not writing a new treatment.
+One component, one definition. `.intro`, `.page-eyebrow`, `.case-eyebrow`, `.detail-label`, `.products-eyebrow` and `.product-kicker` share a single rule: **Inter**, `--text-label`, weight 800, 0.15em, uppercase, cyan. Only margin varies by context. Class names are kept rather than renamed across 36 files; adding a new one means adding it to that selector list, not writing a new treatment.
+
+Inter, not mono. A mono eyebrow was tried and reverted — the site reads better with the eyebrow in the same face as the headline it introduces.
 
 ### Spacing and layout
 
