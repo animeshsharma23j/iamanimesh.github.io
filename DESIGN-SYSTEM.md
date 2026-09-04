@@ -1,10 +1,10 @@
 # Animesh Portfolio Design System
 
-Version 1.0 · 10 August 2026
+Version 1.2 · 4 September 2026 · audited against live `styles.css` + `index.html`
 
 ## Product intent
 
-The system presents a product designer and engineer who brings clarity to complex work. It is deliberately quiet, technical, and editorial: a near-black canvas, warm reading colour, restrained amber and cyan signals, fine structural lines, and generous space around a small number of important actions.
+The system presents a product designer and engineer who brings clarity to complex work. It is deliberately quiet, technical, and editorial: a near-black canvas, warm reading colour, a single restrained cyan signal, fine structural lines, and generous space around a small number of important actions.
 
 ## Foundations
 
@@ -25,21 +25,26 @@ The CSS fallback lists are operating-system fallbacks for these two roles, not e
 | `--bg-2` | `#070A0D` | Deep supporting surface |
 | `--text` | `#F3EEE2` | Main headings and high-emphasis copy |
 | `--muted` | `#AAA395` | Supporting copy and navigation |
-| `--soft` | `#706B62` | Captions and lower-emphasis metadata |
-| `--line` | `rgba(243,238,226,0.15)` | Default divider and border |
-| `--line-strong` | `rgba(243,238,226,0.32)` | Active border and stronger separation |
-| `--amber` | `#F1B45A` | Primary action, emphasis, availability |
-| `--cyan` | `#75D5E4` | Labels, process markers, secondary signal |
+| `--soft` | `#8D877D` | Captions and lower-emphasis metadata |
+| `--line` | `rgba(243,238,226,0.22)` | Directional dividers only (`border-top` / `-bottom` / `-left` / `-right`) — 1.73:1, decorative |
+| `--line-strong` | `rgba(243,238,226,0.38)` | Component boundaries — every full `border: 1px solid` box. 3.11:1 |
+| `--rule` | `rgba(243,238,226,0.45)` | Case-study section rules in long-form copy. 3.97:1 |
+| `--amber` / `--cyan` | `#75D5E4` | Primary action, emphasis, availability, labels, process markers |
+| `--warn` | `#F0857C` | Invalid form fields and error hints only |
 | `--panel` | `rgba(7,10,13,0.52)` | Translucent supporting surface |
 
-The background uses only subtle radial amber/cyan atmosphere and a low-contrast grid. These effects support hierarchy; they must never reduce text legibility or become decorative content.
+**The system now runs a single accent colour.** `--amber` and `--cyan` both resolve to the same cyan (`#75D5E4`) in production — there is no separate gold/amber token in use anywhere in `styles.css`. `--amber` survives only as a legacy variable name; treat it as an alias for cyan, not a second hue. If a warm accent is ever reintroduced, `--amber` should be repointed to a real amber value rather than left as a synonym.
+
+**Structural lines carry a contrast floor.** Fine rules are this system's primary hierarchy device (see *Visual surfaces*), so they have to actually reach the eye. `--line-strong` and `--rule` both clear the WCAG 1.4.11 3:1 minimum for UI-component boundaries against `--bg`; `--line` sits below it deliberately and is therefore restricted to decorative dividers that carry no grouping meaning. **Do not lower these three values.** A full box border around a card, a button, or any interactive surface uses `--line-strong`, never `--line` — the boundary of an interactive element is a UI component boundary and is covered by 1.4.11.
+
+The background uses only a subtle low-contrast grid and restrained radial cyan atmosphere. These effects support hierarchy; they must never reduce text legibility or become decorative content.
 
 ### Typography
 
 | Role | Family | Weight | Scale / behaviour |
 | --- | --- | --- | --- |
-| Display, headings, body, navigation, actions | **Inter only** (`--font-sans`) | 400–800 | Display `clamp(3rem, 5.5vw, 5.8rem)`; body 1.55–1.62 line height |
-| Technical labels and metadata | **System mono only** (`--font-mono`) | 700 | 0.72–0.78rem, uppercase, 0.07–0.08em tracking |
+| Display, headings, body, navigation, actions | **Inter only** (`--font-sans`) | Intended ramp: **400 / 650 / 800**. Nine weights are currently live — see *Known drift* | Display `clamp(3rem, 4.5vw, 4.5rem)`, weight 800, line-height 0.87; body 1.55–1.62 line height |
+| Technical labels and metadata | **System mono only** (`--font-mono`: ui-monospace / SF Mono / Menlo) | 700 | 0.72–0.78rem, uppercase, 0.07–0.08em tracking |
 
 ### Spacing and layout
 
@@ -48,35 +53,35 @@ The background uses only subtle radial amber/cyan atmosphere and a low-contrast 
 | Maximum main width | `1180px` |
 | Standard desktop gutter | `48px` (`calc(100% - 48px)`) |
 | Mobile gutter | `16px` main shell; `12px` header at ≤560px |
-| Header height | 86px desktop, 78px tablet |
+| Header height | `80px` at all breakpoints (sticky, blurred) |
 | Hero grid | `0.94fr / 0.8fr`, 88px gap; becomes one column at ≤900px |
-| Long-form case width | 980px |
-| Section rhythm | 72px case-detail padding; 96px desktop page top padding |
-| Corner treatment | 8px for small interactive and proof surfaces; otherwise square / hairline |
+| Shell padding | `96px` top, `168px` bottom (desktop) |
+| Case-detail rhythm | `72px` vertical padding per section, `52px` at ≤900px |
+| Corner treatment | Intended scale: `0` buttons and primary surfaces (square); `8px` hover chips / accent icons; `16px` cards and portrait imagery; `999px` pills (tag lists, availability). Eighteen radius values are currently live — see *Known drift* |
 
 ## Components
 
 ### Navigation
 
 - Sticky, blurred header with brand at left and portfolio links at right.
-- Links use muted text by default, warm amber on hover and keyboard focus.
-- The active route has a low-opacity cyan outlined treatment.
+- Links use muted text by default, cyan on hover and keyboard focus.
+- The active route has a low-opacity cyan outlined chip treatment.
 - Contact remains an outlined utility action.
 
 ### Buttons and actions
 
 | Component | Resting state | Interaction |
 | --- | --- | --- |
-| Primary action | Amber fill, dark text, 46px minimum height | Lighter amber + 2px upward movement |
+| Primary action | Cyan fill, dark text, 46px minimum height, square corners | Lighter cyan fill (`#A9EDF5`) + dark text (`#0B1B1D`) + 2px upward movement |
 | Secondary action | Transparent dark surface, strong hairline border | Cyan border and text |
-| Resume / utility action | Transparent with cyan border | Amber border and text |
+| Resume / utility action | Translucent cyan border (52% alpha), text colour | Solid cyan border and text |
 
-### Proof rail
+### Recognition
 
-- Full-width hairline-bordered region.
-- Cyan mono label followed by four evidence points.
-- High-emphasis value in `--text`; explanatory caption in `--muted`.
-- On small screens, changes to a two-column grid.
+- Used on `about.html` (not a homepage "proof rail" — that pattern is no longer part of any live page; its CSS is now dead weight in `styles.css`).
+- Cyan mono eyebrow ("Recognition") followed by a stat grid: high-emphasis value in `--text`, explanatory caption in `--muted`.
+- A masked, auto-scrolling row of press/partner marks (Microsoft, Nokia, Windows Central) sits below the stats, followed by a screenshot gallery.
+- Respects `prefers-reduced-motion` by stopping the marquee.
 
 ### Case-study structure
 
@@ -89,7 +94,8 @@ The background uses only subtle radial amber/cyan atmosphere and a low-contrast 
 
 ### Visual surfaces
 
-- Ambient grid, tesseract, and process diagram are decorative and hidden from assistive technology.
+- Ambient grid and tesseract are decorative and correctly `aria-hidden`.
+- The hero process diagram (`.thinking-diagram`) is **not** currently hidden — it carries `aria-label="Design process diagram"` and exposes its step labels. It also renders live text at 9.3px, below the 11px floor. It is a generic Empathize → Define → Ideate → Prototype → Test diagram, which the *Do not* list below prohibits. Resolve rather than document.
 - Product screenshots are real image assets with descriptive alternative text.
 - Fine rules create hierarchy before cards or large fills are introduced.
 
@@ -98,7 +104,7 @@ The background uses only subtle radial amber/cyan atmosphere and a low-contrast 
 | Breakpoint | Behaviour |
 | --- | --- |
 | ≤900px | Hero becomes one column; page grids simplify; background object is moved and reduced in opacity. |
-| ≤560px | Header uses compressed type and gaps; actions wrap; proof rail becomes two columns; case detail becomes one column; UnitX gallery becomes two columns. |
+| ≤560px | Header uses compressed type and gaps; actions wrap; case-detail grid becomes one column; project/screenshot galleries become two columns. |
 | All sizes | Content uses `min-width: 0`, bounded widths, and overflow-safe text wrapping. No horizontal scrolling is permitted. |
 
 ## Accessibility and motion
@@ -106,7 +112,16 @@ The background uses only subtle radial amber/cyan atmosphere and a low-contrast 
 - Semantic landmarks, descriptive navigation label, and real heading hierarchy are required.
 - Decorative space artwork must remain `aria-hidden`.
 - Image content requires meaningful `alt` text.
-- Keyboard focus must be visible via amber/cyan borders or outlines.
+- **Keyboard focus is a single global rule and must never be removed.** `styles.css` defines one zero-specificity source of truth:
+
+  ```css
+  :where(a, button, summary, input, select, textarea, [tabindex]):focus-visible {
+    outline: 2px solid var(--cyan);
+    outline-offset: 3px;
+  }
+  ```
+
+  A component may override the ring **colour** — controls with a cyan fill (`.skip-link`, `.action-primary`, `.product-button.primary`, the mobile menu's active link) set a dark ring, because cyan on cyan is invisible. No component may set `outline: 0` or `outline: none` on a focus state. Merging `:focus-visible` into a `:hover` rule is not a focus indicator: hover styling is not keyboard feedback.
 - `prefers-reduced-motion: reduce` removes animation and transitions.
 - Never encode a status with colour alone; labels, copy, and structure carry the meaning.
 
@@ -116,8 +131,56 @@ The background uses only subtle radial amber/cyan atmosphere and a low-contrast 
 
 **Do not:** introduce glossy cards, large gradients, rounded-everything UI, generic process diagrams without project evidence, fake metrics, or decorative effects that compete with content.
 
+## Known drift
+
+Measured against live `styles.css` on 4 September 2026. These are gaps between the system as specified above and the system as built. Recorded so the spec stays honest — this section should shrink, not grow.
+
+### Type ramp
+
+Nine weights are live where three are intended: 400 ×1, 600 ×8, 650 ×7, 680 ×2, 700 ×21, 720 ×2, 750 ×17, 760 ×3, 800 ×26. On a variable face, 750 vs 760 is a sub-1% stroke difference — the distinction exists in the CSS and nowhere on screen.
+
+`index.html` alone renders 27 distinct size/weight/leading/tracking combinations. The small-label tier holds eight steps between 11.2px and 13.4px, which is below the threshold at which two levels read as distinct. Target: two label sizes — 11px mono for technical metadata, 13px Inter for supporting copy.
+
+### Corner radii
+
+Eighteen values are live where four are intended: `0`, `2px`, `6px`, `8px`, `10px`, `14px`, `15px`, `16px`, `18px`, `20px`, `24px`, `25px`, `28px`, `30px`, `32px`, `41px`, `50%`, `999px`.
+
+### Spacing
+
+No modular scale is in force. Padding and margin populate effectively every even value from 4px to 34px (22 ×14, 24 ×19, 26 ×11, 28 ×21, 30 ×9, 32 ×19, 34 ×10). Target: a 4px beat — 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 96.
+
+### Eyebrow component
+
+One role, four implementations, in two different typefaces:
+
+| Class | Used on | Family | Size | Weight | Tracking |
+| --- | --- | --- | --- | --- | --- |
+| `.intro` | `index.html` | Inter | 0.75rem | 800 | 0.15em |
+| `.page-eyebrow` | about, case-studies, 404 | mono | 0.72rem | 700 | 0.08em |
+| `.case-eyebrow` | case studies | mono | 0.72rem | 400 (inherited) | 0.07em |
+| `.products-eyebrow` / `.product-kicker` | products, product pages | Inter | 0.75rem | 800 | 0.15em |
+
+Collapse to one `.eyebrow`. Mono is the correct choice — it matches the documented "technical labels" role.
+
+### Accent token
+
+One colour, three spellings: `var(--amber)` ×30, `var(--cyan)` ×61, and hard-coded `#75d5e4` / `rgba(117,213,228,…)` ×32. About a quarter of accent references bypass the token, so repointing the accent means editing literals. Migrate to `--cyan` and retire `--amber`.
+
+Separately, cyan currently does seven jobs at once — primary fill, every eyebrow, hover/focus, the availability dot, case numbering, mono metadata, and the FAQ `+`. Reserve the solid fill for primary actions so it retains isolation value.
+
+### Dead CSS
+
+Roughly 36 classes are defined and never used in any page, including the whole `proof-rail` / `proof-items` / `proof-label` / `hero-proof` family already noted under *Recognition*, plus `case-back`, `split-panel`, `principles`, `section-heading`, `contact-stack`, `swap-button`, `temperature-*`, `calculator-cta` and `calculator-submit`.
+
+`styles.css` also carries a complete second `.products-page` theme — light background `#f5f6f8`, `#151820` text, `#e0e3e8` borders, white card fills, drop shadows, and a red `#ed3438` accent — that is fully overridden by a later dark block. It does not render, but it contradicts the single-accent rule above and should be deleted rather than left to confuse the next reader.
+
+### Case-study template
+
+Only `income-tax.html` uses `signal-tag` and `case-next`. `case-back` is styled and used nowhere. Depth ranges from 3,078 words (Income Tax) to 381 (UnitX) with no signal of that difference on `case-studies.html`.
+
 ## Assets
 
-- Exact technical board: `assets/animesh-design-system.svg`
+- Exact technical board: `assets/animesh-design-system.png` — regenerated 1 September 2026 from live `styles.css` + `index.html` values (this document's source of truth).
+- `assets/animesh-design-system.svg` still shows the old amber-primary palette and a text-overflow bug; treat it as superseded by the PNG above and do not hand-edit it further — regenerate it (or drop it) instead.
 - Concept-only visual mood board (not a typography source): `assets/animesh-design-system-moodboard.png`
 - Product evidence: `case-studies/assets/unitx/`

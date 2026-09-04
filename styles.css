@@ -8,8 +8,8 @@
   --line-strong: rgba(243, 238, 226, 0.38);
   /* Structural lines are the system's primary hierarchy device, so they have
      to clear the WCAG 1.4.11 3:1 floor for UI-component boundaries against
-     --bg (#030405). Composited: --line ~1.9:1 (decorative only),
-     --line-strong ~3.1:1, --rule ~3.9:1. Do not lower these. */
+     --bg (#030405). Composited: --line 1.73:1 (decorative dividers only),
+     --line-strong 3.11:1, --rule 3.97:1. Do not lower these. */
   --rule: rgba(243, 238, 226, 0.45);
   --amber: #75d5e4;
   --cyan: #75d5e4;
