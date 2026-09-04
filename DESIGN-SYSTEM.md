@@ -1,6 +1,6 @@
 # Animesh Portfolio Design System
 
-Version 1.9 · 4 September 2026 · audited against live `styles.css` + `index.html`
+Version 2.0 · 4 September 2026 · audited against live `styles.css` + `index.html`
 
 ## Product intent
 
@@ -59,6 +59,8 @@ The mobile value is set by redefining the token inside the `≤900px` block, so 
 | Token | Desktop | ≤900px | Role |
 | --- | --- | --- | --- |
 | `--headline-size` | 72px | 48px | Every `h1` |
+| `--headline-leading` | 0.87 | 0.9 | `h1` line-height, everywhere |
+| `--h2-weight` | 750 | 750 | `h2` weight — set on a bare `h2` rule so nothing falls through to the browser's 700 |
 | `--h2-size` | 48px | 36px | Section headings — home sections, About journey, case-study sections, product sections, privacy/support headings, calculator panels |
 | `--h3-size` | 32px | 24px | Directory and case cards, About journey entries, Trade Cloud suite cards |
 | `--h3-small` | 24px | 20px | Small card headings — proof cards, product feature grids, certifications |

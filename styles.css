@@ -18,11 +18,13 @@
   /* One headline size for the whole site: 72px desktop, 48px at <=900px.
      Every h1 resolves to this token — do not give a page type its own. */
   --headline-size: 4.5rem;
+  --headline-leading: 0.87;
   /* Heading ramp below h1. Sized by the role a heading plays, not by its tag —
      the product/case card is an h2 on its index page and an h3 on the home
      page, and must read the same size in both. Desktop 48/32/24, dropping to
      36/24/20 at <=900px. Do not give a component its own heading size. */
   --h2-size: 3rem;
+  --h2-weight: 750;
   --h3-size: 2rem;
   --h3-small: 1.5rem;
   /* Small-type scale. Everything at or below ~13.6px resolves to one of these
@@ -490,13 +492,20 @@ p {
   margin-top: 0;
 }
 
+/* Without this, every h2 whose rule omits font-weight falls through to the
+   browser default of 700 — a weight that is not in the system's set at all.
+   Card titles override to 800; nothing else should override this. */
+h2 {
+  font-weight: var(--h2-weight);
+}
+
 h1 {
   max-width: 720px;
   margin-bottom: 26px;
   color: var(--text);
   font-size: var(--headline-size);
   font-weight: 800;
-  line-height: 0.87;
+  line-height: var(--headline-leading);
   letter-spacing: 0;
 }
 
@@ -1311,7 +1320,7 @@ h1 {
 .products-page .tab::before { background: rgba(255, 255, 255, 0.72); }
 .products-shell { width: min(1180px, calc(100% - 48px)); margin: 0 auto; padding: 86px 0 128px; }
 .products-eyebrow, .product-kicker { margin: 0 0 20px; }
-.products-shell h1 { max-width: 860px; margin: 0; color: #151820; font-size: var(--headline-size); font-weight: 800; line-height: 0.98; letter-spacing: 0; }
+.products-shell h1 { max-width: 860px; margin: 0; color: #151820; font-size: var(--headline-size); font-weight: 800; letter-spacing: 0; }
 .products-intro { max-width: 620px; margin: 28px 0 70px; color: #5d6574; font-size: clamp(1.05rem, 1.55vw, 1.34rem); line-height: 1.55; }
 .product-directory { display: grid; gap: 26px; }
 .directory-card { position: relative; display: grid; grid-template-columns: 174px minmax(0, 1fr) 146px; gap: 34px; align-items: center; padding: 42px 52px; border: 1px solid #e0e3e8; border-radius: 24px; background: rgba(255, 255, 255, 0.92); box-shadow: 0 16px 38px rgba(28, 35, 46, 0.07); }
@@ -1333,7 +1342,7 @@ h1 {
 .product-copy { position: relative; z-index: 1; max-width: 570px; padding: 0; }
 .product-app-icon { display: block; width: 32px; height: 32px; margin-bottom: 12px; border-radius: 8px; box-shadow: none; }
 .product-page .product-kicker { margin-bottom: 16px; color: var(--product-accent); }
-.product-copy h1 { margin: 0; color: #f8f8f8; font-size: var(--headline-size); font-weight: 800; line-height: 0.98; letter-spacing: 0; }
+.product-copy h1 { margin: 0; color: #f8f8f8; font-size: var(--headline-size); font-weight: 800; letter-spacing: 0; }
 .product-copy h1 em { color: var(--product-accent); font-style: normal; }
 .product-lede { max-width: 535px; margin: 30px 0 34px; color: rgba(238, 240, 244, 0.66); font-size: clamp(1.08rem, 1.6vw, 1.34rem); line-height: 1.52; }
 .product-actions { display: flex; flex-wrap: wrap; gap: 12px; }
@@ -1586,6 +1595,7 @@ h1 {
      h1 follows; no page type gets its own mobile size. */
   :root {
     --headline-size: 3rem;
+    --headline-leading: 0.9;
     --h2-size: 2.25rem;
     --h3-size: 1.5rem;
     --h3-small: 1.25rem;
@@ -1593,7 +1603,6 @@ h1 {
 
   h1 {
     max-width: 100%;
-    line-height: 0.9;
   }
 
   .section-heading,
@@ -1880,7 +1889,7 @@ h1 {
 .calculator-shell { width: min(100% - 48px, 1080px); margin: 0 auto; padding: 100px 0 104px; }
 .calculator-hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(220px, 320px); column-gap: clamp(32px, 6vw, 80px); align-items: center; margin: 0 0 56px; }
 .calculator-hero-download { white-space: nowrap; }
-.calculator-hero h1 { max-width: 760px; margin: 12px 0 0; font-size: var(--headline-size); line-height: .9; letter-spacing: -.065em; }
+.calculator-hero h1 { max-width: 760px; margin: 12px 0 0; font-size: var(--headline-size); letter-spacing: -.065em; }
 .calculator-hero h1 em { color: var(--cyan); font-family: inherit; font-style: normal; }
 .calculator-intro { max-width: 590px; margin: 28px 0 0; color: var(--muted); font-size: 1.1rem; line-height: 1.65; }
 @media (max-width: 700px) {
