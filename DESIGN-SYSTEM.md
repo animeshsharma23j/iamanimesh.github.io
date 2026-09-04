@@ -1,6 +1,6 @@
 # Animesh Portfolio Design System
 
-Version 2.1 · 4 September 2026 · audited against live `styles.css` + `index.html`
+Version 2.2 · 4 September 2026 · audited against live `styles.css` + `index.html`
 
 ## Product intent
 
@@ -66,6 +66,7 @@ The mobile value is set by redefining the token inside the `≤900px` block, so 
 | `--h2-size` | 48px | 36px | Section headings — home sections, About journey, case-study sections, product sections, privacy/support headings, calculator panels |
 | `--h3-size` | 32px | 24px | Directory and case cards, About journey entries, Trade Cloud suite cards |
 | `--h3-small` | 24px | 20px | Small card headings — proof cards, product feature grids, certifications |
+| `--lede-size` | 21.4px | 16.8px | The sentence under a heading — `.lede`, `.case-intro`, `.product-lede`, `.products-intro`, `.section-lede`, `.calculator-intro`, `.case-list-intro`, `.contact-lede`, `.about-copy p` |
 
 **Sized by role, not by tag.** The product/case card is an `h2` on its index page and an `h3` on the home page; both take `--h3-size` so the same component reads the same size wherever it appears. Adding a heading means picking the token whose role it matches — never writing a new size.
 
@@ -181,11 +182,11 @@ Inter, not mono. A mono eyebrow was tried and reverted — the site reads better
 
 Measured against live `styles.css` on 4 September 2026. These are gaps between the system as specified above and the system as built. Recorded so the spec stays honest — this section should shrink, not grow.
 
-### Body and supporting copy
+### Copy
 
-The heading ramp (v1.7), the small tier, the weights and the eyebrow are all resolved. What remains untokenised is body and intro copy — around 20 `clamp()` expressions on `.lede`, `.case-intro`, `.product-lede`, `.calculator-intro` and similar, mostly one use each, spanning roughly 16–27px.
+The type system is fully tokenised as of v2.2 — heading ramp, lede, small tier, weights, eyebrow, headline leading and the content column all resolve to `:root`. Nothing structural is outstanding.
 
-Lower stakes than the headings were, since these sit closer together and rarely appear side by side. Worth a pass eventually; not urgent.
+What is outstanding is **the writing**. Several headlines are placeholder-grade: statements that could sit on any designer's portfolio without changing meaning. That is a copy problem, not a system problem, and it needs the site owner's voice rather than a mechanical pass.
 
 ### Corner radii
 
