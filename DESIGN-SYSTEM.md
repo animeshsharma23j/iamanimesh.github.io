@@ -1,6 +1,6 @@
 # Animesh Portfolio Design System
 
-Version 1.2 · 4 September 2026 · audited against live `styles.css` + `index.html`
+Version 1.3 · 4 September 2026 · audited against live `styles.css` + `index.html`
 
 ## Product intent
 
@@ -43,8 +43,25 @@ The background uses only a subtle low-contrast grid and restrained radial cyan a
 
 | Role | Family | Weight | Scale / behaviour |
 | --- | --- | --- | --- |
-| Display, headings, body, navigation, actions | **Inter only** (`--font-sans`) | Intended ramp: **400 / 650 / 800**. Nine weights are currently live — see *Known drift* | Display `clamp(3rem, 4.5vw, 4.5rem)`, weight 800, line-height 0.87; body 1.55–1.62 line height |
-| Technical labels and metadata | **System mono only** (`--font-mono`: ui-monospace / SF Mono / Menlo) | 700 | 0.72–0.78rem, uppercase, 0.07–0.08em tracking |
+| Display, headings, body, navigation, actions | **Inter only** (`--font-sans`) | **400 / 650 / 750 / 800** — these four only | Display `clamp(3rem, 4.5vw, 4.5rem)`, weight 800, line-height 0.87; body 1.55–1.62 line height |
+| Technical labels and metadata | **System mono only** (`--font-mono`: ui-monospace / SF Mono / Menlo) | 750 | `--text-label`, uppercase, 0.08em tracking |
+
+#### Small-type scale — two steps, no more
+
+Everything at or below ~13.6px resolves to one of two tokens. Role decides which, not appearance:
+
+| Token | Value | Use |
+| --- | --- | --- |
+| `--text-label` | `0.7rem` (11.2px) | Mono and/or uppercase technical labels — eyebrows, tags, table headers, case numbers, metadata |
+| `--text-small` | `0.82rem` (13.1px) | All other small sans copy — buttons, links, captions, footnotes, hints |
+
+This band previously held **23 distinct sizes across 59 declarations**, eight of them inside a 2.2px range. Differences that small are invisible on screen and read as inconsistency rather than hierarchy. 11.2px is also the floor: nothing on the site renders smaller.
+
+**Do not add a third step here**, and do not write a literal `rem` value below `0.86rem` — use a token.
+
+#### The eyebrow
+
+One component, one definition. `.intro`, `.page-eyebrow`, `.case-eyebrow`, `.detail-label`, `.products-eyebrow` and `.product-kicker` share a single rule: mono, `--text-label`, weight 750, 0.08em, uppercase, cyan. Only margin varies by context. Class names are kept rather than renamed across 36 files; adding a new one means adding it to that selector list, not writing a new treatment.
 
 ### Spacing and layout
 
@@ -135,11 +152,11 @@ The background uses only a subtle low-contrast grid and restrained radial cyan a
 
 Measured against live `styles.css` on 4 September 2026. These are gaps between the system as specified above and the system as built. Recorded so the spec stays honest — this section should shrink, not grow.
 
-### Type ramp
+### Display sizes
 
-Nine weights are live where three are intended: 400 ×1, 600 ×8, 650 ×7, 680 ×2, 700 ×21, 720 ×2, 750 ×17, 760 ×3, 800 ×26. On a variable face, 750 vs 760 is a sub-1% stroke difference — the distinction exists in the CSS and nowhere on screen.
+About 40 near-unique `clamp()` expressions carry the headings — `clamp(3.3rem, 7vw, 7rem)`, `clamp(3.4rem, 8vw, 7.2rem)`, `clamp(3.8rem, 7vw, 6.4rem)` and so on, mostly one use each. This is the remaining half of the type finding. It is deliberately untouched: display type carries the site's character, and consolidating it onto a modular ramp changes every heading on every page, which wants a designer's eye rather than a mechanical pass.
 
-`index.html` alone renders 27 distinct size/weight/leading/tracking combinations. The small-label tier holds eight steps between 11.2px and 13.4px, which is below the threshold at which two levels read as distinct. Target: two label sizes — 11px mono for technical metadata, 13px Inter for supporting copy.
+The small tier, the weights and the eyebrow were resolved in v1.3.
 
 ### Corner radii
 
@@ -148,19 +165,6 @@ Eighteen values are live where four are intended: `0`, `2px`, `6px`, `8px`, `10p
 ### Spacing
 
 No modular scale is in force. Padding and margin populate effectively every even value from 4px to 34px (22 ×14, 24 ×19, 26 ×11, 28 ×21, 30 ×9, 32 ×19, 34 ×10). Target: a 4px beat — 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 96.
-
-### Eyebrow component
-
-One role, four implementations, in two different typefaces:
-
-| Class | Used on | Family | Size | Weight | Tracking |
-| --- | --- | --- | --- | --- | --- |
-| `.intro` | `index.html` | Inter | 0.75rem | 800 | 0.15em |
-| `.page-eyebrow` | about, case-studies, 404 | mono | 0.72rem | 700 | 0.08em |
-| `.case-eyebrow` | case studies | mono | 0.72rem | 400 (inherited) | 0.07em |
-| `.products-eyebrow` / `.product-kicker` | products, product pages | Inter | 0.75rem | 800 | 0.15em |
-
-Collapse to one `.eyebrow`. Mono is the correct choice — it matches the documented "technical labels" role.
 
 ### Accent token
 
