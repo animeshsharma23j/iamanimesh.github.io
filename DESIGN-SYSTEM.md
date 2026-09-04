@@ -1,6 +1,6 @@
 # Animesh Portfolio Design System
 
-Version 2.0 · 4 September 2026 · audited against live `styles.css` + `index.html`
+Version 2.1 · 4 September 2026 · audited against live `styles.css` + `index.html`
 
 ## Product intent
 
@@ -32,6 +32,8 @@ The CSS fallback lists are operating-system fallbacks for these two roles, not e
 | `--amber` / `--cyan` | `#75D5E4` | Primary action, emphasis, availability, labels, process markers |
 | `--warn` | `#F0857C` | Invalid form fields and error hints only |
 | `--panel` | `rgba(7,10,13,0.52)` | Translucent supporting surface |
+
+**One palette, no per-section forks.** The six product pages previously ran their own colours — canvas `#08090B`, headings `#F8F8F8`, body `rgba(238,240,244,…)` — which read as a cooler variant of the site. They now use `--bg`, `--text`, `--muted` and `--soft` like everywhere else. No page type gets its own greys.
 
 **The system now runs a single accent colour.** `--amber` and `--cyan` both resolve to the same cyan (`#75D5E4`) in production — there is no separate gold/amber token in use anywhere in `styles.css`. `--amber` survives only as a legacy variable name; treat it as an alias for cyan, not a second hue. If a warm accent is ever reintroduced, `--amber` should be repointed to a real amber value rather than left as a synonym.
 
@@ -94,7 +96,7 @@ Inter, not mono. A mono eyebrow was tried and reverted — the site reads better
 
 | Token / rule | Value |
 | --- | --- |
-| Maximum main width | `1180px` |
+| Maximum main width | `--max`, `1180px` — **every page shell uses it**: `.shell`, `.subpage-shell`, `.case-study-shell`, `.products-shell`, `.calculator-shell`. Product pages are the one exception: `main` is full-bleed for hero art and the inner `.product-hero` / `.product-section` carry the same 1180px column. |
 | Standard desktop gutter | `48px` (`calc(100% - 48px)`) |
 | Mobile gutter | `16px` main shell; `12px` header at ≤560px |
 | Header height | `80px` at all breakpoints (sticky, blurred) |
