@@ -1,6 +1,6 @@
 # Animesh Portfolio Design System
 
-Version 1.5 · 4 September 2026 · audited against live `styles.css` + `index.html`
+Version 1.6 · 4 September 2026 · audited against live `styles.css` + `index.html`
 
 ## Product intent
 
@@ -43,8 +43,16 @@ The background uses only a subtle low-contrast grid and restrained radial cyan a
 
 | Role | Family | Weight | Scale / behaviour |
 | --- | --- | --- | --- |
-| Display, headings, body, navigation, actions | **Inter only** (`--font-sans`) | **400 / 650 / 750 / 800** — these four only | Display `clamp(3rem, 4.5vw, 4.5rem)`, weight 800, line-height 0.87; body 1.55–1.62 line height |
+| Display, headings, body, navigation, actions | **Inter only** (`--font-sans`) | **400 / 650 / 750 / 800** — these four only | `h1` = `--headline-size`, weight 800, line-height 0.87; body 1.55–1.62 line height |
 | Technical labels and metadata | **System mono only** (`--font-mono`: ui-monospace / SF Mono / Menlo) | 750 | `--text-label`, uppercase, 0.08em tracking |
+
+#### Headline size — one value, whole site
+
+**`--headline-size`: `4.5rem` (72px), dropping to `3rem` (48px) at ≤900px.** Every `h1` on every page resolves to this token; no page type gets its own.
+
+Before this, six different h1 sizes were live at 1440px — home and products at 64.8px, product pages at 72px, the case-study index and all support/privacy/404 pages at 89.28px, case-study detail at 100.8px, and the calculators at 115.2px. Each page type had picked up its own `clamp()` at a different time and they were never compared, so a privacy policy outranked the homepage and the ranking inverted at mobile. It read as accidental because it was.
+
+The mobile value is set by redefining the token inside the `≤900px` block, so a single line moves the whole site. **Do not add a per-page `h1` font-size.**
 
 #### Small-type scale — two steps, no more
 
@@ -156,11 +164,11 @@ Inter, not mono. A mono eyebrow was tried and reverted — the site reads better
 
 Measured against live `styles.css` on 4 September 2026. These are gaps between the system as specified above and the system as built. Recorded so the spec stays honest — this section should shrink, not grow.
 
-### Display sizes
+### Section heading sizes (h2 / h3)
 
-About 40 near-unique `clamp()` expressions carry the headings — `clamp(3.3rem, 7vw, 7rem)`, `clamp(3.4rem, 8vw, 7.2rem)`, `clamp(3.8rem, 7vw, 6.4rem)` and so on, mostly one use each. This is the remaining half of the type finding. It is deliberately untouched: display type carries the site's character, and consolidating it onto a modular ramp changes every heading on every page, which wants a designer's eye rather than a mechanical pass.
+`h1` is now a single token (v1.6) and the small tier, the weights and the eyebrow were resolved in v1.3. What remains is roughly 30 near-unique `clamp()` expressions on `h2` and `h3` — `clamp(1.7rem, 3.2vw, 3.2rem)`, `clamp(1.65rem, 2.6vw, 2.35rem)`, `clamp(2rem, 3.5vw, 3rem)` and so on, mostly one use each.
 
-The small tier, the weights and the eyebrow were resolved in v1.3.
+Same problem as the headlines had, one level down: nobody chose these relative to each other. Worth the same treatment — a small set of tokens rather than a per-component clamp — but it needs a designer's eye on the result, not a mechanical pass.
 
 ### Corner radii
 

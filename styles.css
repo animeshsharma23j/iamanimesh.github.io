@@ -15,7 +15,9 @@
   --max: 1180px;
   --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  --headline-size: clamp(3rem, 4.5vw, 4.5rem);
+  /* One headline size for the whole site: 72px desktop, 48px at <=900px.
+     Every h1 resolves to this token — do not give a page type its own. */
+  --headline-size: 4.5rem;
   /* Small-type scale. Everything at or below ~13.6px resolves to one of these
      two. Previously this band held 23 distinct sizes across 59 declarations,
      eight of them inside a 2.2px range — differences that cost maintenance and
@@ -1102,7 +1104,7 @@ h1 {
 .case-study-page .site-header { width: min(var(--max), calc(100% - 48px)); }
 .subpage-shell { width: min(1080px, calc(100% - 48px)); margin: 0 auto; padding: 96px 0 140px; }
 .about-page.subpage-shell { width: min(var(--max), calc(100% - 48px)); }
-.subpage-shell > h1 { max-width: 900px; margin-bottom: 64px; font-size: clamp(3rem, 6.2vw, 6.5rem); }
+.subpage-shell > h1 { max-width: 900px; margin-bottom: 64px; font-size: var(--headline-size); }
 .page-eyebrow { margin: 0 0 20px; }
 .subpage-shell .journey-list { margin: 0; }
 .label-row { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 42px; align-items: baseline; }
@@ -1126,7 +1128,7 @@ h1 {
 .case-back:focus-visible { text-decoration: underline; text-underline-offset: 3px; }
 .case-study-shell { width: min(var(--max), calc(100% - 48px)); margin: 0 auto; padding: 96px 0 156px; }
 
-.case-study-shell h1 { max-width: 900px; margin: 0 0 28px; font-size: clamp(3.3rem, 7vw, 7rem); }
+.case-study-shell h1 { max-width: 900px; margin: 0 0 28px; font-size: var(--headline-size); }
 .case-study-shell h1 span { display: block; margin-top: 0.25em; color: var(--muted); font-size: 0.42em; font-weight: 650; line-height: 1.15; letter-spacing: -0.04em; }
 .case-intro { max-width: 650px; margin: 0 0 42px; color: var(--text); font-size: clamp(1.25rem, 2vw, 1.7rem); line-height: 1.38; }
 .case-meta { display: flex; flex-wrap: wrap; gap: 10px 28px; padding: 22px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); color: var(--muted); font-size: var(--text-small); }
@@ -1324,7 +1326,7 @@ h1 {
 .product-copy { position: relative; z-index: 1; max-width: 570px; padding: 0; }
 .product-app-icon { display: block; width: 32px; height: 32px; margin-bottom: 12px; border-radius: 8px; box-shadow: none; }
 .product-page .product-kicker { margin-bottom: 16px; color: var(--product-accent); }
-.product-copy h1 { margin: 0; color: #f8f8f8; font-size: 4.5rem; font-weight: 800; line-height: 0.98; letter-spacing: 0; }
+.product-copy h1 { margin: 0; color: #f8f8f8; font-size: var(--headline-size); font-weight: 800; line-height: 0.98; letter-spacing: 0; }
 .product-copy h1 em { color: var(--product-accent); font-style: normal; }
 .product-lede { max-width: 535px; margin: 30px 0 34px; color: rgba(238, 240, 244, 0.66); font-size: clamp(1.08rem, 1.6vw, 1.34rem); line-height: 1.52; }
 .product-actions { display: flex; flex-wrap: wrap; gap: 12px; }
@@ -1573,9 +1575,12 @@ h1 {
     gap: 64px;
   }
 
+  /* 72px -> 48px for the whole site. Redefining the token here means every
+     h1 follows; no page type gets its own mobile size. */
+  :root { --headline-size: 3rem; }
+
   h1 {
     max-width: 100%;
-    font-size: clamp(2.5rem, 10.5vw, 4.8rem);
     line-height: 0.9;
   }
 
@@ -1741,7 +1746,6 @@ h1 {
   .subpage-shell,
   .about-page.subpage-shell { width: min(100% - 32px, 1080px); }
   .case-study-shell { padding: 64px 0 96px; }
-  .case-study-shell h1 { font-size: clamp(2.6rem, 11vw, 3.5rem); }
   .case-study-shell h1 span { font-size: 0.48em; }
   .subpage-shell { padding: 64px 0 96px; }
   .case-detail-grid { grid-template-columns: minmax(0, 1fr); gap: 18px; padding: 52px 0; }
@@ -1791,7 +1795,6 @@ h1 {
   .app-screen-hero .product-copy { padding: 48px 0 28px; }
   .product-pacex .app-screen-hero .product-copy { padding: 48px 0 28px; }
   .product-app-icon { width: 32px; height: 32px; margin-bottom: 12px; border-radius: 8px; }
-  .product-copy h1 { font-size: 2.5rem; }
   .product-lede { margin: 20px 0 24px; font-size: 1rem; }
   .product-actions { flex-wrap: nowrap; gap: 8px; }
   .product-button { min-height: 46px; padding: 0 12px; font-size: var(--text-small); white-space: nowrap; }
@@ -1867,7 +1870,7 @@ h1 {
 .calculator-shell { width: min(100% - 48px, 1080px); margin: 0 auto; padding: 100px 0 104px; }
 .calculator-hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(220px, 320px); column-gap: clamp(32px, 6vw, 80px); align-items: center; margin: 0 0 56px; }
 .calculator-hero-download { white-space: nowrap; }
-.calculator-hero h1 { max-width: 760px; margin: 12px 0 0; font-size: clamp(3.4rem, 8vw, 7.2rem); line-height: .9; letter-spacing: -.065em; }
+.calculator-hero h1 { max-width: 760px; margin: 12px 0 0; font-size: var(--headline-size); line-height: .9; letter-spacing: -.065em; }
 .calculator-hero h1 em { color: var(--cyan); font-family: inherit; font-style: normal; }
 .calculator-intro { max-width: 590px; margin: 28px 0 0; color: var(--muted); font-size: 1.1rem; line-height: 1.65; }
 @media (max-width: 700px) {
@@ -1957,7 +1960,6 @@ h1 {
 
 @media (max-width: 700px) {
   .calculator-shell { width: min(100% - 32px, 1080px); padding: 64px 0 78px; }
-  .calculator-shell > h1 { font-size: clamp(3.2rem, 14vw, 5rem); }
   .calculator-intro { margin-bottom: 38px; }
   .pace-calculator, .calculator-explainer { grid-template-columns: 1fr; }
   .product-hero-recital { grid-template-columns: 1fr; }
