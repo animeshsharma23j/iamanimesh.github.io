@@ -210,7 +210,7 @@ Roughly 36 classes are defined and never used in any page, including the whole `
 
 ### Case-study template
 
-Only `income-tax.html` uses `signal-tag` and `case-next`. `case-back` is styled and used nowhere. Depth ranges from 3,078 words (Income Tax) to 381 (UnitX) with no signal of that difference on `case-studies.html`.
+`signal-tag` and `interview-card` are now shared by `income-tax.html` and `itba-case-study.html`; only `income-tax.html` uses `case-next`. `case-back` is styled and used nowhere. Depth ranges from 3,078 words (Income Tax) to 381 (UnitX) with no signal of that difference on `case-studies.html`.
 
 ## Assets
 

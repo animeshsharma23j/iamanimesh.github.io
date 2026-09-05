@@ -13,7 +13,7 @@
     <meta charset="UTF-8" />
     <link rel="icon" href="/icon.png" type="image/png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="How the ITBA case-disposal workflow was reorganised so Income Tax Department officers can see status, risk, and the next required action at a glance." />
+    <meta name="description" content="How assessment case disposal in the Income Tax Business Application (ITBA) was reorganised so Income Tax Department officers can see status, risk, and the next required action at a glance." />
     <title>ITBA Case Study: Case-Disposal UX for Tax Officers</title>
     <link rel="canonical" href="https://www.iamanimesh.com/itba-case-study.html" />
     <meta property="og:type" content="website" />
@@ -22,7 +22,7 @@
     <meta property="og:url" content="https://www.iamanimesh.com/itba-case-study.html" /><meta property="og:image" content="https://www.iamanimesh.com/icon.png" /><meta property="og:image:width" content="637" /><meta property="og:image:height" content="637" />
     <meta name="twitter:card" content="summary" />
 
-    <link rel="stylesheet" href="styles.css?v=20260904-14" />
+    <link rel="stylesheet" href="styles.css?v=20260905-01" />
   </head>
   <body class="case-study-page">
     <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -58,12 +58,12 @@
     <main id="main-content" class="case-study-shell">
       <p class="case-eyebrow">02 / GovTech / UX Design</p>
       <h1>ITBA<br /><span>Making case-disposal work legible for tax officers</span></h1>
-      <p class="case-intro">Reorganising a dense, procedure-driven workflow so an officer can see status, risk, and the next required action at a glance.</p>
-      <div class="case-meta"><span>Role — Senior UX Designer, 2024–Present</span><span>Team — 3 designers (incl. me), 1 PM, 3–5 engineers, department SMEs</span><span>Focus — Case-disposal workflow, information architecture, workflow clarity</span></div>
+      <p class="case-intro">Reorganising a dense, procedure-driven assessment workflow so an officer can see status, risk, and the next required action at a glance.</p>
+      <div class="case-meta"><span>Role — Senior UX Designer, 2024–Present</span><span>Team — 3 designers (incl. me), 1 PM, 3–5 engineers, department SMEs</span><span>Focus — Assessment case disposal, information architecture, workflow clarity</span></div>
 
       <section class="case-detail-grid">
         <p class="detail-label">Context</p>
-        <div><h2>Expert software for people who can't afford to guess.</h2><p>ITBA is the internal system Income Tax Department officers use to work case disposal — resolving assessments, tracking statutory deadlines, and recording decisions that carry legal weight. The users are domain experts, the information is dense by necessity, and an unclear interface doesn't just cost time — it risks a missed deadline or an incomplete decision on a real taxpayer's record. Because ITBA holds sensitive taxpayer and departmental data, everything shown on this page is a reconstructed, sanitised approximation, not the live system.</p><ul class="case-facts"><li><strong>Organisation</strong> Central Board of Direct Taxes, Income Tax Department</li><li><strong>Contribution</strong> Research synthesis, information architecture, wireframes, prototypes, and testing materials</li><li><strong>Status</strong> Professional work, presented here as a sanitised reconstruction</li><li><strong>Constraint</strong> No real screens, taxpayer data, or officer identities can be shown</li><li><strong>Scope</strong> Contextual inquiry with case-handling officers across multiple case types, a procedural audit against departmental requirements, and iterative workshops with the business team over the course of the redesign</li></ul></div>
+        <div><h2>Expert software for people who can't afford to guess.</h2><p>The Income Tax Business Application (ITBA) is the internal system Income Tax Department officers use to work case disposal — resolving cases, tracking statutory deadlines, and recording decisions that carry legal weight. The users are domain experts, the information is dense by necessity, and an unclear interface doesn't just cost time — it risks a missed deadline or an incomplete decision on a real taxpayer's record.</p><p>The system spans the department's case work end to end — appeals, PAN transfer, assessment, revision, CPC, investigation, exemption, and more. This case study follows one of them: assessment proceedings, the highest-volume module and the one where a statutory limitation date makes a missed step irreversible. One module worked end to end is the only resolution at which the problem is legible; what carries over to the rest is set out in the reflection. Because ITBA holds sensitive taxpayer and departmental data, everything shown on this page is a reconstructed, sanitised approximation, not the live system.</p><ul class="case-facts"><li><strong>Organisation</strong> Central Board of Direct Taxes, Income Tax Department</li><li><strong>Contribution</strong> Research synthesis, information architecture, wireframes, prototypes, and testing materials</li><li><strong>Status</strong> Professional work, presented here as a sanitised reconstruction</li><li><strong>Constraint</strong> No real screens, taxpayer data, or officer identities can be shown</li><li><strong>Scope</strong> Contextual inquiry with case-handling officers across the range of assessment proceedings, a procedural audit against departmental requirements, and iterative workshops with departmental SMEs and reviewing officers over the course of the redesign</li></ul></div>
       </section>
 
       <section class="case-detail-grid">
@@ -75,17 +75,58 @@
           <h3 class="mockup-heading research-subhead">Research questions</h3>
           <ul class="case-facts"><li><strong>Where does confidence break down?</strong> Not which field is confusing, but which moment in working a case makes an officer stop, double-check, or route around the system.</li><li><strong>What's mandatory, and what's just inherited?</strong> Whether every field and step still traced back to a real procedural requirement, or had simply accumulated over time.</li><li><strong>What can be simplified without weakening the record?</strong> Whether a decision an officer might need to defend later would still be fully justified after the interface changed.</li></ul>
 
+          <h3 class="mockup-heading research-subhead">How the study was run</h3>
+          <p>Four methods, chosen so each one covered a blind spot in the others. Officers could show where the workflow broke down but not why a field existed; the procedural audit could show why a field existed but not whether anyone struggled with it; departmental SMEs and reviewing officers could speak to downstream consequences neither of the first two would surface.</p>
+          <div class="comparison-table-wrap" tabindex="0" role="group" aria-label="Scrollable table">
+            <table class="comparison-table study-table">
+              <caption>The study design, and the question each method was there to carry.</caption>
+              <thead><tr><th scope="col">Method</th><th scope="col">Who took part</th><th scope="col">The question it carried</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">Contextual inquiry</th><td>Case-handling officers, working live cases at their own desks</td><td>Where does an officer hesitate, backtrack, or step outside the system?</td></tr>
+                <tr><th scope="row">Procedural audit</th><td>Field-by-field against departmental procedure, reviewed with SMEs</td><td>Which fields and steps are genuinely mandatory, and which are inherited?</td></tr>
+                <tr><th scope="row">Requirement workshops</th><td>Departmental SMEs and reviewing officers, with the PM</td><td>What would a proposed simplification cost downstream — in audit, handoff, or record-keeping?</td></tr>
+                <tr><th scope="row">Prototype walkthroughs</th><td>Case-handling officers and departmental stakeholders</td><td>Does the redesigned flow hold up when someone is asked to work a case in it?</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Officers were sampled across the range of assessment proceedings rather than across seniority alone, because a straightforward assessment and a contested one stress completely different parts of the workflow — a model that only holds for the simplest path fails exactly where confidence is thinnest. Experience was spread deliberately too: officers newer to the workflow surface what can't be learned from the interface, while long-tenured officers surface what they've stopped noticing. Two groups are absent by design — taxpayers, because ITBA is an internal system they never touch, and the downstream offices a case passes to, who were represented through the SMEs and reviewing officers rather than observed directly.</p>
+
           <h3 class="mockup-heading research-subhead">Contextual inquiry with case-handling officers</h3>
           <p>Sitting with officers while they worked live cases — not asking them to describe the process from memory — surfaced where they actually paused, backtracked, or cross-checked another screen to stay oriented. That distinction mattered: officers rarely flagged these moments as problems in interviews, but the hesitation was visible in how they worked. That gap between self-report and observed behaviour is also why this leaned on contextual inquiry rather than a survey or interview-only approach — people don't reliably report friction they've already normalised into their routine.</p>
+
+          <h3 class="mockup-heading research-subhead">Where self-report and observed behaviour diverged</h3>
+          <p>Three patterns recurred in nearly every session — described one way when asked, worked another way when watched. No verbatim quotes or officer identities from a live departmental system can be published, so each card below is a paraphrased composite of what recurred rather than a transcript.</p>
+          <div class="interview-grid">
+            <article class="interview-card"><span>Said — the status label is clear</span><p class="interview-note">Asked directly, officers described the status field as unambiguous and familiar. Watched, the same officers opened the case anyway before deciding whether it needed them.</p><p class="interview-note"><strong>Reveals:</strong> the label was legible but not decisive. It named a state without answering whose turn it was.</p></article>
+            <article class="interview-card"><span>Said — finding the next step is easy</span><p class="interview-note">Officers called the screen familiar and navigable. In session, they scanned it top to bottom, often twice, before committing to an action they had taken many times before.</p><p class="interview-note"><strong>Reveals:</strong> fluency built through repetition was doing work the interface wasn't.</p></article>
+            <article class="interview-card"><span>Said — validation rarely bites</span><p class="interview-note">End-of-flow errors were reported as uncommon. The same officers maintained a personal pre-check — side notes, a second window, a colleague — specifically to avoid them.</p><p class="interview-note"><strong>Reveals:</strong> the workaround had been normalised long enough to stop registering as friction worth mentioning.</p></article>
+          </div>
+
+          <h3 class="mockup-heading research-subhead">Observation log, tagged by what it obscured</h3>
+          <p>An officer needs five things answered at any moment in a case. Every friction point from the sessions was logged against whichever one it obscured — and those five tags are the ones running down the left of the log below.</p>
+          <ul class="case-facts"><li><strong>Case</strong> What case is this, and what proceeding am I in?</li><li><strong>History</strong> What has already happened, and was it actually recorded?</li><li><strong>Risk</strong> What needs attention, and how much time is left?</li><li><strong>Action</strong> What can I do right now, and which of these is the one that matters?</li><li><strong>Next</strong> What happens after I act, and who owns it then?</li></ul>
+          <p>Sanitised here: case details, screen names, and identities removed, patterns kept.</p>
+          <div class="signal-table-wrap">
+            <div class="signal-row"><span class="signal-tag">Case</span><p class="signal-text">Identity and proceeding were re-established by hand on each related screen, often by copying a reference into a side note first.</p></div>
+            <div class="signal-row"><span class="signal-tag">Case</span><p class="signal-text">A second window stayed open purely to hold context the current screen dropped.</p></div>
+            <div class="signal-row"><span class="signal-tag">History</span><p class="signal-text">What had already happened on a case had to be reconstructed from separate records rather than read in one place.</p></div>
+            <div class="signal-row"><span class="signal-tag">History</span><p class="signal-text">Whether a previous action had been recorded, or only attempted, was not answerable from the screen.</p></div>
+            <div class="signal-row"><span class="signal-tag">Risk</span><p class="signal-text">Nothing distinguished a case with a statutory deadline approaching from one with months of runway.</p></div>
+            <div class="signal-row"><span class="signal-tag">Risk</span><p class="signal-text">A case blocked on another party looked identical to a case waiting on the officer.</p></div>
+            <div class="signal-row"><span class="signal-tag">Action</span><p class="signal-text">Officers scanned the full field set before acting, even on a routine step repeated daily.</p></div>
+            <div class="signal-row"><span class="signal-tag">Action</span><p class="signal-text">Rarely-used controls carried the same visual weight as the one action the case actually needed.</p></div>
+            <div class="signal-row"><span class="signal-tag">Next</span><p class="signal-text">After an action was recorded, where the case went and who owned it next was inferred rather than stated.</p></div>
+            <div class="signal-row"><span class="signal-tag">Next</span><p class="signal-text">Officers returned to cases they had already actioned, to confirm the action had taken.</p></div>
+          </div>
 
           <h3 class="mockup-heading research-subhead">Auditing the existing flow against procedure</h3>
           <p>Every field, action, and dependency in case disposal was mapped against the department's own procedural requirements, one by one. The goal was to separate what was genuinely mandatory from what had simply accumulated as legacy interface debt — screens that asked for information the process no longer required, or in an order the procedure no longer dictated. This ran as a structured, field-by-field audit rather than an informal walkthrough, because in a system whose records carry legal weight, "this seems unnecessary" isn't sufficient justification to remove something — only a traceable link back to procedure was.</p>
 
-          <h3 class="mockup-heading research-subhead">Requirement workshops with the business team</h3>
-          <p>Simplifying the interface couldn't mean hiding information an officer needed to justify a decision later. Structured workshops with the departmental business team pressure-tested every proposed simplification against that constraint before it went anywhere near a wireframe. Workshops, rather than a one-way sign-off review, because the business team could see downstream consequences of a simplification — audit requirements, inter-department handoffs, statutory record-keeping — that testing with officers alone wouldn't surface.</p>
+          <h3 class="mockup-heading research-subhead">Requirement workshops with SMEs and reviewing officers</h3>
+          <p>Simplifying the interface couldn't mean hiding information an officer needed to justify a decision later. Structured workshops with departmental SMEs and reviewing officers pressure-tested every proposed simplification against that constraint before it went anywhere near a wireframe. Workshops, rather than a one-way sign-off review, because they could see downstream consequences of a simplification — audit requirements, inter-department handoffs, statutory record-keeping — that testing with officers alone wouldn't surface.</p>
 
           <h3 class="mockup-heading research-subhead">Synthesis against five orientation questions</h3>
-          <p>Every friction point surfaced by the three methods above got grouped by which of five things it obscured for an officer: what case, what's happened, what needs attention, what can I do, what happens next. Four problems recurred often enough to drive the design direction:</p>
+          <p>Every friction point from the three discovery methods was grouped by which of those five questions it obscured for an officer. Four problems recurred often enough to drive the design direction:</p>
           <div class="theme-grid">
             <article class="case-proof-card"><p>Status didn't answer the real question.</p><p>A status label was visible, but not whether anything was actually blocking progress, or whose turn it was to act next.</p></article>
             <article class="case-proof-card"><p>The one action that mattered got lost in the density.</p><p>Dense screens gave every field equal visual weight, so the single next step competed with a dozen fields that weren't relevant yet.</p></article>
@@ -93,20 +134,26 @@
             <article class="case-proof-card"><p>Validation caught mistakes too late, or not at all.</p><p>Some required checks only surfaced at the very end of a workflow, after the cost of fixing them had already multiplied.</p></article>
           </div>
 
+          <p>Recurrence alone didn't set the order. Each theme was weighed against three things: how often it appeared across sessions, what it would cost procedurally if left alone — a missed limitation date is not the same class of problem as an extra click — and whether officers had already built a workaround, since a normalised workaround is a sign the system has quietly offloaded work onto the person. The four above cleared all three. Several smaller findings cleared only the first, and were logged rather than designed for.</p>
+
+          <h3 class="mockup-heading research-subhead">Where this study is thin</h3>
+          <p>The limits are worth stating as plainly as the findings, because they bound what the rest of this page can honestly claim.</p>
+          <ul class="case-facts"><li><strong>Sample breadth</strong> Officers were observed on assessment work, within a limited set of proceeding types and locations. The patterns held across those, but another ITBA module — appeals or exemption, where a case moves between parties far more often — could stress the model in ways this study wouldn't have caught.</li><li><strong>No production instrumentation</strong> Every behavioural signal here comes from observed sessions and walkthroughs, not from usage data on the live system. Nothing on this page should be read as a measured effect.</li><li><strong>Downstream roles represented, not observed</strong> Audit, inter-department handoff, and record-keeping needs arrived through SMEs and reviewing officers rather than from sitting with the people who carry them. That was a practical constraint, and it is the first gap I would close.</li><li><strong>No taxpayer-side view</strong> ITBA is internal, so what a clearer disposal workflow does for the person whose case it is stayed out of scope — even though that is where the value ultimately lands.</li></ul>
+
           <p class="research-note">ITBA handles live taxpayer and departmental data, so specific screens and officer identities from this work can't be published — the findings above are described in generalised form, consistent with departmental confidentiality requirements.</p>
         </div>
       </section>
 
       <section class="case-detail-grid">
         <p class="detail-label">Design decisions</p>
-        <div><h2>Answer five questions before optimising anything else.</h2><p>Every decision below responds directly to one of the four research findings, rather than to a generic best practice.</p><div class="comparison-table-wrap" tabindex="0" role="group" aria-label="Scrollable table"><table class="comparison-table traceability-table"><caption>Each of the four recurring findings, and the decision it produced.</caption><thead><tr><th scope="col">Research finding</th><th scope="col">What changed as a result</th></tr></thead><tbody><tr><th scope="row">Status didn&rsquo;t answer the real question</th><td>Status states that mean something</td></tr><tr><th scope="row">The one action that mattered got lost in the density</th><td>One clear next action per screen</td></tr><tr><th scope="row">Context didn&rsquo;t travel with the officer</th><td>Case context that persists</td></tr><tr><th scope="row">Validation caught mistakes too late, or not at all</th><td>Validation moved to the point of the mistake</td></tr></tbody></table></div><ul class="case-facts"><li><strong>Status states that mean something</strong> Replaced generic open/closed labels with explicit states — incomplete, ready for review, awaiting another party, resolved — so an officer could read progress at a glance instead of inferring it from individual fields.</li><li><strong>One clear next action per screen</strong> Separated primary actions, supporting information, and secondary controls into a visible hierarchy, instead of presenting every system capability with equal weight.</li><li><strong>Case context that persists</strong> Kept identity, proceeding, and status available as an officer moved between related tasks, instead of requiring the context to be rebuilt on every screen.</li><li><strong>Validation moved to the point of the mistake</strong> Surfaced missing or inconsistent information next to the relevant field, with plain guidance on what needed attention, instead of failing an entire submission at the end.</li></ul></div>
+        <div><h2>Answer the orientation questions before optimising anything else.</h2><p>Every decision below responds directly to one of the four research findings, rather than to a generic best practice.</p><div class="comparison-table-wrap" tabindex="0" role="group" aria-label="Scrollable table"><table class="comparison-table traceability-table"><caption>Each of the four recurring findings, and the decision it produced.</caption><thead><tr><th scope="col">Research finding</th><th scope="col">What changed as a result</th></tr></thead><tbody><tr><th scope="row">Status didn&rsquo;t answer the real question</th><td>Status states that mean something</td></tr><tr><th scope="row">The one action that mattered got lost in the density</th><td>One clear next action per screen</td></tr><tr><th scope="row">Context didn&rsquo;t travel with the officer</th><td>Case context that persists</td></tr><tr><th scope="row">Validation caught mistakes too late, or not at all</th><td>Validation moved to the point of the mistake</td></tr></tbody></table></div><ul class="case-facts"><li><strong>Status states that mean something</strong> Replaced generic open/closed labels with explicit states — incomplete, ready for review, awaiting another party, resolved — so an officer could read progress at a glance instead of inferring it from individual fields.</li><li><strong>One clear next action per screen</strong> Separated primary actions, supporting information, and secondary controls into a visible hierarchy, instead of presenting every system capability with equal weight.</li><li><strong>Case context that persists</strong> Kept identity, proceeding, and status available as an officer moved between related tasks, instead of requiring the context to be rebuilt on every screen.</li><li><strong>Validation moved to the point of the mistake</strong> Surfaced missing or inconsistent information next to the relevant field, with plain guidance on what needed attention, instead of failing an entire submission at the end.</li></ul></div>
       </section>
 
       <section class="case-detail-grid">
         <p class="detail-label">Workflow</p>
         <div>
           <h2>Sequence and dependency, sketched before any pixel was final.</h2>
-          <p>Low-fidelity flows mapped the sequence of a proceeding before interface design started, to confirm the order made sense to the officers who'd actually use it.</p>
+          <p>Low-fidelity flows mapped the sequence of an assessment proceeding before interface design started, to confirm the order made sense to the officers who'd actually use it.</p>
           <div class="wireframe-row">
             <div class="wireframe-card">
               <span class="wireframe-badge">1</span>
@@ -142,20 +189,129 @@
       </section>
 
       <section class="case-detail-grid">
+        <p class="detail-label">Screens</p>
+        <div>
+          <h2>The same assessment, before and after.</h2>
+          <p>ITBA holds live taxpayer and departmental data, so none of the real interface can be published. The screens below are reconstructions built for this case study — one assessment proceeding followed through, with dummy references, invented case details, and no departmental content. They exist to make the four decisions above legible, not to reproduce what shipped.</p>
+          <div class="mockup-pair">
+            <figure>
+              <div class="mockup-window">
+                <div class="mockup-chrome"><span></span><span></span><span></span><span class="mockup-chrome-brand">Reconstruction</span></div>
+                <div class="mockup-body">
+                  <span class="mockup-eyebrow">Before</span>
+                  <h3 class="mockup-heading">Every field carries the same weight</h3>
+                  <div class="mockup-input"><span>Case ref</span><strong>DEMO/00219</strong></div>
+                  <div class="mockup-input"><span>Assessee ref</span><strong>●●●●●●219</strong></div>
+                  <div class="mockup-input"><span>Proceeding</span><strong>Assessment u/s ●●●</strong></div>
+                  <div class="mockup-input"><span>Status</span><strong>Open</strong></div>
+                  <div class="mockup-input"><span>Last updated</span><strong>12 days ago</strong></div>
+                  <div class="mockup-actions is-bottom"><span class="mockup-btn">Record</span><span class="mockup-btn">Refer</span><span class="mockup-btn">Issue notice</span><span class="mockup-btn">Close</span></div>
+                  <p class="mockup-help">"Open" is accurate and useless. It doesn't say what is blocking the case, whose turn it is, or how much time is left — and four equal buttons don't say which one this case needs.</p>
+                </div>
+              </div>
+              <figcaption>Before — a status with no decision in it</figcaption>
+            </figure>
+            <figure>
+              <div class="mockup-window">
+                <div class="mockup-chrome"><span></span><span></span><span></span><span class="mockup-chrome-brand">Reconstruction</span></div>
+                <div class="mockup-body">
+                  <span class="mockup-eyebrow">After</span>
+                  <h3 class="mockup-heading">Waiting on another office — nothing for you to do yet</h3>
+                  <div class="mockup-input"><span>Assessee ref</span><strong>●●●●●●219</strong></div>
+                  <div class="mockup-input"><span>Limitation</span><strong>41 days left</strong></div>
+                  <ul class="mockup-checklist">
+                    <li class="is-done"><span class="mockup-dot"></span>Notice issued — recorded</li>
+                    <li class="is-attention"><span class="mockup-dot"></span>Awaiting the referring office — 6 days</li>
+                    <li><span class="mockup-dot"></span>Order — not started</li>
+                  </ul>
+                  <div class="mockup-actions is-bottom"><span class="mockup-btn is-primary">Send a reminder →</span><span class="mockup-btn">Case history</span></div>
+                  <p class="mockup-help">The same information, ranked by what an officer has to decide: what state, whose turn, how long left, one next step.</p>
+                </div>
+              </div>
+              <figcaption>After — state, ownership, and one next step</figcaption>
+            </figure>
+          </div>
+
+          <h3 class="mockup-heading research-subhead">Three more moments, reconstructed the same way</h3>
+          <div class="mockup-gallery">
+            <figure>
+              <div class="mockup-window">
+                <div class="mockup-chrome"><span></span><span></span><span></span><span class="mockup-chrome-brand">Reconstruction</span></div>
+                <div class="mockup-body">
+                  <span class="mockup-eyebrow">Worklist</span>
+                  <h3 class="mockup-heading">Four states, readable without opening a case</h3>
+                  <ul class="mockup-checklist">
+                    <li class="is-attention"><span class="mockup-dot"></span>00219 — awaiting another office, 6 days</li>
+                    <li><span class="mockup-dot"></span>00224 — incomplete, 2 fields outstanding</li>
+                    <li class="is-done"><span class="mockup-dot"></span>00231 — ready for review</li>
+                    <li class="is-done"><span class="mockup-dot"></span>00240 — resolved</li>
+                  </ul>
+                  <p class="mockup-fine">Every state names a condition and an owner, so triage doesn't require opening anything.</p>
+                </div>
+              </div>
+              <figcaption>Status that answers whose turn it is</figcaption>
+            </figure>
+            <figure>
+              <div class="mockup-window">
+                <div class="mockup-chrome"><span></span><span></span><span></span><span class="mockup-chrome-brand">Reconstruction</span></div>
+                <div class="mockup-body">
+                  <span class="mockup-eyebrow">Validation</span>
+                  <h3 class="mockup-heading">Flagged at the field, not at submission</h3>
+                  <div class="mockup-input"><span>Response received</span><strong>04 Apr</strong></div>
+                  <ul class="mockup-checklist">
+                    <li class="is-attention"><span class="mockup-dot"></span>Confirm this date or correct it before recording — it falls after the limitation date on this case.</li>
+                  </ul>
+                  <p class="mockup-fine">The message leads with what to do. The rule it comes from is the reason, not the headline.</p>
+                </div>
+              </div>
+              <figcaption>Validation where the mistake happens</figcaption>
+            </figure>
+            <figure>
+              <div class="mockup-window">
+                <div class="mockup-chrome"><span></span><span></span><span></span><span class="mockup-chrome-brand">Reconstruction</span></div>
+                <div class="mockup-body">
+                  <span class="mockup-eyebrow">Review</span>
+                  <h3 class="mockup-heading">Everything about to be recorded, in one place</h3>
+                  <ul class="mockup-checklist">
+                    <li class="is-done"><span class="mockup-dot"></span>Findings — complete</li>
+                    <li class="is-done"><span class="mockup-dot"></span>Supporting record — attached</li>
+                    <li class="is-done"><span class="mockup-dot"></span>Statutory checks — passed</li>
+                  </ul>
+                  <div class="mockup-actions is-bottom"><span class="mockup-btn is-primary">Record disposal →</span></div>
+                  <p class="mockup-fine">An explicit stop before an action that carries legal weight and can't be quietly undone.</p>
+                </div>
+              </div>
+              <figcaption>An explicit place to stop and reconsider</figcaption>
+            </figure>
+          </div>
+          <p class="research-note">Illustrative reconstructions only. No screen, field label, case reference, or record shown here is taken from the live system — the case numbers, dates, and masked references are invented for this page.</p>
+        </div>
+      </section>
+
+      <section class="case-detail-grid">
         <p class="detail-label">Validation</p>
         <div>
           <h2>Check the model against the people who'd actually use it.</h2>
-          <p>Wireframes and prototypes went back to case-handling officers and departmental stakeholders ahead of implementation — not for sign-off alone, but to test three specific things testing materials were built around:</p>
-          <ul class="case-facts"><li><strong>Status recognition</strong> Could an officer tell a case's real state from the state label alone, without opening it?</li><li><strong>Next-action clarity</strong> Did the visually primary action match what an officer would actually do first, unprompted?</li><li><strong>Recovery from a flagged mismatch</strong> Did an in-context validation message give enough to act on immediately, without needing to escalate or ask a colleague?</li></ul>
+          <p>Wireframes and prototypes went back to case-handling officers and departmental stakeholders ahead of implementation — not for sign-off alone, but to test whether the model actually held.</p>
+
+          <h3 class="mockup-heading research-subhead">How the sessions were run</h3>
+          <p>Moderated, one officer at a time, working a clickable prototype rather than reviewing static screens. Tasks were framed as case work rather than as interface tasks — a case has come to you, take it as far as you can — so the officer chose the path instead of being walked down it. Nothing on screen was explained in advance; where an officer asked what something meant, the question was the finding.</p>
+
+          <h3 class="mockup-heading research-subhead">What each round tested, and what counted as passing</h3>
+          <ul class="case-facts"><li><strong>Status recognition</strong> Could an officer tell a case's real state from the state label alone, without opening it? Passing meant naming both the state and whose turn it was, unprompted.</li><li><strong>Next-action clarity</strong> Did the visually primary action match what an officer would actually do first, unprompted? Passing meant reaching for it first, not arriving at it after a full scan of the screen.</li><li><strong>Recovery from a flagged mismatch</strong> Did an in-context validation message give enough to act on immediately? Passing meant correcting it without escalating, opening another screen, or asking a colleague.</li></ul>
+
+          <h3 class="mockup-heading research-subhead">What testing changed</h3>
+          <p>Three things didn't survive the first round, and the design moved rather than the explanation.</p>
+          <ul class="case-facts"><li><strong>A state name that read narrower than it was</strong> "Awaiting another party" was read by several officers as awaiting the taxpayer specifically, when it also covered other offices. The state was rewritten to name the party actually holding the case, rather than describe the category it belonged to.</li><li><strong>One primary action isn't always one action</strong> On steps where two routes were genuinely equal, a single emphasised button made officers hesitate over whether the other was still permitted. Those steps kept both at equal weight, and the rule became one clear <em>decision</em> per screen rather than one button per screen.</li><li><strong>Validation copy that named the rule, not the fix</strong> Early messages stated which check had failed. Officers could see something was wrong but not what to do about it, so the messages were rewritten to lead with the action and keep the rule as the reason behind it.</li></ul>
         </div>
       </section>
 
       <section class="case-detail-grid">
         <p class="detail-label">Stakeholder influence</p>
         <div>
-          <h2>Simplicity had to survive contact with the business team, not just with officers.</h2>
-          <p>The harder resistance wasn't from officers — it was the business team's instinct to keep every field visible "just in case" a decision was challenged later. The procedural audit gave that conversation a different footing: instead of arguing simplicity versus caution in the abstract, each proposed removal could be checked against whether procedure actually required it. Fields that failed that check were the ones that moved; fields that passed it stayed, even where they added visual density.</p>
-          <p>That trade-off went the other way at least once. A proposed simplification to how validation messages were grouped was rolled back after the business team flagged that it would make it harder to reconstruct why a case had been marked — a case where protecting the record mattered more than the cleaner layout.</p>
+          <h2>Simplicity had to survive contact with the reviewing side, not just with case-handling officers.</h2>
+          <p>The harder resistance wasn't from case-handling officers — it was the reviewing side's instinct to keep every field visible "just in case" a decision was challenged later. The procedural audit gave that conversation a different footing: instead of arguing simplicity versus caution in the abstract, each proposed removal could be checked against whether procedure actually required it. Fields that failed that check were the ones that moved; fields that passed it stayed, even where they added visual density.</p>
+          <p>That trade-off went the other way at least once. A proposed simplification to how validation messages were grouped was rolled back after a reviewing officer flagged that it would make it harder to reconstruct why a case had been marked — a case where protecting the record mattered more than the cleaner layout.</p>
         </div>
       </section>
 
@@ -185,7 +341,7 @@
 
       <section class="case-detail-grid">
         <p class="detail-label">Reflection</p>
-        <div><h2>Complexity isn't the enemy — unlabelled complexity is.</h2><p>The rules, exceptions, and accountability requirements inside ITBA are real; removing them was never the brief. The work was to make that complexity navigable — to surface the right information at the right moment, and let officers act with more confidence on decisions that carry real legal weight.</p></div>
+        <div><h2>Complexity isn't the enemy — unlabelled complexity is.</h2><p>The rules, exceptions, and accountability requirements inside ITBA are real; removing them was never the brief. The work was to make that complexity navigable — to surface the right information at the right moment, and let officers act with more confidence on decisions that carry real legal weight.</p><p>What travels beyond assessment is the frame, not the screens. The five orientation questions aren't specific to assessment — they are what any officer needs answered in any ITBA module — and the status vocabulary and in-context validation pattern were built to be reused that way. The fields, statutory checks, and sequence in this case study are assessment's own, and would have to be re-derived for appeals, revision, or exemption rather than copied across.</p></div>
       </section>
     </main>
     <footer class="site-footer">
