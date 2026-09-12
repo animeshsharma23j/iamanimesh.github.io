@@ -39,6 +39,23 @@ reading flat, which turned it into a blob rather than a cushion.
 
 Preview harness used for the comparison: `tmp/icon-preview.html` (gitignored).
 
+### Drop-in slot for replacement artwork
+
+`assets/icons/devices/{iphone,ipad,apple-watch}.svg` is the contract:
+`products.html` references those three paths and nothing else does. Saving new
+files over them needs no markup change.
+
+`.product-showcase-platforms img` was pinned to 18x18. SF Symbols exports are
+not square and carry their own optical padding, so both axes pinned squashed
+them; the rule is now `height: 18px; width: auto` with a 26px max-width cap.
+The current square icons still render 18x18, so nothing moved.
+
+Two properties any replacement has to satisfy: the artwork must be **dark**,
+because the rule inverts it to get the white treatment, and an SF Symbols
+"Export Symbol" template contains all 27 weight and scale variants in one file,
+which renders as a grid rather than one icon - that needs stripping to the
+single Regular variant first.
+
 The Apple logo pill is gone from all six product rows - it said nothing the
 device pills beside it did not.
 

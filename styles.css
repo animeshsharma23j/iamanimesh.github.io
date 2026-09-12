@@ -2284,9 +2284,12 @@ h1 {
   gap: 7px;
 }
 
+/* Height-locked, width free. SF Symbols exports are not square and carry their own
+   optical padding, so pinning both axes squashes them. */
 .product-showcase-platforms img {
-  width: 18px;
+  width: auto;
   height: 18px;
+  max-width: 26px;
   opacity: .78;
   filter: invert(1);
 }
