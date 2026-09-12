@@ -1,3 +1,57 @@
+# Product platform icons - 2026-09-12
+
+## What changed
+
+The platform row on `products.html` used Material Symbols `phone`, `tablet` and
+`watch` plus a Phosphor Apple logo. Those glyphs are drawn for 24-48px: at the
+18px this row renders them, their interior detail turned to mush and the phone
+and tablet were near-indistinguishable outlines.
+
+Replaced with three first-party icons in `assets/icons/devices/`, drawn on a
+24x24 grid specifically for this size:
+
+- **iphone.svg** - narrow portrait body with a Dynamic Island
+- **ipad.svg** - 3:4 portrait body, visibly wider and shorter than the phone,
+  no island; the aspect-ratio difference is what separates the two at 18px
+- **apple-watch.svg** - cushion case with band stubs top and bottom and a crown
+  on the right edge, which is what makes it read at small size
+
+All three are single-colour black fills with `fill-rule="evenodd"` cutouts
+rather than strokes, so the walls stay crisp when the browser scales them down,
+and the existing `filter: invert(1)` on `.product-showcase-platforms img` still
+produces the white treatment. Wall thickness is 1.7-1.8 units (about 1.3px at
+18px), tuned by rendering each icon at 128 / 24 / 18px side by side.
+
+The Apple logo pill is gone from all six product rows - it said nothing the
+device pills beside it did not.
+
+## BuildX is on iPad
+
+Added the iPad pill to the BuildX row and updated its aria-label. `buildx.html`
+claimed iPhone only in three places, which would now have contradicted the
+index, so its meta description, the platform line in the hero facts, and the
+"where can I use BuildX" FAQ answer all say iPhone and iPad.
+
+## Removed
+
+`assets/icons/material-symbols/` and `assets/icons/phosphor/` in full, including
+their LICENSE files. `products.html` was the only consumer of either set, and
+nothing references them after this change - verified by grep across HTML, CSS
+and JS. Both are recoverable from git history if a future icon need arises.
+
+## Verification evidence
+
+- `npm run verify`: all 36 pages pass.
+- No broken images on `products.html`; no remaining `apple-logo` reference.
+- Platform rows now read: UnitX iPhone/iPad/Watch, BuildX iPhone/iPad,
+  TradeBill iPhone/iPad, JobBook iPhone/iPad, Recital iPhone/iPad,
+  RateX iPhone/iPad (still "Coming soon", still unlinked).
+- Console errors: none.
+
+final result: passed
+
+---
+
 # Review fixes - 2026-09-12 (round 2)
 
 Seven items raised by the user against the research case-study build, with the
