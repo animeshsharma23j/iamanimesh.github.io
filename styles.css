@@ -2621,6 +2621,80 @@ h1 {
   .product-showcase-media img { animation: none; transition: none; }
 }
 
+/* The case-study index shares the Products page's compact split-panel system.
+   Its square field uses editorial numbering because these projects are stories,
+   not app listings. */
+.case-showcase-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 24px;
+  color: var(--soft);
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: 750;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.case-showcase-meta span:first-child { color: var(--amber); }
+
+.case-showcase-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  margin: 22px 0 0;
+  padding: 0;
+  color: var(--soft);
+  font-size: var(--text-small);
+  font-weight: 650;
+  list-style: none;
+}
+
+.case-showcase-tags li::before {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin: 0 8px 2px 0;
+  background: var(--amber);
+}
+
+.case-showcase-media {
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 44px;
+}
+
+.case-showcase-visual-label,
+.case-showcase-visual-focus {
+  color: var(--soft);
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: 750;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.case-showcase-visual-index {
+  align-self: center;
+  color: rgba(216, 166, 87, .22);
+  font-size: clamp(9rem, 15vw, 12rem);
+  font-weight: 800;
+  line-height: .72;
+  letter-spacing: -.08em;
+}
+
+.case-showcase-visual-focus { align-self: flex-end; text-align: right; }
+
+@media (max-width: 560px) {
+  .case-showcase-meta { margin-bottom: 20px; }
+  .case-showcase-media { padding: 32px; }
+  .case-showcase-visual-index { font-size: 9rem; }
+}
+
 /* The shared header pins .tab-contact to the right edge with position:absolute.
    The home page adds a theme switch beside it, so the pair is grouped in
    .header-actions and that group takes the anchor instead. */

@@ -70,6 +70,33 @@ final result: passed
 
 ---
 
+# Case-study index design QA — 2026-09-12
+
+## Comparison target
+
+- Visual reference: the finished Products index at `http://localhost:4173/products.html`.
+- Implementation: `http://localhost:4173/case-studies.html`, using the same shared showcase panel classes and Portfolio tokens.
+- Evidence: Products and Case Studies were rendered together at 1440 × 900; Case Studies was also checked at 390 × 844.
+
+## Fidelity and responsive evidence
+
+- Both indexes use the same 1380px shell, 24px vertical gap, flexible-copy / 440px-square split, zero-radius frame, zero-radius CTA, divider, typography hierarchy, and page-start spacing.
+- Case studies replace product imagery with purposeful editorial numbering and project-focus metadata; this distinguishes project narratives from app listings while preserving the shared structure.
+- Four visible case studies remain: Income Tax, ITBA, UnitX, and Trade Cloud Apps. CGDA has no public-facing link, has been removed from the sitemap and homepage metadata, and its retained source page carries `noindex, nofollow`.
+- At 1440px, the first case media field is exactly 440 × 440px. At 390px, it remains square at 364 × 364px, the card is 366px wide, and the document scroll width equals the viewport width.
+- The visible h2 hierarchy, read time, topic tags, description, and square CTA remain legible without clipping. The page-level h1 remains semantic-only.
+
+## Interaction and validation evidence
+
+- The Income Tax CTA navigates to `income-tax.html`.
+- Browser console errors: none.
+- `npm run verify`: all 36 pages pass landmarks, skip links, canonicals, Open Graph, navigation, and local links.
+- `git diff --check`: passed.
+
+final result: passed
+
+---
+
 # Archived: Unified case-study design QA — 2026-09-11
 
 historical result: passed

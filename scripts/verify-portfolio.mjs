@@ -96,7 +96,7 @@ for (const file of pages) {
 }
 
 const caseStudies = readFileSync(resolve(ROOT, "case-studies.html"), "utf8");
-if (!/<h2>Income Tax/.test(caseStudies) || /case-row case-row-link[\s\S]*?<h3>/.test(caseStudies)) {
+if (!/<h2(?:\s[^>]*)?>Income Tax/.test(caseStudies) || /case-row case-row-link[\s\S]*?<h3>/.test(caseStudies)) {
   errors.push("case-studies.html: project titles must use H2 headings");
 }
 
