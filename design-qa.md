@@ -1,3 +1,196 @@
+# Review fixes - 2026-09-12 (round 2)
+
+Seven items raised by the user against the research case-study build, with the
+cause of each where it was a defect rather than a preference.
+
+## 1. Controller, not Comptroller
+
+`cgda-case-study.html` called the organisation the "Comptroller General of
+Defence Accounts". It is the **Controller** General of Defence Accounts. Two
+occurrences corrected. No other file named the organisation.
+
+## 2. Em dashes replaced with plain hyphens, site-wide
+
+387 em dashes across 35 HTML files became " - ". Done site-wide rather than only
+on the pages in this change, because a half-converted convention reads worse than
+either convention on its own.
+
+- En dashes were left alone where they are numeric ranges ("2019-2021", "3-5
+  engineers", "30-50%") - that is correct typography, not the thing being
+  complained about. The one non-range en dash, "Say-do", became a hyphen, as did
+  a stray `&ndash;` entity in the ITBA evidence section.
+- `scripts/case-study-layout.js` splits `.case-meta > span` on the separator to
+  build the label/value pair. The delimiter was ` — ` and is now ` - `; without
+  that change every Role/Team/Focus line on the unified case studies would have
+  rendered as one unsplit string. Verified still splitting on CGDA, Income Tax
+  and Trade Cloud.
+- The two counter placeholders rendered a bare em dash before the fetch resolved
+  ("— appreciations online"). Rather than swap in another dash, the total row now
+  ships hidden and is revealed only when a real count arrives.
+- `currency-converter.html` used an em dash as the live-rate placeholder, which
+  became a stray " - " in the middle of a sentence. Now an ellipsis.
+- CSS comments still contain em dashes. They are not user-visible and were left.
+
+## 3. Case-study index: CTA crowding the tag list
+
+**Cause, not preference.** `.case-showcase .product-showcase-link` uses
+`margin-top: auto` above 901px to floor-align the CTA with the media panel's
+corner marks. An auto margin resolves to *zero* when there is no free space, so
+on the two cards whose copy column is the taller of the two - CGDA and Trade
+Cloud, both with four tags and a three-line description - the button sat flush
+against the tags. The minimum gap now lives on the tag list
+(`.case-showcase .case-showcase-tags { margin-bottom: 32px }`), so the auto
+margin still absorbs any remaining slack. Measured 32px on all five cards at
+1440px and 28px at 375px.
+
+## 4. ITBA hero: four columns now top-aligned
+
+`.itba-hero-grid` used `align-items: center` with `padding-top: 42px`, while the
+sidebar and summary rails both use `padding-top: 64px`. The figure was the taller
+cell, so the copy column was centred against it and pushed 35px down, and all
+four column tops landed on four different lines (172 / 184 / 209 / 219px). Now
+`align-items: start` with `padding-top: 64px`, which puts the rail title, the
+kicker, the mockup window and the summary card all at exactly **184px**.
+
+## 5. Two different "Evidence" statements
+
+The overview facts row and the summary card both had an Evidence entry, saying
+different things. The summary card's Challenge/Response/Evidence triad is shared
+with every other case study, so the *card* keeps Evidence - now reading
+"Officer walkthroughs, qualitative validation, and a 13-source documentary
+review; no claimed production metric" - and the facts row drops its cell,
+leaving My role / Team / Focus. `.itba-facts` regridded from four columns to
+three.
+
+## 6. Clipped table
+
+**Cause, not preference.** `.comparison-table tbody th` carried
+`white-space: nowrap`. That is fine for a short label like "Case status", but the
+research tables use sentence-length row headers, so column one was forced wide
+enough to hold a whole sentence on one line - squeezing the remaining columns to
+roughly one word per line and pushing the last column out of the scroll
+container. `nowrap` removed globally. Separately, the ITBA table caption had
+`padding: 0 0 14px`, so its text started at the wrap's rounded border; now
+`18px 18px 14px`.
+
+After the fix, zero tables overflow their container at 1440px across
+itba-case-study.html (8), trade-cloud-apps.html (8), cgda-case-study.html (3) and
+income-tax.html (1). At 375px they all scroll inside their own wrap and the page
+itself does not.
+
+## 7. Callout needed breathing space
+
+`.itba-callout` had `margin: 32px 0 0` - no bottom margin - so the next heading
+abutted it. Now `36px 0 40px`. Section headings also had no margin of their own,
+so `.itba-section > h3` gets `40px 0 14px`.
+
+**Regression caught during verification:** the heading rule was first written as
+`.itba-section h3`, which leaked a 40px top margin into every h3 *inside* a
+component - mockup bodies, proof cards. Re-scoped to the child selector
+`.itba-section > h3`. Re-audited all 35 h3 elements on the page: mockup headings
+0px, proof cards 0px, findings articles 18px, iteration steps 0px, callout
+headings 12px, pre-existing research-subheads 36px, and only the four
+section-level headings at 40px.
+
+## Verification evidence
+
+- `npm run verify`: all 36 pages pass.
+- `git diff --check`: clean.
+- Console errors on the three rebuilt case studies: none.
+- Screenshots at 1440x900 confirm the ITBA hero alignment, the corpus and
+  persistence tables rendering in full, the callout spacing, the BuildX
+  traceability table, and the CGDA index card's CTA gap.
+- Counter renders "1 appreciation online" (singular) and the row is hidden until
+  a count arrives.
+
+final result: passed
+
+---
+
+# Research case-study build — 2026-09-12
+
+## Scope
+
+Three changes, all driven by research documents supplied by the user on 2026-09-12
+(ITBA field research kit, ITBA research case study, ITBA UX research report, and
+per-product pain-point studies for JobBook, BuildX, RateX and TradeBill).
+
+1. **CGDA restored and rewritten as a pure research study.** The page was
+   orphaned on 2026-09-12 (noindex, out of the sitemap, no public link). It is
+   now indexed, back in the sitemap, back on the case-study index at position 04,
+   and relinked from the About journey entry. The content was rewritten to end at
+   the stakeholder submission per the user's instruction ("pure research,
+   thematic analysis and submission to the stakeholder"): design decisions,
+   wireframe walkthrough, prototype validation and the before/after capability
+   table were all removed. New sections: research questions, method (with a
+   per-method rationale table), thematic analysis (four coded blockers clustered
+   into two themes by shared cause), findings, say–do gaps, submission
+   (recommendation set plus what the department pushed back on), limitations, and
+   reflection.
+2. **ITBA gained an evidence-review section (05).** The user confirmed the
+   existing primary-research claims describe real professional work and that the
+   supplied documents are supplementary, so the fieldwork narrative is unchanged.
+   The new section presents the documentary strand alongside it: the 13-source
+   corpus with a watch-out per source, confidence tagging (documented / inferred
+   / hypothesis, with hypotheses excluded from recommendations), the eight-year
+   persistence table with the 2018 response pattern, four documented say–do gaps,
+   the six root causes with an explicit "what design cannot fix" column, and the
+   2026 dual-Act context. The Delivery & outcomes section gained a "what I would
+   instrument" table — four proposed measures, which is the honest complement to
+   the page's existing statement that no production metric was captured. Sidebar
+   contents and section kickers renumbered 05–11.
+3. **Trade Cloud Apps rebuilt as a four-product research case study.** Per the
+   user's instruction, the JobBook, BuildX, RateX and TradeBill research all live
+   here. New sections: method (four corpora, inductive-then-deductive coding,
+   stated uncoded residue of 31.2%), limitations placed deliberately before the
+   findings, findings (five themes by share of 1,832 negative reviews, the
+   positive contrast set, and the tool-vs-software cross-cutting table), the trust
+   arc, evidence → decisions (a traceability table per product plus the payments
+   reversal and the held-back recommendation), and open questions. Suite roles,
+   design choices and the handoff model were kept; suite roles now notes RateX as
+   a fourth product in App Store review.
+
+## RateX handling
+
+RateX is under App Store submission. Its research is included in the Trade Cloud
+case study, but `ratex.html` remains unlinked and the products-page card keeps its
+"Coming soon" state. No link to the RateX product page was added anywhere.
+
+## Incidental fixes
+
+- Singular/plural bug in the appreciation counter on both case-study layouts:
+  it rendered "1 appreciations online". Both `case-study-layout.js` and
+  `itba-case-study.js` now switch the label on count === 1. Verified live:
+  "1 appreciation online".
+- Read times on the case-study index were stale and are now derived from actual
+  main-content word count at ~215 wpm: ITBA 8 → 17 min (measured with the
+  research disclosure collapsed, which is the default reading path), UnitX 2 → 4,
+  CGDA 10, Trade Cloud 2 → 21. Income Tax was already accurate at 15.
+
+## Verification evidence
+
+- `npm run verify`: all 36 pages pass landmarks, skip links, canonicals, Open
+  Graph, navigation, and local links.
+- Browser console errors on cgda-case-study.html, itba-case-study.html and
+  trade-cloud-apps.html: none.
+- Unified layout applied on both rebuilt pages (`unified-case-study` present);
+  contents rails render 10 entries for CGDA, 12 for Trade Cloud, 11 for ITBA.
+- No horizontal document overflow at 375 px on cgda-case-study.html,
+  itba-case-study.html, trade-cloud-apps.html or case-studies.html; every wide
+  table scrolls inside its own `.comparison-table-wrap` rather than the page.
+- Case-study index renders five cards in order: Income Tax, ITBA, UnitX, CGDA,
+  Trade Cloud Apps.
+
+## Known gap, not addressed here
+
+The home page still carries no work and no contact address, and the header
+"Contact" tab still resolves to the hero section. Out of scope for this change and
+left untouched.
+
+final result: passed
+
+---
+
 # Products showcase design QA — 2026-09-12
 
 ## Comparison target
@@ -67,7 +260,6 @@ The final responsive render shows no remaining actionable P0, P1, or P2 issue. T
 - P3: wide landscape product imagery could reduce unused horizontal space further, but the current real phone captures are more honest than manufactured composites.
 
 final result: passed
-
 ---
 
 # Case-study index design QA — 2026-09-12
@@ -166,3 +358,64 @@ Fresh desktop and mobile captures show no remaining actionable P0, P1, or P2 mis
 - `git diff --check`: passed.
 
 historical result: passed
+
+---
+
+# About page design QA
+
+## Comparison target
+
+- Source visual truth:
+  - `/Users/johnconnor/Desktop/Screenshot 2026-09-12 at 8.41.23 PM.png`
+  - `/Users/johnconnor/Desktop/Screenshot 2026-09-12 at 8.41.50 PM.png`
+- Implementation: `http://127.0.0.1:4173/about.html?v=20260912-23`
+- Implementation screenshot: Codex in-app browser capture surfaced inline; the browser backend did not expose a filesystem path.
+- Viewport: 1280 × 720 CSS px for desktop, with an additional 390 × 844 CSS px responsive check.
+- Source pixels: 2934 × 344 and 3142 × 648. These are user-provided focused crops; their CSS viewport and device density are unknown.
+- Implementation pixels: 1280 × 720 at the browser's default density; 390 × 844 for the responsive check.
+- Density normalization: not applicable because the source images are directional crops rather than full-viewport fidelity targets.
+- State: About page, dark theme, intro and certifications regions.
+
+## Full-view comparison evidence
+
+- The source intro showed the About label below the portrait's top edge and placed New Delhi inside the copy metadata row.
+- The corrected render aligns the About metadata and portrait frame at exactly the same top coordinate (`topDelta: 0`) and moves location beneath the image.
+- The corrected portrait caption rendered `NEW DELHI, INDIA` with the live New Delhi date, time, and IST timezone.
+- The page retained its existing type, color, background, portrait crop, and section rhythm.
+
+## Focused region comparison evidence
+
+- The source credentials crop repeated `CERTIFICATION` once for each credential.
+- The corrected render contains one `CERTIFICATIONS` heading and two credential headings in a single shared section.
+- DOM verification found one `.case-showcase-meta-title` and two certification `h3` elements.
+- At 390px, the intro reflowed to one column, the portrait remained uncropped horizontally, and the caption content remained present in the accessibility tree.
+
+## Required fidelity surfaces
+
+- Fonts and typography: existing font families, weights, heading scale, label tracking, and casing were preserved.
+- Spacing and layout rhythm: intro top alignment is exact; the caption sits 16px below the image; certifications use one numbered vertical sequence at every breakpoint.
+- Colors and visual tokens: existing text, muted, amber, and background tokens are unchanged.
+- Image quality and asset fidelity: the existing portrait asset, crop mode, and source dimensions are unchanged.
+- Copy and content: location moved below the portrait; date and time are generated for `Asia/Kolkata`; the two credential titles are unchanged and now share one section label.
+
+## Findings
+
+- No actionable P0, P1, or P2 mismatch remains for the three requested corrections.
+- P3: the live time changes after capture by design; this is expected dynamic content rather than visual drift.
+
+## Comparison history
+
+1. Earlier findings: intro copy was vertically centered below the portrait top, location occupied the copy metadata row, and Certification was duplicated.
+2. Fixes: top-aligned the intro copy, added a portrait caption with live New Delhi date/time, and consolidated credentials into one semantic section.
+3. Post-fix evidence: browser render and DOM metrics confirmed a 0px top delta, one certification tagline, two credential titles, and no desktop horizontal overflow (`scrollWidth: 1280` at a 1280px viewport).
+
+## Implementation checklist
+
+- [x] Top-align About copy with portrait.
+- [x] Move New Delhi below portrait.
+- [x] Add live date, time, and IST label.
+- [x] Use one Certifications tagline and one ordered vertical list for two credentials.
+- [x] Check desktop and mobile reflow.
+- [x] Check browser console warnings and errors.
+
+final result: passed

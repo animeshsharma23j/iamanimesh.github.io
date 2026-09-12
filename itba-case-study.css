@@ -7,7 +7,7 @@
 .itba-shell { display: grid; grid-template-columns: 190px minmax(0, 1fr) 250px; gap: 0 48px; width: min(1380px, calc(100% - 48px)); margin: 0 auto; padding: 40px 0 80px; }
 .itba-overview { grid-column: 2; grid-row: 1; min-width: 0; scroll-margin-top: 110px; }
 .itba-kicker { margin: 0 0 20px; color: var(--cyan); font-size: .72rem; font-weight: 700; line-height: 1.5; letter-spacing: .12em; text-transform: uppercase; }
-.itba-hero-grid { display: grid; grid-template-columns: 1.15fr 1fr; align-items: center; gap: 80px; padding: 42px 0 56px; }
+.itba-hero-grid { display: grid; grid-template-columns: 1.15fr 1fr; align-items: start; gap: 80px; padding: 64px 0 56px; }
 .itba-hero-copy h1 { margin: 0 0 28px; font-size: var(--headline-size); line-height: 1.04; letter-spacing: -.055em; text-wrap: balance; }
 .itba-lede { color: var(--muted); font-size: var(--lede-size); line-height: 1.65; max-width: 560px; }
 .itba-status { margin: 22px 0; color: var(--soft); font-size: .82rem; line-height: 1.6; }
@@ -17,7 +17,7 @@
 .itba-hero-figure .mockup-body { padding: 30px; }
 .itba-hero-figure .mockup-heading { font-size: var(--h3-small); line-height: 1.25; }
 .itba-hero-figure figcaption { margin-top: 16px; color: var(--soft); font-size: .75rem; text-align: center; }
-.itba-facts { display: grid; grid-template-columns: .85fr 1.2fr 1.3fr 1fr; gap: 32px; margin: 0; padding: 28px 0; border-block: 1px solid #ffffff24; }
+.itba-facts { display: grid; grid-template-columns: .85fr 1.2fr 1.45fr; gap: 32px; margin: 0; padding: 28px 0; border-block: 1px solid #ffffff24; }
 .itba-facts dt { margin-bottom: 10px; color: var(--soft); font-size: .75rem; }
 .itba-facts dd { margin: 0; color: var(--text); font-size: .9rem; line-height: 1.6; }
 .itba-takeaway { display: grid; grid-template-columns: 180px 1fr; align-items: center; gap: 36px; padding: 42px 0 64px; }
@@ -58,8 +58,11 @@
 .itba-section > h2 { margin: 0 0 28px; max-width: 790px; font-size: var(--h2-size); line-height: 1.12; letter-spacing: -.04em; text-wrap: balance; }
 .itba-section > p:not(.itba-kicker), .itba-research-detail > p { max-width: 70ch; margin: 0 0 20px; color: var(--muted); font-size: 1rem; line-height: 1.8; }
 .itba-section h3 { color: var(--text); line-height: 1.35; letter-spacing: -.015em; }
+/* Only a heading that belongs to the section itself gets the section rhythm. Headings
+   inside a component - a mockup body, a proof card - keep their component spacing. */
+.itba-section > h3 { margin: 40px 0 14px; }
 .itba-section .itba-note { font-size: .83rem !important; line-height: 1.7; color: var(--soft); }
-.itba-callout { margin: 32px 0 0; padding: 26px 28px; border-left: 3px solid var(--cyan); background: #75d5e40b; }
+.itba-callout { margin: 36px 0 40px; padding: 26px 28px; border-left: 3px solid var(--cyan); background: #75d5e40b; }
 .itba-callout > span { color: var(--cyan); font-size: .75rem; font-weight: 700; }
 .itba-callout p { margin: 12px 0 0; color: var(--text); font-size: 1.1rem; line-height: 1.7; }
 .itba-callout h3 { margin: 12px 0 0; font-size: var(--h3-small); }
@@ -84,7 +87,7 @@
 .itba-section .case-facts li { font-size: .95rem; line-height: 1.75; padding-block: 18px 0; }
 .itba-section .comparison-table { width: 100%; font-size: .88rem; }
 .itba-section .comparison-table th, .itba-section .comparison-table td { line-height: 1.65; padding: 16px; }
-.itba-section .comparison-table caption { text-align: left; color: var(--soft); padding: 0 0 14px; font-size: .8rem; }
+.itba-section .comparison-table caption { text-align: left; color: var(--soft); padding: 18px 18px 14px; font-size: .8rem; }
 .itba-section .comparison-table-wrap { margin: 28px 0; }
 .itba-section .mockup-pair { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .itba-section .mockup-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }

@@ -1321,7 +1321,11 @@ h1 {
 .comparison-table { width: 100%; min-width: 560px; border-collapse: collapse; font-size: 0.88rem; }
 .comparison-table th, .comparison-table td { padding: 14px 16px; text-align: left; border-bottom: 1px solid var(--rule); vertical-align: top; }
 .comparison-table thead th { color: var(--cyan); font-family: var(--font-mono); font-size: var(--text-label); font-weight: 750; letter-spacing: 0.06em; text-transform: uppercase; border-bottom: 1px solid var(--line-strong); }
-.comparison-table tbody th { color: var(--text); font-weight: 750; white-space: nowrap; }
+/* Row headers carry sentence-length prose in the research tables, so they wrap.
+   `white-space: nowrap` here used to force column one wide enough to hold a whole
+   sentence on one line, which squeezed the remaining columns to one word per line
+   and pushed the last one out of the scroll container. */
+.comparison-table tbody th { color: var(--text); font-weight: 750; }
 .comparison-table tbody td { color: var(--muted); line-height: 1.5; }
 
 /* Traceability variant. Both ITBA and CGDA assert in prose that every design
@@ -2456,7 +2460,10 @@ h1 {
    below 901px the field stacks and keeps its square. */
 @media (min-width: 901px) {
   .case-showcase-media { aspect-ratio: auto; }
+  /* Floor-aligned CTA. `margin-top: auto` resolves to zero when the copy column is the
+     taller of the two, so the minimum gap lives on the tag list above it. */
   .case-showcase .product-showcase-link { margin-top: auto; }
+  .case-showcase .case-showcase-tags { margin-bottom: 32px; }
 }
 
 @media (max-width: 560px) {
@@ -2472,13 +2479,21 @@ h1 {
    full-width evidence panel, and a pair of half-width credentials — so the page
    is no longer four repetitions of one cadence.
    ─────────────────────────────────────────────────────────────────────────── */
-.about-showcase-shell .case-showcase-meta span:first-child { color: var(--amber); }
+.about-showcase-shell .case-showcase-meta > :first-child { color: var(--amber); }
+
+/* About is an editorial page rather than a card index. Give each chapter room
+   to resolve before the next one begins. */
+.about-showcase-shell {
+  gap: clamp(72px, 7vw, 104px);
+  padding-top: 64px;
+  padding-bottom: 136px;
+}
 
 /* About carries no panel boxes. .product-showcase draws a 1px outline and a
    fill so a product or a case study reads as a card; About is one continuous
    page about one person, and the outlines just fence the copy in. The grid
-   itself stays, so the alignment and rhythm are unchanged — only the
-   rectangles go. */
+   itself stays; the About-specific axis correction below removes the now
+   unnecessary card inset. */
 .about-showcase,
 .about-showcase .product-showcase-media,
 .about-showcase-portrait {
@@ -2506,13 +2521,48 @@ h1 {
   letter-spacing: -0.04em;
 }
 
-.about-showcase .product-showcase-description { max-width: 46ch; }
-.about-showcase .about-tags { margin-top: 30px; }
+/* Recognition is a real heading for document navigation, while retaining the
+   compact metadata treatment used throughout the showcase system. */
+.about-showcase .case-showcase-meta .case-showcase-meta-title {
+  margin: 0;
+  color: var(--amber);
+  font: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+}
+
+.about-showcase .case-showcase-meta { margin-bottom: 32px; }
+.about-showcase .product-showcase-description { max-width: 46ch; margin-top: 28px; line-height: 1.62; }
+.about-showcase .about-tags {
+  display: grid;
+  grid-template-columns: repeat(3, max-content);
+  gap: 12px;
+  margin-top: 38px;
+}
+
+/* Once the card borders are removed, retaining the card's horizontal inset
+   leaves every About heading floating inside the shared page axis. Keep the
+   useful vertical rhythm, but align the copy with the header and shell. */
+.about-showcase .product-showcase-copy { padding-inline: 0; }
+.about-page .site-header { width: min(var(--max), calc(100% - 48px)); }
+.about-showcase-intro .product-showcase-copy { justify-content: flex-start; padding-top: 0; }
 
 /* The portrait bleeds to the edges of the square field rather than sitting
    inside its padding — the field is the frame, so a second one is noise. */
 .about-showcase-portrait {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  align-items: stretch;
+  justify-content: stretch;
   padding: 0;
+  overflow: visible;
+  background: none;
+}
+
+.about-portrait-frame {
+  min-width: 0;
+  min-height: 440px;
+  overflow: hidden;
   background: var(--bg-2);
 }
 
@@ -2525,39 +2575,108 @@ h1 {
   animation: none;
 }
 
+.about-portrait-caption {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding-top: 16px;
+  color: var(--soft);
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: 750;
+  line-height: 1.4;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.about-portrait-caption time { text-align: right; }
+
+/* The portrait is the second cell of the intro row. On desktop it should
+   stretch with the copy instead of retaining the product card's 1:1 ratio. */
+@media (min-width: 901px) {
+  .about-showcase-portrait { aspect-ratio: auto; }
+}
+
 /* Recognition: one column, and the copy cell stretches so the stat row, the
    marquee and the gallery all take the full measure. */
 .about-showcase-wide { grid-template-columns: minmax(0, 1fr); min-height: 0; }
 .about-showcase-wide .product-showcase-copy { align-items: stretch; width: 100%; }
-.about-showcase-wide .recognition-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; }
+.about-showcase-wide .recognition-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 40px 48px; }
+.about-showcase-wide .recognition-stats div { align-content: start; gap: 10px; }
+.about-showcase-wide .recognition-stats span { max-width: 30ch; line-height: 1.55; }
 
 /* Journey runs full width too: without the ghost numeral there was nothing for
    a side field to hold. */
 .about-showcase-journey .product-showcase-copy { justify-content: flex-start; }
-.about-showcase-journey .journey-list { margin: 44px 0 0; }
+.about-showcase-journey .journey-list { margin: 56px 0 0; }
+.about-showcase-journey .journey-list li { padding-bottom: 64px; }
 .about-showcase-journey .journey-list li:last-child { padding-bottom: 0; }
 
-.about-showcase-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
-
-.about-showcase-cert {
+.about-certification-list {
+  display: grid;
   grid-template-columns: minmax(0, 1fr);
-  min-height: 0;
+  max-width: 980px;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+  list-style: none;
 }
 
-.about-showcase-cert h2 { font-size: var(--h3-small); line-height: 1.2; }
+.about-certification-list li {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+  padding: 32px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.about-certification-index,
+.about-certification-issuer {
+  color: var(--soft);
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: 750;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.about-certification-index { color: var(--amber); }
+.about-certification-issuer { display: block; margin-bottom: 12px; }
+.about-certification-list h3 { margin: 0; color: var(--text); font-size: var(--h3-small); line-height: 1.2; letter-spacing: -.03em; }
+
+@media (min-width: 901px) and (max-width: 1320px) {
+  .about-showcase-wide .recognition-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
 
 @media (max-width: 900px) {
-  .about-showcase-wide .recognition-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px; }
-  .about-showcase-pair { grid-template-columns: minmax(0, 1fr); }
-  .about-showcase-portrait { aspect-ratio: 4 / 3; }
+  .about-showcase-shell { gap: 72px; padding-top: 48px; padding-bottom: 112px; }
+  .about-showcase-wide .recognition-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px 32px; }
+  .about-showcase-portrait { aspect-ratio: auto; }
+  .about-portrait-frame { min-height: 0; aspect-ratio: 4 / 3; }
 }
 
 @media (max-width: 560px) {
+  .about-showcase-shell { width: min(100% - 48px, var(--max)); gap: 56px; padding-top: 32px; padding-bottom: 88px; }
   .about-showcase h1 { max-width: none; }
-  .about-showcase-wide .recognition-stats { grid-template-columns: minmax(0, 1fr); gap: 22px; }
-  .about-showcase-journey .journey-list { margin-top: 32px; }
-  .about-showcase-pair { gap: 16px; }
-  .about-showcase-cert { min-height: 0; }
+  .about-showcase .case-showcase-meta { margin-bottom: 24px; }
+  .about-showcase .about-tags { display: flex; gap: 10px; margin-top: 32px; }
+  .about-showcase-wide .recognition-stats { grid-template-columns: minmax(0, 1fr); gap: 30px; }
+  .about-showcase-journey .journey-list { margin-top: 40px; }
+  .about-showcase-journey .journey-list li { padding-bottom: 52px; }
+  .about-portrait-caption { flex-direction: column; gap: 5px; }
+  .about-portrait-caption time { text-align: left; }
+  .about-certification-list li { grid-template-columns: 32px minmax(0, 1fr); gap: 16px; padding: 28px 0; }
+}
+
+@media (max-width: 360px) {
+  .about-showcase .case-showcase-meta {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .about-showcase .case-showcase-meta > :last-child { text-align: left; }
 }
 
 /* The shared header pins .tab-contact to the right edge with position:absolute.

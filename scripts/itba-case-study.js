@@ -43,7 +43,8 @@
   const appreciationTitle = document.getElementById('appreciation-title');
   const appreciationTotalRow = document.createElement('p');
   appreciationTotalRow.className = 'itba-appreciation-total';
-  appreciationTotalRow.innerHTML = '<strong data-appreciation-total>—</strong> appreciations online';
+  appreciationTotalRow.innerHTML = '<strong data-appreciation-total></strong> <span data-appreciation-total-label>appreciations</span> online';
+  appreciationTotalRow.hidden = true;
   appreciationTitle?.after(appreciationTotalRow);
   const appreciationTotal = appreciationTotalRow.querySelector('[data-appreciation-total]');
   const appreciationKey = 'itba-case-study-appreciation';
@@ -55,7 +56,12 @@
   try { thumbsUpRecorded = localStorage.getItem(recordedKey) === 'true'; } catch (error) { /* Storage can be unavailable in privacy modes. */ }
 
   function renderTotal(count) {
-    if (appreciationTotal && count !== null) appreciationTotal.textContent = new Intl.NumberFormat().format(count);
+    if (appreciationTotal && count !== null) {
+      appreciationTotal.textContent = new Intl.NumberFormat().format(count);
+      const label = appreciationTotalRow.querySelector('[data-appreciation-total-label]');
+      if (label) label.textContent = count === 1 ? 'appreciation' : 'appreciations';
+      appreciationTotalRow.hidden = false;
+    }
   }
 
   feedbackCounter.get('itba')

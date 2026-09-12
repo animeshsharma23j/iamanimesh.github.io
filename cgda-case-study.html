@@ -13,13 +13,12 @@
     <meta charset="UTF-8" />
     <link rel="icon" href="/icon.png" type="image/png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="noindex, nofollow" />
-    <meta name="description" content="A research-led redesign of the CGDA defence bill-clearance workflow: process mapping across five roles to find where a bill stalls, not which screen broke." />
-    <title>CGDA Case Study: UX Research on Defence Bill Clearance</title>
+    <meta name="description" content="A UX research study of CGDA defence bill clearance: process mapping across five roles, a workaround audit, and thematic analysis to find where a bill actually stalls." />
+    <title>CGDA Research Study: Where a Defence Bill Actually Stalls</title>
     <link rel="canonical" href="https://www.iamanimesh.com/cgda-case-study.html" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="CGDA Case Study: UX Research on Defence Bill Clearance" />
-    <meta property="og:description" content="Research-led redesign of a multi-role defence bill-clearance workflow." />
+    <meta property="og:title" content="CGDA Research Study: Where a Defence Bill Actually Stalls" />
+    <meta property="og:description" content="Process mapping, a workaround audit, and thematic analysis across a five-role defence bill-clearance workflow." />
     <meta property="og:url" content="https://www.iamanimesh.com/cgda-case-study.html" /><meta property="og:image" content="https://www.iamanimesh.com/icon.png" /><meta property="og:image:width" content="637" /><meta property="og:image:height" content="637" />
     <meta name="twitter:card" content="summary" />
 
@@ -58,132 +57,100 @@
       <details class="mobile-menu"><summary aria-label="Open navigation"><span class="mobile-menu-icon" aria-hidden="true"></span><span class="visually-hidden">Menu</span></summary><nav aria-label="Mobile navigation"><a href="products.html">Products</a><a href="case-studies.html">Case studies</a><a href="about.html">About</a><a href="index.html#work-with-me">Contact</a></nav></details>
     </header>
     <main id="main-content" class="case-study-shell">
-      <p class="case-eyebrow">04 / GovTech / UX Research</p>
-      <h1>CGDA<br /><span>Making a five-role bill-clearance process visible</span></h1>
-      <p class="case-intro">A research-led redesign of a multi-stage defence accounting workflow — starting from where the process actually broke, not from the screens.</p>
-      <div class="case-meta"><span>Role — UI/UX Designer, 2019–2021</span><span>Team — 2 designers (incl. me), 1 PM, 3 engineers, department SMEs</span><span>Focus — UX research, process mapping, bill-clearance workflow</span></div>
+      <p class="case-eyebrow">04 / Public service / UX research</p>
+      <h1>CGDA<br /><span>Finding where a defence bill actually stalls</span></h1>
+      <p class="case-intro">A research study of a five-role bill-clearance workflow: mapping the lived process against the official one, auditing the paper workarounds that had grown up around it, and coding what came back into the four things that actually stopped a bill from moving.</p>
+      <div class="case-meta"><span>Role - UI / UX Designer, 2019–2021</span><span>Team - 2 designers (incl. me), 1 PM, 3 engineers, department SMEs</span><span>Focus - Process mapping, workaround audit, thematic analysis</span></div>
 
       <section class="case-detail-grid">
         <p class="detail-label">Context</p>
-        <div><h2>One bill, five roles, no shared view of where it stood.</h2><p>Employee bill clearance at the Comptroller General of Defence Accounts moves through preparation, review, correction, and approval — different people, different responsibilities, different information needs, one workflow. I worked on the internal websites, applications, and accounting system supporting that process. Because it involves financial and employee data, this case study is a sanitised reconstruction — no real screens, records, or figures.</p><ul class="case-facts"><li><strong>Organisation</strong> Comptroller General of Defence Accounts (CGDA)</li><li><strong>Contribution</strong> UX research, process mapping, information architecture, wireframes, prototypes, and testing plans</li><li><strong>Status</strong> Professional work, presented here as a sanitised reconstruction</li><li><strong>Constraint</strong> No confidential screens, employee data, or financial records shown</li><li><strong>Scope</strong> Multiple working sessions with preparers, reviewers, and approvers across the five roles, spread over several weeks, alongside a review of existing paper-workaround practices</li></ul></div>
+        <div><h2>One bill, five roles, no shared view of where it stood.</h2><p>Employee bill clearance at the Controller General of Defence Accounts moves through preparation, review, correction, and approval - different people, different responsibilities, different information needs, one workflow. The department's opening request was a visual refresh of the internal system supporting it. This study is what was done instead of starting there.</p><p>It is presented here as a research case study only. The interface work that followed the submission is deliberately out of scope on this page: what is worth reading about this project is how the problem was located, not what the screens ended up looking like.</p><ul class="case-facts"><li><strong>Organisation</strong> Controller General of Defence Accounts (CGDA)</li><li><strong>Contribution</strong> Research design, process mapping across all five roles, workaround audit, thematic analysis, and the recommendation set submitted to the department</li><li><strong>Status</strong> Professional work, presented here as a sanitised reconstruction</li><li><strong>Constraint</strong> No confidential screens, employee data, or financial records shown; no individual participant is identifiable</li><li><strong>Fieldwork</strong> Working sessions with preparers, reviewers, and approvers across the five roles, spread over several weeks, alongside a review of existing paper-workaround practices</li></ul></div>
       </section>
 
       <section class="case-detail-grid">
-        <p class="detail-label">Research &amp; discovery</p>
+        <p class="detail-label">Research questions</p>
         <div>
-          <h2>Map the process before touching the product.</h2>
-          <p>The brief could have started with the existing screens. It started with the process instead — because a bill's five roles each had a different relationship to the same workflow, and no single screen audit would have surfaced that on its own.</p>
+          <h2>Three questions, none of them about a screen.</h2>
+          <p>The brief could have started with the existing pages. It started with the process instead, because five roles each had a different relationship to the same workflow and no screen audit surfaces that on its own. The questions were written to be answerable by observation rather than opinion.</p>
+          <ul class="case-facts"><li><strong>RQ1 - Where does a bill actually stall?</strong> Not which screen breaks, but which handoff between roles a bill stops at, and what it is waiting for when it does.</li><li><strong>RQ2 - What fills the gap when the system doesn't?</strong> If preparers, reviewers, and approvers had informal workarounds, what were those workarounds compensating for?</li><li><strong>RQ3 - Who is responsible for the next move?</strong> Whether the system itself made ownership of a pending bill legible, or left it to be inferred by asking someone.</li></ul>
+          <p class="research-note">RQ2 is the load-bearing one. A workaround is the cheapest available evidence of an unmet need, because someone has already paid to build it.</p>
+        </div>
+      </section>
 
-          <h3 class="mockup-heading research-subhead">Research questions</h3>
-          <ul class="case-facts"><li><strong>Where does a bill actually stall?</strong> Not which screen breaks, but which handoff between roles a bill gets stuck at, and for how long.</li><li><strong>What fills the gap when the system doesn't?</strong> If preparers, reviewers, and approvers had informal workarounds, what were those workarounds compensating for?</li><li><strong>Who is responsible for the next move?</strong> Whether the interface itself made ownership of a "pending" bill legible, or left it to be inferred by asking around.</li></ul>
+      <section class="case-detail-grid">
+        <p class="detail-label">Method</p>
+        <div>
+          <h2>Ask each role for its own account, not the department's summary of it.</h2>
+          <p>Two methods, chosen so that each covered the other's blind spot. Process mapping could establish the sequence but not what people did when the sequence failed them; the workaround audit could show the failures but not where they sat in the flow.</p>
+          <div class="comparison-table-wrap" tabindex="0" role="group" aria-label="Scrollable table"><table class="comparison-table"><caption>The two methods, and the question each one was there to carry.</caption><thead><tr><th scope="col">Method</th><th scope="col">Who took part</th><th scope="col">The question it carried</th></tr></thead><tbody><tr><th scope="row">Process mapping, role by role</th><td>Preparers, reviewers, and approvers, in separate sessions per role</td><td>What is the real sequence of activities and decisions, as against the org chart's version?</td></tr><tr><th scope="row">Workaround audit</th><td>The same participants, at their own desks, with their own artefacts</td><td>Where has the digital process stopped being enough, and what grew up to cover it?</td></tr></tbody></table></div>
+          <h3 class="mockup-heading research-subhead">Why sessions per role, not one workshop</h3>
+          <p>A five-role workflow needed each role's own account of the sequence, not one department's summary of how the other four operate. Run as a single stakeholder workshop, the account would have converged on the official process - which was already documented, and was not the thing in question. Held separately, the accounts disagreed, and the disagreements were the findings.</p>
+          <h3 class="mockup-heading research-subhead">Why the workarounds were audited alongside, not after</h3>
+          <p>Workarounds rarely surface when you ask someone to describe their job; they are experienced as "how the work gets done", not as compensation for a defect. They show up when you trace the sequence and ask what happens at the point where the system stops helping. Mapping the artefacts against the digital flow is what put each one at a specific handoff instead of on a general list of complaints.</p>
+        </div>
+      </section>
 
-          <h3 class="mockup-heading research-subhead">Process mapping across every role</h3>
-          <p>Working sessions with people at each stage of bill clearance — preparers, reviewers, approvers — traced the actual sequence of activities and decision points each role went through, rather than the org chart's idealised version of it. The gap between the two turned out to be most of the problem. This ran as working sessions with each role rather than a single stakeholder workshop, because a five-role workflow needed each role's own account of the sequence, not one department's summary of how the other four operate.</p>
+      <section class="case-detail-grid">
+        <p class="detail-label">Thematic analysis</p>
+        <div>
+          <h2>Code by what stopped the bill, not by which page it happened on.</h2>
+          <p>Observations from the sessions were written up as discrete statements, each kept separate from my reading of it - what a participant did or said in one column, what I thought it meant in another. Codes were generated from those statements rather than from a prior framework, then clustered by shared underlying cause rather than by surface topic or by screen.</p>
+          <p>That last choice is the analytical step that mattered. Coded by screen, the output would have been a page-by-page audit and the department would have got its visual refresh. Coded by <em>what prevented the bill from reaching its next stage</em>, the same observations resolved into four recurring blockers - and those four sat under two themes.</p>
+          <div class="comparison-table-wrap" tabindex="0" role="group" aria-label="Scrollable table"><table class="comparison-table"><caption>Four coded blockers, clustered into two themes by shared cause.</caption><thead><tr><th scope="col">Theme</th><th scope="col">Blockers it accounts for</th><th scope="col">The shared cause underneath</th></tr></thead><tbody><tr><th scope="row">A - The record described a document; the work needed an owner</th><td>"Pending" meant five different things · Every role saw the same flat view</td><td>The system modelled the bill's state but never whose turn it was, so ownership had to be reconstructed socially - by asking a colleague</td></tr><tr><th scope="row">B - Information arrived after the point where it could prevent work</th><td>Requirements surfaced too late · A returned bill lost its history</td><td>Everything needed to get a bill right the first time was available, but was presented downstream of the moment it would have been useful</td></tr></tbody></table></div>
+        </div>
+      </section>
 
-          <h3 class="mockup-heading research-subhead">Auditing where paper habits still filled the gaps</h3>
-          <p>Wherever the internal system fell short, an informal paper-based workaround had usually grown up to cover it — a separate reference sheet, a phone call, a physical file passed between desks. Mapping those workarounds against the digital system showed exactly where the designed process and the lived process had drifted apart. This ran alongside the process mapping rather than as a separate audit, because workarounds rarely surface when you ask someone to describe their job — they show up when you trace where the digital system stopped being enough and something informal grew up to cover it.</p>
-
-          <h3 class="mockup-heading research-subhead">Structuring around blockers, not screens</h3>
-          <p>Findings were organised by what stopped a bill from moving to its next stage, rather than by the individual pages of the existing system. That reframing is what turned a screen-by-screen audit into a process-level diagnosis. Four blockers recurred often enough to drive the design direction:</p>
+      <section class="case-detail-grid">
+        <p class="detail-label">Findings</p>
+        <div>
+          <h2>Four blockers, each one traceable to a handoff.</h2>
+          <p>These are generalised descriptions. The work involves financial and employee records, so specific figures, bill references, and individual identities cannot be published.</p>
           <div class="theme-grid">
-            <article class="case-proof-card"><p>Requirements surfaced too late.</p><p>What documentation a bill needed wasn't clear until it had already entered review, turning avoidable gaps into correction cycles.</p></article>
-            <article class="case-proof-card"><p>"Pending" meant five different things.</p><p>A bill marked pending could be waiting on review, correction, or approval — or nothing at all — with no way to tell which without asking someone.</p></article>
-            <article class="case-proof-card"><p>Every role saw the same flat view.</p><p>Reviewers and approvers worked through the same undifferentiated screen a preparer used, with no structure suited to what their part of the job needed.</p></article>
-            <article class="case-proof-card"><p>A returned bill lost its history.</p><p>Corrections weren't connected back to what had been flagged, so a returned bill often meant re-learning the objection from scratch.</p></article>
+            <article class="case-proof-card"><p>01 · Requirements surfaced too late.</p><p>What documentation a bill needed wasn't clear until it had already entered review, turning avoidable gaps into correction cycles. The information existed; it just arrived after submission. <strong>Theme B.</strong></p></article>
+            <article class="case-proof-card"><p>02 · "Pending" meant five different things.</p><p>A bill marked pending could be waiting on review, on correction, on approval - or on nothing at all - with no way to tell which without asking someone. <strong>Theme A.</strong></p></article>
+            <article class="case-proof-card"><p>03 · Every role saw the same flat view.</p><p>Reviewers and approvers worked through the same undifferentiated screen a preparer used, with no structure suited to what their part of the job actually required. <strong>Theme A.</strong></p></article>
+            <article class="case-proof-card"><p>04 · A returned bill lost its history.</p><p>Corrections weren't connected back to what had been flagged, so a returned bill often meant re-learning the objection from scratch. <strong>Theme B.</strong></p></article>
           </div>
-
-          <p class="research-note">This work involves financial and employee data, so specific figures and individual identities from the original process can't be published — the findings above are described in generalised form.</p>
+          <p class="research-note">Blocker 02 is the one I would lead with again. A single word standing in for at least four distinct states is not a labelling problem - it is a missing concept, and every social workaround in the audit existed to supply it.</p>
         </div>
       </section>
 
       <section class="case-detail-grid">
-        <p class="detail-label">Design decisions</p>
-        <div><h2>Make the next responsible party as visible as the status itself.</h2><p>Each decision responds directly to one of the four research findings above.</p><div class="comparison-table-wrap" tabindex="0" role="group" aria-label="Scrollable table"><table class="comparison-table traceability-table"><caption>Each of the four recurring blockers, and the decision it produced.</caption><thead><tr><th scope="col">Research finding</th><th scope="col">What changed as a result</th></tr></thead><tbody><tr><th scope="row">Requirements surfaced too late</th><td>Requirements surfaced during preparation</td></tr><tr><th scope="row">&ldquo;Pending&rdquo; meant five different things</th><td>Status as a stage, not a word</td></tr><tr><th scope="row">Every role saw the same flat view</th><td>Navigation split by responsibility</td></tr><tr><th scope="row">A returned bill lost its history</th><td>Corrections tied to their cause</td></tr></tbody></table></div><ul class="case-facts"><li><strong>Requirements surfaced during preparation</strong> Organised required information and supporting documents around the bill-clearance task itself, so gaps showed up before submission, not after.</li><li><strong>Status as a stage, not a word</strong> Distinguished preparation, review, correction, and completion explicitly, so a bill's state also implied who needed to act next.</li><li><strong>Navigation split by responsibility</strong> Structured menus and tabs around each role's actual task, while keeping the fuller history reachable for anyone who needed it.</li><li><strong>Corrections tied to their cause</strong> Connected a flagged issue to the exact part of the submission it came from, so a returned bill kept its context instead of losing it.</li></ul></div>
-      </section>
-
-      <section class="case-detail-grid">
-        <p class="detail-label">Workflow</p>
+        <p class="detail-label">Say-do gaps</p>
         <div>
-          <h2>A visible path from preparation to approval.</h2>
-          <p>Wireframes and prototypes made the proposed sequence reviewable before implementation, stage by stage.</p>
-          <div class="wireframe-row">
-            <div class="wireframe-card">
-              <span class="wireframe-badge">1</span>
-              <div class="wireframe-bar is-heading"></div>
-              <div class="wireframe-bar is-wide"></div>
-              <span class="wireframe-pill"></span><span class="wireframe-pill"></span>
-              <p class="wireframe-caption"><strong>Prepare</strong>Required fields and documents surface as part of preparing the bill, not discovered later in review.</p>
-            </div>
-            <div class="wireframe-card">
-              <span class="wireframe-badge">2</span>
-              <div class="wireframe-bar is-heading"></div>
-              <div class="wireframe-bar is-mid"></div>
-              <span class="wireframe-pill"></span>
-              <p class="wireframe-caption"><strong>Review</strong>The reviewer's view prioritises submitted evidence and exceptions over a flat copy of the preparer's screen.</p>
-            </div>
-            <div class="wireframe-card">
-              <span class="wireframe-badge">3</span>
-              <div class="wireframe-bar is-narrow"></div>
-              <div class="wireframe-bar is-heading"></div>
-              <div class="wireframe-dots"><span>Flagged</span><span>Resolved</span></div>
-              <p class="wireframe-caption"><strong>Correct</strong>A returned bill shows exactly what was flagged and where, instead of the whole submission going back as a blank slate.</p>
-            </div>
-            <div class="wireframe-card">
-              <span class="wireframe-badge">4</span>
-              <div class="wireframe-bar is-heading"></div>
-              <div class="wireframe-bar is-wide"></div>
-              <span class="wireframe-pill"></span>
-              <p class="wireframe-caption"><strong>Approve</strong>Final approval shows the decision trail — what changed, what was reviewed, what remains — before it's finalised.</p>
-            </div>
-          </div>
+          <h2>The workarounds contradicted the process, politely.</h2>
+          <p>Nobody in the study described the official process inaccurately. The gap was between that description and what the desks showed - and in a hierarchical setting, the desk is the more honest source. Each artefact below was doing a job the system had left undone.</p>
+          <div class="comparison-table-wrap" tabindex="0" role="group" aria-label="Scrollable table"><table class="comparison-table"><caption>What the process said, what the desk showed, and what the difference pointed at.</caption><thead><tr><th scope="col">What the process said</th><th scope="col">What was actually there</th><th scope="col">What it revealed</th></tr></thead><tbody><tr><th scope="row">The system tells you what a bill requires</th><td>A separate reference sheet kept to hand while preparing</td><td>Requirements were reachable but not present at the moment of preparation (Blocker 01)</td></tr><tr><th scope="row">A bill's status is visible to everyone on it</th><td>A phone call to find out what "pending" currently meant</td><td>Status was legible as a word and useless as a decision (Blocker 02)</td></tr><tr><th scope="row">The record travels with the bill</th><td>A physical file passed between desks alongside the digital one</td><td>The digital record held data; the paper one held context and history (Blockers 03, 04)</td></tr></tbody></table></div>
+          <p>Reading those three together is what made the diagnosis structural rather than cosmetic. The workarounds were not evidence that people disliked the interface. They were evidence that three specific pieces of information - what is required, whose turn it is, and what happened before - had no home in the system, and had been rehoused in paper and phone calls at a cost nobody was counting.</p>
         </div>
       </section>
 
       <section class="case-detail-grid">
-        <p class="detail-label">Validation</p>
+        <p class="detail-label">Submission</p>
         <div>
-          <h2>Test the workflow against every role it touches, not just one.</h2>
-          <p>Because five different roles depended on the same record, prototypes were tested with preparers, reviewers, and approvers separately — checking whether the reworked structure actually served each role's part of the job:</p>
-          <ul class="case-facts"><li><strong>Preparation completeness</strong> Could a preparer tell what a bill needed before submitting it, without consulting a separate reference sheet?</li><li><strong>Review focus</strong> Did the reviewer's view surface exceptions and evidence first, instead of asking them to scan the full preparer form?</li><li><strong>Correction recovery</strong> Could a preparer see exactly what was flagged on a returned bill without re-reading the original objection from scratch?</li></ul>
+          <h2>What went to the department, and what it changed about the brief.</h2>
+          <p>The findings were submitted as a recommendation set rather than as a screen critique, with each recommendation named against the blocker it answered so the department could accept or reject them individually.</p>
+          <ul class="case-facts"><li><strong>R1 - Move requirements upstream of submission</strong> Present what a bill requires as part of preparing it, so documentation gaps are caught before a correction cycle starts. <em>Answers Blocker 01.</em></li><li><strong>R2 - Replace the status word with an explicit stage</strong> Distinguish preparation, review, correction, and completion, so a bill's state also says who has to act next. <em>Answers Blocker 02 - the highest-priority recommendation.</em></li><li><strong>R3 - Structure the work around responsibility</strong> Give reviewers and approvers a view built for their part of the job rather than a copy of the preparer's form, keeping the fuller record reachable. <em>Answers Blocker 03.</em></li><li><strong>R4 - Keep a correction attached to its cause</strong> Connect a flagged issue to the specific part of the submission it came from, so a returned bill keeps its context. <em>Answers Blocker 04.</em></li></ul>
+          <h3 class="mockup-heading research-subhead">The evidence had to outweigh the instinct to restyle</h3>
+          <p>The department's early expectation was a visual refresh; the pages looked dated and a cosmetic pass was the obvious next step. What moved the brief was not an argument about design quality, it was the workaround audit. Showing that a single "pending" label was standing in for at least four real states - and that people had built phone habits to compensate - was a traceable gap between what the system said and what the work required. Walking stakeholders through those artefacts directly, rather than summarising them in a deck, is what shifted the scope from a restyle to a structural change.</p>
+          <h3 class="mockup-heading research-subhead">What the department pushed back on, and rightly</h3>
+          <p>Not every recommendation survived intact. A proposed change to how corrections were tracked ran into legitimate audit and record-keeping requirements that an interface cannot design away; the accepted version had to carry that complexity rather than simplify around it. That was the correct outcome - the requirement was real, and I had underweighted how much of the existing density was doing legal work rather than accumulating by accident.</p>
         </div>
       </section>
 
       <section class="case-detail-grid">
-        <p class="detail-label">Stakeholder influence</p>
+        <p class="detail-label">Limitations</p>
         <div>
-          <h2>The evidence had to outweigh the instinct to just redesign the screens.</h2>
-          <p>The department's early expectation was a visual refresh — the existing pages looked dated, and a cosmetic pass looked like the obvious next step. The process-mapping and workaround findings made the case for a different scope: showing that a single "pending" label was standing in for at least four different real states wasn't an opinion about visual design, it was a traceable gap between what the system said and what people were actually doing to work around it. Walking stakeholders through the workaround pattern directly, rather than summarising it, is what shifted the brief from a visual refresh to a structural one.</p>
-          <p>Not every finding survived that conversation. A proposed change to how corrections were tracked ran into legitimate audit and record-keeping requirements the interface couldn't design away, and the final structure had to hold onto that complexity rather than simplify around it.</p>
-        </div>
-      </section>
-
-      <section class="case-detail-grid">
-        <p class="detail-label">Outcome</p>
-        <div>
-          <h2>What changed, stated plainly.</h2>
-          <p>Quantitative operational results from a defence accounting system can't be published. What follows is what changed structurally between the old process and the new one, and why it mattered to the people using it. The department didn't run a formal before/after measurement program on this system, so the evidence here is what shifted structurally and in validation sessions afterward, not a tracked metric — if I were running this today, I'd push to instrument time-to-clearance and correction-cycle frequency directly against the new stages.</p>
-          <div class="comparison-table-wrap" tabindex="0" role="group" aria-label="Scrollable table">
-            <table class="comparison-table">
-              <thead><tr><th scope="col">Capability</th><th scope="col">Before</th><th scope="col">After</th></tr></thead>
-              <tbody>
-                <tr><th scope="row">Bill requirements</th><td>Listed in a separate reference document</td><td>Surfaced inline during preparation, before submission</td></tr>
-                <tr><th scope="row">Bill status</th><td>A single "pending" label for four different real states</td><td>Explicit stages — preparation, review, correction, completion</td></tr>
-                <tr><th scope="row">Reviewer view</th><td>Identical to the preparer's full entry form</td><td>Prioritises evidence and exceptions relevant to review</td></tr>
-                <tr><th scope="row">Corrections</th><td>Disconnected from the original flagged issue</td><td>Tied directly to the specific field and objection</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="case-proof-grid">
-            <article class="case-proof-card"><span>Flat status → staged status</span><h3>Ownership became visible</h3><p>A bill's status started implying who was responsible for the next move. In the sessions that followed rollout, people across departments described fewer status-check calls to each other — an informal signal, not a tracked metric.</p></article>
-            <article class="case-proof-card"><span>Late requirements → upfront requirements</span><h3>Fewer correction cycles, by report</h3><p>Surfacing what a bill needed during preparation was meant to reduce documentation-only bounce-backs, and preparers said that held up in practice — though the system had no formal before/after tracking to confirm it.</p></article>
-            <article class="case-proof-card"><span>Disconnected corrections → traceable corrections</span><h3>Faster recovery from a return</h3><p>Tying a flagged issue to its source was designed to remove the need to re-diagnose an objection from scratch — the clearest win reported in validation sessions, even without a measured recovery-time figure.</p></article>
-          </div>
+          <h2>What this study cannot claim.</h2>
+          <ul class="case-facts"><li><strong>No measured outcome</strong> The department did not run a before/after measurement programme on this system, so there is no time-to-clearance or correction-rate figure to report, and I have not manufactured one. What followed the submission was structural change and qualitative feedback, not a tracked metric.</li><li><strong>Participants were nominated within a hierarchy</strong> Access ran through the department, which biases a sample toward people comfortable being observed. Sessions were held per role partly to offset that; it does not remove it.</li><li><strong>Self-report and observation were not separable everywhere</strong> Some of the sequence had to be reconstructed from description rather than watched end to end, because a single bill's clearance spans days and desks.</li><li><strong>Sanitisation costs specificity</strong> Publishable findings are generalised. The internal version carried the concrete artefacts and references that make each one checkable.</li></ul>
+          <h3 class="mockup-heading research-subhead">What I would instrument if I ran this today</h3>
+          <p>Time-in-stage per handoff, correction-cycle frequency per bill, and the volume of status-check contact between roles - that third one being the direct measure of Blocker 02, and the cheapest of the three to collect. Agreeing those three measures <em>before</em> the change went in is the single thing I would do differently.</p>
         </div>
       </section>
 
       <section class="case-detail-grid">
         <p class="detail-label">Reflection</p>
-        <div><h2>The research was the design work.</h2><p>Nothing in the final structure came from a best-practice checklist. Every decision traced back to a specific blocker surfaced by mapping the process across five roles instead of one screen at a time. A bill-clearance interface does more than collect data — it has to help five different people trust the same record of a decision, and that only comes from understanding how each of them actually works, not just what they click.</p></div>
+        <div><h2>The research was the deliverable.</h2><p>Nothing in the submitted recommendation set came from a best-practice checklist. Each one traces to a blocker that only appeared once the process was mapped across five roles instead of one screen at a time, and the strongest evidence in the whole study was a physical file that somebody had decided to keep carrying. A bill-clearance system does more than collect data - it has to let five people trust the same record of a decision. Finding out where that trust was being rebuilt by hand was the work; the interface that followed was the easy part.</p></div>
       </section>
     </main>
     <footer class="site-footer">

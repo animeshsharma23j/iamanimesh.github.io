@@ -7,7 +7,7 @@
     'income-tax': {
       challenge: 'Make a high-stakes filing journey understandable for first-time taxpayers and senior citizens.',
       response: 'A confidence-first concept that explains one decision at a time and keeps guidance close to the action.',
-      evidence: 'Independent concept, research synthesis, prototypes, and accessibility-focused testing—not an official portal.'
+      evidence: 'Independent concept, research synthesis, prototypes, and accessibility-focused testing, not an official portal.'
     },
     'unitx-case-study': {
       challenge: 'Give people a conversion answer immediately without ads, account setup, or avoidable network dependence.',
@@ -15,14 +15,14 @@
       evidence: 'A shipped iOS product, product screens, competitive audit, and customer-review evidence.'
     },
     'cgda-case-study': {
-      challenge: 'A five-role bill-clearance process had no shared view of status, ownership, or the next required action.',
-      response: 'Mapped the lived process and reorganised the workflow around stages, blockers, and explicit responsibility.',
-      evidence: 'Working sessions and qualitative validation, shown as a sanitised reconstruction with no claimed metric.'
+      challenge: 'A bill moved through five roles, and nothing in the system said whose turn it was.',
+      response: 'Mapped the lived process role by role, audited the paper workarounds, and coded four blockers into two themes.',
+      evidence: 'Working sessions and a workaround audit; recommendations submitted, with no measured before/after claimed.'
     },
     'trade-cloud-apps': {
-      challenge: 'Keep connected trade-business work coherent without turning every task into one overloaded application.',
-      response: 'Three focused products with shared language, visible status, and explicit handoffs between jobs and billing.',
-      evidence: 'Shipped product suite and product screens; cross-product workflow outcomes are not yet measured.'
+      challenge: 'Four products for solo tradespeople, built on assumptions about a user nobody in the team had watched work.',
+      response: 'Mined and coded the competitor review corpus, then traced every product decision back to a named finding.',
+      evidence: 'Secondary research only: 7,439 reviews, trade forums and national surveys; no user of these apps observed yet.'
     }
   };
   const summary = summaries[pageKey];
@@ -41,13 +41,13 @@
   const firstSection = sections[0] || null;
   while (story.firstChild && story.firstChild !== firstSection) overview.append(story.firstChild);
   overview.querySelectorAll('.case-meta > span').forEach(item => {
-    const [label, ...valueParts] = item.textContent.split(' — ');
+    const [label, ...valueParts] = item.textContent.split(' - ');
     if (!valueParts.length) return;
     item.textContent = '';
     const heading = document.createElement('strong');
     heading.textContent = label;
     const value = document.createElement('span');
-    value.textContent = valueParts.join(' — ');
+    value.textContent = valueParts.join(' - ');
     item.append(heading, value);
   });
 
@@ -89,7 +89,7 @@
   const quickSummary = document.createElement('aside');
   quickSummary.className = 'case-layout-summary';
   quickSummary.setAttribute('aria-label', 'Case study summary');
-  quickSummary.innerHTML = `<div><section class="case-summary-card" aria-labelledby="case-summary-title"><p class="case-summary-eyebrow">In a hurry?</p><h2 id="case-summary-title">The case, in brief.</h2><dl><div><dt>Challenge</dt><dd>${summary.challenge}</dd></div><div><dt>Response</dt><dd>${summary.response}</dd></div><div><dt>Evidence</dt><dd>${summary.evidence}</dd></div></dl></section><section class="case-feedback" aria-labelledby="case-feedback-title"><h2 id="case-feedback-title">Was this case study useful?</h2><p class="case-feedback-total"><strong data-feedback-total>—</strong> appreciations online</p><div class="case-feedback-actions" role="group" aria-label="Rate this case study"><button type="button" data-feedback="up" aria-pressed="false"><span aria-hidden="true">👍</span><span>Yes</span></button><button type="button" data-feedback="down" aria-pressed="false"><span aria-hidden="true">👎</span><span>Not quite</span></button></div><p class="case-feedback-status" aria-live="polite"></p></section></div>`;
+  quickSummary.innerHTML = `<div><section class="case-summary-card" aria-labelledby="case-summary-title"><p class="case-summary-eyebrow">In a hurry?</p><h2 id="case-summary-title">The case, in brief.</h2><dl><div><dt>Challenge</dt><dd>${summary.challenge}</dd></div><div><dt>Response</dt><dd>${summary.response}</dd></div><div><dt>Evidence</dt><dd>${summary.evidence}</dd></div></dl></section><section class="case-feedback" aria-labelledby="case-feedback-title"><h2 id="case-feedback-title">Was this case study useful?</h2><p class="case-feedback-total" hidden><strong data-feedback-total></strong> <span data-feedback-total-label>appreciations</span> online</p><div class="case-feedback-actions" role="group" aria-label="Rate this case study"><button type="button" data-feedback="up" aria-pressed="false"><span aria-hidden="true">👍</span><span>Yes</span></button><button type="button" data-feedback="down" aria-pressed="false"><span aria-hidden="true">👎</span><span>Not quite</span></button></div><p class="case-feedback-status" aria-live="polite"></p></section></div>`;
 
   main.classList.add('case-layout-shell');
   main.append(contents, overview, story, quickSummary);
@@ -128,8 +128,12 @@
   try { feedback = localStorage.getItem(storageKey); } catch (error) { /* Storage may be unavailable. */ }
   try { thumbsUpRecorded = localStorage.getItem(recordedKey) === 'true'; } catch (error) { /* Storage may be unavailable. */ }
 
+  const totalLabel = quickSummary.querySelector('[data-feedback-total-label]');
   const renderTotal = count => {
-    if (total && count !== null) total.textContent = new Intl.NumberFormat().format(count);
+    if (!total || count === null) return;
+    total.textContent = new Intl.NumberFormat().format(count);
+    if (totalLabel) totalLabel.textContent = count === 1 ? 'appreciation' : 'appreciations';
+    total.closest('.case-feedback-total')?.removeAttribute('hidden');
   };
 
   window.CaseStudyFeedbackCounter?.get(pageKey)

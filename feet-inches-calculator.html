@@ -49,7 +49,7 @@
         <div>
           <p class="product-kicker">BuildX tools</p>
           <h1>Feet &amp; inches<br /><em>calculator.</em></h1>
-          <p class="calculator-intro">Add or subtract measurements in feet, inches, and fractions. The result stays exact—useful for layout, materials, and everyday field math.</p>
+          <p class="calculator-intro">Add or subtract measurements in feet, inches, and fractions. The result stays exact - useful for layout, materials, and everyday field math.</p>
           <div class="calculator-hero-cta">
             <a class="product-button primary calculator-hero-download" data-app="BuildX" href="https://apps.apple.com/app/id6767122401" target="_blank" rel="noopener noreferrer">Download BuildX on the App Store <span aria-hidden="true">↗</span></a>
             <div class="calculator-hero-rating">
@@ -103,7 +103,7 @@
           const inchesInvalid = inchesField.value !== '' && (Number(inchesField.value) < 0 || Number(inchesField.value) > 11);
           feetField.setAttribute('aria-invalid', String(feetInvalid));
           inchesField.setAttribute('aria-invalid', String(inchesInvalid));
-          hintEl.textContent = inchesInvalid ? 'Inches should be 0–11 — use feet for anything larger.' : feetInvalid ? 'Feet can’t be negative.' : '';
+          hintEl.textContent = inchesInvalid ? 'Inches should be 0–11 - use feet for anything larger.' : feetInvalid ? 'Feet can’t be negative.' : '';
         };
         const calculate = () => {
           validate(inputs.feetA, inputs.inchesA, hintA);
