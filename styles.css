@@ -2078,6 +2078,25 @@ h1 {
   /* Inter carries no CJK, Hangul or Devanagari; name the fallbacks explicitly. */
   font-family: var(--font-sans), "PingFang SC", "Noto Sans SC", "Apple SD Gothic Neo", "Noto Sans KR", "Hiragino Sans", "Noto Sans JP", "Kohinoor Devanagari", "Noto Sans Devanagari", sans-serif;
   transition: width 320ms ease, opacity 200ms ease;
+
+  /* Sit on the text baseline, not the line-box floor. An inline-block with
+     non-visible overflow takes its BASELINE FROM ITS BOTTOM MARGIN EDGE, so the
+     shared `overflow: hidden` above plus `vertical-align: bottom` tied this
+     word's position to its box height - and the box height comes from whichever
+     fallback font supplies the glyphs. Devanagari's metrics are the tallest of
+     the set, which inflated the box and floated नमस्ते above the line while
+     nudging the whole hero down. Latin never showed it because Inter sets the
+     box height itself.
+
+     So: overflow back to visible to restore real baseline alignment, an explicit
+     line-height so box height stops depending on the fallback, and clip-path in
+     place of overflow to keep clipping the width transition - it crops without
+     touching baseline or box geometry. The vertical slack leaves room for the
+     shirorekha and matras that sit above Latin's cap height. */
+  overflow: visible;
+  vertical-align: baseline;
+  line-height: 1;
+  clip-path: inset(-0.5em 0);
 }
 
 .greeting-word.is-swapping { opacity: 0; }
@@ -2785,6 +2804,9 @@ body.home { min-height: 100dvh; }
   color: var(--muted);
   font-size: clamp(1.1rem, 1.9vw, 1.5rem);
   font-weight: 400;
+  /* Explicit, so a taller script in the rotator cannot grow this line and shift
+     the headline below it. */
+  line-height: 1.45;
   letter-spacing: -0.01em;
 }
 

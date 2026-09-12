@@ -1,3 +1,75 @@
+# Hero greeting baseline - 2026-09-12
+
+## The report
+
+Every Latin greeting in the home-page rotator sat correctly, but नमस्ते floated
+above the line and read as misplaced.
+
+## Cause
+
+`.greeting-word` is an `inline-block` sharing a rule block with `.typed-role`
+that sets `overflow: hidden` and `vertical-align: bottom`.
+
+Per CSS 2.1 section 10.8.1, **an inline-block whose overflow is not `visible`
+takes its baseline from its bottom margin edge** rather than from its text
+baseline. With `vertical-align: bottom` pinning that edge to the line-box floor,
+the word's position became a function of its box height - and box height came
+from whichever fallback font supplied the glyphs, because `line-height` was
+`normal`.
+
+Measured at a 17.6px font size:
+
+| Greeting | Box height (before) | Box top (before) |
+|---|---|---|
+| Hola / Bonjour | 21.0px | 270.9 |
+| 你好 | 24.5px | 269.2 |
+| こんにちは / 안녕하세요 | 22.5px | 270.2 |
+| नमस्ते | **26.5px** | **268.2** |
+
+Devanagari's fallback has the tallest metrics of the set, so its box was 5.5px
+taller than Latin's and the glyphs rode 2.7px upward with it. Latin never showed
+the bug because Inter set the box height itself. The same inflation also grew the
+parent line box, which is why the eyebrow and headline shifted by ~2px on every
+rotation through Hindi - a jitter visible on the whole hero, not just the word.
+
+## Fix
+
+Three lines on `.greeting-word`:
+
+- `overflow: visible` - cancels the inherited `hidden` so the element reports a
+  real text baseline again.
+- `vertical-align: baseline` - aligns on the baseline instead of the box floor,
+  which is what makes mixed scripts sit on the same line.
+- `line-height: 1` - makes box height font-independent, so no fallback can
+  inflate it.
+- `clip-path: inset(-0.5em 0)` replaces the clipping that `overflow: hidden` was
+  providing for the width transition. It crops horizontally without touching
+  baseline or box geometry, and the 0.5em vertical slack leaves room for the
+  shirorekha and matras that sit above Latin cap height.
+
+`.hero-greet` also gained an explicit `line-height: 1.45` so the paragraph cannot
+change height between languages.
+
+`.typed-role` was deliberately left on the old alignment: it is Latin-only and
+its blinking caret is positioned against the current box.
+
+## Verification evidence
+
+- Box height is now **17.6px for all six scripts** (Latin, Chinese, Korean,
+  Japanese, Hindi), box bottom identical at 223.8 in every case.
+- Eyebrow top and h1 top identical across all six greetings at 1440px and at
+  375px - the hero no longer moves during rotation.
+- Width clipping still works: 'Bonjour' forced into a 24px box renders cropped
+  to "Bo" with no spill into the following text.
+- Set width matches scroll width for every greeting, so nothing is clipped in
+  the resting state.
+- No horizontal document overflow at 375px. Console errors: none.
+- `npm run verify`: all 36 pages pass.
+
+final result: passed
+
+---
+
 # Product platform icons - 2026-09-12
 
 ## What changed
