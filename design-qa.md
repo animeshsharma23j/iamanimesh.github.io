@@ -10,11 +10,28 @@ and tablet were near-indistinguishable outlines.
 Replaced with SF Symbols artwork supplied by the user, saved as PNG into
 `assets/icons/devices/`:
 
-| File | Canvas | Rendered at 18px high | Detail that carries it small |
-|---|---|---|---|
-| `iphone.png` | 644x1060 | 11x18 | Island pill, home indicator, heavy wall |
-| `ipad.png` | 836x1128 | 13x18 | Home indicator, tighter corner radius |
-| `apple-watch.png` | 774x1072 | 13x18 | Crown and tapered band stubs |
+| Served file | Source PNG | Served size | Rendered | Detail that carries it small |
+|---|---|---|---|---|
+| `iphone.webp` | 644x1060, 23.7 KB | 33x54, 438 B | 11x18 | Island pill, home indicator, heavy wall |
+| `ipad.webp` | 836x1128, 26.2 KB | 40x54, 334 B | 13x18 | Home indicator, tighter corner radius |
+| `apple-watch.webp` | 774x1072, 32.8 KB | 39x54, 654 B | 13x18 | Crown and tapered band stubs |
+
+The supplied PNGs were 88 KB for artwork that renders at 13x18 - about 40x
+oversampled. They are downscaled to lossless WebP at 54px tall, which is 3x the
+render size and therefore still crisp on a 3x display: **88 KB to 1.4 KB**, a
+98.4% reduction, with no visible change on the page.
+
+The source PNGs stay in the same folder, unreferenced, following the convention
+already used in `assets/about` and `assets/home` where a large source sits
+beside the served `.webp`. Nothing links to them, so they cost repository size
+and not page weight.
+
+One resampling detail worth recording: the artwork is white on transparent, and
+resampling RGBA directly averages the (0,0,0) RGB sitting underneath the
+transparent pixels, which leaves a grey fringe along every edge. The alpha
+channel is resampled on its own instead and recomposited onto solid white.
+Verified by magnifying each result 6x with nearest-neighbour and by counting
+pixels: zero non-white opaque pixels in all three files.
 
 The heavier stroke weight is what makes these work at 18px where the previous
 attempts did not: the walls stay solid instead of thinning out.
@@ -66,6 +83,8 @@ and JS. Both are recoverable from git history if a future icon need arises.
 - Rendered sizes on the page: iPhone 11x18, iPad 13x18, Watch 13x18. Computed
   `filter` on the platform icons is `none`. No horizontal overflow, and the row
   stays on one line at 375px.
+- 13 platform icons across the six rows, none broken. Resource timing confirms
+  438 / 334 / 654 bytes decoded.
 - Console errors: none.
 
 final result: passed
