@@ -8,19 +8,36 @@ The platform row on `products.html` used Material Symbols `phone`, `tablet` and
 and tablet were near-indistinguishable outlines.
 
 Replaced with three first-party icons in `assets/icons/devices/`, drawn on a
-24x24 grid specifically for this size:
+24x24 grid and matched to **SF Symbols geometry** at the user's direction:
 
-- **iphone.svg** - narrow portrait body with a Dynamic Island
-- **ipad.svg** - 3:4 portrait body, visibly wider and shorter than the phone,
-  no island; the aspect-ratio difference is what separates the two at 18px
-- **apple-watch.svg** - cushion case with band stubs top and bottom and a crown
-  on the right edge, which is what makes it read at small size
+| Icon | w:h | Corner radius | Identifying detail |
+|---|---|---|---|
+| `iphone.svg` | 0.56 | 2.9 (25% of width) | Thin speaker slot near the top inside edge |
+| `ipad.svg` | 0.76 | 2.2 (15% of width) | Front-camera dot, centred just inside the top |
+| `apple-watch.svg` | 0.74 | 3.2 (28% of width) | Band stubs at half the case width, crown on the right above centre |
+
+The proportions and construction follow SF Symbols; the outlines are our own.
+Apple's SF Symbols artwork is licensed for app UI on Apple platforms and may
+not be redistributed or modified, so matching the geometry rather than
+embedding the glyphs is the only route that stays clear of that.
 
 All three are single-colour black fills with `fill-rule="evenodd"` cutouts
 rather than strokes, so the walls stay crisp when the browser scales them down,
 and the existing `filter: invert(1)` on `.product-showcase-platforms img` still
-produces the white treatment. Wall thickness is 1.7-1.8 units (about 1.3px at
-18px), tuned by rendering each icon at 128 / 24 / 18px side by side.
+produces the white treatment. Wall thickness is 1.6 units throughout (about
+1.2px at 18px).
+
+### First pass, and why it was wrong
+
+The initial versions were rejected as not reading like the devices. Rendering
+them at 132 / 48 / 24 / 18px side by side showed three specific faults, each
+corrected above: the iPhone was too narrow at 0.52 and its top detail was a fat
+pill floating inside the screen rather than a slot at the edge; the iPad had no
+camera dot at all, so nothing but width distinguished it from the phone; and the
+watch case at 3.9 corner radius on an 11.6 body was so round the sides stopped
+reading flat, which turned it into a blob rather than a cushion.
+
+Preview harness used for the comparison: `tmp/icon-preview.html` (gitignored).
 
 The Apple logo pill is gone from all six product rows - it said nothing the
 device pills beside it did not.
@@ -46,6 +63,8 @@ and JS. Both are recoverable from git history if a future icon need arises.
 - Platform rows now read: UnitX iPhone/iPad/Watch, BuildX iPhone/iPad,
   TradeBill iPhone/iPad, JobBook iPhone/iPad, Recital iPhone/iPad,
   RateX iPhone/iPad (still "Coming soon", still unlinked).
+- Each icon inspected at 132 / 48 / 24 / 18px against the dark ground before and
+  after the SF Symbols revision.
 - Console errors: none.
 
 final result: passed
