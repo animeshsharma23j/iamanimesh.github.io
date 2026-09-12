@@ -100,25 +100,6 @@ if (typedRole) {
   }
 }
 
-// Theme. The pre-paint script in the document head has already set the
-// attribute; this only wires the control and remembers the choice.
-const themeSwitches = document.querySelectorAll('[data-theme-switch]');
-if (themeSwitches.length) {
-  const root = document.documentElement;
-  const paint = (isLight) => {
-    root.setAttribute('data-theme', isLight ? 'light' : 'dark');
-    themeSwitches.forEach((s) => {
-      s.setAttribute('aria-checked', String(isLight));
-      s.setAttribute('aria-label', isLight ? 'Switch to dark mode' : 'Switch to light mode');
-    });
-    try { localStorage.setItem('theme', isLight ? 'light' : 'dark'); } catch (e) {}
-  };
-  paint(root.getAttribute('data-theme') === 'light');
-  themeSwitches.forEach((s) => {
-    s.addEventListener('click', () => paint(root.getAttribute('data-theme') !== 'light'));
-  });
-}
-
 // Local time, ticking on the minute.
 const clock = document.querySelector('[data-clock]');
 if (clock) {

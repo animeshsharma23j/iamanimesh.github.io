@@ -1,4 +1,8 @@
 :root {
+  /* The site is dark-only: this keeps scrollbars, form controls and the
+     browser's own chrome from rendering in a light default. */
+  color-scheme: dark;
+
   --bg: #030405;
   --bg-2: #070a0d;
   --text: #f3eee2;
@@ -898,30 +902,11 @@ h1 {
   box-shadow: 0 0 0 1px rgba(243, 238, 226, 0.18);
 }
 
-.journey-list h3 { margin: 0 0 9px; color: var(--text); font-size: var(--h3-size); letter-spacing: -0.035em; }
-.journey-list p { max-width: 800px; margin: 0; color: var(--muted); font-size: clamp(0.98rem, 1.45vw, 1.2rem); line-height: 1.5; }
-.journey-list .career-role { margin-bottom: 17px; color: var(--text); font-size: clamp(1rem, 1.6vw, 1.26rem); font-weight: 650; }
-.journey-list time { padding-top: 6px; color: var(--muted); font-size: 0.92rem; white-space: nowrap; }
+.journey-list h3 { margin: 0 0 7px; color: var(--text); font-size: var(--h3-small); letter-spacing: -0.03em; }
+.journey-list p { max-width: 68ch; margin: 0; color: var(--muted); font-size: 1rem; line-height: 1.55; }
+.journey-list .career-role { margin-bottom: 12px; color: var(--text); font-size: 1rem; font-weight: 650; }
+.journey-list time { padding-top: 5px; color: var(--soft); font-size: var(--text-small); white-space: nowrap; }
 .journey-case-link { color: var(--cyan); text-decoration: underline; text-underline-offset: 2px; }
-
-.certifications-list {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 28px;
-  max-width: 1060px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.certifications-list li {
-  padding: 26px 28px;
-  border: 1px solid var(--line);
-  border-radius: 14px;
-}
-
-.certifications-list h3 { margin: 0 0 8px; color: var(--text); font-size: var(--h3-small); letter-spacing: -0.03em; }
-.cert-issuer { margin: 0; color: var(--muted); font-size: 0.94rem; }
 
 .case-row {
   display: grid;
@@ -1049,18 +1034,8 @@ h1 {
   margin-bottom: 24px;
 }
 
-.contact-stack,
-.about-copy {
+.contact-stack {
   padding-top: 6px;
-}
-
-/* The About page puts its eyebrow in the label column, so its h1 lives inside
-   .about-copy rather than as a direct child of the shell. It still takes the
-   shared --headline-size; only the trailing space differs, to sit against the
-   intro paragraph below it. */
-.about-copy h1 {
-  margin: 0 0 22px;
-  max-width: 820px;
 }
 
 .contact-link {
@@ -1085,13 +1060,6 @@ h1 {
   color: var(--text);
   font-size: clamp(1.2rem, 2vw, 2rem);
   font-weight: 750;
-}
-
-.about-copy p {
-  max-width: 560px;
-  color: var(--muted);
-  font-size: var(--lede-size);
-  line-height: 1.55;
 }
 
 .principles {
@@ -1135,26 +1103,8 @@ h1 {
 .case-study-page { background: var(--bg); }
 .case-study-page .site-header { width: min(var(--max), calc(100% - 48px)); }
 .subpage-shell { width: min(var(--max), calc(100% - 48px)); margin: 0 auto; padding: 96px 0 140px; }
-.about-page.subpage-shell { width: min(var(--max), calc(100% - 48px)); }
 .subpage-shell > h1 { max-width: 900px; margin-bottom: 64px; font-size: var(--headline-size); }
 .page-eyebrow { margin: 0 0 20px; }
-.subpage-shell .journey-list { margin: 0; }
-.label-row { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 42px; align-items: baseline; }
-.label-row > .page-eyebrow { margin-bottom: 0; }
-.about-hero-row { margin-bottom: 0; }
-.about-portrait { position: relative; margin: 24px 0 0; max-width: 320px; border-radius: 16px; overflow: hidden; }
-.about-portrait img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 16px; border: 1px solid var(--line-strong); box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45); filter: grayscale(100%) contrast(1.5) brightness(0.62); }
-.about-portrait::after { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at 42% 32%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 72%, rgba(0, 0, 0, 0.78) 100%); pointer-events: none; }
-.about-journey { align-items: start; margin-top: 112px; padding-top: 26px; border-top: 1px solid var(--line); }
-.about-journey > .page-eyebrow { padding-top: clamp(0.5rem, 1.6vw, 1.1rem); }
-.journey-body { min-width: 0; }
-.about-journey h2 + .journey-list,
-.journey-body .journey-list { margin-top: 0; }
-.about-journey h2 { max-width: 820px; margin: 0 0 58px; color: var(--text); font-size: var(--h2-size); line-height: 1.02; letter-spacing: -0.045em; }
-.about-certifications { align-items: start; margin-top: 96px; padding-top: 26px; border-top: 1px solid var(--line); }
-.about-certifications > .page-eyebrow { padding-top: clamp(0.5rem, 1.6vw, 1.1rem); }
-.certifications-body { min-width: 0; }
-.certifications-body h2 { max-width: 820px; margin: 0 0 32px; color: var(--text); font-size: var(--h2-size); line-height: 1.05; letter-spacing: -0.04em; }
 .case-back { color: var(--muted); font-size: var(--text-small); font-weight: 750; }
 .case-back:hover, .case-back:focus-visible { color: var(--amber); }
 .case-back:focus-visible { text-decoration: underline; text-underline-offset: 3px; }
@@ -1543,46 +1493,12 @@ h1 {
 .product-recital .device-duo::before,
 .product-buildx .app-screen-buildx::before { animation: landing-glow-breathe 5.6s ease-in-out 820ms infinite; }
 
-.recognition {
-  margin: 96px 0;
-  padding: 54px 0 58px;
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-}
-
 .recognition-stats { display: grid; gap: 22px; margin: 0; }
 .recognition-stats div { display: grid; gap: 6px; }
 .recognition-stats strong { color: var(--text); font-size: clamp(1.3rem, 2.2vw, 1.7rem); font-weight: 800; letter-spacing: -0.03em; }
 .recognition-stats span { color: var(--muted); font-size: 0.92rem; line-height: 1.4; }
 
-.recognition-logos { overflow: hidden; margin-top: 36px; padding-top: 32px; border-top: 1px solid var(--line); -webkit-mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent); mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent); }
-.recognition-logos-track { display: flex; align-items: center; gap: 56px; width: max-content; color: rgba(243, 238, 226, 0.7); animation: logos-marquee 16s linear infinite; }
-.recognition-logos-track span { display: inline-flex; align-items: center; gap: 9px; font-size: clamp(1.05rem, 1.7vw, 1.4rem); font-weight: 750; letter-spacing: -0.02em; white-space: nowrap; }
-.recognition-logos-track svg { width: 20px; height: 20px; flex-shrink: 0; color: inherit; }
-.recognition-logos-track span.logo-nokia { font-weight: 800; letter-spacing: 0.02em; }
-.recognition-logos-track span.logo-wc,
-.recognition-logos-track span.logo-wp { font-weight: 650; letter-spacing: -0.01em; }
 
-@keyframes logos-marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .recognition-logos-track { animation: none; }
-}
-
-.store-gallery { column-count: 6; column-gap: 12px; margin: 40px 0 0; padding: 0; list-style: none; }
-.store-gallery li { margin: 0 0 14px; overflow: hidden; break-inside: avoid; border-radius: 10px; border: 1px solid var(--line-strong); background: var(--bg-2); }
-.store-gallery img { display: block; width: 100%; height: auto; }
-.store-gallery .tile-accent,
-.store-gallery .tile-plain { display: flex; flex-direction: column; justify-content: center; gap: 6px; padding: 18px; aspect-ratio: 4 / 3; }
-.store-gallery .tile-accent { background: var(--cyan); color: #04222a; border-color: transparent; }
-.store-gallery .tile-accent strong { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.03em; }
-.store-gallery .tile-accent span { font-size: var(--text-small); font-weight: 650; }
-.store-gallery .tile-plain { background: var(--panel); color: var(--text); }
-.store-gallery .tile-plain strong { color: var(--cyan); font-size: 1.15rem; font-weight: 800; letter-spacing: -0.02em; }
-.store-gallery .tile-plain span { color: var(--muted); font-size: var(--text-small); }
 
 @keyframes reveal {
   from {
@@ -1745,9 +1661,6 @@ h1 {
   .hero, .hero-copy, .thinking-diagram { min-width: 0; }
 
   .journey-list { max-width: none; }
-  .label-row { grid-template-columns: 1fr; gap: 16px; }
-  .about-portrait { max-width: 260px; }
-  .store-gallery { column-count: 4; }
 }
 
 @media (max-width: 560px) {
@@ -1846,15 +1759,9 @@ h1 {
   .journey-list li { grid-template-columns: 1fr; gap: 8px; padding-bottom: 42px; }
   .journey-node { left: -30px; }
   .journey-list time { padding: 0; font-size: var(--text-small); }
-  .certifications-list { grid-template-columns: 1fr; }
-  .recognition { margin: 72px 0; padding: 38px 0; }
-  .recognition-logos-track { gap: 40px; }
-  .store-gallery { column-count: 3; column-gap: 10px; }
-  .store-gallery li { margin-bottom: 10px; }
   .case-study-page .site-header,
   .case-study-shell,
-  .subpage-shell,
-  .about-page.subpage-shell { width: min(100% - 32px, 1080px); }
+  .subpage-shell { width: min(100% - 32px, 1080px); }
   .case-study-shell { padding: 64px 0 96px; }
   .case-study-shell h1 span { font-size: 0.48em; }
   .subpage-shell { padding: 64px 0 96px; }
@@ -2192,8 +2099,11 @@ h1 {
     justify-content: center;
   }
 
+  /* .tabs is a later sibling stretched to the full header width, so without
+     its own stacking level it paints over the brand and eats the click. */
   .site-header .brand {
     position: absolute;
+    z-index: 1;
     left: 0;
   }
 
@@ -2240,8 +2150,6 @@ h1 {
 
 .hero-avatar img { display: block; width: 100%; height: auto; }
 .hero-avatar .on-light { display: none; }
-:root[data-theme="light"] .hero-avatar .on-dark { display: none; }
-:root[data-theme="light"] .hero-avatar .on-light { display: block; }
 
 /* A slow bloom behind, deliberately out of phase with the float so the two
    never synchronise into a pulse. */
@@ -2273,87 +2181,6 @@ h1 {
   text-transform: uppercase;
 }
 
-/* The theme switch: a small rectangular toggle, square everywhere. Detail
-   is carried at size rather than by scale — an etched track, a milled thumb
-   with a centre groove, engraved faces and a lit pip. */
-.theme-switch {
-  /* .tab::before draws a blurred backdrop on hover and focus; without its own
-     stacking level the switch is painted over by the Contact tab beside it. */
-  position: relative;
-  z-index: 1;
-  display: inline-flex;
-  align-items: center;
-  padding: 0;
-  border: 0;
-  background: none;
-  cursor: pointer;
-}
-
-.theme-switch-track {
-  position: relative;
-  display: block;
-  width: 40px;
-  height: 18px;
-  border: 1px solid var(--line-strong);
-  background:
-    repeating-linear-gradient(90deg, rgba(243, 238, 226, 0.07) 0 1px, transparent 1px 4px);
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.5);
-  transition: border-color 200ms ease;
-}
-
-:root[data-theme="light"] .theme-switch-track {
-  background: repeating-linear-gradient(90deg, rgba(21, 24, 27, 0.07) 0 1px, transparent 1px 4px);
-  box-shadow: inset 0 1px 2px rgba(21, 24, 27, 0.14);
-}
-
-.theme-switch:hover .theme-switch-track { border-color: var(--cyan); }
-
-/* Engraved end marks, just legible at 7px. */
-.theme-switch-face {
-  position: absolute;
-  top: 50%;
-  color: var(--soft);
-  font-size: 7px;
-  line-height: 1;
-  opacity: 0.55;
-  transform: translateY(-50%);
-  transition: opacity 200ms ease, color 200ms ease;
-}
-
-.theme-switch-face.l { left: 3px; }
-.theme-switch-face.r { right: 3px; }
-.theme-switch[aria-checked="false"] .theme-switch-face.l,
-.theme-switch[aria-checked="true"] .theme-switch-face.r { color: var(--cyan); opacity: 1; }
-
-.theme-switch-thumb {
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 16px;
-  height: 12px;
-  background: linear-gradient(180deg, var(--muted), var(--soft));
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.55);
-  transition: transform 220ms cubic-bezier(0.4, 0, 0.2, 1), background 200ms ease;
-}
-
-/* A milled groove down the middle, the way a physical thumb is knurled. */
-.theme-switch-thumb::before {
-  position: absolute;
-  left: 50%;
-  top: 3px;
-  bottom: 3px;
-  width: 1px;
-  background: rgba(3, 4, 5, 0.42);
-  content: "";
-}
-
-.theme-switch[aria-checked="true"] .theme-switch-thumb {
-  background: linear-gradient(180deg, var(--cyan), #b98a3e);
-  transform: translateX(20px);
-}
-
-.theme-switch:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; }
-
 .home .header-actions { display: flex; align-items: center; gap: 14px; }
 
 @media (max-width: 900px) {
@@ -2365,73 +2192,6 @@ h1 {
   .hero-avatar::before { animation: none; }
   .hero-avatar-tilt { transition: none; }
 }
-
-/* ───────────────────────────────────────────────────────────────────────────
-   Light theme. Token overrides first, then the handful of components that
-   hardcode a dark fill outside the token system and would otherwise become
-   unreadable slabs on a light ground.
-
-   The accent darkens to #8a6526: the dark theme's #d8a657 sits near 2.1:1 on white
-   and fails contrast for text and for the focus ring.
-   ─────────────────────────────────────────────────────────────────────────── */
-:root[data-theme="light"] {
-  --bg: #f2f0ea;
-  --bg-2: #ffffff;
-  --text: #15181b;
-  --muted: #4e5256;
-  --soft: #6f7378;
-  --line: rgba(21, 24, 27, 0.12);
-  --line-strong: rgba(21, 24, 27, 0.2);
-  --rule: rgba(21, 24, 27, 0.32);
-  --amber: #8a6526;
-  --cyan: #8a6526;
-  --panel: rgba(255, 255, 255, 0.72);
-  color-scheme: light;
-}
-
-:root[data-theme="light"] body {
-  background:
-    radial-gradient(circle at 84% 18%, rgba(138, 101, 38, 0.07), transparent 27rem),
-    radial-gradient(circle at 16% 74%, rgba(138, 101, 38, 0.05), transparent 30rem),
-    linear-gradient(180deg, #f5f3ee 0%, #efece5 52%, #f2f0ea 100%);
-}
-
-:root[data-theme="light"] .space-field { opacity: 0.1; filter: invert(1); }
-:root[data-theme="light"] body::after {
-  background:
-    linear-gradient(rgba(21, 24, 27, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(21, 24, 27, 0.025) 1px, transparent 1px);
-}
-:root[data-theme="light"] .site-header::before {
-  background: linear-gradient(180deg, rgba(242, 240, 234, 0.92), rgba(242, 240, 234, 0.5) 72%, transparent);
-}
-
-/* Dark fills that are hardcoded rather than tokenised. */
-:root[data-theme="light"] .action-primary { border-color: var(--text); background: var(--text); color: var(--bg); }
-:root[data-theme="light"] .action-primary:hover,
-:root[data-theme="light"] .action-primary:focus-visible { border-color: var(--cyan); background: var(--cyan); color: #fff; }
-:root[data-theme="light"] .action-secondary { background: rgba(255, 255, 255, 0.72); }
-:root[data-theme="light"] .action-secondary:hover,
-:root[data-theme="light"] .action-secondary:focus-visible { background: #fff; }
-:root[data-theme="light"] .directory-entry,
-:root[data-theme="light"] .suite-card,
-:root[data-theme="light"] .case-proof-card,
-:root[data-theme="light"] .workflow-steps li,
-:root[data-theme="light"] .wireframe-card,
-:root[data-theme="light"] .case-feedback { background: rgba(255, 255, 255, 0.66); }
-:root[data-theme="light"] .directory-entry:not(.directory-card-static):hover,
-:root[data-theme="light"] .directory-entry:not(.directory-card-static):focus-visible { background: rgba(138, 101, 38, 0.07); }
-:root[data-theme="light"] .research-note { background: rgba(21, 24, 27, 0.04); }
-:root[data-theme="light"] img[loading="lazy"] { background: rgba(21, 24, 27, 0.05); }
-:root[data-theme="light"] .back-to-top { background: #ffffff; border-color: rgba(138, 101, 38, 0.5); }
-:root[data-theme="light"] .mobile-menu nav { background: rgba(255, 255, 255, 0.98); }
-:root[data-theme="light"] .mobile-menu nav a:hover,
-:root[data-theme="light"] .mobile-menu nav a:focus-visible { background: var(--cyan); color: #fff; }
-:root[data-theme="light"] .hero-avatar::before { background: radial-gradient(circle, rgba(138, 101, 38, 0.12), transparent 68%); }
-:root[data-theme="light"] .theme-switch[aria-checked="true"] .s-light { background: rgba(138, 101, 38, 0.14); }
-
-:root[data-theme="light"] html,
-:root[data-theme="light"] body { transition: background 380ms ease, color 380ms ease; }
 
 /* Products index: large, focused showcase panels inspired by the supplied
    reference. The page title stays semantic-only; the work begins immediately. */
@@ -2595,8 +2355,6 @@ h1 {
 
 .product-showcase-media-mark img { width: min(280px, 62%); height: auto; opacity: .9; }
 
-:root[data-theme="light"] .product-showcase-platforms img { filter: none; }
-
 @media (max-width: 900px) {
   .product-showcase { grid-template-columns: 1fr; min-height: 0; }
   .product-showcase-copy { padding: clamp(32px, 7vw, 48px); }
@@ -2661,11 +2419,13 @@ h1 {
   background: var(--amber);
 }
 
+.case-showcase .product-showcase-copy { justify-content: flex-start; }
+
 .case-showcase-media {
   align-items: flex-start;
   flex-direction: column;
   justify-content: space-between;
-  padding: 44px;
+  padding: clamp(36px, 4vw, 56px);
 }
 
 .case-showcase-visual-label,
@@ -2689,10 +2449,115 @@ h1 {
 
 .case-showcase-visual-focus { align-self: flex-end; text-align: right; }
 
+/* Bottom corner marks on one line. Two things stopped that: aspect-ratio 1/1
+   pinned the square field to 440px while the copy cell stretched to the row
+   (28px shorter on the tallest panel), and the CTA was sized by content rather
+   than pushed to the cell floor. Only applies where the panel is two columns —
+   below 901px the field stacks and keeps its square. */
+@media (min-width: 901px) {
+  .case-showcase-media { aspect-ratio: auto; }
+  .case-showcase .product-showcase-link { margin-top: auto; }
+}
+
 @media (max-width: 560px) {
   .case-showcase-meta { margin-bottom: 20px; }
   .case-showcase-media { padding: 32px; }
   .case-showcase-visual-index { font-size: 9rem; }
+}
+
+/* ───────────────────────────────────────────────────────────────────────────
+   About, on the same split-panel system as Products and Case studies. The
+   180px eyebrow column is gone: each section's label is the corner mark inside
+   its own panel. Three panel shapes carry the rhythm — a square-field intro, a
+   full-width evidence panel, and a pair of half-width credentials — so the page
+   is no longer four repetitions of one cadence.
+   ─────────────────────────────────────────────────────────────────────────── */
+.about-showcase-shell .case-showcase-meta span:first-child { color: var(--amber); }
+
+/* About carries no panel boxes. .product-showcase draws a 1px outline and a
+   fill so a product or a case study reads as a card; About is one continuous
+   page about one person, and the outlines just fence the copy in. The grid
+   itself stays, so the alignment and rhythm are unchanged — only the
+   rectangles go. */
+.about-showcase,
+.about-showcase .product-showcase-media,
+.about-showcase-portrait {
+  border: 0;
+  background: none;
+}
+
+/* Sized to --h2-size, not --headline-size: on Products and Case studies the
+   h1 is visually hidden and the 48px panel title leads the page, so a 72px
+   headline here made About the only index page shouting. Deviates from the
+   "every h1 takes --headline-size" rule in DESIGN-SYSTEM.md. */
+.about-showcase h1 {
+  max-width: 22ch;
+  margin: 0;
+  font-size: var(--h2-size);
+  line-height: 1.04;
+  letter-spacing: -0.04em;
+}
+
+.about-showcase h2 {
+  margin: 0;
+  color: var(--text);
+  font-size: var(--h2-size);
+  line-height: 1.04;
+  letter-spacing: -0.04em;
+}
+
+.about-showcase .product-showcase-description { max-width: 46ch; }
+.about-showcase .about-tags { margin-top: 30px; }
+
+/* The portrait bleeds to the edges of the square field rather than sitting
+   inside its padding — the field is the frame, so a second one is noise. */
+.about-showcase-portrait {
+  padding: 0;
+  background: var(--bg-2);
+}
+
+.about-showcase-portrait img {
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 10%;
+  animation: none;
+}
+
+/* Recognition: one column, and the copy cell stretches so the stat row, the
+   marquee and the gallery all take the full measure. */
+.about-showcase-wide { grid-template-columns: minmax(0, 1fr); min-height: 0; }
+.about-showcase-wide .product-showcase-copy { align-items: stretch; width: 100%; }
+.about-showcase-wide .recognition-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; }
+
+/* Journey runs full width too: without the ghost numeral there was nothing for
+   a side field to hold. */
+.about-showcase-journey .product-showcase-copy { justify-content: flex-start; }
+.about-showcase-journey .journey-list { margin: 44px 0 0; }
+.about-showcase-journey .journey-list li:last-child { padding-bottom: 0; }
+
+.about-showcase-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+
+.about-showcase-cert {
+  grid-template-columns: minmax(0, 1fr);
+  min-height: 0;
+}
+
+.about-showcase-cert h2 { font-size: var(--h3-small); line-height: 1.2; }
+
+@media (max-width: 900px) {
+  .about-showcase-wide .recognition-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px; }
+  .about-showcase-pair { grid-template-columns: minmax(0, 1fr); }
+  .about-showcase-portrait { aspect-ratio: 4 / 3; }
+}
+
+@media (max-width: 560px) {
+  .about-showcase h1 { max-width: none; }
+  .about-showcase-wide .recognition-stats { grid-template-columns: minmax(0, 1fr); gap: 22px; }
+  .about-showcase-journey .journey-list { margin-top: 32px; }
+  .about-showcase-pair { gap: 16px; }
+  .about-showcase-cert { min-height: 0; }
 }
 
 /* The shared header pins .tab-contact to the right edge with position:absolute.
@@ -2765,11 +2630,6 @@ h1 {
 .home { height: 100%; }
 body.home { min-height: 100dvh; }
 
-/* The tesseract sits top-right, which unbalances a centred composition.
-   Quietened to roughly a starfield. */
-.home .space-field { opacity: 0.42; }
-.home .tesseract { opacity: 0.5; }
-
 /* The home page must not scroll: .shell becomes a flex column and the hero
    takes whatever is left between the header and the footer, rather than
    claiming a fixed slice of the viewport and pushing the footer past it. */
@@ -2828,6 +2688,73 @@ body.home { min-height: 100dvh; }
   .hero-center .hero-actions { width: 100%; margin-top: 44px; }
 }
 
+/* ───────────────────────────────────────────────────────────────────────────
+   The runner along the foot of the home page. Sized as a footnote: a narrow
+   centred lane well under the CTAs, at 45% until it is hovered, focused or
+   running. It never takes vertical space away from the hero — the strip is a
+   fixed 78px and the hero keeps whatever is left.
+   ─────────────────────────────────────────────────────────────────────────── */
+.hero-play {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: min(560px, 100%);
+  margin: 0 auto;
+  padding-bottom: 10px;
+  opacity: 0.45;
+  transition: opacity 400ms ease;
+}
+
+.hero-play:hover,
+.hero-play:focus-within,
+.hero-play.is-running { opacity: 1; }
+
+/* Transparent button: it is a hit area over the canvas, not a control with a
+   look of its own. */
+.hero-play-surface {
+  display: block;
+  width: 100%;
+  height: 64px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.hero-play-surface:focus-visible { outline: 1px solid var(--line-strong); outline-offset: 2px; }
+.hero-play.is-pointer .hero-play-surface:focus-visible { outline: none; }
+
+.hero-play-canvas { display: block; width: 100%; height: 100%; }
+
+.hero-play-caption {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 14px;
+  margin: 0;
+  padding: 0 2px;
+  color: var(--soft);
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.hero-play-score { color: var(--cyan); }
+
+@media (max-width: 560px) {
+  .hero-play-surface { height: 52px; }
+  .hero-play { padding-bottom: 4px; }
+}
+
+/* Short viewports have no room to spare between the CTAs and the footer. */
+@media (max-height: 620px) {
+  .hero-play { display: none; }
+}
+
 
 
 /* ───────────────────────────────────────────────────────────────────────────
@@ -2861,10 +2788,6 @@ body.home { min-height: 100dvh; }
   content: "";
   background: radial-gradient(closest-side, rgba(216, 166, 87, 0.11), transparent 72%);
   animation: field-wander 38s ease-in-out infinite alternate;
-}
-
-:root[data-theme="light"] .home .space-field::after {
-  background: radial-gradient(closest-side, rgba(138, 101, 38, 0.09), transparent 72%);
 }
 
 @keyframes field-wander {
