@@ -2284,14 +2284,14 @@ h1 {
   gap: 7px;
 }
 
-/* Height-locked, width free. SF Symbols exports are not square and carry their own
-   optical padding, so pinning both axes squashes them. */
+/* Height-locked, width free: the device icons are not square and carry their own
+   optical padding, so pinning both axes squashes them. The artwork is already
+   light-on-transparent, so there is no invert here - adding one hides it. */
 .product-showcase-platforms img {
   width: auto;
   height: 18px;
   max-width: 26px;
   opacity: .78;
-  filter: invert(1);
 }
 
 .product-showcase-link {

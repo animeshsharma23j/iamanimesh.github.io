@@ -7,54 +7,34 @@ The platform row on `products.html` used Material Symbols `phone`, `tablet` and
 18px this row renders them, their interior detail turned to mush and the phone
 and tablet were near-indistinguishable outlines.
 
-Replaced with three first-party icons in `assets/icons/devices/`, drawn on a
-24x24 grid and matched to **SF Symbols geometry** at the user's direction:
+Replaced with SF Symbols artwork supplied by the user, saved as PNG into
+`assets/icons/devices/`:
 
-| Icon | w:h | Corner radius | Identifying detail |
+| File | Canvas | Rendered at 18px high | Detail that carries it small |
 |---|---|---|---|
-| `iphone.svg` | 0.56 | 2.9 (25% of width) | Thin speaker slot near the top inside edge |
-| `ipad.svg` | 0.76 | 2.2 (15% of width) | Front-camera dot, centred just inside the top |
-| `apple-watch.svg` | 0.74 | 3.2 (28% of width) | Band stubs at half the case width, crown on the right above centre |
+| `iphone.png` | 644x1060 | 11x18 | Island pill, home indicator, heavy wall |
+| `ipad.png` | 836x1128 | 13x18 | Home indicator, tighter corner radius |
+| `apple-watch.png` | 774x1072 | 13x18 | Crown and tapered band stubs |
 
-The proportions and construction follow SF Symbols; the outlines are our own.
-Apple's SF Symbols artwork is licensed for app UI on Apple platforms and may
-not be redistributed or modified, so matching the geometry rather than
-embedding the glyphs is the only route that stays clear of that.
+The heavier stroke weight is what makes these work at 18px where the previous
+attempts did not: the walls stay solid instead of thinning out.
 
-All three are single-colour black fills with `fill-rule="evenodd"` cutouts
-rather than strokes, so the walls stay crisp when the browser scales them down,
-and the existing `filter: invert(1)` on `.product-showcase-platforms img` still
-produces the white treatment. Wall thickness is 1.6 units throughout (about
-1.2px at 18px).
+Two adjustments the artwork required:
 
-### First pass, and why it was wrong
+- **The invert filter had to go.** `.product-showcase-platforms img` carried
+  `filter: invert(1)`, which was there to turn black glyphs white. This artwork
+  is already white-on-transparent, so inverting it rendered near-black on a
+  near-black ground - invisible. Confirmed by sampling opaque pixels in all
+  three files: average RGB (255, 255, 255).
+- **Both axes could not stay pinned.** The rule was `width: 18px; height: 18px`
+  and these files are 0.61, 0.74 and 0.72 wide-to-tall, so square sizing
+  squashed them. Now `height: 18px; width: auto` with a 26px cap, and the `img`
+  tags carry the real intrinsic dimensions so the aspect ratio is known before
+  the file loads.
 
-The initial versions were rejected as not reading like the devices. Rendering
-them at 132 / 48 / 24 / 18px side by side showed three specific faults, each
-corrected above: the iPhone was too narrow at 0.52 and its top detail was a fat
-pill floating inside the screen rather than a slot at the edge; the iPad had no
-camera dot at all, so nothing but width distinguished it from the phone; and the
-watch case at 3.9 corner radius on an 11.6 body was so round the sides stopped
-reading flat, which turned it into a blob rather than a cushion.
-
-Preview harness used for the comparison: `tmp/icon-preview.html` (gitignored).
-
-### Drop-in slot for replacement artwork
-
-`assets/icons/devices/{iphone,ipad,apple-watch}.svg` is the contract:
-`products.html` references those three paths and nothing else does. Saving new
-files over them needs no markup change.
-
-`.product-showcase-platforms img` was pinned to 18x18. SF Symbols exports are
-not square and carry their own optical padding, so both axes pinned squashed
-them; the rule is now `height: 18px; width: auto` with a 26px max-width cap.
-The current square icons still render 18x18, so nothing moved.
-
-Two properties any replacement has to satisfy: the artwork must be **dark**,
-because the rule inverts it to get the white treatment, and an SF Symbols
-"Export Symbol" template contains all 27 weight and scale variants in one file,
-which renders as a grid rather than one icon - that needs stripping to the
-single Regular variant first.
+Three drawn SVG attempts preceded this and were rejected; they are gone from the
+tree and recoverable from git history. The lesson worth keeping: at 18px, stroke
+weight decides legibility, and detail inside the silhouette is wasted.
 
 The Apple logo pill is gone from all six product rows - it said nothing the
 device pills beside it did not.
@@ -80,8 +60,12 @@ and JS. Both are recoverable from git history if a future icon need arises.
 - Platform rows now read: UnitX iPhone/iPad/Watch, BuildX iPhone/iPad,
   TradeBill iPhone/iPad, JobBook iPhone/iPad, Recital iPhone/iPad,
   RateX iPhone/iPad (still "Coming soon", still unlinked).
-- Each icon inspected at 132 / 48 / 24 / 18px against the dark ground before and
-  after the SF Symbols revision.
+- Each icon composited onto the site's #0a0e10 ground at 220 / 54 / 24 / 18px and
+  inspected, since white-on-transparent artwork is invisible against a white
+  viewer background.
+- Rendered sizes on the page: iPhone 11x18, iPad 13x18, Watch 13x18. Computed
+  `filter` on the platform icons is `none`. No horizontal overflow, and the row
+  stays on one line at 375px.
 - Console errors: none.
 
 final result: passed
