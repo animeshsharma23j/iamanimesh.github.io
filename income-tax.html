@@ -22,8 +22,18 @@
     <meta property="og:url" content="https://www.iamanimesh.com/income-tax.html" /><meta property="og:image" content="https://www.iamanimesh.com/icon.png" /><meta property="og:image:width" content="637" /><meta property="og:image:height" content="637" />
     <meta name="twitter:card" content="summary" />
     
-    <link rel="stylesheet" href="styles.css?v=20260905-01" />
-  </head>
+    <link rel="stylesheet" href="styles.css?v=20260911-02" />
+    <link rel="stylesheet" href="case-study-unified.css?v=20260911-03" />
+  <script>
+      // Applied before first paint so a light-mode visitor never sees a dark flash.
+      (function () {
+        try {
+          var t = localStorage.getItem('theme');
+          document.documentElement.setAttribute('data-theme',
+            t || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'));
+        } catch (e) {}
+      })();
+    </script></head>
   <body class="case-study-page">
     <a class="skip-link" href="#main-content">Skip to main content</a>
     <div class="space-field" aria-hidden="true">
@@ -378,6 +388,8 @@
     </footer>
   <button type="button" id="back-to-top" class="back-to-top" aria-label="Back to top">↑</button>
   <script src="scripts/site.js" defer></script>
+  <script src="scripts/case-study-feedback-counter.js?v=20260911-03" defer></script>
+  <script src="scripts/case-study-layout.js?v=20260911-03" defer></script>
 
   </body>
 </html>
