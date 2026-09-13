@@ -46,6 +46,23 @@
      0.58rem because that artwork is sized as a unit. */
   --text-label: 0.7rem;
   --text-small: 0.82rem;
+
+  /* Motion. Scroll reveal is the first thing to resolve to tokens rather than
+     to literals; the durations and curves already scattered through this file
+     should migrate onto --ease-soft as they are next touched, rather than in
+     one sweep. Values settled by eye in the tuning prototype. */
+  --ease-soft: cubic-bezier(0.16, 1, 0.3, 1);
+  --reveal-shift: 10px;
+  --reveal-dur: 460ms;
+  --reveal-stagger: 50ms;
+  /* The cursor lens over the background artwork. */
+  --lens-radius: 280px;
+  --lens-boost: 2.6;
+  /* Cards arrive with more travel than prose does — see the reveal section. */
+  --card-rise: 44px;
+  --card-scale: 0.955;
+  --card-tilt: 6deg;
+  --card-dur: 700ms;
 }
 
 * {
@@ -2943,4 +2960,136 @@ body.home { min-height: 100dvh; }
   .home .tesseract,
   .home .stars,
   .home .space-field::after { animation: none; }
+}
+
+
+/* ───────────────────────────────────────────────────────────────────────────
+   Scroll reveal. Sections rise into place once, on first entry, and are then
+   left alone — an element that has arrived is unobserved and never hidden
+   again, because re-animating on scroll-back is what makes a long case study
+   feel like it is fighting the reader.
+
+   The hidden state is scoped to html.js-reveal, which a one-line inline script
+   in each page's head sets before first paint. If that script never runs — JS
+   off, a parse error earlier in the page — the class is absent and everything
+   is simply visible. Content is never hidden by CSS that JS has to come and
+   rescue.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+html.js-reveal [data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, var(--reveal-shift), 0);
+  transition:
+    opacity   var(--reveal-dur) var(--ease-soft) var(--reveal-delay, 0ms),
+    transform var(--reveal-dur) var(--ease-soft) var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+html.js-reveal [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Anything already on screen at load is shown outright, with no transition at
+   all. The h1 must never fade in: the page should look finished the instant it
+   is finished. */
+html.js-reveal [data-reveal].is-immediate {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+/* Once an element has arrived it is done. Drop the compositor hint so a long
+   page is not holding a layer per section for the rest of its life. */
+html.js-reveal [data-reveal].is-settled {
+  will-change: auto;
+}
+
+/* ── Cards ──────────────────────────────────────────────────────────────────
+   A ten-pixel fade is the right amount of movement for a paragraph and far too
+   little for a card the size of a product showcase — at that scale it reads as
+   the page being slow to load rather than as anything arriving.
+
+   A card gets its own treatment: it comes up from further down, from slightly
+   further back, and tilted a few degrees off the vertical, hinged near its own
+   lower edge so it swings up into place. The point is that the card should
+   look like it is being set down, not like it is being faded in.
+
+   The three selectors below are not redundant. `.reveal-card` ties on
+   specificity with `.is-in` and `.is-immediate` and is written after them, so
+   without the explicit pairings a card would out-rank its own arrival state
+   and never actually land.                                                    */
+
+html.js-reveal [data-reveal].reveal-card {
+  transform:
+    perspective(1400px)
+    translate3d(0, var(--card-rise), 0)
+    rotateX(var(--card-tilt))
+    scale(var(--card-scale));
+  transform-origin: 50% 88%;
+  transition:
+    opacity   var(--card-dur) var(--ease-soft) var(--reveal-delay, 0ms),
+    transform var(--card-dur) var(--ease-soft) var(--reveal-delay, 0ms);
+}
+
+html.js-reveal [data-reveal].reveal-card.is-in,
+html.js-reveal [data-reveal].reveal-card.is-immediate {
+  transform: none;
+}
+
+html.js-reveal [data-reveal].reveal-card.is-immediate {
+  transition: none;
+}
+
+/* Both of these must name the card too: `.reveal-card` out-ranks the plain
+   `[data-reveal]` reset, so without it a card would keep its tilt here. */
+@media (scripting: none) {
+  html.js-reveal [data-reveal],
+  html.js-reveal [data-reveal].reveal-card { opacity: 1; transform: none; transition: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js-reveal [data-reveal],
+  html.js-reveal [data-reveal].reveal-card { opacity: 1; transform: none; transition: none; }
+}
+
+
+/* ───────────────────────────────────────────────────────────────────────────
+   The cursor lens.
+
+   Rather than adding a new decorative layer, this brightens the artwork that
+   is already back there — the tesseract frames, the axes, the sparks, the
+   starfield. scripts/site.js clones .space-field wholesale and drops the copy
+   directly on top of the original; because it is the same markup under the
+   same rules it registers pixel for pixel, and its animations start within a
+   frame of the originals, which on a 44s turn is imperceptible.
+
+   The copy is then brightened and shown only through a soft circle that
+   follows the pointer. Inside that circle the reader is seeing the same
+   drawing twice — once dim, once bright — so the artwork gains definition
+   under the cursor and is untouched everywhere else.
+
+   A cloned layer is used instead of a blend-mode wash because a wash lifts the
+   empty black as much as the linework, which reads as a torch shining on the
+   page. This reads as the drawing itself coming forward.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+.space-field-lit {
+  opacity: 0;
+  filter: brightness(var(--lens-boost)) saturate(1.12);
+  -webkit-mask-image:
+    radial-gradient(circle var(--lens-radius) at var(--px, 50vw) var(--py, 50vh),
+                    #000 0%, rgba(0, 0, 0, 0.45) 55%, transparent 100%);
+  mask-image:
+    radial-gradient(circle var(--lens-radius) at var(--px, 50vw) var(--py, 50vh),
+                    #000 0%, rgba(0, 0, 0, 0.45) 55%, transparent 100%);
+  transition: opacity 420ms ease;
+}
+
+/* Raised on the first pointer movement, dropped when the pointer leaves the
+   window, so a page nobody touches never renders it. */
+.space-field-lit.is-live { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .space-field-lit { display: none; }
 }

@@ -113,25 +113,23 @@ if (clock) {
 }
 
 // Avatar parallax: a few pixels of drift and a few degrees of tilt, eased, so
-// it reads as depth rather than as a trick. Pointer devices only.
+// it reads as depth rather than as a trick.
+//
+// The cursor comes from the shared listener in site.js — already throttled to
+// one read per frame, and already gated on a hovering pointer and on the
+// reader not having asked for less motion — rather than from a second global
+// pointermove of our own.
 const avatar = document.querySelector('[data-avatar]');
 const avatarTilt = document.querySelector('[data-avatar-tilt]');
-if (avatar && avatarTilt
-    && !window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    && window.matchMedia('(hover: hover)').matches) {
-  let queued = false;
-  window.addEventListener('pointermove', (event) => {
-    if (queued) return;
-    queued = true;
-    requestAnimationFrame(() => {
-      queued = false;
-      const box = avatar.getBoundingClientRect();
-      const x = Math.max(-1, Math.min(1, (event.clientX - (box.left + box.width / 2)) / window.innerWidth * 2));
-      const y = Math.max(-1, Math.min(1, (event.clientY - (box.top + box.height / 2)) / window.innerHeight * 2));
-      avatarTilt.style.transform =
-        `translate3d(${(x * 7).toFixed(2)}px, ${(y * 5).toFixed(2)}px, 0)` +
-        ` rotateY(${(x * 3.2).toFixed(2)}deg) rotateX(${(-y * 2.4).toFixed(2)}deg)`;
-    });
+const pointer = window.SitePointer;
+if (avatar && avatarTilt && pointer && pointer.available) {
+  pointer.onMove((clientX, clientY) => {
+    const box = avatar.getBoundingClientRect();
+    const x = Math.max(-1, Math.min(1, (clientX - (box.left + box.width / 2)) / window.innerWidth * 2));
+    const y = Math.max(-1, Math.min(1, (clientY - (box.top + box.height / 2)) / window.innerHeight * 2));
+    avatarTilt.style.transform =
+      `translate3d(${(x * 7).toFixed(2)}px, ${(y * 5).toFixed(2)}px, 0)` +
+      ` rotateY(${(x * 3.2).toFixed(2)}deg) rotateX(${(-y * 2.4).toFixed(2)}deg)`;
   });
-  document.addEventListener('pointerleave', () => { avatarTilt.style.transform = ''; });
+  pointer.onLeave(() => { avatarTilt.style.transform = ''; });
 }

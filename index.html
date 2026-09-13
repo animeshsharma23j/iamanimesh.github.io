@@ -28,7 +28,11 @@
       {"@context":"https://schema.org","@type":"Person","name":"Animesh Sharma","url":"https://www.iamanimesh.com/","image":"https://www.iamanimesh.com/icon.png","jobTitle":"Product Designer & UX Researcher","address":{"@type":"PostalAddress","addressLocality":"New Delhi","addressCountry":"IN"},"sameAs":["https://www.linkedin.com/in/animesh-sharma-57829344/","https://x.com/animesh_sharma_","https://www.instagram.com/iamanimeshsharma/","https://github.com/animeshsharma23j","https://www.behance.net/Animesh_Sharma_"]}
     </script>
     
-    <link rel="stylesheet" href="styles.css?v=20260912-20" />
+    <link rel="stylesheet" href="styles.css?v=20260913-05" />
+      <!-- Scroll reveal: arm the hidden state before first paint. The failsafe
+         un-hides everything if scripts/site.js never reports in, so a script
+         that fails to load can never leave the page blank. -->
+    <script>(function(e){e.classList.add("js-reveal");setTimeout(function(){if(!e.dataset.revealReady)e.classList.remove("js-reveal")},3000)})(document.documentElement)</script>
   </head>
   <body class="home">
     <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -114,8 +118,8 @@
       <span>New Delhi, India</span>
     </footer>
   <button type="button" id="back-to-top" class="back-to-top" aria-label="Back to top">↑</button>
-  <script src="scripts/site.js" defer></script>
-  <script src="scripts/home-hero.js" defer></script>
+  <script src="scripts/site.js?v=20260913-05" defer></script>
+  <script src="scripts/home-hero.js?v=20260913-02" defer></script>
   <script src="scripts/home-play.js" defer></script>
 
 
