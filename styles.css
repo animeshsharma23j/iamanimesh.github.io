@@ -451,6 +451,10 @@ body[class] .tesseract {
 .tab[aria-current="page"]::before { border-color: rgba(216, 166, 87, 0.16); opacity: 0.62; }
 
 .tab-contact {
+  /* .tab is inline-flex, so the label and the arrow are separate flex items and
+     the literal space between them in the markup is collapsed. The gap is what
+     actually separates them. */
+  gap: 6px;
   padding: 0 14px;
   border: 1px solid rgba(243, 238, 226, 0.28);
   color: var(--text);
