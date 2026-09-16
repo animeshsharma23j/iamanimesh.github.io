@@ -47,7 +47,7 @@
   try { best = parseInt(localStorage.getItem('hero-play-best'), 10) || 0; } catch (e) {}
 
   var ink = getComputedStyle(document.documentElement);
-  var accent = (ink.getPropertyValue('--cyan') || '#d8a657').trim();
+  var accent = (ink.getPropertyValue('--amber') || '#d8a657').trim();
 
   function resize() {
     var box = canvas.getBoundingClientRect();

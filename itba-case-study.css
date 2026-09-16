@@ -6,7 +6,7 @@
 .itba-page .site-header { width: min(1380px, calc(100% - 48px)); }
 .itba-shell { display: grid; grid-template-columns: 190px minmax(0, 1fr) 250px; gap: 0 48px; width: min(1380px, calc(100% - 48px)); margin: 0 auto; padding: 40px 0 80px; }
 .itba-overview { grid-column: 2; grid-row: 1; min-width: 0; scroll-margin-top: 110px; }
-.itba-kicker { margin: 0 0 20px; color: var(--cyan); font-size: .72rem; font-weight: 700; line-height: 1.5; letter-spacing: .12em; text-transform: uppercase; }
+.itba-kicker { margin: 0 0 20px; color: var(--amber); font-size: .72rem; font-weight: 700; line-height: 1.5; letter-spacing: .12em; text-transform: uppercase; }
 .itba-hero-grid { display: grid; grid-template-columns: 1.15fr 1fr; align-items: start; gap: 80px; padding: 64px 0 56px; }
 .itba-hero-copy h1 { margin: 0 0 28px; font-size: var(--headline-size); line-height: 1.04; letter-spacing: -.055em; text-wrap: balance; }
 .itba-lede { color: var(--muted); font-size: var(--lede-size); line-height: 1.65; max-width: 560px; }
@@ -31,7 +31,7 @@
 .itba-sidebar li { margin: 0; }
 .itba-sidebar a { display: flex; align-items: center; gap: 12px; min-height: 42px; padding: 8px 10px; border-left: 2px solid transparent; color: var(--muted); font-size: .8rem; line-height: 1.4; transition: color 160ms, border-color 160ms, background 160ms; }
 .itba-sidebar a span { color: var(--soft); font-size: .65rem; font-family: var(--font-mono); }
-.itba-sidebar a:hover, .itba-sidebar a[aria-current="location"] { border-color: var(--cyan); background: #75d5e40b; color: var(--cyan); }
+.itba-sidebar a:hover, .itba-sidebar a[aria-current="location"] { border-color: var(--amber); background: #d8a6570b; color: var(--amber); }
 .itba-story { grid-column: 2; grid-row: 2; min-width: 0; border-top: 1px solid #ffffff24; }
 .itba-summary { grid-column: 3; grid-row: 1 / span 2; min-width: 0; padding-top: 64px; }
 .itba-summary-sticky { position: sticky; top: 112px; display: grid; gap: 16px; }
@@ -42,17 +42,17 @@
 .itba-summary-card h2 { font-size: 1.25rem; line-height: 1.25; }
 .itba-summary-card dl { margin: 22px 0 0; }
 .itba-summary-card dl > div { padding: 16px 0; border-top: 1px solid #ffffff1f; }
-.itba-summary-card dt { margin-bottom: 7px; color: var(--cyan); font-size: .68rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.itba-summary-card dt { margin-bottom: 7px; color: var(--amber); font-size: .68rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
 .itba-summary-card dd { margin: 0; color: var(--muted); font-size: .82rem; line-height: 1.6; }
 .itba-appreciation { padding: 20px; }
 .itba-appreciation h2 { font-size: .9rem; line-height: 1.4; }
 .itba-appreciation-total { margin: 8px 0 0; color: var(--soft); font-size: .72rem; line-height: 1.4; }
-.itba-appreciation-total strong { color: var(--cyan); }
+.itba-appreciation-total strong { color: var(--amber); }
 .itba-appreciation-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 16px; }
 .itba-appreciation button { display: inline-flex; align-items: center; justify-content: center; gap: 7px; min-height: 44px; padding: 8px 10px; border: 1px solid #ffffff2b; border-radius: 999px; background: #ffffff08; color: var(--muted); font: inherit; font-size: .75rem; cursor: pointer; transition: color 160ms, border-color 160ms, background 160ms; }
-.itba-appreciation button:hover { border-color: #75d5e488; color: var(--text); }
-.itba-appreciation button:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; }
-.itba-appreciation button[aria-pressed="true"] { border-color: var(--cyan); background: #75d5e417; color: var(--cyan); }
+.itba-appreciation button:hover { border-color: #d8a65788; color: var(--text); }
+.itba-appreciation button:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; }
+.itba-appreciation button[aria-pressed="true"] { border-color: var(--amber); background: #d8a65717; color: var(--amber); }
 .itba-appreciation-status { min-height: 1.4em; margin: 12px 0 0; color: var(--soft); font-size: .72rem; line-height: 1.4; }
 .itba-section { padding: 64px 0; border-bottom: 1px solid #ffffff24; scroll-margin-top: 110px; }
 .itba-section > h2 { margin: 0 0 28px; max-width: 790px; font-size: var(--h2-size); line-height: 1.12; letter-spacing: -.04em; text-wrap: balance; }
@@ -66,8 +66,8 @@
    inside a component - a mockup body, a proof card - keep their component spacing. */
 .itba-section > h3 { margin: 40px 0 14px; }
 .itba-section .itba-note { max-width: 56ch; font-size: .83rem !important; line-height: 1.7; color: var(--soft); }
-.itba-callout { margin: 36px 0 40px; padding: 26px 28px; border-left: 3px solid var(--cyan); background: #75d5e40b; }
-.itba-callout > span { color: var(--cyan); font-size: .75rem; font-weight: 700; }
+.itba-callout { margin: 36px 0 40px; padding: 26px 28px; border-left: 3px solid var(--amber); background: #d8a6570b; }
+.itba-callout > span { color: var(--amber); font-size: .75rem; font-weight: 700; }
 .itba-callout p { max-width: 52ch; margin: 12px 0 0; color: var(--text); font-size: 1.1rem; line-height: 1.7; }
 .itba-callout h3 { margin: 12px 0 0; font-size: var(--h3-small); }
 .itba-two-up { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; margin-top: 32px; }
@@ -75,8 +75,8 @@
 .itba-two-up h3 { font-size: 1.15rem; margin: 0 0 12px; }
 .itba-two-up p { color: var(--muted); font-size: .95rem; line-height: 1.75; margin: 0; }
 .itba-findings { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin: 32px 0 24px; }
-.itba-findings article { padding: 24px 0 0; border-top: 1px solid #75d5e466; }
-.itba-findings span { color: var(--cyan); font-family: var(--font-mono); font-size: .75rem; }
+.itba-findings article { padding: 24px 0 0; border-top: 1px solid #d8a65766; }
+.itba-findings span { color: var(--amber); font-family: var(--font-mono); font-size: .75rem; }
 .itba-findings h3 { font-size: 1.2rem; margin: 18px 0 12px; }
 .itba-findings p { color: var(--muted); font-size: .92rem; line-height: 1.7; }
 /* This block used to be a collapsed <details>. The method, the observation log,
@@ -168,7 +168,7 @@
   .itba-page *, .itba-page *::before, .itba-page *::after { animation: none !important; transition: none !important; }
 }
 @media print {
-  .itba-page { background: white; color: black; --text: #111; --muted: #333; --soft: #444; --cyan: #174c57; }
+  .itba-page { background: white; color: black; --text: #111; --muted: #333; --soft: #444; --amber: #594017; }
   .itba-page .site-header, .itba-page .space-field, .itba-sidebar, .itba-summary, .itba-page .back-to-top { display: none; }
   .itba-shell { width: 100%; }
   .itba-reading-layout { display: block; }
@@ -180,11 +180,11 @@
 .itba-iterations { margin-top: 40px; }
 .itba-iteration { padding: 28px 0; border-top: 1px solid #ffffff30; }
 .itba-iteration h3 { display: flex; align-items: baseline; gap: 16px; margin: 0 0 24px; font-size: 1.3rem; }
-.itba-iteration h3 > span { color: var(--cyan); font-family: var(--font-mono); font-size: .8rem; font-weight: 500; }
+.itba-iteration h3 > span { color: var(--amber); font-family: var(--font-mono); font-size: .8rem; font-weight: 500; }
 .itba-iteration dl { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin: 0; }
 .itba-iteration dt { margin-bottom: 10px; color: var(--soft); font-size: .75rem; font-weight: 650; }
 .itba-iteration dd { margin: 0; color: var(--muted); font-size: .95rem; line-height: 1.75; }
-.itba-iteration dl > div:last-child dt { color: var(--cyan); }
+.itba-iteration dl > div:last-child dt { color: var(--amber); }
 .itba-iteration dl > div:last-child dd { color: var(--text); }
 @media (max-width: 1000px) {
   .itba-iteration dl { grid-template-columns: 1fr; gap: 20px; }

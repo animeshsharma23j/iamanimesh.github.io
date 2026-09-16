@@ -17,7 +17,6 @@
   --text: #f5f3ee;
   --muted: #b0aeaa;
   --soft: #aaa6a1;
-  --cyan: #d0b5f1;
   --amber: #d0b5f1;
   --line: #2c2b2a;
   --line-strong: #47433f;
@@ -43,22 +42,22 @@
 .home-page .intro { font-size: 12px; font-weight: 700; letter-spacing: .15em; color: var(--muted); }
 .home-page .hero .intro { margin-bottom: 28px; }
 .home-page .hero .intro { text-transform: uppercase; }
-.home-page .typed-role { display: inline-block; text-align: left; white-space: nowrap; color: var(--cyan); }
-.home-page .typed-role::after { display: inline-block; width: 2px; height: 1em; margin-left: 3px; background: var(--cyan); content: ""; vertical-align: -.12em; animation: caret-blink 1.1s step-end infinite; }
+.home-page .typed-role { display: inline-block; text-align: left; white-space: nowrap; color: var(--amber); }
+.home-page .typed-role::after { display: inline-block; width: 2px; height: 1em; margin-left: 3px; background: var(--amber); content: ""; vertical-align: -.12em; animation: caret-blink 1.1s step-end infinite; }
 @keyframes caret-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 .home-page h1 { max-width: 1060px; margin: 0 auto 30px; font-size: clamp(3.25rem, 6.5vw, 5.5rem); font-weight: 700; line-height: 1.12; letter-spacing: -.035em; }
 .home-page .hero-highlight { display: inline-block; margin: 8px 0; padding: 0 30px 5px; border-radius: 999px; background: #3e2b50; color: #d9b9fa; }
 .home-page .lede { max-width: 760px; margin: 0 auto; font-size: 21px; line-height: 1.6; font-weight: 400; }
-.home-page .greeting-word { display: inline-block; overflow: hidden; vertical-align: bottom; white-space: nowrap; color: var(--cyan); font-family: "Roboto Condensed", "Hiragino Sans", "Noto Sans JP", "Noto Sans Devanagari", "Arial Narrow", sans-serif; transition: width 320ms ease, opacity 200ms ease; }
+.home-page .greeting-word { display: inline-block; overflow: hidden; vertical-align: bottom; white-space: nowrap; color: var(--amber); font-family: "Roboto Condensed", "Hiragino Sans", "Noto Sans JP", "Noto Sans Devanagari", "Arial Narrow", sans-serif; transition: width 320ms ease, opacity 200ms ease; }
 .home-page .greeting-word.is-swapping { opacity: 0; }
 .home-page .hero-actions { justify-content: center; gap: 14px; margin-top: 32px; }
 .home-page .action-primary,
 .home-page .action-secondary { min-height: 48px; padding: 13px 25px; border-radius: 999px; font-size: 16px; font-weight: 700; }
 .home-page .action-primary { background: var(--text); border-color: var(--text); color: #151515; }
-.home-page .action-primary:hover { background: var(--cyan); border-color: var(--cyan); }
-.home-page .action-primary:focus-visible { outline-color: var(--cyan); }
+.home-page .action-primary:hover { background: var(--amber); border-color: var(--amber); }
+.home-page .action-primary:focus-visible { outline-color: var(--amber); }
 .home-page .action-secondary { background: transparent; border-color: #57534f; }
-.home-page .action-secondary:hover { background: #252129; border-color: var(--cyan); }
+.home-page .action-secondary:hover { background: #252129; border-color: var(--amber); }
 .home-page .home-directory-section { margin-top: 88px; padding-top: 32px; }
 .home-page #products { margin-top: 0; }
 .home-page .home-section-heading { margin-bottom: 32px; gap: 24px; }
@@ -67,7 +66,7 @@
 .home-page .section-link { border: 0; padding: 0; font-size: 16px; font-weight: 400; gap: 16px; }
 .home-page .directory-list { width: 100%; gap: 24px; }
 .home-page .directory-card.directory-entry { position: relative; grid-template-columns: 48px 1fr; align-items: start; align-content: start; gap: 22px 14px; padding: 0 0 24px; border: 0; border-bottom: 1px solid var(--line); min-height: 0; background: transparent; }
-.home-page .directory-card.directory-entry:hover { background: transparent; border-color: var(--cyan); }
+.home-page .directory-card.directory-entry:hover { background: transparent; border-color: var(--amber); }
 .home-product-preview { grid-column: 1 / -1; display: flex; width: 100%; height: 310px; overflow: hidden; justify-content: center; padding: 30px 24px 0; border-radius: 12px; }
 .preview-unitx { background: #252831; }
 .preview-recital { background: #292722; }
@@ -96,7 +95,7 @@
 .home-page .case-proof-card { padding: 24px 0; border: 0; background: none; }
 .home-page .case-proof-card h3 { font-size: 24px; font-weight: 700; }
 .home-page .case-proof-card p { font-size: 17px; line-height: 1.55; }
-.home-page .case-proof-card > span { color: var(--cyan); }
+.home-page .case-proof-card > span { color: var(--amber); }
 .home-page .contact-panel { padding-top: 64px; }
 .home-page .contact-email { font-size: clamp(1.2rem, 3vw, 2rem); overflow-wrap: anywhere; }
 .home-page .contact-lede { font-size: 18px; }
