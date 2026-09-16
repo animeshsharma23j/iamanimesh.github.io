@@ -2644,7 +2644,7 @@ h1 {
    marquee and the gallery all take the full measure. */
 .about-showcase-wide { grid-template-columns: minmax(0, 1fr); min-height: 0; }
 .about-showcase-wide .product-showcase-copy { align-items: stretch; width: 100%; }
-.about-showcase-wide .recognition-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 40px 48px; }
+.about-showcase-wide .recognition-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px 48px; }
 .about-showcase-wide .recognition-stats div { align-content: start; gap: 10px; }
 .about-showcase-wide .recognition-stats span { max-width: 30ch; line-height: 1.55; }
 
@@ -2688,6 +2688,22 @@ h1 {
 .about-certification-issuer { display: block; margin-bottom: 12px; }
 .about-certification-list h3 { margin: 0; color: var(--text); font-size: var(--h3-small); line-height: 1.2; letter-spacing: -.03em; }
 
+/* The degree sits after the certificates rather than inside that list - it is a
+   qualification, not a certificate, and the list's numbered index would mislabel
+   it as one. Indented to the list's text column so the two still line up. */
+.about-education { max-width: 980px; padding: 32px 0 0 72px; }
+.about-education h3 {
+  margin: 0 0 12px;
+  color: var(--soft);
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: 750;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.about-education p { max-width: 56ch; margin: 0; color: var(--muted); font-size: 0.95rem; line-height: 1.6; }
+.about-education strong { color: var(--text); font-size: var(--h3-small); font-weight: 650; letter-spacing: -.02em; }
+
 @media (min-width: 901px) and (max-width: 1320px) {
   .about-showcase-wide .recognition-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
@@ -2710,6 +2726,8 @@ h1 {
   .about-portrait-caption { flex-direction: column; gap: 5px; }
   .about-portrait-caption time { text-align: left; }
   .about-certification-list li { grid-template-columns: 32px minmax(0, 1fr); gap: 16px; padding: 28px 0; }
+  /* Follows the narrower index column above it. */
+  .about-education { padding: 28px 0 0 48px; }
 }
 
 @media (max-width: 360px) {
