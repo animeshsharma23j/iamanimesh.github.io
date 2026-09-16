@@ -56,15 +56,18 @@
 .itba-appreciation-status { min-height: 1.4em; margin: 12px 0 0; color: var(--soft); font-size: .72rem; line-height: 1.4; }
 .itba-section { padding: 64px 0; border-bottom: 1px solid #ffffff24; scroll-margin-top: 110px; }
 .itba-section > h2 { margin: 0 0 28px; max-width: 790px; font-size: var(--h2-size); line-height: 1.12; letter-spacing: -.04em; text-wrap: balance; }
-.itba-section > p:not(.itba-kicker), .itba-research-detail > p { max-width: 70ch; margin: 0 0 20px; color: var(--muted); font-size: 1rem; line-height: 1.8; }
+/* Measure. CSS `ch` is the width of the "0" glyph, which in Inter is wider than
+   the average lowercase character, so 70ch rendered ~79 actual characters per
+   line. 62ch lands at ~70, inside the 45-75 range that long-form reading wants. */
+.itba-section > p:not(.itba-kicker), .itba-research-detail > p { max-width: 62ch; margin: 0 0 20px; color: var(--muted); font-size: 1rem; line-height: 1.8; }
 .itba-section h3 { color: var(--text); line-height: 1.35; letter-spacing: -.015em; }
 /* Only a heading that belongs to the section itself gets the section rhythm. Headings
    inside a component - a mockup body, a proof card - keep their component spacing. */
 .itba-section > h3 { margin: 40px 0 14px; }
-.itba-section .itba-note { font-size: .83rem !important; line-height: 1.7; color: var(--soft); }
+.itba-section .itba-note { max-width: 62ch; font-size: .83rem !important; line-height: 1.7; color: var(--soft); }
 .itba-callout { margin: 36px 0 40px; padding: 26px 28px; border-left: 3px solid var(--cyan); background: #75d5e40b; }
 .itba-callout > span { color: var(--cyan); font-size: .75rem; font-weight: 700; }
-.itba-callout p { margin: 12px 0 0; color: var(--text); font-size: 1.1rem; line-height: 1.7; }
+.itba-callout p { max-width: 58ch; margin: 12px 0 0; color: var(--text); font-size: 1.1rem; line-height: 1.7; }
 .itba-callout h3 { margin: 12px 0 0; font-size: var(--h3-small); }
 .itba-two-up { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; margin-top: 32px; }
 .itba-two-up > div { border-top: 1px solid #ffffff24; padding-top: 16px; }
@@ -99,7 +102,7 @@
 .itba-section .case-proof-card { background: transparent; border: 0; border-top: 1px solid #ffffff24; border-radius: 0; padding: 24px 0; }
 .itba-section .case-proof-card h3 { font-size: 1.3rem; }
 .itba-section .case-proof-card span { font-size: .7rem; }
-.itba-section .case-proof-card p { line-height: 1.8 !important; }
+.itba-section .case-proof-card p { max-width: 66ch; line-height: 1.8 !important; }
 .itba-section .wireframe-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .itba-section .wireframe-card { background: #0d1317; }
 @media (prefers-reduced-motion: no-preference) {

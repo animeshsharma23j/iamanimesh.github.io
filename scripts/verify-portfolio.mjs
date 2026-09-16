@@ -23,13 +23,14 @@ const exceptions = {
 };
 
 // Every page carries the same top-level nav; a page that is itself a nav
-// destination marks its own tab. Contact is an anchor on the home page, so it
-// is a bare fragment there and a cross-page link everywhere else.
-const navFor = (file) => [
+// destination marks its own tab. Contact is a direct mailto rather than an
+// anchor: the home page does not scroll, so an in-page fragment had nowhere to
+// go, and the same href works identically from every page.
+const navFor = () => [
   "products.html",
   "case-studies.html",
   "about.html",
-  file === "index.html" ? "#work-with-me" : "index.html#work-with-me",
+  "mailto:animeshsharma23j@gmail.com",
 ];
 // A nav destination marks itself in both navs: the .tabs row and the mobile
 // menu that replaces it below 560px. Marking only one leaves the other set of
