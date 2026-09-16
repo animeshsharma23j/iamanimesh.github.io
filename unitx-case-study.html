@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-3SREKDHMC2"></script>
@@ -14,15 +14,20 @@
     <link rel="icon" href="/icon.png" type="image/png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="UnitX product-design case study by Animesh Sharma." />
-    <title>UnitX — Animesh Sharma</title>
+    <title>UnitX - Animesh Sharma</title>
     <link rel="canonical" href="https://www.iamanimesh.com/unitx-case-study.html" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="UnitX — Animesh Sharma" />
+    <meta property="og:title" content="UnitX - Animesh Sharma" />
     <meta property="og:description" content="A product-design case study for a faster, more flexible unit converter." />
     <meta property="og:url" content="https://www.iamanimesh.com/unitx-case-study.html" /><meta property="og:image" content="https://www.iamanimesh.com/assets/products/unitx-mark-crop.png" /><meta property="og:image:width" content="1024" /><meta property="og:image:height" content="1024" />
     <meta name="twitter:card" content="summary" />
     
-    <link rel="stylesheet" href="styles.css?v=20260904-14" />
+    <link rel="stylesheet" href="styles.css?v=20260913-05" />
+    <link rel="stylesheet" href="case-study-unified.css?v=20260911-03" />
+    <!-- Scroll reveal: arm the hidden state before first paint. The failsafe
+         un-hides everything if scripts/site.js never reports in, so a script
+         that fails to load can never leave the page blank. -->
+    <script>(function(e){e.classList.add("js-reveal");setTimeout(function(){if(!e.dataset.revealReady)e.classList.remove("js-reveal")},3000)})(document.documentElement)</script>
   </head>
   <body class="case-study-page">
     <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -52,30 +57,38 @@
 
     <header class="site-header">
       <a class="brand" href="index.html" aria-label="Animesh Sharma home"><span class="brand-name">animesh</span><span class="availability" aria-hidden="true"></span></a>
-      <nav class="tabs" aria-label="Portfolio sections"><a class="tab" href="products.html">Products</a><a class="tab" href="case-studies.html">Case studies</a><a class="tab" href="about.html">About</a><a class="tab tab-contact" href="index.html#work-with-me">Contact</a></nav>
-      <details class="mobile-menu"><summary aria-label="Open navigation"><span class="mobile-menu-icon" aria-hidden="true"></span><span class="visually-hidden">Menu</span></summary><nav aria-label="Mobile navigation"><a href="products.html">Products</a><a href="case-studies.html">Case studies</a><a href="about.html">About</a><a href="index.html#work-with-me">Contact</a></nav></details>
+      <nav class="tabs" aria-label="Portfolio sections"><a class="tab" href="products.html">Products</a><a class="tab" href="case-studies.html">Case studies</a><a class="tab" href="about.html">About</a><a class="tab tab-contact" href="mailto:animeshsharma23j@gmail.com">Let's talk <span aria-hidden="true">↗</span></a></nav>
+      <details class="mobile-menu"><summary aria-label="Open navigation"><span class="mobile-menu-icon" aria-hidden="true"></span><span class="visually-hidden">Menu</span></summary><nav aria-label="Mobile navigation"><a href="products.html">Products</a><a href="case-studies.html">Case studies</a><a href="about.html">About</a><a href="mailto:animeshsharma23j@gmail.com">Let's talk</a></nav></details>
     </header>
     <main id="main-content" class="case-study-shell">
       <p class="case-eyebrow">03 / iOS utility / Product design &amp; engineering</p>
       <h1>UnitX<br /><span>Making everyday conversion feel immediate</span></h1>
       <p class="case-intro">A unit converter designed around the way questions actually appear: type it, say it, scan it, save it, or pick up a familiar conversion from your wrist.</p>
-      <div class="case-meta"><span>Role — Product design &amp; SwiftUI engineering</span><span>Focus — Intent-first interaction, precision controls, multimodal input</span><span>Status — Live on the App Store</span></div>
+      <div class="case-meta"><span>Role - Product design &amp; SwiftUI engineering</span><span>Focus - Intent-first interaction, precision controls, multimodal input</span><span>Status - Live on the App Store</span></div>
 
       <section class="case-detail-grid">
         <p class="detail-label">Context</p>
-        <div><h2>Conversion is usually a small task that happens at an inconvenient moment.</h2><p>A traveller checks a price, a cook adapts a recipe, a shopper reads a label, or a student sees an unfamiliar measurement. Most converter apps make people choose a category, pick two units, enter a value, and only then see an answer. UnitX was designed to shorten that setup without losing control when accuracy matters.</p><ul class="case-facts"><li><strong>Audience</strong> People converting measurements or currencies in the middle of another task</li><li><strong>Product challenge</strong> Make the fast path feel immediate while keeping exact manual conversion discoverable</li><li><strong>Platforms</strong> iPhone with an Apple Watch companion for repeated utility moments</li></ul></div>
+        <div><h2>Back in 2025 I was in Japan, and my converter app stopped working the moment I lost signal.</h2><p>I use one constantly, most of all when I travel - which is exactly where mine gave up. That was the push. I installed the first twenty converters the App Store offered me and audited them properly. They were mostly the same app: cluttered, years out of date, and unable to finish the one task they exist for without a banner ad in the way. Favourites sat behind a paywall. History and Apple Watch support were rare. Almost none of it worked offline. UnitX is the converter I wanted on that trip: an answer straight away - no network, no ad, no form to fill in first.</p><ul class="case-facts"><li><strong>Where it started</strong> Twenty of the top-ranked converters, installed and used before any design work began</li><li><strong>Audience</strong> People converting measurements or currencies in the middle of another task</li><li><strong>Product challenge</strong> Give the answer immediately, offline and unblocked, while keeping exact manual conversion one tap away</li><li><strong>Platforms</strong> iPhone with an Apple Watch companion for repeated utility moments</li></ul></div>
       </section>
       <section class="case-detail-grid">
         <p class="detail-label">Design choices</p>
-        <div><h2>Start with intent. Offer control when it helps.</h2><p>The primary surface accepts short natural requests such as “72 kg to lb” or “5 miles in km.” Manual controls remain a parallel route rather than a buried fallback, while voice and camera entry remove typing when the number is spoken or printed.</p><div class="case-proof-grid"><article class="case-proof-card"><span>Type</span><h3>Natural queries</h3><p>Let people begin with the words they already have instead of a form to configure.</p></article><article class="case-proof-card"><span>Choose</span><h3>Manual precision</h3><p>Keep categories, units, swapping, and values explicit for exact or repeatable work.</p></article><article class="case-proof-card"><span>Capture</span><h3>Voice and camera</h3><p>Turn a spoken request or visible label into an editable starting point.</p></article></div></div>
+        <div><h2>Start with intent. Offer control when it helps.</h2><p>I built the main surface to take short requests like “72 kg to lb” or “5 miles in km.” Manual controls sit beside it as a parallel route, not a buried fallback, and voice and camera entry take the typing out when the number is spoken or printed.</p><div class="case-proof-grid"><article class="case-proof-card"><span>Type</span><h3>Natural queries</h3><p>Let people begin with the words they already have instead of a form to configure.</p></article><article class="case-proof-card"><span>Choose</span><h3>Manual precision</h3><p>Keep categories, units, swapping, and values explicit for exact or repeatable work.</p></article><article class="case-proof-card"><span>Capture</span><h3>Voice and camera</h3><p>Turn a spoken request or visible label into an editable starting point.</p></article></div></div>
+      </section>
+      <section class="case-detail-grid">
+        <p class="detail-label">Competitive audit</p>
+        <div><h2>The twenty apps wrote the brief.</h2><p>Every row below is a reason I put one of them down, and the decision it produced in UnitX.</p><div class="comparison-table-wrap" tabindex="0" role="group" aria-label="Scrollable table"><table class="comparison-table traceability-table"><caption>The five recurring findings across twenty converters, and what each one changed.</caption><thead><tr><th scope="col">What the audit found</th><th scope="col">What UnitX does instead</th></tr></thead><tbody><tr><th scope="row">The answer sat behind a banner ad</th><td>No ads. The result is the first thing on screen, and nothing interrupts it.</td></tr><tr><th scope="row">Favourites were locked behind a paywall</th><td>Favourites work on the free tier. Pro lifts the limit rather than unlocking the feature.</td></tr><tr><th scope="row">History was rare, or cleared itself</th><td>Every conversion is kept and replayable, so a repeat request never starts from scratch.</td></tr><tr><th scope="row">Apple Watch support was rare</th><td>A Watch companion carrying favourites and recents, for the moments the phone is not in hand.</td></tr><tr><th scope="row">Almost nothing worked without a signal</th><td>Unit conversion runs entirely on device. Only live currency rates need the network.</td></tr></tbody></table></div></div>
       </section>
       <section class="case-detail-grid">
         <p class="detail-label">Evidence</p>
-        <div><h2>A single converter, with several useful ways in.</h2><p>The product keeps one clear outcome—the conversion answer—while adapting its entry method to the moment. The app screen shows intent-led suggestions and access to manual, microphone, and camera flows; the iPad view makes the navigation model visible at a larger scale.</p><div class="project-gallery cols-2"><figure><img src="assets/products/unitx-app.png" width="1206" height="2622" alt="UnitX on iPhone showing natural conversion suggestions" /><figcaption>Intent-led conversion on iPhone</figcaption></figure><figure><img src="assets/products/unitx-ipad.png" width="1640" height="2360" alt="UnitX on iPad with navigation and conversion suggestions" /><figcaption>Navigation and smart input on iPad</figcaption></figure></div></div>
+        <div><h2>A single converter, with several useful ways in.</h2><p>I kept one outcome - the answer - and let the way in change with the moment. The iPhone screen shows intent-led suggestions alongside the manual, microphone, and camera flows; the iPad view makes the same navigation model visible at a larger scale.</p><div class="project-gallery cols-2"><figure><img src="assets/products/unitx-app.png" width="1206" height="2622" alt="UnitX on iPhone showing natural conversion suggestions" /><figcaption>Intent-led conversion on iPhone</figcaption></figure><figure><img src="assets/products/unitx-ipad.png" width="1640" height="2360" alt="UnitX on iPad with navigation and conversion suggestions" /><figcaption>Navigation and smart input on iPad</figcaption></figure></div></div>
+      </section>
+      <section class="case-detail-grid">
+        <p class="detail-label">Outcome</p>
+        <div><h2>Every rating it has had so far is five stars.</h2><p>UnitX is live on the App Store, free, and holding a 5.0 average across 25+ ratings. The part that matters more than the number: people who never read this page keep naming the three things the audit set out to fix - that it works without a signal, that nothing is sold to them on the way to an answer, and that it stays out of the way.</p><div class="case-proof-grid"><article class="case-proof-card"><span>Five stars · Itachi_7576</span><h3>Nice</h3><p>“You can type, speak, or scan a label to quickly convert… It also works offline, supports Apple Watch, saves favorites and history, and has no ads or account requirements.”</p></article><article class="case-proof-card"><span>Five stars · DeepikaRani</span><h3>Best conversion App</h3><p>“This app perfectly balances speed and simplicity for everyday conversion needs. its robust offline capabilities and reliable live accuracy make it highly recommended.”</p></article><article class="case-proof-card"><span>Five stars · Mikejohn511</span><h3>Best Unit &amp; Currency Converter App</h3><p>“Love the smart input, live exchange rates, camera scan feature, and Apple Watch support. Perfect for travelers, students, cooks, and everyday conversions.”</p></article><article class="case-proof-card"><span>Five stars · Sterkstroom</span><h3>Lightning fast!</h3><p>“Light weight. Fast. Accurate. Worth it! Amazing thank you for this.”</p></article><article class="case-proof-card"><span>Five stars · Sidharthbasoya</span><h3>Good and easy to use</h3><p>“Its the first add free app that help in my tasks. Good job team”</p></article><article class="case-proof-card"><span>Five stars · Dxb123</span><h3>Perfect app</h3><p>“All my needs in place simple &amp; efficient. Well done dev!”</p></article></div></div>
       </section>
       <section class="case-detail-grid">
         <p class="detail-label">Reflection</p>
-        <div><h2>Flexibility works only when the default remains calm.</h2><p>UnitX deliberately makes the common request feel light while retaining reliable escape hatches for manual input, editability, history, favourites, and Apple Watch follow-through. The next iteration should validate recognition recovery and which repeat conversions are genuinely worth surfacing on the wrist.</p></div>
+        <div><h2>Flexibility works only when the default remains calm.</h2><p>I kept the common request light, and left reliable ways out of it: manual input, an editable result, history, favourites, and Apple Watch follow-through. What I still want to test is how well recognition recovers when it misreads something, and which repeat conversions actually earn a place on the wrist.</p></div>
       </section>
     </main>
     <footer class="site-footer">
@@ -84,7 +97,9 @@
       <span>New Delhi, India</span>
     </footer>
   <button type="button" id="back-to-top" class="back-to-top" aria-label="Back to top">↑</button>
-  <script src="scripts/site.js" defer></script>
+  <script src="scripts/site.js?v=20260913-05" defer></script>
+  <script src="scripts/case-study-feedback-counter.js?v=20260911-03" defer></script>
+  <script src="scripts/case-study-layout.js?v=20260911-03" defer></script>
 
   </body>
 </html>

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-3SREKDHMC2"></script>
@@ -15,9 +15,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex" />
     <meta name="description" content="This page doesn't exist. Find products, case studies, and more from Animesh Sharma." />
-    <title>Page not found — Animesh Sharma</title>
+    <title>Page not found - Animesh Sharma</title>
     
-    <link rel="stylesheet" href="styles.css?v=20260905-01" />
+    <link rel="stylesheet" href="styles.css?v=20260913-05" />
+    <!-- Scroll reveal: arm the hidden state before first paint. The failsafe
+         un-hides everything if scripts/site.js never reports in, so a script
+         that fails to load can never leave the page blank. -->
+    <script>(function(e){e.classList.add("js-reveal");setTimeout(function(){if(!e.dataset.revealReady)e.classList.remove("js-reveal")},3000)})(document.documentElement)</script>
   </head>
   <body class="subpage">
     <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -47,8 +51,8 @@
 
     <header class="site-header">
       <a class="brand" href="index.html" aria-label="Animesh Sharma home"><span class="brand-name">animesh</span><span class="availability" aria-hidden="true"></span></a>
-      <nav class="tabs" aria-label="Portfolio sections"><a class="tab" href="products.html">Products</a><a class="tab" href="case-studies.html">Case studies</a><a class="tab" href="about.html">About</a><a class="tab tab-contact" href="index.html#work-with-me">Contact</a></nav>
-      <details class="mobile-menu"><summary aria-label="Open navigation"><span class="mobile-menu-icon" aria-hidden="true"></span><span class="visually-hidden">Menu</span></summary><nav aria-label="Mobile navigation"><a href="products.html">Products</a><a href="case-studies.html">Case studies</a><a href="about.html">About</a><a href="index.html#work-with-me">Contact</a></nav></details>
+      <nav class="tabs" aria-label="Portfolio sections"><a class="tab" href="products.html">Products</a><a class="tab" href="case-studies.html">Case studies</a><a class="tab" href="about.html">About</a><a class="tab tab-contact" href="mailto:animeshsharma23j@gmail.com">Let's talk <span aria-hidden="true">↗</span></a></nav>
+      <details class="mobile-menu"><summary aria-label="Open navigation"><span class="mobile-menu-icon" aria-hidden="true"></span><span class="visually-hidden">Menu</span></summary><nav aria-label="Mobile navigation"><a href="products.html">Products</a><a href="case-studies.html">Case studies</a><a href="about.html">About</a><a href="mailto:animeshsharma23j@gmail.com">Let's talk</a></nav></details>
     </header>
     <main id="main-content" class="subpage-shell">
       <p class="page-eyebrow">404</p>
@@ -65,7 +69,7 @@
       <span>New Delhi, India</span>
     </footer>
   <button type="button" id="back-to-top" class="back-to-top" aria-label="Back to top">↑</button>
-  <script src="scripts/site.js" defer></script>
+  <script src="scripts/site.js?v=20260913-05" defer></script>
 
   </body>
 </html>

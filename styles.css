@@ -1,4 +1,8 @@
 :root {
+  /* The site is dark-only: this keeps scrollbars, form controls and the
+     browser's own chrome from rendering in a light default. */
+  color-scheme: dark;
+
   --bg: #030405;
   --bg-2: #070a0d;
   --text: #f3eee2;
@@ -8,17 +12,17 @@
   --line-strong: rgba(243, 238, 226, 0.15);
   /* Separator lines in long-form case-study copy. */
   --rule: rgba(243, 238, 226, 0.24);
-  --amber: #75d5e4;
-  --cyan: #75d5e4;
+  --amber: #d8a657;
+  --cyan: #d8a657;
   --warn: #f0857c;
   --panel: rgba(7, 10, 13, 0.52);
-  --max: 1180px;
+  --max: 1380px;
   --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   /* One headline size for the whole site: 72px desktop, 48px at <=900px.
      Every h1 resolves to this token — do not give a page type its own. */
   --headline-size: 4.5rem;
-  --headline-leading: 0.87;
+  --headline-leading: 0.94;
   /* Heading ramp below h1. Sized by the role a heading plays, not by its tag —
      the product/case card is an h2 on its index page and an h3 on the home
      page, and must read the same size in both. Desktop 48/32/24, dropping to
@@ -42,6 +46,23 @@
      0.58rem because that artwork is sized as a unit. */
   --text-label: 0.7rem;
   --text-small: 0.82rem;
+
+  /* Motion. Scroll reveal is the first thing to resolve to tokens rather than
+     to literals; the durations and curves already scattered through this file
+     should migrate onto --ease-soft as they are next touched, rather than in
+     one sweep. Values settled by eye in the tuning prototype. */
+  --ease-soft: cubic-bezier(0.16, 1, 0.3, 1);
+  --reveal-shift: 10px;
+  --reveal-dur: 460ms;
+  --reveal-stagger: 50ms;
+  /* The cursor lens over the background artwork. */
+  --lens-radius: 280px;
+  --lens-boost: 2.6;
+  /* Cards arrive with more travel than prose does — see the reveal section. */
+  --card-rise: 44px;
+  --card-scale: 0.955;
+  --card-tilt: 6deg;
+  --card-dur: 700ms;
 }
 
 * {
@@ -101,8 +122,8 @@ body {
   margin: 0;
   overflow-x: hidden;
   background:
-    radial-gradient(circle at 84% 18%, rgba(117, 213, 228, 0.13), transparent 27rem),
-    radial-gradient(circle at 16% 74%, rgba(117, 213, 228, 0.11), transparent 30rem),
+    radial-gradient(circle at 84% 18%, rgba(216, 166, 87, 0.13), transparent 27rem),
+    radial-gradient(circle at 16% 74%, rgba(216, 166, 87, 0.11), transparent 30rem),
     linear-gradient(180deg, #020303 0%, #07090b 52%, #030405 100%);
   isolation: isolate;
 }
@@ -160,9 +181,9 @@ button {
   opacity: 0.7;
   background-image:
     radial-gradient(circle at 12% 22%, rgba(243, 238, 226, 0.6) 0 1px, transparent 2px),
-    radial-gradient(circle at 38% 16%, rgba(117, 213, 228, 0.5) 0 1px, transparent 2px),
+    radial-gradient(circle at 38% 16%, rgba(216, 166, 87, 0.5) 0 1px, transparent 2px),
     radial-gradient(circle at 74% 42%, rgba(243, 238, 226, 0.4) 0 1px, transparent 2px),
-    radial-gradient(circle at 86% 76%, rgba(117, 213, 228, 0.5) 0 1px, transparent 2px),
+    radial-gradient(circle at 86% 76%, rgba(216, 166, 87, 0.5) 0 1px, transparent 2px),
     radial-gradient(circle at 24% 86%, rgba(243, 238, 226, 0.36) 0 1px, transparent 2px);
 }
 
@@ -198,8 +219,8 @@ body[class] .tesseract {
   inset: 13% 9%;
   border: 1px solid rgba(243, 238, 226, 0.18);
   box-shadow:
-    inset 0 0 34px rgba(117, 213, 228, 0.08),
-    0 0 60px rgba(117, 213, 228, 0.08);
+    inset 0 0 34px rgba(216, 166, 87, 0.08),
+    0 0 60px rgba(216, 166, 87, 0.08);
 }
 
 .frame-1 {
@@ -208,7 +229,7 @@ body[class] .tesseract {
 
 .frame-2 {
   transform: scale(0.38);
-  border-color: rgba(117, 213, 228, 0.32);
+  border-color: rgba(216, 166, 87, 0.32);
 }
 
 .frame-3 {
@@ -217,7 +238,7 @@ body[class] .tesseract {
 
 .frame-4 {
   transform: scale(0.72);
-  border-color: rgba(117, 213, 228, 0.26);
+  border-color: rgba(216, 166, 87, 0.26);
 }
 
 .frame-5 {
@@ -369,7 +390,7 @@ body[class] .tesseract {
   margin-left: 1px;
   border-radius: 50%;
   background: var(--cyan);
-  box-shadow: 0 0 0 4px rgba(117, 213, 228, 0.14), 0 0 15px rgba(117, 213, 228, 0.72);
+  box-shadow: 0 0 0 4px rgba(216, 166, 87, 0.14), 0 0 15px rgba(216, 166, 87, 0.72);
   animation: availability-pulse 2.6s ease-in-out infinite;
 }
 
@@ -422,12 +443,12 @@ body[class] .tesseract {
 
 .tab:hover::before,
 .tab:focus-visible::before {
-  border-color: rgba(117, 213, 228, 0.22);
+  border-color: rgba(216, 166, 87, 0.22);
   opacity: 1;
 }
 
 .tab[aria-current="page"] { color: var(--text); }
-.tab[aria-current="page"]::before { border-color: rgba(117, 213, 228, 0.16); opacity: 0.62; }
+.tab[aria-current="page"]::before { border-color: rgba(216, 166, 87, 0.16); opacity: 0.62; }
 
 .tab-contact {
   padding: 0 14px;
@@ -511,7 +532,9 @@ h1 {
   font-size: var(--headline-size);
   font-weight: 800;
   line-height: var(--headline-leading);
-  letter-spacing: 0;
+  /* The looser leading is paid for with tighter tracking, so the headline
+     keeps its density without the lines colliding. */
+  letter-spacing: -0.018em;
 }
 
 .lede {
@@ -570,7 +593,7 @@ h1 {
 }
 
 .action-primary { gap: 12px; border-color: var(--amber); color: #1b1205; background: var(--amber); }
-.action-primary:hover, .action-primary:focus-visible { color: #0b1b1d; background: #a9edf5; border-color: #a9edf5; transform: translateY(-2px); }
+.action-primary:hover, .action-primary:focus-visible { color: #0b1b1d; background: #e8c184; border-color: #e8c184; transform: translateY(-2px); }
 .action-primary:focus-visible { outline-color: #0b1b1d; }
 .action-secondary { color: var(--text); background: rgba(3, 4, 5, 0.38); }
 .action-secondary:hover, .action-secondary:focus-visible { border-color: var(--cyan); color: var(--cyan); }
@@ -602,9 +625,9 @@ h1 {
 .diagram-orbit {
   position: absolute;
   inset: 16%;
-  border: 1px dashed rgba(117, 213, 228, 0.4);
+  border: 1px dashed rgba(216, 166, 87, 0.4);
   border-radius: 50%;
-  box-shadow: 0 0 70px rgba(117, 213, 228, 0.08), inset 0 0 70px rgba(117, 213, 228, 0.035);
+  box-shadow: 0 0 70px rgba(216, 166, 87, 0.08), inset 0 0 70px rgba(216, 166, 87, 0.035);
 }
 
 .diagram-orbit::before,
@@ -616,7 +639,7 @@ h1 {
   border-radius: 50%;
 }
 
-.diagram-orbit::after { inset: 30%; border-color: rgba(117, 213, 228, 0.46); }
+.diagram-orbit::after { inset: 30%; border-color: rgba(216, 166, 87, 0.46); }
 
 .diagram-core {
   position: absolute;
@@ -896,30 +919,11 @@ h1 {
   box-shadow: 0 0 0 1px rgba(243, 238, 226, 0.18);
 }
 
-.journey-list h3 { margin: 0 0 9px; color: var(--text); font-size: var(--h3-size); letter-spacing: -0.035em; }
-.journey-list p { max-width: 800px; margin: 0; color: var(--muted); font-size: clamp(0.98rem, 1.45vw, 1.2rem); line-height: 1.5; }
-.journey-list .career-role { margin-bottom: 17px; color: var(--text); font-size: clamp(1rem, 1.6vw, 1.26rem); font-weight: 650; }
-.journey-list time { padding-top: 6px; color: var(--muted); font-size: 0.92rem; white-space: nowrap; }
+.journey-list h3 { margin: 0 0 7px; color: var(--text); font-size: var(--h3-small); letter-spacing: -0.03em; }
+.journey-list p { max-width: 68ch; margin: 0; color: var(--muted); font-size: 1rem; line-height: 1.55; }
+.journey-list .career-role { margin-bottom: 12px; color: var(--text); font-size: 1rem; font-weight: 650; }
+.journey-list time { padding-top: 5px; color: var(--soft); font-size: var(--text-small); white-space: nowrap; }
 .journey-case-link { color: var(--cyan); text-decoration: underline; text-underline-offset: 2px; }
-
-.certifications-list {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 28px;
-  max-width: 1060px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.certifications-list li {
-  padding: 26px 28px;
-  border: 1px solid var(--line);
-  border-radius: 14px;
-}
-
-.certifications-list h3 { margin: 0 0 8px; color: var(--text); font-size: var(--h3-small); letter-spacing: -0.03em; }
-.cert-issuer { margin: 0; color: var(--muted); font-size: 0.94rem; }
 
 .case-row {
   display: grid;
@@ -1047,18 +1051,8 @@ h1 {
   margin-bottom: 24px;
 }
 
-.contact-stack,
-.about-copy {
+.contact-stack {
   padding-top: 6px;
-}
-
-/* The About page puts its eyebrow in the label column, so its h1 lives inside
-   .about-copy rather than as a direct child of the shell. It still takes the
-   shared --headline-size; only the trailing space differs, to sit against the
-   intro paragraph below it. */
-.about-copy h1 {
-  margin: 0 0 22px;
-  max-width: 820px;
 }
 
 .contact-link {
@@ -1085,13 +1079,6 @@ h1 {
   font-weight: 750;
 }
 
-.about-copy p {
-  max-width: 560px;
-  color: var(--muted);
-  font-size: var(--lede-size);
-  line-height: 1.55;
-}
-
 .principles {
   display: grid;
   gap: 14px;
@@ -1115,7 +1102,7 @@ h1 {
   gap: 10px;
   margin-top: 32px;
   padding: 13px 16px;
-  border: 1px solid rgba(117, 213, 228, 0.52);
+  border: 1px solid rgba(216, 166, 87, 0.52);
   color: var(--text);
   font-size: var(--text-small);
   font-weight: 750;
@@ -1126,33 +1113,42 @@ h1 {
 .resume-link:focus-visible { border-color: var(--amber); color: var(--amber); }
 
 .about-tags { display: flex; flex-wrap: wrap; gap: 12px; margin: 28px 0 0; padding: 0; list-style: none; }
-.about-tags li { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border: 1px solid var(--line-strong); border-radius: 999px; color: var(--muted); font-size: 0.86rem; font-weight: 650; letter-spacing: -0.01em; transition: border-color 180ms ease, color 180ms ease; }
-.about-tags li:hover { border-color: var(--cyan); color: var(--text); }
+.about-tags li { display: inline-flex; }
+/* The pill is the button now, so it carries what the li used to. */
+.about-tag { display: inline-flex; align-items: center; gap: 8px; margin: 0; padding: 10px 16px; border: 1px solid var(--line-strong); border-radius: 999px; background: transparent; color: var(--muted); font: inherit; font-size: 0.86rem; font-weight: 650; letter-spacing: -0.01em; cursor: pointer; transition: border-color 180ms ease, color 180ms ease, background 180ms ease; }
+.about-tag:hover, .about-tag:focus-visible, .about-tag.is-active { border-color: var(--cyan); color: var(--text); }
+.about-tag.is-active { background: rgba(216, 166, 87, 0.09); }
+.about-tag:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; }
 .about-tags svg { width: 15px; height: 15px; color: var(--cyan); flex-shrink: 0; }
+
+/* The line under the tags. The reserve is deliberately only for pointers: on
+   hover the reader did not ask for anything to move, so the space is held open
+   in advance. On touch there is no hover, the line only appears on a tap, and
+   a deliberate tap moving the page is ordinary disclosure behaviour - holding
+   43px of empty space open for it would just be a hole. */
+@media (hover: hover) {
+  .about-tag-detail { min-height: 3.1em; }
+}
+.about-tag-detail {
+  max-width: 52ch;
+  margin: 14px 0 0;
+  color: var(--soft);
+  font-size: 0.86rem;
+  line-height: 1.55;
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+.about-tag-detail.is-shown { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .about-tag, .about-tag-detail { transition: none; }
+}
 
 .case-study-page { background: var(--bg); }
 .case-study-page .site-header { width: min(var(--max), calc(100% - 48px)); }
 .subpage-shell { width: min(var(--max), calc(100% - 48px)); margin: 0 auto; padding: 96px 0 140px; }
-.about-page.subpage-shell { width: min(var(--max), calc(100% - 48px)); }
 .subpage-shell > h1 { max-width: 900px; margin-bottom: 64px; font-size: var(--headline-size); }
 .page-eyebrow { margin: 0 0 20px; }
-.subpage-shell .journey-list { margin: 0; }
-.label-row { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 42px; align-items: baseline; }
-.label-row > .page-eyebrow { margin-bottom: 0; }
-.about-hero-row { margin-bottom: 0; }
-.about-portrait { position: relative; margin: 24px 0 0; max-width: 320px; border-radius: 16px; overflow: hidden; }
-.about-portrait img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 16px; border: 1px solid var(--line-strong); box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45); filter: grayscale(100%) contrast(1.5) brightness(0.62); }
-.about-portrait::after { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at 42% 32%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 72%, rgba(0, 0, 0, 0.78) 100%); pointer-events: none; }
-.about-journey { align-items: start; margin-top: 112px; padding-top: 26px; border-top: 1px solid var(--line); }
-.about-journey > .page-eyebrow { padding-top: clamp(0.5rem, 1.6vw, 1.1rem); }
-.journey-body { min-width: 0; }
-.about-journey h2 + .journey-list,
-.journey-body .journey-list { margin-top: 0; }
-.about-journey h2 { max-width: 820px; margin: 0 0 58px; color: var(--text); font-size: var(--h2-size); line-height: 1.02; letter-spacing: -0.045em; }
-.about-certifications { align-items: start; margin-top: 96px; padding-top: 26px; border-top: 1px solid var(--line); }
-.about-certifications > .page-eyebrow { padding-top: clamp(0.5rem, 1.6vw, 1.1rem); }
-.certifications-body { min-width: 0; }
-.certifications-body h2 { max-width: 820px; margin: 0 0 32px; color: var(--text); font-size: var(--h2-size); line-height: 1.05; letter-spacing: -0.04em; }
 .case-back { color: var(--muted); font-size: var(--text-small); font-weight: 750; }
 .case-back:hover, .case-back:focus-visible { color: var(--amber); }
 .case-back:focus-visible { text-decoration: underline; text-underline-offset: 3px; }
@@ -1175,7 +1171,7 @@ h1 {
 .case-facts { display: grid; gap: 12px; max-width: 700px; margin: 28px 0 0; padding: 0; list-style: none; }
 .case-facts li { padding-top: 12px; border-top: 1px solid var(--rule); color: var(--muted); font-size: 0.98rem; line-height: 1.5; }
 .case-facts strong { display: block; margin-bottom: 4px; color: var(--text); font-size: var(--text-label); letter-spacing: 0.01em; text-transform: uppercase; }
-.case-callout { margin-top: 24px !important; padding: 18px 20px; border-left: 2px solid var(--cyan); color: var(--text) !important; background: rgba(117, 213, 228, 0.10); font-size: 0.94rem !important; }
+.case-callout { margin-top: 24px !important; padding: 18px 20px; border-left: 2px solid var(--cyan); color: var(--text) !important; background: rgba(216, 166, 87, 0.10); font-size: 0.94rem !important; }
 .project-gallery { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-top: 32px; }
 .project-gallery figure { min-width: 0; margin: 0; }
 .project-gallery img { display: block; width: 100%; height: auto; border: 1px solid var(--line); background: var(--bg-2); }
@@ -1190,7 +1186,7 @@ h1 {
 .suite-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 32px; }
 .suite-card { min-width: 0; padding: 22px; border: 1px solid var(--line); background: rgba(7, 10, 13, 0.38); }
 .suite-card-link { transition: border-color 180ms ease, background 180ms ease, transform 180ms ease; }
-.suite-card-link:hover, .suite-card-link:focus-visible { border-color: rgba(117, 213, 228, 0.7); background: rgba(117, 213, 228, 0.07); transform: translateY(-3px); }
+.suite-card-link:hover, .suite-card-link:focus-visible { border-color: rgba(216, 166, 87, 0.7); background: rgba(216, 166, 87, 0.07); transform: translateY(-3px); }
 .suite-card-link h3 span { color: var(--cyan); font-size: 0.78em; }
 .suite-number { margin: 0 0 30px !important; color: var(--cyan) !important; font-family: var(--font-mono); font-size: var(--text-label) !important; font-weight: 750; letter-spacing: 0.08em; }
 .suite-card h3 { margin: 0 0 10px; color: var(--text); font-size: var(--h3-size); letter-spacing: -0.04em; }
@@ -1206,9 +1202,70 @@ h1 {
 .workflow-steps strong, .workflow-steps span { display: block; }
 .workflow-steps strong { margin-bottom: 8px; color: var(--text); font-size: 0.98rem; }
 .workflow-steps span { color: var(--muted); font-size: var(--text-small); line-height: 1.45; }
-.case-next { display: flex; align-items: center; justify-content: center; width: fit-content; min-height: 44px; margin: 44px auto 0; padding: 0 16px; border: 1px solid rgba(117, 213, 228, 0.52); color: var(--text); font-size: var(--text-small); font-weight: 750; transition: border-color 180ms ease, color 180ms ease, transform 180ms ease; }
+.case-next { display: flex; align-items: center; justify-content: center; width: fit-content; min-height: 44px; margin: 44px auto 0; padding: 0 16px; border: 1px solid rgba(216, 166, 87, 0.52); color: var(--text); font-size: var(--text-small); font-weight: 750; transition: border-color 180ms ease, color 180ms ease, transform 180ms ease; }
 .case-next:hover, .case-next:focus-visible { border-color: var(--amber); color: var(--amber); transform: translateX(3px); }
 .case-next-hero { margin: 28px 0 0; }
+
+/* Shared long-form case-study shell: contents, story, and quick summary. */
+.case-layout-shell {
+  display: grid;
+  grid-template-columns: 190px minmax(0, 1fr) 250px;
+  gap: 0 48px;
+  width: min(var(--max), calc(100% - 48px));
+  padding-top: 40px;
+}
+
+.case-layout-story { grid-column: 2; min-width: 0; }
+.case-layout-contents { grid-column: 1; grid-row: 1; min-width: 0; padding-top: 56px; }
+.case-layout-summary { grid-column: 3; grid-row: 1; min-width: 0; padding-top: 56px; }
+.case-layout-contents > nav,
+.case-layout-summary > div { position: sticky; top: 112px; }
+.case-layout-contents p,
+.case-layout-summary .case-summary-eyebrow { margin: 0 0 16px; color: var(--cyan); font-size: var(--text-label); font-weight: 750; letter-spacing: .1em; text-transform: uppercase; }
+.case-layout-contents ol { margin: 0; padding: 0; list-style: none; }
+.case-layout-contents a { display: flex; align-items: center; gap: 11px; min-height: 42px; padding: 8px 10px; border-left: 2px solid transparent; color: var(--muted); font-size: .8rem; line-height: 1.35; transition: color 160ms, border-color 160ms, background 160ms; }
+.case-layout-contents a span { color: var(--soft); font-family: var(--font-mono); font-size: .65rem; }
+.case-layout-contents a:hover,
+.case-layout-contents a[aria-current="location"] { border-color: var(--cyan); background: rgba(216, 166, 87, .045); color: var(--cyan); }
+.case-layout-summary > div { display: grid; gap: 16px; }
+.case-summary-card,
+.case-feedback { padding: 22px; border: 1px solid var(--line-strong); border-radius: 10px; background: rgba(7, 10, 13, .82); }
+.case-summary-card h2 { margin: 0; color: var(--text); font-size: 1.22rem; line-height: 1.25; letter-spacing: -.02em; }
+.case-summary-card dl { margin: 20px 0 0; }
+.case-summary-card dl > div { padding: 15px 0; border-top: 1px solid var(--line); }
+.case-summary-card dt { margin-bottom: 7px; color: var(--cyan); font-size: .68rem; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; }
+.case-summary-card dd { margin: 0; color: var(--muted); font-size: .82rem; line-height: 1.55; }
+.case-feedback h2 { margin: 0; color: var(--text); font-size: .9rem; line-height: 1.4; letter-spacing: -.01em; }
+.case-feedback-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 16px; }
+.case-feedback button { display: inline-flex; align-items: center; justify-content: center; gap: 7px; min-height: 44px; padding: 8px 10px; border: 1px solid var(--line-strong); border-radius: 999px; color: var(--muted); background: rgba(255, 255, 255, .025); cursor: pointer; font-size: .75rem; }
+.case-feedback button:hover { border-color: rgba(216, 166, 87, .55); color: var(--text); }
+.case-feedback button[aria-pressed="true"] { border-color: var(--cyan); color: var(--cyan); background: rgba(216, 166, 87, .09); }
+.case-feedback-status { min-height: 1.4em; margin: 12px 0 0; color: var(--soft); font-size: .72rem; line-height: 1.4; }
+
+@media (max-width: 1180px) {
+  .case-layout-shell { grid-template-columns: 180px minmax(0, 1fr); gap: 0 32px; }
+  .case-layout-story { grid-column: 2; grid-row: 1; }
+  .case-layout-contents { grid-column: 1; grid-row: 1 / span 2; }
+  .case-layout-summary { grid-column: 2; grid-row: 2; padding-top: 48px; }
+  .case-layout-summary > div { position: static; }
+  .case-summary-card dl { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+  .case-feedback { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 16px; }
+  .case-feedback-actions { margin-top: 0; }
+  .case-feedback-status { grid-column: 1 / -1; margin-top: -4px; }
+}
+
+@media (max-width: 760px) {
+  .case-layout-shell { display: flex; flex-direction: column; width: min(100% - 32px, var(--max)); padding-top: 24px; }
+  .case-layout-contents { order: 1; padding: 24px 0 32px; border-bottom: 1px solid var(--rule); }
+  .case-layout-contents > nav { position: static; }
+  .case-layout-contents ol { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+  .case-layout-story { order: 2; }
+  .case-layout-summary { order: 3; padding-top: 32px; }
+  .case-summary-card dl { grid-template-columns: 1fr; gap: 0; }
+  .case-feedback { display: block; }
+  .case-feedback-actions { margin-top: 16px; }
+  .case-feedback-status { margin-top: 12px; }
+}
 
 
 /* Read time on the directory rows. All five cases are presented as peers, but
@@ -1218,7 +1275,7 @@ h1 {
 .case-readtime { color: var(--soft); font-family: var(--font-mono); font-size: var(--text-label); font-weight: 750; letter-spacing: 0.07em; text-transform: uppercase; }
 
 
-.back-to-top { position: fixed; right: 24px; bottom: 24px; z-index: 5; display: flex; align-items: center; justify-content: center; width: 46px; height: 46px; border: 1px solid rgba(117, 213, 228, 0.5); border-radius: 50%; background: #0d1418; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(117, 213, 228, 0.12); color: var(--cyan); font-size: 1.2rem; line-height: 1; opacity: 0; pointer-events: none; transform: translateY(6px); transition: opacity 180ms ease, transform 180ms ease, border-color 180ms ease, color 180ms ease, background 180ms ease; }
+.back-to-top { position: fixed; right: 24px; bottom: 24px; z-index: 5; display: flex; align-items: center; justify-content: center; width: 46px; height: 46px; border: 1px solid rgba(216, 166, 87, 0.5); border-radius: 50%; background: #0d1418; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(216, 166, 87, 0.12); color: var(--cyan); font-size: 1.2rem; line-height: 1; opacity: 0; pointer-events: none; transform: translateY(6px); transition: opacity 180ms ease, transform 180ms ease, border-color 180ms ease, color 180ms ease, background 180ms ease; }
 .back-to-top.is-visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
 .back-to-top:hover, .back-to-top:focus-visible { border-color: var(--amber); color: var(--amber); background: #131b20; }
 @media (max-width: 560px) { .back-to-top { right: 16px; bottom: 16px; width: 40px; height: 40px; } }
@@ -1236,7 +1293,7 @@ h1 {
 .case-hero-caption a {
   color: var(--cyan);
   text-decoration: underline;
-  text-decoration-color: rgba(117, 213, 228, 0.4);
+  text-decoration-color: rgba(216, 166, 87, 0.4);
   text-underline-offset: 3px;
 }
 .case-study-shell p a:hover,
@@ -1256,7 +1313,11 @@ h1 {
 .mockup-input strong { color: var(--text); font-family: var(--font-mono); font-size: 0.86rem; font-weight: 650; letter-spacing: 0.04em; }
 .mockup-body { display: flex; flex: 1; flex-direction: column; padding: 24px; }
 .mockup-eyebrow { display: block; margin-bottom: 10px; color: var(--cyan); font-family: var(--font-mono); font-size: var(--text-label); font-weight: 750; letter-spacing: 0.08em; text-transform: uppercase; }
-.mockup-heading { margin: 0 0 8px; color: var(--text); font-size: 1.14rem; line-height: 1.3; letter-spacing: -0.02em; }
+/* Simulated UI text, not document structure, so these are divs rather than
+   headings - they used to be h3s, which put fake screen labels in the outline
+   and skipped h1 -> h3. The weight was coming from the UA heading default, so
+   it has to be declared here now. */
+.mockup-heading { margin: 0 0 8px; color: var(--text); font-size: 1.14rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.02em; }
 .mockup-body p { margin: 0 0 16px; color: var(--muted); font-size: var(--text-small); line-height: 1.5; }
 .mockup-steps { display: flex; gap: 5px; margin-bottom: 14px; }
 .mockup-steps span { width: 16px; height: 4px; flex-shrink: 0; border-radius: 999px; background: var(--line-strong); }
@@ -1269,7 +1330,7 @@ h1 {
 .mockup-checklist { display: grid; gap: 11px; margin: 4px 0 16px; padding: 0; list-style: none; }
 .mockup-checklist li { display: flex; align-items: center; gap: 9px; padding: 9px 10px; border: 1px solid var(--line); border-radius: 8px; color: var(--muted); font-size: var(--text-small); }
 .mockup-checklist li.is-done { color: var(--text); }
-.mockup-checklist li.is-attention { color: var(--text); border-color: var(--cyan); background: rgba(117, 213, 228, 0.10); }
+.mockup-checklist li.is-attention { color: var(--text); border-color: var(--cyan); background: rgba(216, 166, 87, 0.10); }
 .mockup-checklist .mockup-dot { width: 8px; height: 8px; flex-shrink: 0; border-radius: 50%; background: var(--line-strong); }
 .mockup-checklist li.is-done .mockup-dot { background: var(--cyan); }
 .mockup-checklist li.is-attention .mockup-dot { background: var(--cyan); }
@@ -1308,7 +1369,11 @@ h1 {
 .comparison-table { width: 100%; min-width: 560px; border-collapse: collapse; font-size: 0.88rem; }
 .comparison-table th, .comparison-table td { padding: 14px 16px; text-align: left; border-bottom: 1px solid var(--rule); vertical-align: top; }
 .comparison-table thead th { color: var(--cyan); font-family: var(--font-mono); font-size: var(--text-label); font-weight: 750; letter-spacing: 0.06em; text-transform: uppercase; border-bottom: 1px solid var(--line-strong); }
-.comparison-table tbody th { color: var(--text); font-weight: 750; white-space: nowrap; }
+/* Row headers carry sentence-length prose in the research tables, so they wrap.
+   `white-space: nowrap` here used to force column one wide enough to hold a whole
+   sentence on one line, which squeezed the remaining columns to one word per line
+   and pushed the last one out of the scroll container. */
+.comparison-table tbody th { color: var(--text); font-weight: 750; }
 .comparison-table tbody td { color: var(--muted); line-height: 1.5; }
 
 /* Traceability variant. Both ITBA and CGDA assert in prose that every design
@@ -1363,8 +1428,8 @@ h1 {
 .directory-card small { color: #8b94a4; font-size: var(--text-small); font-weight: 650; }
 .product-page { --product-accent: var(--amber); background: var(--bg); }
 .product-page::after { display: none; }
-.product-page .site-header { width: min(1180px, calc(100% - 48px)); }
-.product-hero { position: relative; display: grid; grid-template-columns: minmax(0, 0.96fr) minmax(440px, 1.04fr); column-gap: clamp(48px, 7vw, 112px); align-items: start; width: min(1180px, calc(100% - 48px)); min-height: 0; margin: 0 auto; padding: 112px 0 88px; overflow: hidden; }
+.product-page .site-header { width: min(var(--max), calc(100% - 48px)); }
+.product-hero { position: relative; display: grid; grid-template-columns: minmax(0, 0.96fr) minmax(440px, 1.04fr); column-gap: clamp(48px, 7vw, 112px); align-items: start; width: min(var(--max), calc(100% - 48px)); min-height: 0; margin: 0 auto; padding: 112px 0 88px; overflow: hidden; }
 .product-copy { position: relative; z-index: 1; max-width: 570px; padding: 0; }
 .product-app-icon { display: block; width: 32px; height: 32px; margin-bottom: 12px; border-radius: 8px; box-shadow: none; }
 .product-page .product-kicker { margin-bottom: 16px; color: var(--product-accent); }
@@ -1385,7 +1450,7 @@ h1 {
 .unitx-visual { display: flex; justify-content: center; align-self: end; height: 100%; overflow: hidden; }
 .unitx-visual img { width: min(355px, 80%); height: auto; margin-top: 100px; object-fit: contain; object-position: bottom; filter: drop-shadow(0 32px 52px rgba(0, 0, 0, 0.46)); }
 .product-unitx, .product-buildx, .product-pacex { background: var(--bg); }
-.product-section { width: min(1180px, calc(100% - 48px)); margin: 0 auto; padding: 128px 0 140px; border-top: 1px solid rgba(255, 255, 255, 0.12); }
+.product-section { width: min(var(--max), calc(100% - 48px)); margin: 0 auto; padding: 128px 0 140px; border-top: 1px solid rgba(255, 255, 255, 0.12); }
 .product-section h2 { max-width: 860px; margin: 0; color: var(--text); font-size: var(--h2-size); font-weight: 750; line-height: 1.04; letter-spacing: 0; }
 .section-lede { max-width: 620px; margin: 28px 0 54px; color: var(--muted); font-size: var(--lede-size); line-height: 1.55; }
 .product-feature-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
@@ -1480,46 +1545,12 @@ h1 {
 .product-recital .device-duo::before,
 .product-buildx .app-screen-buildx::before { animation: landing-glow-breathe 5.6s ease-in-out 820ms infinite; }
 
-.recognition {
-  margin: 96px 0;
-  padding: 54px 0 58px;
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-}
-
 .recognition-stats { display: grid; gap: 22px; margin: 0; }
 .recognition-stats div { display: grid; gap: 6px; }
 .recognition-stats strong { color: var(--text); font-size: clamp(1.3rem, 2.2vw, 1.7rem); font-weight: 800; letter-spacing: -0.03em; }
 .recognition-stats span { color: var(--muted); font-size: 0.92rem; line-height: 1.4; }
 
-.recognition-logos { overflow: hidden; margin-top: 36px; padding-top: 32px; border-top: 1px solid var(--line); -webkit-mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent); mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent); }
-.recognition-logos-track { display: flex; align-items: center; gap: 56px; width: max-content; color: rgba(243, 238, 226, 0.7); animation: logos-marquee 16s linear infinite; }
-.recognition-logos-track span { display: inline-flex; align-items: center; gap: 9px; font-size: clamp(1.05rem, 1.7vw, 1.4rem); font-weight: 750; letter-spacing: -0.02em; white-space: nowrap; }
-.recognition-logos-track svg { width: 20px; height: 20px; flex-shrink: 0; color: inherit; }
-.recognition-logos-track span.logo-nokia { font-weight: 800; letter-spacing: 0.02em; }
-.recognition-logos-track span.logo-wc,
-.recognition-logos-track span.logo-wp { font-weight: 650; letter-spacing: -0.01em; }
 
-@keyframes logos-marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .recognition-logos-track { animation: none; }
-}
-
-.store-gallery { column-count: 6; column-gap: 12px; margin: 40px 0 0; padding: 0; list-style: none; }
-.store-gallery li { margin: 0 0 14px; overflow: hidden; break-inside: avoid; border-radius: 10px; border: 1px solid var(--line-strong); background: var(--bg-2); }
-.store-gallery img { display: block; width: 100%; height: auto; }
-.store-gallery .tile-accent,
-.store-gallery .tile-plain { display: flex; flex-direction: column; justify-content: center; gap: 6px; padding: 18px; aspect-ratio: 4 / 3; }
-.store-gallery .tile-accent { background: var(--cyan); color: #04222a; border-color: transparent; }
-.store-gallery .tile-accent strong { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.03em; }
-.store-gallery .tile-accent span { font-size: var(--text-small); font-weight: 650; }
-.store-gallery .tile-plain { background: var(--panel); color: var(--text); }
-.store-gallery .tile-plain strong { color: var(--cyan); font-size: 1.15rem; font-weight: 800; letter-spacing: -0.02em; }
-.store-gallery .tile-plain span { color: var(--muted); font-size: var(--text-small); }
 
 @keyframes reveal {
   from {
@@ -1682,9 +1713,6 @@ h1 {
   .hero, .hero-copy, .thinking-diagram { min-width: 0; }
 
   .journey-list { max-width: none; }
-  .label-row { grid-template-columns: 1fr; gap: 16px; }
-  .about-portrait { max-width: 260px; }
-  .store-gallery { column-count: 4; }
 }
 
 @media (max-width: 560px) {
@@ -1783,15 +1811,9 @@ h1 {
   .journey-list li { grid-template-columns: 1fr; gap: 8px; padding-bottom: 42px; }
   .journey-node { left: -30px; }
   .journey-list time { padding: 0; font-size: var(--text-small); }
-  .certifications-list { grid-template-columns: 1fr; }
-  .recognition { margin: 72px 0; padding: 38px 0; }
-  .recognition-logos-track { gap: 40px; }
-  .store-gallery { column-count: 3; column-gap: 10px; }
-  .store-gallery li { margin-bottom: 10px; }
   .case-study-page .site-header,
   .case-study-shell,
-  .subpage-shell,
-  .about-page.subpage-shell { width: min(100% - 32px, 1080px); }
+  .subpage-shell { width: min(100% - 32px, 1080px); }
   .case-study-shell { padding: 64px 0 96px; }
   .case-study-shell h1 span { font-size: 0.48em; }
   .subpage-shell { padding: 64px 0 96px; }
@@ -1829,7 +1851,7 @@ h1 {
 
 @media (max-width: 560px) {
   .screenshot-grid { grid-template-columns: 1fr; gap: 48px; }
-  .products-shell, .product-hero, .product-section { width: min(100% - 32px, 1180px); }
+  .products-shell, .product-hero, .product-section { width: min(100% - 32px, var(--max)); }
   .products-shell { padding: 42px 0 82px; }
   .products-intro { margin-bottom: 42px; }
   .directory-card { grid-template-columns: 82px minmax(0, 1fr); gap: 20px; padding: 24px; border-radius: 0; }
@@ -1882,7 +1904,7 @@ h1 {
 .product-directory.directory-list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .case-list.directory-list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .directory-entry { box-sizing: border-box; min-width: 0; min-height: 420px; border: 1px solid var(--line); border-radius: 0; background: rgba(7, 10, 13, 0.72); }
-.directory-entry:not(.directory-card-static):hover, .directory-entry:not(.directory-card-static):focus-visible { border-color: rgba(117, 213, 228, 0.68); background: rgba(117, 213, 228, 0.055); }
+.directory-entry:not(.directory-card-static):hover, .directory-entry:not(.directory-card-static):focus-visible { border-color: rgba(216, 166, 87, 0.68); background: rgba(216, 166, 87, 0.055); }
 
 .directory-card.directory-entry { display: grid; grid-template-columns: 1fr; justify-items: start; gap: 20px; min-height: 540px; padding: 32px; }
 .directory-card.directory-entry > img { width: 88px; height: 88px; border-radius: 18px; outline: 1px solid rgba(255, 255, 255, 0.14); outline-offset: -1px; }
@@ -1939,7 +1961,7 @@ h1 {
 .currency-card-input input { flex: 1; min-width: 0; border: 0; background: transparent; color: var(--text); font: inherit; font-size: 1.65rem; font-weight: 800; letter-spacing: -.03em; font-variant-numeric: tabular-nums; padding: 0; }
 .currency-card-input input:focus-visible { outline-offset: 2px; }
 .currency-card-input:focus-within { border-color: var(--cyan); }
-.currency-code-select { appearance: none; -webkit-appearance: none; border: 0; background: transparent; color: var(--muted); font: inherit; font-size: 0.92rem; font-weight: 750; letter-spacing: .03em; padding-right: 16px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%2375d5e4' stroke-width='1.6'%3E%3Cpath d='M4 6l4 4 4-4'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right center; background-size: 12px; cursor: pointer; }
+.currency-code-select { appearance: none; -webkit-appearance: none; border: 0; background: transparent; color: var(--muted); font: inherit; font-size: 0.92rem; font-weight: 750; letter-spacing: .03em; padding-right: 16px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23d8a657' stroke-width='1.6'%3E%3Cpath d='M4 6l4 4 4-4'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right center; background-size: 12px; cursor: pointer; }
 .currency-card-swap { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; margin: 10px auto; border: 1px solid var(--line-strong); border-radius: 50%; background: transparent; color: var(--text); font-size: 1.05rem; cursor: pointer; }
 .currency-card-swap:hover, .currency-card-swap:focus-visible { border-color: var(--cyan); color: var(--cyan); }
 .currency-card-rate { margin: 26px 0 0; color: var(--text); font-size: 0.95rem; }
@@ -1965,7 +1987,7 @@ h1 {
 .distance-row label { display: grid; grid-template-rows: subgrid; grid-row: span 2; gap: 0; align-items: end; }
 .calculator-submit { width: 100%; margin-top: 30px; border-color: var(--cyan); background: var(--cyan); color: #071013; font-size: var(--text-small); }
 .calculator-submit:hover { background: #b6f7ff; }
-.pace-result { display: flex; flex-direction: column; justify-content: center; min-width: 0; padding: 42px; background: rgba(117, 213, 228, .07); }
+.pace-result { display: flex; flex-direction: column; justify-content: center; min-width: 0; padding: 42px; background: rgba(216, 166, 87, .07); }
 .result-label { margin: 0 0 16px; color: var(--cyan); font-size: var(--text-label); font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
 .pace-number { display: block; font-size: clamp(3.8rem, 7vw, 6.4rem); font-weight: 800; letter-spacing: -.075em; font-variant-numeric: tabular-nums; line-height: .86; }
 .pace-number span { font-size: .24em; letter-spacing: -.02em; }
@@ -1980,16 +2002,16 @@ h1 {
 .product-utility-link a { color: var(--cyan); font-weight: 750; text-decoration: none; }
 .product-utility-link a:hover, .product-utility-link a:focus-visible { text-decoration: underline; }
 .product-hero-recital { grid-template-columns: 1.05fr .95fr; }
-.recital-hero-card { display: flex; flex-direction: column; justify-content: center; align-self: stretch; min-height: 520px; padding: clamp(34px, 5vw, 72px); background: linear-gradient(135deg, rgba(117, 213, 228, .18), rgba(24, 33, 45, .46) 60%, rgba(7, 10, 13, .8)); border-left: 1px solid var(--line); }
+.recital-hero-card { display: flex; flex-direction: column; justify-content: center; align-self: stretch; min-height: 520px; padding: clamp(34px, 5vw, 72px); background: linear-gradient(135deg, rgba(216, 166, 87, .18), rgba(24, 33, 45, .46) 60%, rgba(7, 10, 13, .8)); border-left: 1px solid var(--line); }
 .recital-hero-card p { margin: 0 0 28px; color: var(--cyan); font-size: var(--text-label); font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
 .recital-hero-card strong { max-width: 440px; font-size: clamp(2.6rem, 5vw, 5.2rem); line-height: .92; letter-spacing: -.065em; }
 .recital-hero-card span { max-width: 360px; margin-top: 30px; color: var(--muted); line-height: 1.6; }
 .recital-privacy { border-top: 1px solid var(--line); }
 .operation-options { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
 .operation-options button { min-height: 44px; border: 1px solid var(--line-strong); border-radius: 0; background: transparent; color: var(--text); font: inherit; font-size: var(--text-small); font-weight: 750; cursor: pointer; }
-.operation-options button[aria-pressed="true"] { border-color: var(--cyan); background: rgba(117, 213, 228, .12); color: var(--cyan); }
+.operation-options button[aria-pressed="true"] { border-color: var(--cyan); background: rgba(216, 166, 87, .12); color: var(--cyan); }
 .measurement-fields { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-.calculator-form-wrap select { appearance: none; -webkit-appearance: none; width: 100%; height: 52px; min-height: 52px; border: 1px solid var(--line-strong); border-radius: 0; background: rgba(255, 255, 255, .035) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%2375d5e4' stroke-width='1.6'%3E%3Cpath d='M4 6l4 4 4-4'/%3E%3C/svg%3E") no-repeat right 12px center; background-size: 14px; color: var(--text); font: inherit; font-size: 1rem; padding: 0 34px 0 14px; }
+.calculator-form-wrap select { appearance: none; -webkit-appearance: none; width: 100%; height: 52px; min-height: 52px; border: 1px solid var(--line-strong); border-radius: 0; background: rgba(255, 255, 255, .035) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23d8a657' stroke-width='1.6'%3E%3Cpath d='M4 6l4 4 4-4'/%3E%3C/svg%3E") no-repeat right 12px center; background-size: 14px; color: var(--text); font: inherit; font-size: 1rem; padding: 0 34px 0 14px; }
 .measurement-number { display: block; min-width: 0; overflow-wrap: anywhere; white-space: nowrap; font-size: clamp(3.5rem, 6vw, 5.8rem); font-weight: 800; letter-spacing: -.07em; font-variant-numeric: tabular-nums; line-height: .9; }
 .currency-fields { display: grid; grid-template-columns: 1fr auto 1fr; align-items: end; gap: 8px; }
 .swap-button { align-self: end; min-width: 52px; min-height: 52px; border: 1px solid var(--line-strong); border-radius: 0; background: transparent; color: var(--text); font-size: 1.2rem; line-height: 1; cursor: pointer; }
@@ -2061,4 +2083,1049 @@ h1 {
   .home-section-heading .section-link { width: 100%; justify-content: space-between; }
   .home-directory-section .directory-entry { min-height: 0; }
   .home-case-studies { margin-top: 76px; }
+}
+
+/* Home hero: the eyebrow types its second role, the lede greets in three
+   languages, and the three nav tabs sit centred with Contact on the right.
+   Scoped to body.home so the other 35 pages keep the shared header. */
+.home .site-header { display: grid; grid-template-columns: 1fr auto 1fr; }
+.home .site-header .tabs { justify-self: center; }
+.home .header-actions { display: flex; justify-content: flex-end; }
+
+/* Both animated words reserve the width of their longest variant, so the
+   line around them never reflows mid-swap. */
+.typed-role,
+.greeting-word {
+  display: inline-block;
+  overflow: hidden;
+  text-align: left;
+  white-space: nowrap;
+  vertical-align: bottom;
+}
+
+.typed-role { color: var(--cyan); }
+
+.typed-role::after {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  margin-left: 3px;
+  background: var(--cyan);
+  content: "";
+  vertical-align: -0.12em;
+  animation: caret-blink 1.1s step-end infinite;
+}
+
+@keyframes caret-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.greeting-word {
+  color: var(--cyan);
+  /* Inter carries no CJK, Hangul or Devanagari; name the fallbacks explicitly. */
+  font-family: var(--font-sans), "PingFang SC", "Noto Sans SC", "Apple SD Gothic Neo", "Noto Sans KR", "Hiragino Sans", "Noto Sans JP", "Kohinoor Devanagari", "Noto Sans Devanagari", sans-serif;
+  transition: width 320ms ease, opacity 200ms ease;
+
+  /* Sit on the text baseline, not the line-box floor. An inline-block with
+     non-visible overflow takes its BASELINE FROM ITS BOTTOM MARGIN EDGE, so the
+     shared `overflow: hidden` above plus `vertical-align: bottom` tied this
+     word's position to its box height - and the box height comes from whichever
+     fallback font supplies the glyphs. Devanagari's metrics are the tallest of
+     the set, which inflated the box and floated नमस्ते above the line while
+     nudging the whole hero down. Latin never showed it because Inter sets the
+     box height itself.
+
+     So: overflow back to visible to restore real baseline alignment, an explicit
+     line-height so box height stops depending on the fallback, and clip-path in
+     place of overflow to keep clipping the width transition - it crops without
+     touching baseline or box geometry. The vertical slack leaves room for the
+     shirorekha and matras that sit above Latin's cap height. */
+  overflow: visible;
+  vertical-align: baseline;
+  line-height: 1;
+  clip-path: inset(-0.5em 0);
+}
+
+.greeting-word.is-swapping { opacity: 0; }
+
+@media (max-width: 560px) {
+  /* .tabs is hidden at this width and Contact lives in the mobile menu. */
+  .home .site-header { display: flex; justify-content: space-between; }
+  .home .header-actions { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .typed-role::after { animation: none; }
+  .greeting-word { transition: none; }
+}
+
+/* Keep the three primary destinations centered to the viewport on desktop.
+   The brand and Contact remain independent anchors at either edge. */
+@media (min-width: 561px) {
+  .site-header,
+  .home .site-header {
+    position: sticky;
+    display: flex;
+    justify-content: center;
+  }
+
+  /* .tabs is a later sibling stretched to the full header width, so without
+     its own stacking level it paints over the brand and eats the click. */
+  .site-header .brand {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+  }
+
+  .site-header .tabs,
+  .home .site-header .tabs {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .site-header .tab-contact {
+    position: absolute;
+    right: 0;
+  }
+}
+
+/* ───────────────────────────────────────────────────────────────────────────
+   Home hero avatar. Three nested layers so the motions never compete: the
+   figure holds the perspective, the tilt layer follows the pointer, and the
+   float layer runs its own idle loop.
+   ─────────────────────────────────────────────────────────────────────────── */
+.hero-avatar {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  width: min(100%, 420px);
+  margin: 0 0 0 auto;
+  perspective: 1000px;
+}
+
+.hero-avatar-tilt {
+  display: block;
+  transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
+  transform-style: preserve-3d;
+}
+
+.hero-avatar-float {
+  display: block;
+  animation:
+    avatar-rise 780ms cubic-bezier(0.22, 1, 0.36, 1) both,
+    avatar-float 7s ease-in-out 780ms infinite alternate;
+}
+
+.hero-avatar img { display: block; width: 100%; height: auto; }
+.hero-avatar .on-light { display: none; }
+
+/* A slow bloom behind, deliberately out of phase with the float so the two
+   never synchronise into a pulse. */
+.hero-avatar::before {
+  position: absolute;
+  left: 50%;
+  top: 44%;
+  z-index: -1;
+  width: 78%;
+  aspect-ratio: 1;
+  content: "";
+  background: radial-gradient(circle, rgba(216, 166, 87, 0.17), transparent 68%);
+  transform: translate(-50%, -50%);
+  animation: avatar-bloom 9s ease-in-out infinite alternate;
+}
+
+@keyframes avatar-rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+@keyframes avatar-float { from { transform: translateY(-5px); } to { transform: translateY(5px); } }
+@keyframes avatar-bloom {
+  from { opacity: 0.55; transform: translate(-50%, -50%) scale(0.94); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1.06); }
+}
+
+.hero-clock {
+  color: var(--soft);
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.home .header-actions { display: flex; align-items: center; gap: 14px; }
+
+@media (max-width: 900px) {
+  .hero-avatar { width: min(100%, 340px); margin-inline: auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-avatar-float { animation: avatar-rise 780ms ease both; }
+  .hero-avatar::before { animation: none; }
+  .hero-avatar-tilt { transition: none; }
+}
+
+/* Products index: large, focused showcase panels inspired by the supplied
+   reference. The page title stays semantic-only; the work begins immediately. */
+.products-showcase-shell {
+  display: grid;
+  gap: 24px;
+  width: min(var(--max), calc(100% - 48px));
+  margin: 0 auto;
+  padding: 48px 0 112px;
+}
+
+.product-showcase {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(400px, 440px);
+  min-height: 440px;
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  border-radius: 0;
+  background: rgba(10, 12, 13, .9);
+}
+
+.product-showcase-copy {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  padding: clamp(36px, 4vw, 56px);
+}
+
+.product-showcase-title {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  min-width: 0;
+}
+
+.product-showcase-icon {
+  display: block;
+  width: 72px;
+  height: 72px;
+  flex: 0 0 auto;
+  border-radius: 16px;
+  outline: 1px solid var(--line-strong);
+  outline-offset: -1px;
+}
+
+.product-showcase-title h2 {
+  margin: 0;
+  color: var(--text);
+  font-size: var(--h2-size);
+  font-weight: var(--h2-weight);
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.product-showcase-title p {
+  margin: 8px 0 0;
+  color: var(--amber);
+  font-size: var(--lede-size);
+  font-weight: 650;
+  line-height: 1.25;
+}
+
+.product-showcase-description {
+  max-width: 42ch;
+  margin: 24px 0 0;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+.product-showcase-platforms {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  margin-top: 22px;
+  color: var(--soft);
+  font-size: var(--text-small);
+  font-weight: 650;
+}
+
+.product-showcase-platforms span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+/* Height-locked, width free: the device icons are not square and carry their own
+   optical padding, so pinning both axes squashes them. The artwork is already
+   light-on-transparent, so there is no invert here - adding one hides it. */
+.product-showcase-platforms img {
+  width: auto;
+  height: 18px;
+  max-width: 26px;
+  opacity: .78;
+}
+
+.product-showcase-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 46px;
+  margin-top: 30px;
+  padding: 0 20px;
+  border: 1px solid var(--text);
+  border-radius: 0;
+  color: #090b0c;
+  background: var(--text);
+  font-size: .94rem;
+  font-weight: 800;
+  transition: border-color 180ms ease, color 180ms ease, background 180ms ease, transform 180ms ease;
+}
+
+.product-showcase-link:hover,
+.product-showcase-link:focus-visible {
+  border-color: var(--amber);
+  color: #090b0c;
+  background: var(--amber);
+  transform: translateY(-2px);
+}
+
+.product-showcase-media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  width: 100%;
+  min-height: 0;
+  aspect-ratio: 1;
+  margin: 0;
+  padding: 32px clamp(28px, 4vw, 56px);
+  overflow: hidden;
+  border-left: 1px solid var(--line);
+  background: rgba(216, 166, 87, .035);
+}
+
+.product-showcase-media img {
+  display: block;
+  width: auto;
+  max-width: 82%;
+  height: 360px;
+  object-fit: contain;
+  object-position: center;
+  filter: drop-shadow(0 28px 46px rgba(0, 0, 0, .52));
+  animation: product-mockup-float 6s ease-in-out infinite;
+  transition: transform 280ms ease;
+}
+
+@keyframes product-mockup-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.product-showcase:nth-of-type(3n + 2) .product-showcase-media img { animation-delay: -2s; }
+.product-showcase:nth-of-type(3n + 3) .product-showcase-media img { animation-delay: -4s; }
+
+.product-showcase-status {
+  border-color: var(--line-strong);
+  color: var(--amber);
+  background: transparent;
+}
+
+.product-showcase-media-mark img { width: min(280px, 62%); height: auto; opacity: .9; }
+
+@media (max-width: 900px) {
+  .product-showcase { grid-template-columns: 1fr; min-height: 0; }
+  .product-showcase-copy { padding: clamp(32px, 7vw, 48px); }
+  .product-showcase-media { border-top: 1px solid var(--line); border-left: 0; }
+}
+
+@media (max-width: 560px) {
+  .products-showcase-shell { width: min(100% - 24px, var(--max)); padding: 24px 0 72px; }
+  .product-showcase-copy { padding: 28px 24px 30px; }
+  .product-showcase-title { gap: 16px; }
+  .product-showcase-icon { width: 60px; height: 60px; border-radius: 14px; }
+  .product-showcase-title h2 { font-size: var(--h2-size); }
+  .product-showcase-description { margin-top: 20px; }
+  .product-showcase-link { width: 100%; margin-top: 28px; }
+  .product-showcase-media { padding: 24px 20px; }
+  .product-showcase-media img { max-width: 84%; height: 280px; }
+  .product-showcase-media-mark img { width: min(250px, 72%); height: auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .product-showcase-link,
+  .product-showcase-media img { animation: none; transition: none; }
+}
+
+/* The case-study index shares the Products page's compact split-panel system.
+   Its square field uses editorial numbering because these projects are stories,
+   not app listings. */
+.case-showcase-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 24px;
+  color: var(--soft);
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: 750;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.case-showcase-meta span:first-child { color: var(--amber); }
+
+.case-showcase-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  margin: 22px 0 0;
+  padding: 0;
+  color: var(--soft);
+  font-size: var(--text-small);
+  font-weight: 650;
+  list-style: none;
+}
+
+.case-showcase-tags li::before {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin: 0 8px 2px 0;
+  background: var(--amber);
+}
+
+.case-showcase .product-showcase-copy { justify-content: flex-start; }
+
+.case-showcase-media {
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(36px, 4vw, 56px);
+}
+
+.case-showcase-visual-label,
+.case-showcase-visual-focus {
+  color: var(--soft);
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: 750;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.case-showcase-visual-index {
+  align-self: center;
+  color: rgba(216, 166, 87, .22);
+  font-size: clamp(9rem, 15vw, 12rem);
+  font-weight: 800;
+  line-height: .72;
+  letter-spacing: -.08em;
+}
+
+.case-showcase-visual-focus { align-self: flex-end; text-align: right; }
+
+/* Bottom corner marks on one line. Two things stopped that: aspect-ratio 1/1
+   pinned the square field to 440px while the copy cell stretched to the row
+   (28px shorter on the tallest panel), and the CTA was sized by content rather
+   than pushed to the cell floor. Only applies where the panel is two columns —
+   below 901px the field stacks and keeps its square. */
+@media (min-width: 901px) {
+  .case-showcase-media { aspect-ratio: auto; }
+  /* Floor-aligned CTA. `margin-top: auto` resolves to zero when the copy column is the
+     taller of the two, so the minimum gap lives on the tag list above it. */
+  .case-showcase .product-showcase-link { margin-top: auto; }
+  .case-showcase .case-showcase-tags { margin-bottom: 32px; }
+}
+
+@media (max-width: 560px) {
+  .case-showcase-meta { margin-bottom: 20px; }
+  .case-showcase-media { padding: 32px; }
+  .case-showcase-visual-index { font-size: 9rem; }
+}
+
+/* ───────────────────────────────────────────────────────────────────────────
+   About, on the same split-panel system as Products and Case studies. The
+   180px eyebrow column is gone: each section's label is the corner mark inside
+   its own panel. Three panel shapes carry the rhythm — a square-field intro, a
+   full-width evidence panel, and a pair of half-width credentials — so the page
+   is no longer four repetitions of one cadence.
+   ─────────────────────────────────────────────────────────────────────────── */
+.about-showcase-shell .case-showcase-meta > :first-child { color: var(--amber); }
+
+/* About is an editorial page rather than a card index. Give each chapter room
+   to resolve before the next one begins. */
+.about-showcase-shell {
+  gap: clamp(72px, 7vw, 104px);
+  padding-top: 64px;
+  padding-bottom: 136px;
+}
+
+/* About carries no panel boxes. .product-showcase draws a 1px outline and a
+   fill so a product or a case study reads as a card; About is one continuous
+   page about one person, and the outlines just fence the copy in. The grid
+   itself stays; the About-specific axis correction below removes the now
+   unnecessary card inset. */
+.about-showcase,
+.about-showcase .product-showcase-media,
+.about-showcase-portrait {
+  border: 0;
+  background: none;
+}
+
+/* Sized to --h2-size, not --headline-size: on Products and Case studies the
+   h1 is visually hidden and the 48px panel title leads the page, so a 72px
+   headline here made About the only index page shouting. Deviates from the
+   "every h1 takes --headline-size" rule in DESIGN-SYSTEM.md. */
+.about-showcase h1 {
+  max-width: 22ch;
+  margin: 0;
+  font-size: var(--h2-size);
+  line-height: 1.04;
+  letter-spacing: -0.04em;
+}
+
+.about-showcase h2 {
+  margin: 0;
+  color: var(--text);
+  font-size: var(--h2-size);
+  line-height: 1.04;
+  letter-spacing: -0.04em;
+}
+
+/* Recognition is a real heading for document navigation, while retaining the
+   compact metadata treatment used throughout the showcase system. */
+.about-showcase .case-showcase-meta .case-showcase-meta-title {
+  margin: 0;
+  color: var(--amber);
+  font: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+}
+
+.about-showcase .case-showcase-meta { margin-bottom: 32px; }
+.about-showcase .product-showcase-description { max-width: 46ch; margin-top: 28px; line-height: 1.62; }
+.about-showcase .about-tags {
+  display: grid;
+  grid-template-columns: repeat(3, max-content);
+  gap: 12px;
+  margin-top: 38px;
+}
+
+/* Once the card borders are removed, retaining the card's horizontal inset
+   leaves every About heading floating inside the shared page axis. Keep the
+   useful vertical rhythm, but align the copy with the header and shell. */
+.about-showcase .product-showcase-copy { padding-inline: 0; }
+.about-page .site-header { width: min(var(--max), calc(100% - 48px)); }
+.about-showcase-intro .product-showcase-copy { justify-content: flex-start; padding-top: 0; }
+
+/* The portrait bleeds to the edges of the square field rather than sitting
+   inside its padding — the field is the frame, so a second one is noise. */
+.about-showcase-portrait {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  align-items: stretch;
+  justify-content: stretch;
+  padding: 0;
+  overflow: visible;
+  background: none;
+}
+
+.about-portrait-frame {
+  min-width: 0;
+  min-height: 440px;
+  overflow: hidden;
+  background: var(--bg-2);
+}
+
+.about-showcase-portrait img {
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 10%;
+  animation: none;
+}
+
+.about-portrait-caption {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding-top: 16px;
+  color: var(--soft);
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: 750;
+  line-height: 1.4;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.about-portrait-caption time { text-align: right; }
+
+/* The portrait is the second cell of the intro row. On desktop it should
+   stretch with the copy instead of retaining the product card's 1:1 ratio. */
+@media (min-width: 901px) {
+  .about-showcase-portrait { aspect-ratio: auto; }
+}
+
+/* Recognition: one column, and the copy cell stretches so the stat row, the
+   marquee and the gallery all take the full measure. */
+.about-showcase-wide { grid-template-columns: minmax(0, 1fr); min-height: 0; }
+.about-showcase-wide .product-showcase-copy { align-items: stretch; width: 100%; }
+.about-showcase-wide .recognition-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px 48px; }
+.about-showcase-wide .recognition-stats div { align-content: start; gap: 10px; }
+/* No measure cap here. The column is already the constraint, and 30ch stopped the
+   description less than two-thirds across it, leaving a ragged gutter inside every
+   cell. Six across was tried instead and is worse - 190px columns push these to
+   three and four lines. */
+.about-showcase-wide .recognition-stats span { line-height: 1.55; }
+
+/* Journey runs full width too: without the ghost numeral there was nothing for
+   a side field to hold. */
+.about-showcase-journey .product-showcase-copy { justify-content: flex-start; }
+.about-showcase-journey .journey-list { margin: 56px 0 0; }
+.about-showcase-journey .journey-list li { padding-bottom: 64px; }
+.about-showcase-journey .journey-list li:last-child { padding-bottom: 0; }
+
+.about-certification-list {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 980px;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+  list-style: none;
+}
+
+.about-certification-list li {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+  padding: 32px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.about-certification-index,
+.about-certification-issuer {
+  color: var(--soft);
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: 750;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.about-certification-index { color: var(--amber); }
+.about-certification-issuer { display: block; margin-bottom: 12px; }
+.about-certification-list h3 { margin: 0; color: var(--text); font-size: var(--h3-small); line-height: 1.2; letter-spacing: -.03em; }
+
+
+@media (min-width: 901px) and (max-width: 1320px) {
+  .about-showcase-wide .recognition-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 900px) {
+  .about-showcase-shell { gap: 72px; padding-top: 48px; padding-bottom: 112px; }
+  .about-showcase-wide .recognition-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px 32px; }
+  .about-showcase-portrait { aspect-ratio: auto; }
+  .about-portrait-frame { min-height: 0; aspect-ratio: 4 / 3; }
+}
+
+@media (max-width: 560px) {
+  .about-showcase-shell { width: min(100% - 48px, var(--max)); gap: 56px; padding-top: 32px; padding-bottom: 88px; }
+  .about-showcase h1 { max-width: none; }
+  .about-showcase .case-showcase-meta { margin-bottom: 24px; }
+  .about-showcase .about-tags { display: flex; gap: 10px; margin-top: 32px; }
+  .about-showcase-wide .recognition-stats { grid-template-columns: minmax(0, 1fr); gap: 30px; }
+  .about-showcase-journey .journey-list { margin-top: 40px; }
+  .about-showcase-journey .journey-list li { padding-bottom: 52px; }
+  .about-portrait-caption { flex-direction: column; gap: 5px; }
+  .about-portrait-caption time { text-align: left; }
+  .about-certification-list li { grid-template-columns: 32px minmax(0, 1fr); gap: 16px; padding: 28px 0; }
+}
+
+@media (max-width: 360px) {
+  .about-showcase .case-showcase-meta {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .about-showcase .case-showcase-meta > :last-child { text-align: left; }
+}
+
+/* The shared header pins .tab-contact to the right edge with position:absolute.
+   The home page adds a theme switch beside it, so the pair is grouped in
+   .header-actions and that group takes the anchor instead. */
+@media (min-width: 561px) {
+  .home .site-header .tab-contact { position: static; }
+  .home .header-actions { position: absolute; right: 0; }
+}
+
+@media (max-width: 560px) {
+  /* Declared last: the .header-actions flex rule above would otherwise win at
+     every width and leak the switch and Contact into the mobile header, where
+     the hamburger already carries navigation. */
+  .home .header-actions { display: none; }
+}
+
+/* The headline's closing phrase carries a drawn underline: two passes of an
+   irregular stroke, the way it would be marked by hand. It scales with the
+   phrase because the viewBox stretches. */
+.marked { position: relative; display: inline-block; white-space: nowrap; }
+
+.marked .mark {
+  position: absolute;
+  left: -1%;
+  bottom: -0.16em;
+  width: 102%;
+  height: 0.24em;
+  overflow: visible;
+  fill: none;
+  stroke: var(--cyan);
+  stroke-width: 3.4;
+  stroke-linecap: round;
+  pointer-events: none;
+}
+
+.marked .mark path {
+  stroke-dasharray: 420;
+  stroke-dashoffset: 420;
+  animation: mark-draw 900ms cubic-bezier(0.65, 0, 0.35, 1) 620ms forwards;
+}
+
+/* The second pass is lighter and slightly offset, so the two read as one
+   hand-drawn stroke rather than a printed rule. */
+.marked .mark-2 { stroke-width: 2.2; opacity: 0.5; animation-delay: 780ms; }
+
+@keyframes mark-draw { to { stroke-dashoffset: 0; } }
+
+/* The avatar sits in a drawn box, so the cut-out figure has something to
+   stand in rather than floating loose in the column. */
+.hero-avatar-boxed {
+  padding: 22px 22px 16px;
+  border: 1px solid var(--line-strong);
+  background: var(--panel);
+}
+
+.hero-avatar-boxed::before { width: 64%; top: 42%; }
+
+@media (prefers-reduced-motion: reduce) {
+  .marked .mark path { animation: none; stroke-dashoffset: 0; }
+}
+
+/* ───────────────────────────────────────────────────────────────────────────
+   Home hero, centred. The home page is the hero and nothing else, so the
+   section owns the viewport: .shell's padding is dropped and the height is
+   measured against the small-viewport unit so mobile browser chrome cannot
+   push the cue off-screen.
+   ─────────────────────────────────────────────────────────────────────────── */
+.home .shell { min-height: 0; padding: 0; }
+.home { height: 100%; }
+body.home { min-height: 100dvh; }
+
+/* The home page must not scroll: .shell becomes a flex column and the hero
+   takes whatever is left between the header and the footer, rather than
+   claiming a fixed slice of the viewport and pushing the footer past it. */
+.home .shell { display: flex; flex-direction: column; }
+
+.hero-center {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+  padding: 40px 0 28px;
+  text-align: center;
+}
+
+/* The copy rests slightly above optical centre, which is where the eye
+   expects it, rather than on the true midpoint. */
+.hero-center-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto 0;
+  padding-bottom: 6vh;
+}
+
+.hero-center .intro { margin-bottom: 52px; }
+
+.hero-greet {
+  margin: 0 0 26px;
+  color: var(--muted);
+  font-size: clamp(1.1rem, 1.9vw, 1.5rem);
+  font-weight: 400;
+  /* Explicit, so a taller script in the rotator cannot grow this line and shift
+     the headline below it. */
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+}
+
+.hero-greet .greeting-word { color: var(--cyan); }
+
+/* Lighter and smaller than the site's display h1: at this measure a 72px
+   800-weight headline fills the line and kills the surrounding air, which is
+   the point of the layout. */
+.hero-center h1 {
+  max-width: 17ch;
+  margin: 0;
+  font-size: clamp(2.1rem, 4.4vw, 3.5rem);
+  font-weight: 600;
+  line-height: 1.18;
+  letter-spacing: -0.022em;
+}
+
+.hero-center .hero-actions { justify-content: center; gap: 16px; margin-top: 58px; }
+
+@media (max-width: 560px) {
+  .hero-center { padding-top: 24px; }
+  .hero-center .intro { margin-bottom: 34px; }
+  .hero-center .hero-actions { width: 100%; margin-top: 44px; }
+}
+
+/* ───────────────────────────────────────────────────────────────────────────
+   The runner along the foot of the home page. Sized as a footnote: a narrow
+   centred lane well under the CTAs, at 45% until it is hovered, focused or
+   running. It never takes vertical space away from the hero — the strip is a
+   fixed 78px and the hero keeps whatever is left.
+   ─────────────────────────────────────────────────────────────────────────── */
+.hero-play {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: min(560px, 100%);
+  margin: 0 auto;
+  padding-bottom: 10px;
+  opacity: 0.45;
+  transition: opacity 400ms ease;
+}
+
+.hero-play:hover,
+.hero-play:focus-within,
+.hero-play.is-running { opacity: 1; }
+
+/* Transparent button: it is a hit area over the canvas, not a control with a
+   look of its own. */
+.hero-play-surface {
+  display: block;
+  width: 100%;
+  height: 64px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.hero-play-surface:focus-visible { outline: 1px solid var(--line-strong); outline-offset: 2px; }
+.hero-play.is-pointer .hero-play-surface:focus-visible { outline: none; }
+
+.hero-play-canvas { display: block; width: 100%; height: 100%; }
+
+.hero-play-caption {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 14px;
+  margin: 0;
+  padding: 0 2px;
+  color: var(--soft);
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.hero-play-score { color: var(--cyan); }
+
+@media (max-width: 560px) {
+  .hero-play-surface { height: 52px; }
+  .hero-play { padding-bottom: 4px; }
+}
+
+/* Short viewports have no room to spare between the CTAs and the footer. */
+@media (max-height: 620px) {
+  .hero-play { display: none; }
+}
+
+
+
+/* ───────────────────────────────────────────────────────────────────────────
+   The field drifts. Everything here is slow enough to read as atmosphere
+   rather than motion: a 44s turn on the wireframe, a 26s breath on the
+   starfield, and a warm mass that crosses the frame over 38s.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+/* rotate and scale are their own properties, so they compose with the
+   tesseract's existing skewY transform instead of overwriting it. */
+.home .tesseract { animation: field-turn 44s ease-in-out infinite; }
+
+@keyframes field-turn {
+  0%, 100% { rotate: 0deg; scale: 1; }
+  50% { rotate: 1.6deg; scale: 1.035; }
+}
+
+.home .stars { animation: field-breathe 26s ease-in-out infinite; }
+
+@keyframes field-breathe {
+  0%, 100% { opacity: 0.45; translate: 0 0; }
+  50% { opacity: 0.8; translate: 0 -12px; }
+}
+
+.home .space-field::after {
+  position: absolute;
+  left: 8%;
+  top: 14%;
+  width: 54vmax;
+  height: 54vmax;
+  content: "";
+  background: radial-gradient(closest-side, rgba(216, 166, 87, 0.11), transparent 72%);
+  animation: field-wander 38s ease-in-out infinite alternate;
+}
+
+@keyframes field-wander {
+  from { transform: translate(-8%, -4%) scale(1); }
+  to { transform: translate(26%, 16%) scale(1.14); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home .tesseract,
+  .home .stars,
+  .home .space-field::after { animation: none; }
+}
+
+
+/* ───────────────────────────────────────────────────────────────────────────
+   Scroll reveal. Sections rise into place once, on first entry, and are then
+   left alone — an element that has arrived is unobserved and never hidden
+   again, because re-animating on scroll-back is what makes a long case study
+   feel like it is fighting the reader.
+
+   The hidden state is scoped to html.js-reveal, which a one-line inline script
+   in each page's head sets before first paint. If that script never runs — JS
+   off, a parse error earlier in the page — the class is absent and everything
+   is simply visible. Content is never hidden by CSS that JS has to come and
+   rescue.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+html.js-reveal [data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, var(--reveal-shift), 0);
+  transition:
+    opacity   var(--reveal-dur) var(--ease-soft) var(--reveal-delay, 0ms),
+    transform var(--reveal-dur) var(--ease-soft) var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+html.js-reveal [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Anything already on screen at load is shown outright, with no transition at
+   all. The h1 must never fade in: the page should look finished the instant it
+   is finished. */
+html.js-reveal [data-reveal].is-immediate {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+/* Once an element has arrived it is done. Drop the compositor hint so a long
+   page is not holding a layer per section for the rest of its life. */
+html.js-reveal [data-reveal].is-settled {
+  will-change: auto;
+}
+
+/* ── Cards ──────────────────────────────────────────────────────────────────
+   A ten-pixel fade is the right amount of movement for a paragraph and far too
+   little for a card the size of a product showcase — at that scale it reads as
+   the page being slow to load rather than as anything arriving.
+
+   A card gets its own treatment: it comes up from further down, from slightly
+   further back, and tilted a few degrees off the vertical, hinged near its own
+   lower edge so it swings up into place. The point is that the card should
+   look like it is being set down, not like it is being faded in.
+
+   The three selectors below are not redundant. `.reveal-card` ties on
+   specificity with `.is-in` and `.is-immediate` and is written after them, so
+   without the explicit pairings a card would out-rank its own arrival state
+   and never actually land.                                                    */
+
+html.js-reveal [data-reveal].reveal-card {
+  transform:
+    perspective(1400px)
+    translate3d(0, var(--card-rise), 0)
+    rotateX(var(--card-tilt))
+    scale(var(--card-scale));
+  transform-origin: 50% 88%;
+  transition:
+    opacity   var(--card-dur) var(--ease-soft) var(--reveal-delay, 0ms),
+    transform var(--card-dur) var(--ease-soft) var(--reveal-delay, 0ms);
+}
+
+html.js-reveal [data-reveal].reveal-card.is-in,
+html.js-reveal [data-reveal].reveal-card.is-immediate {
+  transform: none;
+}
+
+html.js-reveal [data-reveal].reveal-card.is-immediate {
+  transition: none;
+}
+
+/* Both of these must name the card too: `.reveal-card` out-ranks the plain
+   `[data-reveal]` reset, so without it a card would keep its tilt here. */
+@media (scripting: none) {
+  html.js-reveal [data-reveal],
+  html.js-reveal [data-reveal].reveal-card { opacity: 1; transform: none; transition: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js-reveal [data-reveal],
+  html.js-reveal [data-reveal].reveal-card { opacity: 1; transform: none; transition: none; }
+}
+
+
+/* ───────────────────────────────────────────────────────────────────────────
+   The cursor lens.
+
+   Rather than adding a new decorative layer, this brightens the artwork that
+   is already back there — the tesseract frames, the axes, the sparks, the
+   starfield. scripts/site.js clones .space-field wholesale and drops the copy
+   directly on top of the original; because it is the same markup under the
+   same rules it registers pixel for pixel, and its animations start within a
+   frame of the originals, which on a 44s turn is imperceptible.
+
+   The copy is then brightened and shown only through a soft circle that
+   follows the pointer. Inside that circle the reader is seeing the same
+   drawing twice — once dim, once bright — so the artwork gains definition
+   under the cursor and is untouched everywhere else.
+
+   A cloned layer is used instead of a blend-mode wash because a wash lifts the
+   empty black as much as the linework, which reads as a torch shining on the
+   page. This reads as the drawing itself coming forward.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+.space-field-lit {
+  opacity: 0;
+  filter: brightness(var(--lens-boost)) saturate(1.12);
+  -webkit-mask-image:
+    radial-gradient(circle var(--lens-radius) at var(--px, 50vw) var(--py, 50vh),
+                    #000 0%, rgba(0, 0, 0, 0.45) 55%, transparent 100%);
+  mask-image:
+    radial-gradient(circle var(--lens-radius) at var(--px, 50vw) var(--py, 50vh),
+                    #000 0%, rgba(0, 0, 0, 0.45) 55%, transparent 100%);
+  transition: opacity 420ms ease;
+}
+
+/* Raised on the first pointer movement, dropped when the pointer leaves the
+   window, so a page nobody touches never renders it. */
+.space-field-lit.is-live { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .space-field-lit { display: none; }
 }
