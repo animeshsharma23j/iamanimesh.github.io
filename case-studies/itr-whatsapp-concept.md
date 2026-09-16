@@ -1,9 +1,9 @@
 # File Your ITR on WhatsApp
-### A concept note, not a case study — no research or testing behind this yet
+### Originally a concept note — now built and collecting feedback
 
 ---
 
-**Status:** Idea stage only. Nothing here has been built, tested, or validated with a single participant. Written to decide whether this is worth turning into real research, in the same way [income-tax.html](../income-tax.html) was.
+**Status:** Built and public at [itrdemo.com/whatsapp.html](https://www.itrdemo.com/whatsapp.html), carrying a structured feedback form (persona, trust rating, hardest step, would-use, free text, optional follow-up consent). Still not validated: responses are self-selecting and no finding has been drawn from them yet. This note is kept as the reasoning that existed *before* it was built — the questions below are the ones the live version is now able to answer.
 
 ---
 

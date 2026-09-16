@@ -1,9 +1,9 @@
 # A Live-Reconciliation ITR
-### A concept note, not a case study — no research or testing behind this yet
+### Originally a concept note — now built and collecting feedback
 
 ---
 
-**Status:** Idea stage only. Nothing here has been built, tested, or validated with a single participant. Written the same way [itr-whatsapp-concept.md](itr-whatsapp-concept.md) was — to decide whether it's worth turning into real research, sitting next to [income-tax.html](../income-tax.html).
+**Status:** Built and public at [itrdemo.com/filing.html](https://www.itrdemo.com/filing.html), carrying the same structured feedback form as [itr-whatsapp-concept.md](itr-whatsapp-concept.md). Still not validated: responses are self-selecting and no finding has been drawn from them yet. This note is kept as the reasoning that existed *before* it was built, sitting next to [income-tax.html](../income-tax.html).
 
 ---
 
