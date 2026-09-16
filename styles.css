@@ -1113,9 +1113,36 @@ h1 {
 .resume-link:focus-visible { border-color: var(--amber); color: var(--amber); }
 
 .about-tags { display: flex; flex-wrap: wrap; gap: 12px; margin: 28px 0 0; padding: 0; list-style: none; }
-.about-tags li { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border: 1px solid var(--line-strong); border-radius: 999px; color: var(--muted); font-size: 0.86rem; font-weight: 650; letter-spacing: -0.01em; transition: border-color 180ms ease, color 180ms ease; }
-.about-tags li:hover { border-color: var(--cyan); color: var(--text); }
+.about-tags li { display: inline-flex; }
+/* The pill is the button now, so it carries what the li used to. */
+.about-tag { display: inline-flex; align-items: center; gap: 8px; margin: 0; padding: 10px 16px; border: 1px solid var(--line-strong); border-radius: 999px; background: transparent; color: var(--muted); font: inherit; font-size: 0.86rem; font-weight: 650; letter-spacing: -0.01em; cursor: pointer; transition: border-color 180ms ease, color 180ms ease, background 180ms ease; }
+.about-tag:hover, .about-tag:focus-visible, .about-tag.is-active { border-color: var(--cyan); color: var(--text); }
+.about-tag.is-active { background: rgba(216, 166, 87, 0.09); }
+.about-tag:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; }
 .about-tags svg { width: 15px; height: 15px; color: var(--cyan); flex-shrink: 0; }
+
+/* The line under the tags. The reserve is deliberately only for pointers: on
+   hover the reader did not ask for anything to move, so the space is held open
+   in advance. On touch there is no hover, the line only appears on a tap, and
+   a deliberate tap moving the page is ordinary disclosure behaviour - holding
+   43px of empty space open for it would just be a hole. */
+@media (hover: hover) {
+  .about-tag-detail { min-height: 3.1em; }
+}
+.about-tag-detail {
+  max-width: 52ch;
+  margin: 14px 0 0;
+  color: var(--soft);
+  font-size: 0.86rem;
+  line-height: 1.55;
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+.about-tag-detail.is-shown { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .about-tag, .about-tag-detail { transition: none; }
+}
 
 .case-study-page { background: var(--bg); }
 .case-study-page .site-header { width: min(var(--max), calc(100% - 48px)); }
