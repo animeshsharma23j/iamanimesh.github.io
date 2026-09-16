@@ -3,3 +3,6 @@ tmp/
 node_modules/
 .DS_Store
 
+
+# Unfinished homepage concept - kept local until it is deliberately shipped.
+v3/
