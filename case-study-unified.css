@@ -154,11 +154,11 @@ html:has(body.unified-case-study) { overflow-x: clip; }
   letter-spacing: -.04em;
   text-wrap: balance;
 }
-/* See the measure note in itba-case-study.css: 70ch of Inter renders ~79 actual
-   characters, so the cap is set below the nominal target to land inside 45-75. */
+/* See the measure note in itba-case-study.css: the ch unit overstates how much
+   Inter fits, so these are calibrated against counted lines, not nominal ch. */
 .unified-case-study .case-layout-section > div > p:not([class]),
 .unified-case-study .case-layout-section p:last-child {
-  max-width: 62ch;
+  max-width: 56ch;
   margin: 0 0 20px;
   color: var(--muted);
   font-size: 1rem;
@@ -226,7 +226,7 @@ html:has(body.unified-case-study) { overflow-x: clip; }
 .unified-case-study .case-proof-card h3 { font-size: 1.25rem; }
 .unified-case-study .case-proof-card p,
 .unified-case-study .theme-grid > article p {
-  max-width: 66ch;
+  max-width: 60ch;
   color: var(--muted) !important;
   font-size: .92rem !important;
   line-height: 1.75 !important;

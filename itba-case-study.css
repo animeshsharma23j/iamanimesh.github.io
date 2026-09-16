@@ -56,18 +56,19 @@
 .itba-appreciation-status { min-height: 1.4em; margin: 12px 0 0; color: var(--soft); font-size: .72rem; line-height: 1.4; }
 .itba-section { padding: 64px 0; border-bottom: 1px solid #ffffff24; scroll-margin-top: 110px; }
 .itba-section > h2 { margin: 0 0 28px; max-width: 790px; font-size: var(--h2-size); line-height: 1.12; letter-spacing: -.04em; text-wrap: balance; }
-/* Measure. CSS `ch` is the width of the "0" glyph, which in Inter is wider than
-   the average lowercase character, so 70ch rendered ~79 actual characters per
-   line. 62ch lands at ~70, inside the 45-75 range that long-form reading wants. */
-.itba-section > p:not(.itba-kicker), .itba-research-detail > p { max-width: 62ch; margin: 0 0 20px; color: var(--muted); font-size: 1rem; line-height: 1.8; }
+/* Measure. CSS `ch` is the width of Inter's "0", which is much wider than its
+   average lowercase character: 62ch measured out at ~78 real characters per
+   line, still above the 45-75 that long-form reading wants. 56ch is calibrated
+   against counted lines rather than the ch unit, and lands at ~70. */
+.itba-section > p:not(.itba-kicker), .itba-research-detail > p { max-width: 56ch; margin: 0 0 20px; color: var(--muted); font-size: 1rem; line-height: 1.8; }
 .itba-section h3 { color: var(--text); line-height: 1.35; letter-spacing: -.015em; }
 /* Only a heading that belongs to the section itself gets the section rhythm. Headings
    inside a component - a mockup body, a proof card - keep their component spacing. */
 .itba-section > h3 { margin: 40px 0 14px; }
-.itba-section .itba-note { max-width: 62ch; font-size: .83rem !important; line-height: 1.7; color: var(--soft); }
+.itba-section .itba-note { max-width: 56ch; font-size: .83rem !important; line-height: 1.7; color: var(--soft); }
 .itba-callout { margin: 36px 0 40px; padding: 26px 28px; border-left: 3px solid var(--cyan); background: #75d5e40b; }
 .itba-callout > span { color: var(--cyan); font-size: .75rem; font-weight: 700; }
-.itba-callout p { max-width: 58ch; margin: 12px 0 0; color: var(--text); font-size: 1.1rem; line-height: 1.7; }
+.itba-callout p { max-width: 52ch; margin: 12px 0 0; color: var(--text); font-size: 1.1rem; line-height: 1.7; }
 .itba-callout h3 { margin: 12px 0 0; font-size: var(--h3-small); }
 .itba-two-up { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; margin-top: 32px; }
 .itba-two-up > div { border-top: 1px solid #ffffff24; padding-top: 16px; }
@@ -78,12 +79,12 @@
 .itba-findings span { color: var(--cyan); font-family: var(--font-mono); font-size: .75rem; }
 .itba-findings h3 { font-size: 1.2rem; margin: 18px 0 12px; }
 .itba-findings p { color: var(--muted); font-size: .92rem; line-height: 1.7; }
-.itba-disclosure { margin-top: 32px; border: 1px solid #ffffff30; border-radius: 6px; }
-.itba-disclosure summary { padding: 22px 24px; color: var(--text); cursor: pointer; font-size: .9rem; line-height: 1.6; }
-.itba-disclosure summary::marker { color: var(--cyan); }
-.itba-disclosure summary:hover { background: #75d5e408; }
-.itba-disclosure[open] summary { border-bottom: 1px solid #ffffff24; }
-.itba-research-detail { padding: 4px 24px 28px; }
+/* This block used to be a collapsed <details>. The method, the observation log,
+   the confidence tagging and the limits are the strongest evidence on the page,
+   and putting them behind a toggle meant most readers never saw them. It keeps
+   the bordered container so it still reads as one body of work. */
+.itba-research-detail { margin-top: 32px; padding: 4px 24px 28px; border: 1px solid #ffffff30; border-radius: 6px; }
+.itba-research-detail > h3:first-child { margin: 26px 0 4px; padding-bottom: 20px; border-bottom: 1px solid #ffffff24; font-size: 1.05rem; color: var(--text); }
 .itba-section .research-subhead { margin-top: 36px; font-size: 1.25rem; }
 .itba-section .case-facts { max-width: none; margin-bottom: 32px; }
 .itba-section .case-facts strong { font-size: .78rem; line-height: 1.5; margin-bottom: 8px; }
@@ -102,7 +103,7 @@
 .itba-section .case-proof-card { background: transparent; border: 0; border-top: 1px solid #ffffff24; border-radius: 0; padding: 24px 0; }
 .itba-section .case-proof-card h3 { font-size: 1.3rem; }
 .itba-section .case-proof-card span { font-size: .7rem; }
-.itba-section .case-proof-card p { max-width: 66ch; line-height: 1.8 !important; }
+.itba-section .case-proof-card p { max-width: 60ch; line-height: 1.8 !important; }
 .itba-section .wireframe-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .itba-section .wireframe-card { background: #0d1317; }
 @media (prefers-reduced-motion: no-preference) {
@@ -189,3 +190,6 @@
   .itba-iteration dl { grid-template-columns: 1fr; gap: 20px; }
   .itba-iteration dt { margin-bottom: 6px; }
 }
+
+/* Observation-log rows read as prose, not table cells, so they take a measure too. */
+.itba-section .signal-text { max-width: 60ch; }
