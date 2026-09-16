@@ -460,6 +460,11 @@ body[class] .tesseract {
   color: var(--text);
 }
 
+/* The arrow carries the accent, the label stays in text colour. Set explicitly
+   rather than left to inherit, so the hover rule recolouring the anchor cannot
+   drag the arrow away from the accent. */
+.tab-contact span { color: var(--amber); }
+
 .tab-contact::before { inset: -1px; }
 
 .tab-contact:hover,
