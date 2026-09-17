@@ -36,7 +36,6 @@
   }
   window.addEventListener('scroll', schedule, { passive: true });
   window.addEventListener('resize', schedule);
-  document.querySelector('.itba-disclosure')?.addEventListener('toggle', schedule);
 
   const appreciationButtons = [...document.querySelectorAll('[data-appreciation]')];
   const appreciationStatus = document.querySelector('.itba-appreciation-status');
