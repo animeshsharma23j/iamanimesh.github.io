@@ -20,6 +20,12 @@ const exceptions = {
   // A stub kept so old links still resolve. It canonicalises to the page that
   // replaced it and ships none of the site chrome.
   "journey.html": { canonical: `${SITE}/about.html`, og: false, nav: false, skipLink: false },
+  // The same stub shape, for the RateX → RateBook rename. These three paths are
+  // the ones registered with Apple for the App Store submission, so they have
+  // to keep resolving even though nothing links to them any more.
+  "ratex.html": { canonical: `${SITE}/ratebook.html`, og: false, nav: false, skipLink: false },
+  "ratex-privacy.html": { canonical: `${SITE}/ratebook-privacy.html`, og: false, nav: false, skipLink: false },
+  "ratex-support.html": { canonical: `${SITE}/ratebook-support.html`, og: false, nav: false, skipLink: false },
 };
 
 // Every page carries the same top-level nav; a page that is itself a nav
