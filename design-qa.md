@@ -148,7 +148,7 @@ and JS. Both are recoverable from git history if a future icon need arises.
 - No broken images on `products.html`; no remaining `apple-logo` reference.
 - Platform rows now read: UnitX iPhone/iPad/Watch, BuildX iPhone/iPad,
   TradeBill iPhone/iPad, JobBook iPhone/iPad, Recital iPhone/iPad,
-  RateX iPhone/iPad (still "Coming soon", still unlinked).
+  RateBook iPhone/iPad (still "Coming soon", still unlinked).
 - Each icon composited onto the site's #0a0e10 ground at 220 / 54 / 24 / 18px and
   inspected, since white-on-transparent artwork is invisible against a white
   viewer background.
@@ -278,7 +278,7 @@ final result: passed
 
 Three changes, all driven by research documents supplied by the user on 2026-09-12
 (ITBA field research kit, ITBA research case study, ITBA UX research report, and
-per-product pain-point studies for JobBook, BuildX, RateX and TradeBill).
+per-product pain-point studies for JobBook, BuildX, RateBook and TradeBill).
 
 1. **CGDA restored and rewritten as a pure research study.** The page was
    orphaned on 2026-09-12 (noindex, out of the sitemap, no public link). It is
@@ -305,21 +305,21 @@ per-product pain-point studies for JobBook, BuildX, RateX and TradeBill).
    the page's existing statement that no production metric was captured. Sidebar
    contents and section kickers renumbered 05–11.
 3. **Trade Cloud Apps rebuilt as a four-product research case study.** Per the
-   user's instruction, the JobBook, BuildX, RateX and TradeBill research all live
+   user's instruction, the JobBook, BuildX, RateBook and TradeBill research all live
    here. New sections: method (four corpora, inductive-then-deductive coding,
    stated uncoded residue of 31.2%), limitations placed deliberately before the
    findings, findings (five themes by share of 1,832 negative reviews, the
    positive contrast set, and the tool-vs-software cross-cutting table), the trust
    arc, evidence → decisions (a traceability table per product plus the payments
    reversal and the held-back recommendation), and open questions. Suite roles,
-   design choices and the handoff model were kept; suite roles now notes RateX as
+   design choices and the handoff model were kept; suite roles now notes RateBook as
    a fourth product in App Store review.
 
-## RateX handling
+## RateBook handling
 
-RateX is under App Store submission. Its research is included in the Trade Cloud
-case study, but `ratex.html` remains unlinked and the products-page card keeps its
-"Coming soon" state. No link to the RateX product page was added anywhere.
+RateBook is under App Store submission. Its research is included in the Trade Cloud
+case study, but `ratebook.html` remains unlinked and the products-page card keeps its
+"Coming soon" state. No link to the RateBook product page was added anywhere.
 
 ## Incidental fixes
 
@@ -381,7 +381,7 @@ The source and final implementation were opened together in one comparison input
 - Fonts and typography: the implementation uses the site's Roboto Condensed family and shared `--h2-size`, `--h2-weight`, `--lede-size`, `--text-small`, and body-size roles. The app name—not its subtitle—is the h2.
 - Spacing and layout rhythm: the final flexible-copy / 440px-media split, 440px minimum panel height, 24px section gap, square frame, single divider, and compact page-start spacing use the Portfolio's established layout tokens without adding a separate visible page hero.
 - Colors and visual tokens: existing near-black, ivory, muted gray, warm-gold, and line tokens are reused. No foreign color system was introduced.
-- Image quality and asset fidelity: every block uses its real app icon. Real UnitX, BuildX, TradeBill, JobBook, and Recital product captures are vertically centred at fixed proportional heights; RateX uses its existing identity artwork because no product screen exists yet. The Apple mark comes from the MIT-licensed Phosphor set, while the updated edge-to-edge iPhone, iPad, and Watch silhouettes come from Apache-2.0-licensed Material Symbols. Both sets are vendored locally.
+- Image quality and asset fidelity: every block uses its real app icon. Real UnitX, BuildX, TradeBill, JobBook, and Recital product captures are vertically centred at fixed proportional heights; RateBook uses its existing identity artwork because no product screen exists yet. The Apple mark comes from the MIT-licensed Phosphor set, while the updated edge-to-edge iPhone, iPad, and Watch silhouettes come from Apache-2.0-licensed Material Symbols. Both sets are vendored locally.
 - Motion: mockups use a low-amplitude 6-second vertical float with staggered delays. `prefers-reduced-motion` removes the animation and all associated transitions.
 - Copy and content: product names, descriptors, benefits, platform metadata, routes, and coming-soon state remain product-specific and truthful.
 

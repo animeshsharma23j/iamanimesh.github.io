@@ -6,7 +6,7 @@ const ROOT = process.cwd();
 
 // The page list is read from disk rather than hand-maintained. The previous
 // hard-coded list had drifted 17 pages behind the site, so whole sections
-// (JobBook, TradeBill, RateX, the ITBA and CGDA case studies, the standalone
+// (JobBook, TradeBill, RateBook, the ITBA and CGDA case studies, the standalone
 // calculators) were never checked at all.
 const pages = readdirSync(ROOT)
   .filter((name) => name.endsWith(".html"))
