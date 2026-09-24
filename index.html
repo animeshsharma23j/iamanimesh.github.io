@@ -28,7 +28,7 @@
       {"@context":"https://schema.org","@type":"Person","name":"Animesh Sharma","url":"https://www.iamanimesh.com/","image":"https://www.iamanimesh.com/icon.png","jobTitle":"Product Designer & UX Researcher","address":{"@type":"PostalAddress","addressLocality":"New Delhi","addressCountry":"IN"},"sameAs":["https://www.linkedin.com/in/animesh-sharma-57829344/","https://x.com/animesh_sharma_","https://www.instagram.com/iamanimeshsharma/","https://github.com/animeshsharma23j","https://www.behance.net/Animesh_Sharma_"]}
     </script>
     
-    <link rel="stylesheet" href="styles.css?v=20260916-07" />
+    <link rel="stylesheet" href="styles.css?v=20260917-09" />
       <!-- Scroll reveal: arm the hidden state before first paint. The failsafe
          un-hides everything if scripts/site.js never reports in, so a script
          that fails to load can never leave the page blank. -->
@@ -38,6 +38,28 @@
     <a class="skip-link" href="#main-content">Skip to main content</a>
     <div class="space-field" aria-hidden="true">
       <div class="stars"></div>
+      <div class="motes">
+        <span class="mote mote-square mote-1"></span>
+        <span class="mote mote-ring mote-2"></span>
+        <span class="mote mote-diamond mote-3"></span>
+        <span class="mote mote-square mote-4"></span>
+        <span class="mote mote-ring mote-5"></span>
+        <span class="mote mote-diamond mote-6"></span>
+        <span class="mote mote-square mote-7"></span>
+        <span class="mote mote-diamond mote-8"></span>
+        <span class="mote mote-ring mote-9"></span>
+        <span class="mote mote-square mote-10"></span>
+        <span class="mote mote-diamond mote-11"></span>
+        <span class="mote mote-ring mote-12"></span>
+        <span class="mote mote-square mote-13"></span>
+        <span class="mote mote-diamond mote-14"></span>
+        <span class="mote mote-rect mote-15"></span>
+        <span class="mote mote-rect-tall mote-16"></span>
+        <span class="mote mote-rect mote-17"></span>
+        <span class="mote mote-rect-tall mote-18"></span>
+        <span class="mote mote-rect mote-19"></span>
+        <span class="mote mote-rect mote-20"></span>
+      </div>
       <div class="tesseract">
         <span class="frame frame-1"></span>
         <span class="frame frame-2"></span>
@@ -57,6 +79,20 @@
         <span class="spark spark-6"></span>
         <span class="spark spark-7"></span>
         <span class="spark spark-8"></span>
+        <span class="spark spark-9"></span>
+        <span class="spark spark-10"></span>
+        <span class="spark spark-11"></span>
+        <span class="spark spark-12"></span>
+        <span class="spark spark-13"></span>
+        <span class="spark spark-14"></span>
+        <span class="spark spark-15"></span>
+        <span class="spark spark-16"></span>
+        <span class="spark spark-17"></span>
+        <span class="spark spark-18"></span>
+        <span class="spark spark-19"></span>
+        <span class="spark spark-20"></span>
+        <span class="spark spark-21"></span>
+        <span class="spark spark-22"></span>
       </div>
     </div>
 
@@ -86,10 +122,52 @@
           <h1 id="hero-title">Making complex things <span class="marked">feel simple.<svg class="mark" viewBox="0 0 300 22" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M4 13.5c26-4.2 54-6.6 82-7.4 46-1.3 92 .6 138 3.1 22 1.2 44 2.8 66 5.4" /><path class="mark-2" d="M12 17.4c34-3.1 69-4.9 104-5.3 40-.4 80 1 120 3.2 17 .9 34 2.1 51 3.9" /></svg></span></h1>
 
           <div class="hero-actions" aria-label="Explore the portfolio">
-            <a class="action-primary" href="case-studies.html">View case studies <span aria-hidden="true">→</span></a>
-            <a class="action-secondary" href="assets/animesh-sharma-ats-resume.pdf" download>Download résumé</a>
+            <a class="action-primary" href="case-studies.html">View case studies <span aria-hidden="true">&#8594;</span></a>
+            <a class="action-secondary" href="assets/animesh-sharma-ats-resume.pdf" download>Download r&eacute;sum&eacute;</a>
           </div>
         </div>
+
+        <!-- Selected work, on the hero's floor: two case studies and three
+             shipped apps. It is a sibling of .hero-center-copy rather than a
+             child, which is what lets the copy's auto margins centre it in the
+             space above while this row settles against the bottom edge.
+
+             Each block flips on hover to its own one-liner. The copy is taken
+             from case-studies.html and products.html rather than written here,
+             so a project described in two places cannot end up described two
+             ways. -->
+        <nav class="hero-work" aria-label="Selected work">
+          <a class="hero-work-item" data-kind="case" href="income-tax.html">
+            <span class="hero-work-flip">
+              <span class="hero-work-face hero-work-front"><span class="hero-work-kind">Case study</span><span class="hero-work-name">Income Tax</span><span class="hero-work-go" aria-hidden="true">&#8594;</span></span>
+              <span class="hero-work-face hero-work-back"><span class="hero-work-line">Making a high-stakes filing journey explain itself</span><span class="hero-work-go" aria-hidden="true">&#8594;</span></span>
+            </span>
+          </a>
+          <a class="hero-work-item" data-kind="case" href="trade-cloud-apps.html">
+            <span class="hero-work-flip">
+              <span class="hero-work-face hero-work-front"><span class="hero-work-kind">Case study</span><span class="hero-work-name">Trade Cloud Apps</span><span class="hero-work-go" aria-hidden="true">&#8594;</span></span>
+              <span class="hero-work-face hero-work-back"><span class="hero-work-line">What 7,439 reviews say about trade software</span><span class="hero-work-go" aria-hidden="true">&#8594;</span></span>
+            </span>
+          </a>
+          <a class="hero-work-item" data-kind="app" href="unitx.html">
+            <span class="hero-work-flip">
+              <span class="hero-work-face hero-work-front"><span class="hero-work-kind">App</span><span class="hero-work-name">UnitX</span><span class="hero-work-go" aria-hidden="true">&#8594;</span></span>
+              <span class="hero-work-face hero-work-back"><span class="hero-work-line">Everyday answers, without the busywork</span><span class="hero-work-go" aria-hidden="true">&#8594;</span></span>
+            </span>
+          </a>
+          <a class="hero-work-item" data-kind="app" href="recital.html">
+            <span class="hero-work-flip">
+              <span class="hero-work-face hero-work-front"><span class="hero-work-kind">App</span><span class="hero-work-name">Recital</span><span class="hero-work-go" aria-hidden="true">&#8594;</span></span>
+              <span class="hero-work-face hero-work-back"><span class="hero-work-line">The calm ledger for solo music teachers</span><span class="hero-work-go" aria-hidden="true">&#8594;</span></span>
+            </span>
+          </a>
+          <a class="hero-work-item" data-kind="app" href="jobbook.html">
+            <span class="hero-work-flip">
+              <span class="hero-work-face hero-work-front"><span class="hero-work-kind">App</span><span class="hero-work-name">JobBook</span><span class="hero-work-go" aria-hidden="true">&#8594;</span></span>
+              <span class="hero-work-face hero-work-back"><span class="hero-work-line">Keep jobs, schedules and follow-ups in view</span><span class="hero-work-go" aria-hidden="true">&#8594;</span></span>
+            </span>
+          </a>
+        </nav>
       </section>
 
       <!-- Easter egg: a runner along the foot of the page. Ships hidden and is
@@ -119,7 +197,7 @@
     </footer>
   <button type="button" id="back-to-top" class="back-to-top" aria-label="Back to top">↑</button>
   <script src="scripts/site.js?v=20260916-01" defer></script>
-  <script src="scripts/home-hero.js?v=20260916-01" defer></script>
+  <script src="scripts/home-hero.js?v=20260917-02" defer></script>
   <script src="scripts/home-play.js?v=20260916-03" defer></script>
 
 
