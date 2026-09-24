@@ -1491,10 +1491,6 @@ h1 {
 .directory-card small { color: var(--soft); }
 
 .app-screen-hero { grid-template-columns: minmax(0, 0.9fr) minmax(370px, 0.85fr); align-items: start; }
-/* RateBook ships without a hero screenshot for now, so its hero runs as a single
-   column rather than reserving an empty 370px one beside the copy. To restore
-   it: delete this rule and put the .app-screen-frame back in ratebook.html. */
-.product-ratebook .app-screen-hero { grid-template-columns: minmax(0, 1fr); }
 .app-screen-hero .product-copy { align-self: start; padding: 0; }
 .app-screen-frame { position: relative; display: flex; align-items: flex-end; justify-content: center; align-self: start; min-height: 560px; overflow: hidden; }
 .app-screen-frame::before { position: absolute; inset: 18% 8% 2%; content: ""; border-radius: 50%; background: radial-gradient(circle, color-mix(in srgb, var(--product-accent) 24%, transparent), transparent 68%); filter: blur(10px); }
@@ -1539,8 +1535,10 @@ h1 {
 .product-faq-list summary::after { color: var(--product-accent); content: "+"; font-size: 1.5rem; font-weight: 400; }
 .product-faq-list details[open] summary::after { content: "−"; }
 .product-faq-list p { max-width: 690px; margin: -5px 0 26px; color: var(--muted); font-size: 1rem; line-height: 1.6; }
-.app-screen-buildx { align-self: start; justify-content: flex-end; min-height: 600px; height: 600px; overflow: visible; }
-.app-screen-buildx img { width: min(290px, 82%); margin: 0; border-radius: 0; box-shadow: none; }
+.app-screen-buildx,
+.app-screen-ratebook { align-self: start; justify-content: flex-end; min-height: 600px; height: 600px; overflow: visible; }
+.app-screen-buildx img,
+.app-screen-ratebook img { width: min(290px, 82%); margin: 0; border-radius: 0; box-shadow: none; }
 .device-duo { position: relative; align-self: start; justify-self: end; width: min(100%, 500px); height: 520px; overflow: visible; }
 .device-duo::before { position: absolute; inset: 14% 2% 2% 18%; content: ""; border-radius: 50%; background: radial-gradient(circle, color-mix(in srgb, var(--product-accent) 20%, transparent), transparent 68%); filter: blur(12px); }
 .device-duo img { position: absolute; z-index: 1; display: block; height: auto; margin: 0; border-radius: 0; box-shadow: none; filter: drop-shadow(0 24px 48px rgba(0, 0, 0, 0.46)); }
@@ -1847,7 +1845,8 @@ h1 {
   .product-copy { padding: 68px 0 42px; }
   .app-screen-hero .product-copy { padding: 68px 0 42px; }
   .product-pacex .app-screen-hero .product-copy { padding: 68px 0 42px; }
-  .app-screen-buildx { justify-content: center; }
+  .app-screen-buildx,
+  .app-screen-ratebook { justify-content: center; }
   .product-pacex .app-screen-frame { justify-content: center; }
   .image-hero .product-hero-art { position: relative; inset: auto; grid-row: 1; grid-column: 1; width: calc(100% + 48px); height: auto; margin: -80px -24px 0; opacity: 0.62; }
   .image-hero .product-copy { grid-row: 1; grid-column: 1; align-self: center; }
@@ -1884,7 +1883,8 @@ h1 {
   .app-screen-frame, .app-screen-hero .app-screen-frame-paired { min-height: 420px; height: 420px; margin-top: 6px; }
   .product-pacex .app-screen-frame { min-height: 500px; height: 500px; margin-top: 6px; }
   .product-pacex .app-screen-frame img { width: 220px; margin-top: 0; }
-  .app-screen-buildx { min-height: 500px; height: 500px; }
+  .app-screen-buildx,
+  .app-screen-ratebook { min-height: 500px; height: 500px; }
   .device-duo { justify-self: center; width: min(100%, 500px); height: 510px; }
   .device-duo .device-ipad { width: min(410px, 85%); }
   .device-duo .device-phone { width: min(172px, 39%); }
