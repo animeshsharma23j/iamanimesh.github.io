@@ -232,8 +232,12 @@ html:has(body.unified-case-study) { overflow-x: clip; }
   line-height: 1.75 !important;
 }
 
+/* Two-up rather than four-up: this shell is capped near 700px for reading
+   measure, so four text cards in a row would leave ~117px of content width
+   each. The gallery below still runs four across, because thumbnails survive
+   that width and text does not. */
 .unified-case-study .suite-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
   margin-top: 34px;
 }
@@ -352,7 +356,8 @@ html:has(body.unified-case-study) { overflow-x: clip; }
   .unified-case-study .theme-grid,
   .unified-case-study .suite-grid,
   .unified-case-study .workflow-steps { grid-template-columns: 1fr; }
-  .unified-case-study .project-gallery.cols-3 { grid-template-columns: 1fr; }
+  .unified-case-study .project-gallery.cols-3,
+  .unified-case-study .project-gallery.cols-4 { grid-template-columns: 1fr; }
   .unified-case-study .project-gallery.cols-2 { grid-template-columns: 1fr; }
   .unified-case-study .comparison-table { min-width: 520px; }
   .unified-case-study .comparison-table-wrap { overflow-x: auto; }
