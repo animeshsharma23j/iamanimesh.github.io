@@ -1519,15 +1519,19 @@ h1 {
 .product-app-faq h2 { max-width: none; }
 .product-unitx .product-feature-grid,
 .product-recital .product-feature-grid,
+.product-ratebook .product-feature-grid,
 .product-buildx .product-feature-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
 .product-unitx .product-feature-grid article,
 .product-recital .product-feature-grid article,
+.product-ratebook .product-feature-grid article,
 .product-buildx .product-feature-grid article { min-height: 252px; padding: 24px 18px; border-radius: 0; background: transparent; }
 .product-unitx .product-feature-grid h3,
 .product-recital .product-feature-grid h3,
+.product-ratebook .product-feature-grid h3,
 .product-buildx .product-feature-grid h3 { margin-top: 30px; }
 .product-unitx .product-feature-grid p,
 .product-recital .product-feature-grid p,
+.product-ratebook .product-feature-grid p,
 .product-buildx .product-feature-grid p { font-size: 0.88rem; }
 .product-faq-list { max-width: 860px; margin-top: 58px; }
 .product-faq-list details { border-top: 1px solid rgba(255, 255, 255, 0.13); }
@@ -1860,6 +1864,7 @@ h1 {
   .product-pacex .product-feature-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .product-unitx .product-feature-grid,
   .product-recital .product-feature-grid,
+  .product-ratebook .product-feature-grid,
   .product-buildx .product-feature-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .screenshot-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
@@ -1907,9 +1912,11 @@ h1 {
   .product-pacex .product-feature-grid article { min-height: 0; }
   .product-unitx .product-feature-grid,
   .product-recital .product-feature-grid,
+  .product-ratebook .product-feature-grid,
   .product-buildx .product-feature-grid { grid-template-columns: 1fr; }
   .product-unitx .product-feature-grid article,
   .product-recital .product-feature-grid article,
+  .product-ratebook .product-feature-grid article,
   .product-buildx .product-feature-grid article { min-height: 0; }
   .product-faq-list { margin-top: 38px; }
   .product-faq-list summary { padding: 20px 0; }
