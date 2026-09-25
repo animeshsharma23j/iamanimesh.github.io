@@ -1550,10 +1550,12 @@ h1 {
 .product-recital .product-hero { padding-top: 80px; padding-bottom: 60px; }
 .product-unitx .device-duo,
 .product-recital .device-duo,
-.product-buildx .app-screen-buildx { opacity: 0; animation: landing-device-enter 720ms cubic-bezier(0.16, 1, 0.3, 1) 120ms forwards, landing-device-float 5.6s ease-in-out 820ms infinite; }
+.product-buildx .app-screen-buildx,
+.product-ratebook .app-screen-ratebook { opacity: 0; animation: landing-device-enter 720ms cubic-bezier(0.16, 1, 0.3, 1) 120ms forwards, landing-device-float 5.6s ease-in-out 820ms infinite; }
 .product-unitx .device-duo::before,
 .product-recital .device-duo::before,
-.product-buildx .app-screen-buildx::before { animation: landing-glow-breathe 5.6s ease-in-out 820ms infinite; }
+.product-buildx .app-screen-buildx::before,
+.product-ratebook .app-screen-ratebook::before { animation: landing-glow-breathe 5.6s ease-in-out 820ms infinite; }
 
 .recognition-stats { display: grid; gap: 22px; margin: 0; }
 .recognition-stats div { display: grid; gap: 6px; }
@@ -1613,9 +1615,11 @@ h1 {
   .product-unitx .device-duo,
   .product-recital .device-duo,
   .product-buildx .app-screen-buildx,
+  .product-ratebook .app-screen-ratebook,
   .product-unitx .device-duo::before,
   .product-recital .device-duo::before,
-  .product-buildx .app-screen-buildx::before { animation: none; opacity: 1; transform: none; translate: none; }
+  .product-buildx .app-screen-buildx::before,
+  .product-ratebook .app-screen-ratebook::before { animation: none; opacity: 1; transform: none; translate: none; }
 }
 
 @keyframes pacex-glow-breathe {
