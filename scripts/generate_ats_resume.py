@@ -59,7 +59,7 @@ def main():
             "ITBA (case-disposal system for ~45,000 tax personnel across ~780 offices): led an 8-12 week field study with participants across all six officer cadres plus a 13-source documentary review, reducing 40+ symptoms to six root causes and separating what design could fix from platform limits.",
             "Redesigned four moments in the assessment flow (explicit case states, a clear primary action, persistent case context, and validation before submission) in a team of 3 designers, 1 PM, and 3-5 engineers; in validation sessions officers identified blocked cases faster from status alone.",
             "Resolved a density conflict between working cadres and reviewing officers by tying every field removal to a procedural requirement, so the simpler screen stayed defensible on audit.",
-            "Conducted filer interviews for the Income Tax 2.0 website overhaul (Infosys x Income Tax Department), and built two live ITR filing concepts with a structured feedback instrument to test guided form selection and AIS reconciliation.",
+            "Conducted filer interviews for the Income Tax 2.0 website overhaul, and built two live ITR filing concepts with a structured feedback instrument to test guided form selection and AIS reconciliation.",
         ], styles),
         role("UX Designer", "Independent / Freelance (alongside full-time roles)", "2019-Present", [
             "Designed and built six live App Store apps in SwiftUI for iPhone, iPad, and Apple Watch since Oct 2025: UnitX, BuildX, TradeBill, JobBook, Recital, and RateBook.",
