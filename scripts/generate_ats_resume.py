@@ -28,7 +28,7 @@ def main():
         str(OUTPUT), pagesize=A4, rightMargin=0.6 * inch, leftMargin=0.6 * inch,
         topMargin=0.46 * inch, bottomMargin=0.46 * inch,
         title="Animesh Sharma - ATS Resume", author="Animesh Sharma",
-        subject="Senior Product and UX Designer resume",
+        subject="Senior UX Designer resume",
     )
     styles = getSampleStyleSheet()
     styles.add(ParagraphStyle(name="name", parent=styles["Heading1"], fontName="Helvetica-Bold", fontSize=20, leading=23, spaceAfter=2, textColor=HexColor("#15191D")))
@@ -41,43 +41,47 @@ def main():
 
     story = [
         p("ANIMESH SHARMA", styles["name"]),
-        p("Senior Product &amp; UX Designer | Mobile, Web, Wearables &amp; Public-Service Systems", styles["resume_title"]),
+        p("Senior UX Designer | UX Research, Complex Workflows &amp; Shipped iOS Products", styles["resume_title"]),
         p(
             "New Delhi, India | +91 9582137784 | "
             "<link href='mailto:animeshsharma23j@gmail.com'>animeshsharma23j@gmail.com</link> | "
-            "Portfolio: <link href='https://www.iamanimesh.com'>iamanimesh.com</link><br/>"
-            "LinkedIn: <link href='https://www.linkedin.com/in/animesh-sharma-57829344/'>linkedin.com/in/animesh-sharma-57829344</link>",
+            "Portfolio: <link href='https://www.iamanimesh.com'>www.iamanimesh.com</link><br/>"
+            "LinkedIn: <link href='https://www.linkedin.com/in/animeshsharma23'>linkedin.com/in/animeshsharma23</link>",
             styles["contact"],
         ),
         Spacer(1, 6), HRFlowable(width="100%", thickness=0.8, color=HexColor("#9AA4AE")),
         p("Professional Summary", styles["section"]),
-        p("Senior product and UX designer with 10+ years of experience across public-service, enterprise, mobile, web, and wearable products. Leads user research and translates complex workflows into accessible user flows, interaction designs, prototypes, and testable experiences. Experience includes Income Tax digital services and a team portfolio of 30+ Windows-platform apps reaching 4M+ downloads.", styles["body"]),
+        p("Senior UX designer with 10+ years across government, enterprise, and consumer products. Leads field research on high-stakes, rule-bound workflows and turns it into decisions engineering and policy teams can act on. Founded Galaxy Studio (30+ apps, 4M+ downloads), and now designs and builds six live iOS apps end to end, AI-assisted throughout.", styles["body"]),
         p("Core Skills", styles["section"]),
-        p("Product Design; UX Strategy; UX Research; Service Design; Interaction Design; Information Architecture; Design Systems; Accessibility; Complex Workflow Design; User Flows; Wireframing; Prototyping; Usability Testing; A/B Testing; Design QA; Figma; Adobe Illustrator; AI-Assisted Design &amp; Development (Claude Code, Codex)", styles["body"]),
+        p("Product Design; UX Research (contextual inquiry, interviews, surveys and questionnaires, thematic analysis); Interaction Design; Information Architecture; Complex Workflow Design; Prototyping; Usability Testing; Design Systems; Accessibility; Figma; SwiftUI; AI-Assisted Design &amp; Development (Claude Code, Codex)", styles["body"]),
         p("Professional Experience", styles["section"]),
         role("Senior UX Designer", "Central Board of Direct Taxes (Income Tax)", "2021-Present", [
-            "Lead UX research and contribute UI, prototypes, and user-testing materials for Income Tax Return (ITR) and public-service experiences.",
-            "Contributed to the Income Tax website redesign and improvements to ITBA, an internal case-disposal tool, translating complex tax and operational tasks into clearer user flows.",
+            "ITBA (case-disposal system for ~45,000 tax personnel across ~780 offices): led an 8-12 week field study with participants across all six officer cadres plus a 13-source documentary review, reducing 40+ symptoms to six root causes and separating what design could fix from platform limits.",
+            "Redesigned four moments in the assessment flow (explicit case states, a clear primary action, persistent case context, and validation before submission) in a team of 3 designers, 1 PM, and 3-5 engineers; in validation sessions officers identified blocked cases faster from status alone.",
+            "Resolved a density conflict between working cadres and reviewing officers by tying every field removal to a procedural requirement, so the simpler screen stayed defensible on audit.",
+            "Conducted filer interviews for the Income Tax 2.0 website overhaul (Infosys x Income Tax Department), and built two live ITR filing concepts with a structured feedback instrument to test guided form selection and AIS reconciliation.",
         ], styles),
-        role("UX Designer", "Independent / Freelance", "2019-Present", [
-            "Deliver product design for mobile, web, e-commerce, and wearable products, from research and user flows through interaction design, prototypes, and testing.",
-            "Created 100+ smartwatch face designs for boAt Lifestyle India and contributed product work for clients including Country Delight and Wizikey.",
+        role("UX Designer", "Independent / Freelance (alongside full-time roles)", "2019-Present", [
+            "Designed and built six live App Store apps in SwiftUI for iPhone, iPad, and Apple Watch since Oct 2025: UnitX, BuildX, TradeBill, JobBook, Recital, and RateBook.",
+            "UnitX: a 20-app competitive audit set the brief (offline, ad-free, free favourites); holds a 5.0 average across 25+ ratings.",
+            "Trade suite (BuildX, TradeBill, JobBook, RateBook): coded 7,439 App Store reviews across 14 competing apps and six markets into five themes, and traced every product decision to one of them.",
+            "Created 100+ smartwatch faces for boAt Lifestyle India, and delivered mobile, web, and e-commerce product work for clients including Country Delight and Wizikey.",
         ], styles),
         role("UI / UX Designer", "Comptroller General of Defence Accounts (CGDA) / DRDO", "2019-2021", [
-            "Conducted UX research and designed workflows, information architecture, wireframes, prototypes, navigation, and testing plans for internal websites, apps, and accounting systems.",
-            "Clarified employee bill-clearance workflows through interaction design for complex enterprise processes.",
+            "Ran per-role working sessions with 15 participants across all five roles in the bill-clearance chain, plus a workaround audit, identifying four blockers behind stalled bills.",
+            "Used the audit evidence to shift the department's brief from a visual refresh to structural change; submitted four recommendations, each traced to a blocker, in a team of 2 designers, 1 PM, and 3 engineers.",
         ], styles),
-        role("UI / UX Designer", "Galaxy Studio", "2016-2019", [
-            "Designed Windows Phone, Windows 10, Nokia Asha, and BlackBerry OS 10 applications in a team portfolio of 30+ apps with 4M+ downloads.",
-            "Designed Yube, eXpress Player, FitVid, and SuperHeroes Wallpapers; selected apps were featured in the Windows App Store and Windows Central.",
+        role("Founder &amp; UI / UX Designer", "Galaxy Studio", "2016-2019", [
+            "Founded the studio and shipped 30+ Windows Phone, Windows 10, Nokia Asha, and BlackBerry 10 apps: 4M+ downloads, 4.0+ average rating, and US$100K+ revenue.",
+            "Designed Yube, eXpress Player, FitVid, and SuperHeroes Wallpapers; studio apps were featured by Microsoft, Nokia, and Windows Central.",
         ], styles),
         role("QA Analyst", "IBM India Pvt. Ltd.", "2014-2016", [
-            "Created and executed test cases across McKesson Healthcare and C2C Rail projects, covering unit, integration, interface, sanity, regression, usability, and beta testing.",
+            "Functional, regression, and usability testing on McKesson Healthcare and C2C Rail projects.",
         ], styles),
         p("Recognition", styles["section"]),
         p("Microsoft Student Partner (2012-2013); Top 10 in Microsoft DVLUP, a Windows Phone developer reward program.", styles["body"]),
-        p("Education", styles["section"]),
-        p("Post Graduate Certificate in UX Design &amp; HCI, Indian Institute of Technology (IIT), Guwahati, 2023<br/>Bachelor of Technology (ECE), Netaji Subhash University of Technology (East Campus), 2009-2013", styles["body"]),
+        p("Certifications &amp; Education", styles["section"]),
+        p("Post Graduate Certificate in UX Design &amp; HCI, Indian Institute of Technology (IIT) Guwahati, 2023<br/>Google UX Design Professional Certificate<br/>Bachelor of Technology (ECE), Netaji Subhash University of Technology (East Campus), 2009-2013", styles["body"]),
     ]
     document.build(story)
 
